@@ -590,7 +590,7 @@
 
     <div class="top-banner">
         ﴿ هذا الجهد استغرق وقتاً وعناية، ولا أحلل نقله تجارياً أو نسخه دون إذن ﴾<br>
-        للتواصل والاتصال عبر واتساب: <a href="https://wa.me/966581015002" target="_blank" style="color: #ffff00; text-decoration: underline;">0581015002</a>
+        للتواصل والاتصال عبر واتساب: <a href="https://wa.me/966581015002" target="_blank" style="color: #ffff00; text-decoration: underline;">0581015002</a>[cite: 3]
     </div>
 
     <div class="header">
@@ -617,7 +617,7 @@
                 <p id="totalStudents">0</p>
             </div>
             <div class="stat-card">
-                <h3>⭐ المهارات العلمية (الحد 21)</h3>
+                <h3>⭐ المهارات العلمية</h3>
                 <p id="totalSkills">0</p>
             </div>
             <div class="stat-card">
@@ -731,7 +731,7 @@
                             <th>🔴 الغياب</th>
                             <th>✋ المشاركة</th>
                             <th>📚 الواجبات</th>
-                            <th>⭐ المهارات (من 21)</th>
+                            <th>⭐ المهارات (21)</th>
                             <th>🛠️ المشاريع</th>
                             <th>💬 الرسائل</th>
                             <th>حذف</th>
@@ -838,7 +838,7 @@
                             <strong id="sdAbsence">0</strong>
                         </div>
                         <div class="detail-item">
-                            <span>المهارات (من 21)</span>
+                            <span>المهارات</span>
                             <strong id="sdSkills">0</strong>
                         </div>
                         <div class="detail-item">
@@ -941,7 +941,7 @@
 
         <div class="footer-note">
             ﴿ هذا الجهد استغرق وقتاً وعناية، ولا أحلل نقله تجارياً أو نسخه دون إذن ﴾<br>
-            للتواصل واتساب: <a href="https://wa.me/966581015002" target="_blank" style="color: inherit; text-decoration: underline;">0581015002</a>
+            للتواصل واتساب: <a href="https://wa.me/966581015002" target="_blank" style="color: inherit; text-decoration: underline;">0581015002</a>[cite: 3]
         </div>
 
     </div>
@@ -1055,11 +1055,13 @@
         }
 
         function updateScore(index, field, value) {
-            let newVal = (students[index][field] || 0) + value;
-            if (field === 'skills') {
-                if (newVal > 21) newVal = 21; // الحد الأقصى للمهارات 21
-            }
-            students[index][field] = Math.max(0, newVal);
+            let maxLimit = (field === 'skills') ? 21 : 999;
+            let currentVal = students[index][field] || 0;
+            let newVal = currentVal + value;
+            if (newVal < 0) newVal = 0;
+            if (field === 'skills' && newVal > 21) newVal = 21; // الحد الأقصى للمهارات 21
+
+            students[index][field] = newVal;
             
             const cellElement = document.getElementById(`val-${index}-${field}`);
             if (cellElement) {
@@ -1288,7 +1290,7 @@
                 totals.messages += st.messages || 0;
             });
             document.getElementById('totalStudents').textContent = students.length;
-            document.getElementById('totalSkills').textContent = totals.skills + ' / 21';
+            document.getElementById('totalSkills').textContent = totals.skills;
             document.getElementById('totalParticipation').textContent = totals.participation;
             document.getElementById('totalHomework').textContent = totals.homework;
             document.getElementById('totalAbsence').textContent = totals.absence;
@@ -1412,6 +1414,8 @@
                 selectedStudentIndex = index;
                 document.getElementById('studentSearchInput').value = `${students[index].name} (${students[index].studentClass || ''})`;
                 loadStudentDetails();
+                
+                // التمرير بسلاسة إلى قسم الاستعلام والتتبع
                 document.getElementById('studentCard').scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
         }
@@ -1589,14 +1593,14 @@
                     <thead>
                         <tr>
                             <th>عنصر المتابعة والتقييم</th>
-                            <th>الدرجة أو المجموع التراكمي</th>
+                            <th>الدرجة أو المجموع التراكمي (حد أقصى للمهارات 21)</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr><td class="text-right">✋ المشاركات الصفية الفعالة</td><td><strong>${st.participation || 0}</strong></td></tr>
                         <tr><td class="text-right">📚 الواجبات المنزلية والأنشطة</td><td><strong>${st.homework || 0}</strong></td></tr>
                         <tr><td class="text-right">🔴 أيام الغياب</td><td><strong>${st.absence || 0}</strong></td></tr>
-                        <tr><td class="text-right">⭐ المهارات العلمية المكتسبة (من 21)</td><td><strong>${st.skills || 0} / 21</strong></td></tr>
+                        <tr><td class="text-right">⭐ المهارات العلمية المكتسبة</td><td><strong>${st.skills || 0} / 21</strong></td></tr>
                         <tr><td class="text-right">🛠️ المشاريع والأنشطة الإثرائية</td><td><strong>${st.projects || 0}</strong></td></tr>
                         <tr><td class="text-right">📝 اختبار الفترة الأولى (من 20)</td><td><strong>${st.exam1 !== undefined ? st.exam1 + ' / 20' : '-'}</strong></td></tr>
                         <tr><td class="text-right">📝 اختبار الفترة الثانية (من 20)</td><td><strong>${st.exam2 !== undefined ? st.exam2 + ' / 20' : '-'}</strong></td></tr>
@@ -1784,9 +1788,7 @@
 
                             const valExam1 = row["Exam 1 (Out of 20)"] !== undefined && row["Exam 1 (Out of 20)"] !== "" ? Number(row["Exam 1 (Out of 20)"]) : (row["Exam 1"] !== undefined && row["Exam 1"] !== "" ? Number(row["Exam 1"]) : undefined);
                             const valExam2 = row["Exam 2 (Out of 20)"] !== undefined && row["Exam 2 (Out of 20)"] !== "" ? Number(row["Exam 2 (Out of 20)"]) : (row["Exam 2"] !== undefined && row["Exam 2"] !== "" ? Number(row["Exam 2"]) : undefined);
-
-                            let importedSkills = Number(row["Skills"] || row["المهارات"] || 0);
-                            if (importedSkills > 21) importedSkills = 21;
+                            const valSkills = Number(row["Skills"] || row["المهارات"] || 0);
 
                             students.push({
                                 id: Date.now() + Math.random(),
@@ -1796,7 +1798,7 @@
                                 absence: Number(row["Absence"] || row["الغياب"] || 0),
                                 participation: Number(row["Participation"] || row["المشاركة"] || 0),
                                 homework: Number(row["Homework"] || row["الواجبات"] || 0),
-                                skills: importedSkills,
+                                skills: Math.min(21, Math.max(0, valSkills)),
                                 projects: Number(row["Projects"] || row["المشاريع"] || 0),
                                 exam1: valExam1 !== undefined ? Math.min(20, Math.max(0, valExam1)) : undefined,
                                 exam2: valExam2 !== undefined ? Math.min(20, Math.max(0, valExam2)) : undefined,
@@ -2088,7 +2090,7 @@
                         </td>
                         <td>
                             <button class="btn-action" onclick="updateScore(${i}, 'skills', 1)">+</button>
-                            <span id="val-${i}-skills">${st.skills || 0}</span> / 21
+                            <span id="val-${i}-skills">${st.skills || 0} / 21</span>
                             <button class="btn-action" onclick="updateScore(${i}, 'skills', -1)">-</button>
                         </td>
                         <td>
@@ -2117,7 +2119,7 @@
             document.getElementById('nextPageBtn').disabled = (currentPage >= totalPages);
 
             document.getElementById('totalStudents').textContent = students.length;
-            document.getElementById('totalSkills').textContent = totals.skills + ' / 21';
+            document.getElementById('totalSkills').textContent = totals.skills;
             document.getElementById('totalParticipation').textContent = totals.participation;
             document.getElementById('totalHomework').textContent = totals.homework;
             document.getElementById('totalAbsence').textContent = totals.absence;
