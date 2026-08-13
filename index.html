@@ -590,13 +590,13 @@
 
     <div class="top-banner">
         ﴿ هذا الجهد استغرق وقتاً وعناية، ولا أحلل نقله تجارياً أو نسخه دون إذن ﴾<br>
-        للتواصل والاتصال عبر واتساب: <a href="https://wa.me/966581015002" target="_blank" style="color: #ffff00; text-decoration: underline;">0581015002</a>[cite: 3]
+        للتواصل والاتصال عبر واتساب: <a href="https://wa.me/966581015002" target="_blank" style="color: #ffff00; text-decoration: underline;">0581015002</a>
     </div>
 
     <div class="header">
         <h1>الابتدائية الأولى للبنات بالمدينة المنورة</h1>
         <div>إعداد المعلمة: تهاني مهنا الحجيلي</div>
-        <p>لوحة تحكم معلمة مادة العلوم - الصف السادس الابتدائي (وفق المنهج السعودي)</p>
+        <p>لوحة تحكم معلمة مادة العلوم الابتدائي (وفق المنهج السعودي)</p>
         <div class="subscription-badge">⏳ نهاية الاشتراك: 2027/07/01</div>
 
         <div class="theme-switcher">
@@ -610,6 +610,18 @@
     </div>
 
     <div class="container">
+        <!-- القائمة المنسدلة لاختيار المرحلة/الصف الدراسي -->
+        <div class="section-card" style="background: linear-gradient(135deg, rgba(5,150,105,0.05), rgba(4,120,87,0.1)); border: 2px solid var(--secondary);">
+            <h3 style="margin-bottom: 10px;">📌 اختر الصف الدراسي للمتابعة</h3>
+            <div class="form-row" style="margin-bottom: 0;">
+                <select id="globalGradeSelect" onchange="changeGradeLevel(this.value)" style="font-weight: bold; font-size: 16px; color: var(--secondary);">
+                    <option value="الرابع">الصف الرابع الابتدائي</option>
+                    <option value="الخامس">الصف الخامس الابتدائي</option>
+                    <option value="السادس">الصف السادس الابتدائي</option>
+                </select>
+            </div>
+        </div>
+
         <!-- الإحصائيات -->
         <div class="stats-grid">
             <div class="stat-card">
@@ -696,16 +708,16 @@
                 <input type="text" id="studentName" placeholder="اسم الطالبه (Student Name)">
                 <select id="studentClassSelect">
                     <option value="">-- اختر الصف الدراسي --</option>
-                    <option value="سادس/1">سادس/1</option>
-                    <option value="سادس/2">سادس/2</option>
-                    <option value="سادس/3">سادس/3</option>
-                    <option value="سادس/4">سادس/4</option>
-                    <option value="سادس/5">سادس/5</option>
-                    <option value="سادس/6">سادس/6</option>
-                    <option value="سادس/7">سادس/7</option>
-                    <option value="سادس/8">سادس/8</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
                 </select>
-                <input type="text" id="studentClassCustom" placeholder="أو كتابة صف آخر..." style="max-width: 160px;">
+                <input type="text" id="studentClassCustom" placeholder="أو كتابة شعبة/صف آخر..." style="max-width: 160px;">
                 <input type="tel" id="studentPhone" placeholder="رقم جوال ولي الأمر (مثال: 05xxxxxxx)">
                 <button onclick="addStudent()">➕ إضافة طالبه</button>
             </div>
@@ -731,7 +743,7 @@
                             <th>🔴 الغياب</th>
                             <th>✋ المشاركة</th>
                             <th>📚 الواجبات</th>
-                            <th>⭐ المهارات (21)</th>
+                            <th>⭐ المهارات</th>
                             <th>🛠️ المشاريع</th>
                             <th>💬 الرسائل</th>
                             <th>حذف</th>
@@ -767,14 +779,14 @@
             <div class="form-row">
                 <select id="examClassSelect" onchange="renderExamsTable()">
                     <option value="">-- اختر الصف الدراسي لعرض وسجل الاختبارات --</option>
-                    <option value="سادس/1">سادس/1</option>
-                    <option value="سادس/2">سادس/2</option>
-                    <option value="سادس/3">سادس/3</option>
-                    <option value="سادس/4">سادس/4</option>
-                    <option value="سادس/5">سادس/5</option>
-                    <option value="سادس/6">سادس/6</option>
-                    <option value="سادس/7">سادس/7</option>
-                    <option value="سادس/8">سادس/8</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
                 </select>
                 <button class="btn-print" onclick="printExamsAnalysisReport()" style="display: none;" id="printExamsBtn">🖨️ طباعة تقرير تحليل النتائج</button>
             </div>
@@ -925,7 +937,7 @@
 
         <!-- قائمة وحدات ودروس مادة العلوم -->
         <div class="section-card">
-            <h3>📚 دليل مقرر العلوم - الصف السادس الابتدائي (المنهج السعودي المعتمد) وتتبع التنفيذ</h3>
+            <h3 id="curriculumTitle">📚 دليل مقرر العلوم - المرحلة الابتدائية (المنهج السعودي المعتمد) وتتبع التنفيذ</h3>
             
             <div class="sub-box" style="margin-bottom: 15px; margin-top: 0;">
                 <h5 style="margin-bottom: 10px;">➕ إضافة درس جديد أو وحدة للمنهج</h5>
@@ -941,7 +953,7 @@
 
         <div class="footer-note">
             ﴿ هذا الجهد استغرق وقتاً وعناية، ولا أحلل نقله تجارياً أو نسخه دون إذن ﴾<br>
-            للتواصل واتساب: <a href="https://wa.me/966581015002" target="_blank" style="color: inherit; text-decoration: underline;">0581015002</a>[cite: 3]
+            للتواصل واتساب: <a href="https://wa.me/966581015002" target="_blank" style="color: inherit; text-decoration: underline;">0581015002</a>
         </div>
 
     </div>
@@ -957,6 +969,9 @@
     <script>
         const TEACHER_NAME = "تهاني مهنا الحجيلي";
         const SCHOOL_NAME = "الابتدائية الأولى للبنات بالمدينة المنورة";
+
+        let currentGrade = localStorage.getItem('awwal_current_grade_v3') || 'الرابع';
+        document.getElementById('globalGradeSelect').value = currentGrade;
 
         let activeQueryClass = '';
         let selectedStudentIndex = ''; 
@@ -1005,49 +1020,67 @@
         const savedTheme = localStorage.getItem('awwal_primary_science_v2') || 'theme-default';
         document.body.className = savedTheme;
 
-        const defaultLessons = [
-            { chapter: "الوحدة الأولى: تنوع الحياة", title: "الفصل الأول: عربات وأنظمة البيئة / الخلايا", desc: "دراسة تركيب الخلية النباتية والحيوانية والعمليات الحيوية فيها." },
-            { chapter: "الوحدة الأولى: تنوع الحياة", title: "الفصل الأول: العمليات الحيوية في الخلايا", desc: "التعرف على عمليات التباين الخلوي، التنفس الخلوي، والبناء الضوئي." },
-            { chapter: "الوحدة الأولى: تنوع الحياة", title: "الفصل الثاني: تصنيف المخلوقات الحية", desc: "استكشاف الممالك الخمس، الفطريات، النباتات اللابذرية والبذرية." },
-            { chapter: "الوحدة الأولى: تنوع الحياة", title: "الفصل الثاني: النباتات والحيوانات الفقارية واللافقارية", desc: "خصائص الفقاريات واللافقاريات وتصنيفها العلمي." },
-
-            { chapter: "الوحدة الثانية: العمليات المؤثرة في سطح الأرض", title: "الفصل الثالث: العمليات الداخلية لسطح الأرض", desc: "دراسة الصفائح الأرضية، الزلازل، والبراكين وأثرها في تشكيل القشرة." },
-            { chapter: "الوحدة الثانية: العمليات المؤثرة في سطح الأرض", title: "الفصل الثالث: العمليات الخارجية لسطح الأرض", desc: "التجوية والتعرية والترسيب والعوامل المؤثرة فيها." },
-            { chapter: "الوحدة الثانية: العمليات المؤثرة في سطح الأرض", title: "الفصل الرابع: نماذج كوكب الأرض", desc: "معالم سطح الأرض، المحيطات، والغلاف الجوي." },
-
-            { chapter: "الوحدة الثالثة: المادة والطاقة", title: "الفصل الخامس: المادة والتفاعلات الكيميائية", desc: "الذرات، العناصر، الجدول الدوري، والتغيرات الفيزيائية والكيميائية." },
-            { chapter: "الوحدة الثالثة: المادة والطاقة", title: "الفصل الخامس: الأحماض والقواعد", desc: "خصائص الأحماض والقواعد وكشف الرقم الهيدروجيني (PH)." },
-            { chapter: "الوحدة الثالثة: المادة والطاقة", title: "الفصل السادس: الحركة والالقوة", desc: "المسافة والزمن، السرعة المتسارعة، وقوانين نيوتن للحركة." },
-
-            { chapter: "الوحدة الرابعة: القوى والطاقة", title: "الفصل السابع: الكهرباء والمغناطيسية", desc: "الكهرباء الساكنة، الدوائر الكهربائية البسيطة، والمغناطيس الكهربائي." },
-            { chapter: "الوحدة الرابعة: القوى والطاقة", title: "الفصل الثامن: الصوت والموجات", desc: "خصائص الصوت، انعكاسه، وخصائص الضوء والموجات الكهرومغناطيسية." }
-        ];
-
-        let lessons = JSON.parse(localStorage.getItem('awwal_custom_lessons_science_v2')) || defaultLessons;
-
-        const motivationTemplates = {
-            "1": "🌟 **عالمة المستقبل المتميزة** 🌟\nعزيزي وليّ الأمر، نفخر اليوم بتميز ابنتكم وتألقها في حصة العلوم بمشاركتها الفعالة واستقصائها العلمي الرائع. بوركت جهودكم!",
-            "2": "🔬 **تفوق ملحوظ في التجارب العلمية** 🔬\nعزيزي وليّ الأمر، أظهرت ابنتكم اليوم مهارات استكشافية ممتازة وتفكيراً علمياً عميقاً أثناء تنفيذ التجارب. أحسنت صنعاً!",
-            "3": "📊 **دقة وإتقان في المفاهيم والمصطلحات** 📊\nعزيزي وليّ الأمر، تميزت ابنتكم اليوم بمهارات علمية دقيقة وفهم عميق للأنظمة والمفاهيم. بارك الله في جهودها!",
-            "4": "✋ **مشاركة نشطة وتفاعل علمي متميز** ✋\nعزيزي وليّ الأمر، تميزت ابنتكم اليوم بحرصها العالي ومشاركتها النشطة وإجاباتها الموفقة داخل المعمل والفصل.",
-            "5": "🧠 **حصيلة علمية واستكشافية ممتازة** 🧠\nعزيزي وليّ الأمر، أبدعت ابنتكم اليوم في التفكير الناقد وتوظيف المصطلحات العلمية بشكل دقيق. مبروك لها!",
-            "6": "📝 **تنظيم رائع للبيانات وواجبات مرتبة** 📝\nعزيزي وليّ الأمر، نشكر لكم متابعتكم المنزلية الواعية. لقد كان واجب ابنتكم اليوم منظماً، دقيقاً، وخطها في غاية الجمال والترتيب.",
-            "7": "✍️ **حل ممتاز للتمارين والأنشطة العلمية** ⑦\nعزيزي وليّ الأمر، تميز أداء ابنتكم اليوم بحل التدريبات العلمية بدقة عالية وفهم عميق. دمتِ ممتازة يا بطلة!",
-            "8": "📚 **اهتمام رائع بالملاحظة والاستنتاج** ⑧\nعزيزي وليّ الأمر، أظهرت ابنتكم اليوم شغفاً واهتماماً لافتاً بالملاحظة العلمية واستنباط النتائج.",
-            "9": "🛠️ **مشروع علمي متميز ومبتكر ومتقن** ⑨\nعزيزي وليّ الأمر، قدمت ابنتكم اليوم مشروعاً علمياً رائعاً ومنظماً ينم عن تفكير إبداعي ومهارة عالية.",
-            "10": "⭐ **اجتهاد وحرص عالٍ على إتقان العلوم** ⑩\nعزيزي وليّ الأمر، إن حرص ابنتكم المستمر على التميز والتعلم في مادة العلوم محل تقديرنا الدائم.",
-            "11": "🤝 **شراكة منزلية مثمرة ومباركة** ⑪\nعزيزي وليّ الأمر، شكراً لتعاونكم المستمر ومتابعتكم الرائعة التي تظهر جلياً في تفوق ابنتكم وتألقها.",
-            "12": "🏡 **متابعة منزلية واعية ومتميزة** ⑫\nعزيزي وليّ الأمر، إن اهتمامكم الدائم بمراجعة الدروس لابنتكم يثمر يوماً بعد يوم عن نتائج رائعة ومشرقة.",
-            "13": "🏅 **أخلاق عالية وأدب جم وتركيز متميز** ⑬\nعزيزي وليّ الأمر، ابنتكم نموذج مشرف في حسن الخلق، والهدوء، والتركيز العالي، واحترام المعلمة والزميلات.",
-            "14": "🌱 **جهد مبارك ودعم مستمر** ⑭\nعزيزي وليّ الأمر، نشكر لكم تشجيعكم المستمر لابنتكم، معاً نصنع لها مستقبلاً مشرقاً في مسار العلوم.",
-            "15": "🚀 **مستقبل واعد وطالبه مجتهدة** ⑮\nعزيزي وليّ الأمر، بمثل هذا الاجتهاد والأدب الرفيع، نتوقع لابنتكم مستقبلاً باهراً بإذن الله!"
+        const gradeLessonsData = {
+            "الرابع": [
+                { chapter: "الوحدة الأولى: النباتات والمخلوقات الحية", title: "الفصل الأول: مملكة المخلوقات الحية", desc: "دراسة خصائص المخلوقات الحية وتصنيفها." },
+                { chapter: "الوحدة الأولى: النباتات والمخلوقات الحية", title: "الفصل الثاني: النباتات وتصنيفها", desc: "التعرف على النباتات البذرية واللابذرية وأجزائها." },
+                { chapter: "الوحدة الثانية: الحيوانات", title: "الفصل الثالث: المجموعات الحيوانية", desc: "دراسة الفقاريات واللافقاريات وخصائصها." },
+                { chapter: "الوحدة الثالثة: الأرض ومواردها", title: "الفصل الرابع: أرضنا المتغيرة", desc: "التجوية والتعرية والتشكيلات الأرضية." }
+            ],
+            "الخامس": [
+                { chapter: "الوحدة الأولى: تنوع المخلوقات الحية", title: "الفصل الأول: الخلايا لبنات الحياة", desc: "تركيب الخلية النباتية والحيوانية." },
+                { chapter: "الوحدة الأولى: تنوع المخلوقات الحية", title: "الفصل الثاني: تصنيف المخلوقات الحية", desc: "الممالك وخاصة الفطريات والبكتيريا." },
+                { chapter: "الوحدة الثانية: الأنظمة البيئية", title: "الفصل الثالث: التفاعلات في الأنظمة البيئية", desc: "السلاسل والشبكات الغذائية والتوازن البيئي." },
+                { chapter: "الوحدة الثالثة: الأرض ومواردها", title: "الفصل الرابع: دورة الماء والمعالم", desc: "حالة الغلاف الجوي ودورة الماء في الطبيعة." }
+            ],
+            "السادس": [
+                { chapter: "الوحدة الأولى: تنوع الحياة", title: "الفصل الأول: العمليات الحيوية في الخلايا", desc: "دراسة العمليات الحيوية والتبادل الخلوي والتنفس." },
+                { chapter: "الوحدة الأولى: تنوع الحياة", title: "الفصل الثاني: تصنيف المخلوقات الحية", desc: "استكشاف الممالك الخمس والنباتات والحيوانات." },
+                { chapter: "الوحدة الثانية: العمليات المؤثرة في سطح الأرض", title: "الفصل الثالث: العمليات الداخلية والخارجية", desc: "الزلازل والبراكين والتجوية والتعرية." },
+                { chapter: "الوحدة الثالثة: المادة والطاقة", title: "الفصل الرابع: المادة والتفاعلات الكيميائية", desc: "الذرات والعناصر والتغيرات الفيزيائية والكيميائية." }
+            ]
         };
 
-        let students = JSON.parse(localStorage.getItem('awwal_students_science_v2')) || [];
-        let lessonStatus = JSON.parse(localStorage.getItem('awwal_lesson_status_science_v2')) || {};
+        function getStorageKeyForLessons() {
+            return 'awwal_custom_lessons_science_' + currentGrade + '_v3';
+        }
+
+        function getStorageKeyForStudents() {
+            return 'awwal_students_science_' + currentGrade + '_v3';
+        }
+
+        function getStorageKeyForStatus() {
+            return 'awwal_lesson_status_science_' + currentGrade + '_v3';
+        }
+
+        let lessons = JSON.parse(localStorage.getItem(getStorageKeyForLessons())) || gradeLessonsData[currentGrade];
+        let students = JSON.parse(localStorage.getItem(getStorageKeyForStudents())) || [];
+        let lessonStatus = JSON.parse(localStorage.getItem(getStorageKeyForStatus())) || {};
+
+        function changeGradeLevel(grade) {
+            currentGrade = grade;
+            localStorage.setItem('awwal_current_grade_v3', currentGrade);
+            
+            lessons = JSON.parse(localStorage.getItem(getStorageKeyForLessons())) || gradeLessonsData[currentGrade];
+            students = JSON.parse(localStorage.getItem(getStorageKeyForStudents())) || [];
+            lessonStatus = JSON.parse(localStorage.getItem(getStorageKeyForStatus())) || {};
+
+            activeQueryClass = '';
+            selectedStudentIndex = '';
+            currentPage = 1;
+            document.getElementById('studentSearchInput').value = '';
+
+            document.getElementById('curriculumTitle').textContent = `📚 دليل مقرر العلوم - الصف ${currentGrade} الابتدائي (المنهج السعودي المعتمد) وتتبع التنفيذ`;
+
+            renderLessons();
+            render();
+            renderExamsTable();
+            updateCharts();
+            showToast(`🔄 تم الانتقال إلى بيانات الصف ${currentGrade} الابتدائي`);
+        }
 
         function saveAndRefresh() {
-            localStorage.setItem('awwal_students_science_v2', JSON.stringify(students));
+            localStorage.setItem(getStorageKeyForStudents(), JSON.stringify(students));
             render();
             renderExamsTable();
             updateCharts();
@@ -1055,13 +1088,7 @@
         }
 
         function updateScore(index, field, value) {
-            let maxLimit = (field === 'skills') ? 21 : 999;
-            let currentVal = students[index][field] || 0;
-            let newVal = currentVal + value;
-            if (newVal < 0) newVal = 0;
-            if (field === 'skills' && newVal > 21) newVal = 21; // الحد الأقصى للمهارات 21
-
-            students[index][field] = newVal;
+            students[index][field] = Math.max(0, (students[index][field] || 0) + value);
             
             const cellElement = document.getElementById(`val-${index}-${field}`);
             if (cellElement) {
@@ -1074,7 +1101,7 @@
 
             updateHeaderStats();
             updateCharts();
-            localStorage.setItem('awwal_students_science_v2', JSON.stringify(students));
+            localStorage.setItem(getStorageKeyForStudents(), JSON.stringify(students));
         }
 
         function updateExamScore(index, examField, val) {
@@ -1083,7 +1110,7 @@
             if (num > 20) num = 20;
             if (num < 0) num = 0;
             students[index][examField] = num;
-            localStorage.setItem('awwal_students_science_v2', JSON.stringify(students));
+            localStorage.setItem(getStorageKeyForStudents(), JSON.stringify(students));
             renderExamsTable();
             updateCharts();
             showToast('✅ تم تحديث درجة الاختبار!');
@@ -1098,7 +1125,7 @@
             }
 
             const headerInfo = `🏫 المدرسة: ${SCHOOL_NAME}\n👩‍🏫 معلمة المادة: ${TEACHER_NAME}\n\n`;
-            const msg = `${headerInfo}📋 **نتيجة اختبارات مادة العلوم**\nالطالبه: ${st.name} (${st.studentClass || ''})\n\n` +
+            const msg = `${headerInfo}📋 **نتيجة اختبارات مادة العلوم - الصف ${currentGrade}**\nالطالبه: ${st.name} (شعبة/رقم ${st.studentClass || ''})\n\n` +
                           `📝 اختبار الفترة الأولى: **${st.exam1 !== undefined ? st.exam1 : '-'} / 20**\n` +
                           `📝 اختبار الفترة الثانية: **${st.exam2 !== undefined ? st.exam2 : '-'} / 20**\n\n` +
                           `شكراً لمتابعتكم المستمرة ودعمكم الدائم لمسيرة ابنتنا التعليمية.`;
@@ -1116,16 +1143,16 @@
             const printBtn = document.getElementById('printExamsBtn');
 
             if (!selectedCls) {
-                tbody.innerHTML = `<tr><td colspan="5" style="padding: 20px; opacity: 0.7;">الرجاء اختيار الصف الدراسي من القائمة أعلاه لعرض رصد واختبارات الطالبات.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="5" style="padding: 20px; opacity: 0.7;">الرجاء اختيار الشعبة/الصف من القائمة أعلاه لعرض رصد واختبارات الطالبات.</td></tr>`;
                 analysisBox.style.display = 'none';
                 printBtn.style.display = 'none';
                 return;
             }
 
-            const classStudents = students.map((st, idx) => ({ st, originalIndex: idx })).filter(item => (item.st.studentClass || 'سادس/1') === selectedCls);
+            const classStudents = students.map((st, idx) => ({ st, originalIndex: idx })).filter(item => (item.st.studentClass || '1') === selectedCls);
 
             if (classStudents.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="5" style="padding: 20px; opacity: 0.7;">لا توجد طالبات مسجلات في هذا الصف حالياً.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="5" style="padding: 20px; opacity: 0.7;">لا توجد طالبات مسجلات في هذه الشعبة حالياً.</td></tr>`;
                 analysisBox.style.display = 'none';
                 printBtn.style.display = 'none';
                 return;
@@ -1176,7 +1203,7 @@
             const selectedCls = select.value;
             if (!selectedCls) return;
 
-            const classStudents = students.filter(s => (s.studentClass || 'سادس/1') === selectedCls);
+            const classStudents = students.filter(s => (s.studentClass || '1') === selectedCls);
             if (classStudents.length === 0) return;
 
             let sum1 = 0, sum2 = 0, count1 = 0, count2 = 0;
@@ -1217,8 +1244,8 @@
                     <h2>المملكة العربية السعودية</h2>
                     <h3>وزارة التعليم</h3>
                     <h3 style="color: #059669;">${SCHOOL_NAME}</h3>
-                    <h4 style="margin-top: 5px;">تقرير تحليل نتائج اختبارات الفترة الأولى والفترة الثانية - صف: ${selectedCls}</h4>
-                    <p style="margin: 5px 0 0 0; font-size: 14px;">مادة العلوم - الصف السادس الابتدائي</p>
+                    <h4 style="margin-top: 5px;">تقرير تحليل نتائج اختبارات الفترة الأولى والفترة الثانية - الصف ${currentGrade} (شعبة: ${selectedCls})</h4>
+                    <p style="margin: 5px 0 0 0; font-size: 14px;">مادة العلوم</p>
                 </div>
 
                 <div class="meta-row">
@@ -1377,7 +1404,7 @@
                     else if (percentage >= 60) mediumCount++;
                     else {
                         atRiskCount++;
-                        atRiskDropdown.innerHTML += `<option value="${idx}">${st.name} (${st.studentClass || 'سادس/1'}) - الدرجة: ${score1}/20</option>`;
+                        atRiskDropdown.innerHTML += `<option value="${idx}">${st.name} (شعبة: ${st.studentClass || '1'}) - الدرجة: ${score1}/20</option>`;
                     }
                 }
             });
@@ -1415,7 +1442,6 @@
                 document.getElementById('studentSearchInput').value = `${students[index].name} (${students[index].studentClass || ''})`;
                 loadStudentDetails();
                 
-                // التمرير بسلاسة إلى قسم الاستعلام والتتبع
                 document.getElementById('studentCard').scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
         }
@@ -1426,7 +1452,7 @@
 
         function toggleLessonStatus(index) {
             lessonStatus[index] = !lessonStatus[index];
-            localStorage.setItem('awwal_lesson_status_science_v2', JSON.stringify(lessonStatus));
+            localStorage.setItem(getStorageKeyForStatus(), JSON.stringify(lessonStatus));
             renderLessons();
             updateCharts();
             showToast('🔄 تم تحديث حالة الدرس وحفظه!');
@@ -1442,7 +1468,7 @@
             }
 
             lessons.push({ chapter: "إضافات المعلمة", title: title, desc: desc || 'لا توجد تفاصيل إضافية' });
-            localStorage.setItem('awwal_custom_lessons_science_v2', JSON.stringify(lessons));
+            localStorage.setItem(getStorageKeyForLessons(), JSON.stringify(lessons));
 
             document.getElementById('newLessonTitle').value = '';
             document.getElementById('newLessonDesc').value = '';
@@ -1455,7 +1481,7 @@
         function deleteLesson(index) {
             if (confirm('هل أنت متأكد من حذف هذا الدرس من المنهج؟')) {
                 lessons.splice(index, 1);
-                localStorage.setItem('awwal_custom_lessons_science_v2', JSON.stringify(lessons));
+                localStorage.setItem(getStorageKeyForLessons(), JSON.stringify(lessons));
                 renderLessons();
                 updateCharts();
                 showToast('🗑️ تم حذف الدرس بنجاح!');
@@ -1475,7 +1501,7 @@
             const classSelect = document.getElementById('studentClassSelect').value;
             const classCustom = document.getElementById('studentClassCustom').value.trim();
 
-            const studentClass = classCustom || classSelect || 'سادس/1';
+            const studentClass = classCustom || classSelect || '1';
 
             if (!name) {
                 alert('الرجاء إدخال اسم الطالبه');
@@ -1529,14 +1555,14 @@
         function deleteClassStudents(className, event) {
             if (event) event.stopPropagation();
             
-            const count = students.filter(s => (s.studentClass || 'سادس/1') === className).length;
+            const count = students.filter(s => (s.studentClass || '1') === className).length;
             if (count === 0) {
-                alert(`لا توجد طالبات مسجلات في الصف (${className}) حالياً.`);
+                alert(`لا توجد طالبات مسجلات في هذه الشعبة (${className}) حالياً.`);
                 return;
             }
 
-            if (confirm(`⚠️ تحذير: هل أنت متأكد من حذف جميع طالبات الصف (${className}) وعددهم (${count}) طالبه؟ لا يمكن التراجع عن هذا الإجراء.`)) {
-                students = students.filter(s => (s.studentClass || 'سادس/1') !== className);
+            if (confirm(`⚠️ تحذير: هل أنت متأكد من حذف جميع طالبات الشعبة (${className}) وعددهم (${count}) طالبه؟ لا يمكن التراجع عن هذا الإجراء.`)) {
+                students = students.filter(s => (s.studentClass || '1') !== className);
                 if (activeQueryClass === className) {
                     activeQueryClass = '';
                 }
@@ -1544,7 +1570,7 @@
                 document.getElementById('studentSearchInput').value = '';
                 currentPage = 1;
                 saveAndRefresh();
-                showToast(`🗑️ تم حذف جميع طالبات الصف (${className}) بنجاح!`);
+                showToast(`🗑️ تم حذف جميع طالبات الشعبة (${className}) بنجاح!`);
             }
         }
 
@@ -1581,7 +1607,7 @@
                     <h3>وزارة التعليم</h3>
                     <h3 style="color: #059669;">${SCHOOL_NAME}</h3>
                     <h4 style="margin-top: 5px;">تقرير متابعة أداء الطالبه: ${st.name}</h4>
-                    <p style="margin: 5px 0 0 0; font-size: 14px;">الصف: ${st.studentClass || 'سادس/1'} - مادة العلوم</p>
+                    <p style="margin: 5px 0 0 0; font-size: 14px;">الصف ${currentGrade} الابتدائي (شعبة: ${st.studentClass || '1'}) - مادة العلوم</p>
                 </div>
 
                 <div class="meta-row">
@@ -1593,14 +1619,14 @@
                     <thead>
                         <tr>
                             <th>عنصر المتابعة والتقييم</th>
-                            <th>الدرجة أو المجموع التراكمي (حد أقصى للمهارات 21)</th>
+                            <th>الدرجة أو المجموع التراكمي</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr><td class="text-right">✋ المشاركات الصفية الفعالة</td><td><strong>${st.participation || 0}</strong></td></tr>
                         <tr><td class="text-right">📚 الواجبات المنزلية والأنشطة</td><td><strong>${st.homework || 0}</strong></td></tr>
                         <tr><td class="text-right">🔴 أيام الغياب</td><td><strong>${st.absence || 0}</strong></td></tr>
-                        <tr><td class="text-right">⭐ المهارات العلمية المكتسبة</td><td><strong>${st.skills || 0} / 21</strong></td></tr>
+                        <tr><td class="text-right">⭐ المهارات العلمية المكتسبة</td><td><strong>${st.skills || 0}</strong></td></tr>
                         <tr><td class="text-right">🛠️ المشاريع والأنشطة الإثرائية</td><td><strong>${st.projects || 0}</strong></td></tr>
                         <tr><td class="text-right">📝 اختبار الفترة الأولى (من 20)</td><td><strong>${st.exam1 !== undefined ? st.exam1 + ' / 20' : '-'}</strong></td></tr>
                         <tr><td class="text-right">📝 اختبار الفترة الثانية (من 20)</td><td><strong>${st.exam2 !== undefined ? st.exam2 + ' / 20' : '-'}</strong></td></tr>
@@ -1629,13 +1655,13 @@
             if (event) event.stopPropagation();
 
             if (!className || className === 'ALL') {
-                alert('يرجى اختيار صف محدد (مثل سادس/1) لطباعة تقريره الرسمي.');
+                alert('يرجى اختيار شعبة محددة لطباعة تقريرها الرسمي.');
                 return;
             }
 
-            const classStudents = students.filter(s => (s.studentClass || 'سادس/1') === className);
+            const classStudents = students.filter(s => (s.studentClass || '1') === className);
             if (classStudents.length === 0) {
-                alert(`لا توجد طالبات مسجلات في الصف (${className}) لطباعة تقريرهن.`);
+                alert(`لا توجد طالبات مسجلات في الشعبة (${className}) لطباعة تقريرهن.`);
                 return;
             }
 
@@ -1644,7 +1670,7 @@
 
             var printWindow = window.open('', '_blank', 'height=750,width=1000');
             
-            printWindow.document.write('<html><head><title>تقرير طالبات الصف الرسمي</title>');
+            printWindow.document.write('<html><head><title>تقرير طالبات الشعبة الرسمي</title>');
             printWindow.document.write('<style>');
             printWindow.document.write('body { font-family: Tahoma, Arial, sans-serif; direction: rtl; text-align: right; color: #000; background: #fff; padding: 25px; margin: 0; }');
             printWindow.document.write('.header-box { text-align: center; margin-bottom: 25px; border-bottom: 2px solid #333; padding-bottom: 15px; }');
@@ -1663,8 +1689,8 @@
                     <h2>المملكة العربية السعودية</h2>
                     <h3>وزارة التعليم</h3>
                     <h3 style="color: #059669;">${SCHOOL_NAME}</h3>
-                    <h4 style="margin-top: 5px;">تقرير متابعة أداء طالبات الصف: ${className}</h4>
-                    <p style="margin: 5px 0 0 0; font-size: 14px;">مادة العلوم - الصف السادس الابتدائي</p>
+                    <h4 style="margin-top: 5px;">تقرير متابعة أداء طالبات الصف ${currentGrade} (شعبة: ${className})</h4>
+                    <p style="margin: 5px 0 0 0; font-size: 14px;">مادة العلوم</p>
                 </div>
 
                 <div class="meta-row">
@@ -1681,7 +1707,7 @@
                             <th>الغياب</th>
                             <th>المشاركة</th>
                             <th>الواجبات</th>
-                            <th>المهارات (من 21)</th>
+                            <th>المهارات</th>
                             <th>فترة 1 (من 20)</th>
                             <th>فترة 2 (من 20)</th>
                         </tr>
@@ -1701,7 +1727,7 @@
                         <td>${st.absence || 0}</td>
                         <td>${st.participation || 0}</td>
                         <td>${st.homework || 0}</td>
-                        <td>${st.skills || 0} / 21</td>
+                        <td>${st.skills || 0}</td>
                         <td>${e1Str}</td>
                         <td>${e2Str}</td>
                     </tr>
@@ -1739,7 +1765,7 @@
             const excelData = students.map((st, idx) => ({
                 "No.": idx + 1,
                 "Student Name": st.name,
-                "Class": st.studentClass || 'سادس/1',
+                "Class": st.studentClass || '1',
                 "Phone": st.phone || '',
                 "Absence": st.absence || 0,
                 "Participation": st.participation || 0,
@@ -1760,7 +1786,7 @@
             workbook.Workbook.Views[0] = { RTL: true };
 
             const dateStr = new Date().toISOString().slice(0,10);
-            XLSX.writeFile(workbook, `Awwal_School_Science_${dateStr}.xlsx`);
+            XLSX.writeFile(workbook, `Awwal_School_Science_${currentGrade}_${dateStr}.xlsx`);
             showToast('📊 تم تصدير ملف إكسل بنجاح!');
         }
 
@@ -1788,7 +1814,6 @@
 
                             const valExam1 = row["Exam 1 (Out of 20)"] !== undefined && row["Exam 1 (Out of 20)"] !== "" ? Number(row["Exam 1 (Out of 20)"]) : (row["Exam 1"] !== undefined && row["Exam 1"] !== "" ? Number(row["Exam 1"]) : undefined);
                             const valExam2 = row["Exam 2 (Out of 20)"] !== undefined && row["Exam 2 (Out of 20)"] !== "" ? Number(row["Exam 2 (Out of 20)"]) : (row["Exam 2"] !== undefined && row["Exam 2"] !== "" ? Number(row["Exam 2"]) : undefined);
-                            const valSkills = Number(row["Skills"] || row["المهارات"] || 0);
 
                             students.push({
                                 id: Date.now() + Math.random(),
@@ -1798,7 +1823,7 @@
                                 absence: Number(row["Absence"] || row["الغياب"] || 0),
                                 participation: Number(row["Participation"] || row["المشاركة"] || 0),
                                 homework: Number(row["Homework"] || row["الواجبات"] || 0),
-                                skills: Math.min(21, Math.max(0, valSkills)),
+                                skills: Number(row["Skills"] || row["المهارات"] || 0),
                                 projects: Number(row["Projects"] || row["المشاريع"] || 0),
                                 exam1: valExam1 !== undefined ? Math.min(20, Math.max(0, valExam1)) : undefined,
                                 exam2: valExam2 !== undefined ? Math.min(20, Math.max(0, valExam2)) : undefined,
@@ -1835,7 +1860,7 @@
             const downloadAnchor = document.createElement('a');
             const dateStr = new Date().toISOString().slice(0,10);
             downloadAnchor.setAttribute("href", dataStr);
-            downloadAnchor.setAttribute("download", `Awwal_School_Science_Backup_${dateStr}.json`);
+            downloadAnchor.setAttribute("download", `Awwal_School_Science_${currentGrade}_Backup_${dateStr}.json`);
             document.body.appendChild(downloadAnchor);
             downloadAnchor.click();
             downloadAnchor.remove();
@@ -1918,18 +1943,18 @@
             
             const currentBulkTarget = bulkTargetSelect.value;
             
-            const defaultClasses = ["سادس/1", "سادس/2", "سادس/3", "سادس/4", "سادس/5", "سادس/6", "سادس/7", "سادس/8"];
-            const existingClasses = students.map(s => s.studentClass || 'سادس/1');
+            const defaultClasses = ["1", "2", "3", "4", "5", "6", "7", "8"];
+            const existingClasses = students.map(s => s.studentClass || '1');
             const allClasses = [...new Set([...defaultClasses, ...existingClasses])].filter(c => c && c.trim() !== "");
             
             queryContainer.innerHTML = '';
-            bulkTargetSelect.innerHTML = '<option value="ALL">جميع الصفوف</option>';
+            bulkTargetSelect.innerHTML = '<option value="ALL">جميع الشعب</option>';
 
             const isEmptyActive = (activeQueryClass === '') ? 'active' : '';
             queryContainer.innerHTML += `
                 <div class="class-btn-wrapper ${isEmptyActive}" style="flex: 2; min-width: 140px;">
                     <button class="class-query-btn" style="text-align: center;" onclick="selectQueryClass('')">
-                        ⬜ (اختر صفاً)
+                        ⬜ (اختر شعبة)
                     </button>
                 </div>
             `;
@@ -1938,7 +1963,7 @@
             queryContainer.innerHTML += `
                 <div class="class-btn-wrapper ${isAllActive}" style="flex: 2; min-width: 160px;">
                     <button class="class-query-btn" style="text-align: center;" onclick="selectQueryClass('ALL')">
-                        🏫 جميع الصفوف <span style="font-size: 11px; opacity: 0.8;">(${students.length})</span>
+                        🏫 جميع الشعب <span style="font-size: 11px; opacity: 0.8;">(${students.length})</span>
                     </button>
                 </div>
             `;
@@ -1950,18 +1975,18 @@
                 queryContainer.innerHTML += `
                     <div class="class-btn-wrapper ${isActive}">
                         <button class="class-query-btn" onclick="selectQueryClass('${cls}')">
-                            🏫 ${cls} <span style="font-size: 11px; opacity: 0.8;">(${count})</span>
+                            🏫 شعبة ${cls} <span style="font-size: 11px; opacity: 0.8;">(${count})</span>
                         </button>
-                        <button class="btn-info btn-action" onclick="printClassReport('${cls}', event)" title="طباعة تقرير الصف الرسمي" style="padding: 0 8px; font-size: 13px; border-radius: 0;">
+                        <button class="btn-info btn-action" onclick="printClassReport('${cls}', event)" title="طباعة تقرير الشعبة الرسمي" style="padding: 0 8px; font-size: 13px; border-radius: 0;">
                             🖨️
                         </button>
-                        <button class="class-delete-btn" onclick="deleteClassStudents('${cls}', event)" title="حذف جميع طالبات الصف ${cls}">
+                        <button class="class-delete-btn" onclick="deleteClassStudents('${cls}', event)" title="حذف جميع طالبات الشعبة ${cls}">
                             🗑️
                         </button>
                     </div>
                 `;
 
-                bulkTargetSelect.innerHTML += `<option value="${cls}">${cls}</option>`;
+                bulkTargetSelect.innerHTML += `<option value="${cls}">شعبة ${cls}</option>`;
             });
 
             bulkTargetSelect.value = currentBulkTarget;
@@ -2005,7 +2030,7 @@
                 filtered.forEach(item => {
                     const div = document.createElement('div');
                     div.className = 'searchable-item';
-                    div.innerHTML = `<strong>${item.st.name}</strong> <span style="font-size: 12px; opacity: 0.7; float: left;">(${item.st.studentClass || ''})</span>`;
+                    div.innerHTML = `<strong>${item.st.name}</strong> <span style="font-size: 12px; opacity: 0.7; float: left;">(شعبة: ${item.st.studentClass || ''})</span>`;
                     div.onclick = function() {
                         selectStudentFromDropdown(item.index, item.st.name, item.st.studentClass || '');
                     };
@@ -2017,7 +2042,7 @@
 
         function selectStudentFromDropdown(index, name, className) {
             selectedStudentIndex = index;
-            document.getElementById('studentSearchInput').value = `${name} (${className})`;
+            document.getElementById('studentSearchInput').value = `${name} (شعبة: ${className})`;
             document.getElementById('studentDropdownList').style.display = 'none';
             loadStudentDetails();
         }
@@ -2090,7 +2115,7 @@
                         </td>
                         <td>
                             <button class="btn-action" onclick="updateScore(${i}, 'skills', 1)">+</button>
-                            <span id="val-${i}-skills">${st.skills || 0} / 21</span>
+                            <span id="val-${i}-skills">${st.skills || 0}</span>
                             <button class="btn-action" onclick="updateScore(${i}, 'skills', -1)">-</button>
                         </td>
                         <td>
@@ -2108,8 +2133,8 @@
 
             if (tbody.innerHTML === '') {
                 const emptyMsg = (activeQueryClass === '' && searchInputVal === '') ? 
-                    'يرجى النقر على أحد الصفوف أو زر "جميع الصفوف" بالأعلى لعرض بيانات الطالبات.' : 
-                    'لا توجد نتائج مطابقة لعملية البحث أو الصف الحالي فارغ.';
+                    'يرجى النقر على إحدى الشعب أو زر "جميع الشعب" بالأعلى لعرض بيانات الطالبات.' : 
+                    'لا توجد نتائج مطابقة لعملية البحث أو الشعبة فارغة.';
                 tbody.innerHTML = `<tr><td colspan="10" style="padding: 25px; opacity: 0.7;">${emptyMsg}</td></tr>`;
             }
 
@@ -2150,7 +2175,7 @@
             document.getElementById('sdParticipation').textContent = st.participation || 0;
             document.getElementById('sdHomework').textContent = st.homework || 0;
             document.getElementById('sdAbsence').textContent = st.absence || 0;
-            document.getElementById('sdSkills').textContent = (st.skills || 0) + ' / 21';
+            document.getElementById('sdSkills').textContent = st.skills || 0;
             document.getElementById('sdProjects').textContent = st.projects || 0;
             document.getElementById('sdMessages').textContent = st.messages || 0;
             document.getElementById('sdPhone').textContent = st.phone || 'لا يوجد';
@@ -2173,11 +2198,11 @@
 
             const st = students[stIndex];
             const headerInfo = `🏫 المدرسة: ${SCHOOL_NAME}\n👩‍🏫 معلمة المادة: ${TEACHER_NAME}\n\n`;
-            const reportMsg = `${headerInfo}📋 **التقرير الشامل لأداء الطالبه:** ${st.name} (${st.studentClass || ''})\n\n` +
+            const reportMsg = `${headerInfo}📋 **التقرير الشامل لأداء الطالبه:** ${st.name} (الصف ${currentGrade} - شعبة: ${st.studentClass || ''})\n\n` +
                               `✋ المشاركات: ${st.participation || 0}\n` +
                               `📚 الواجبات: ${st.homework || 0}\n` +
                               `🔴 أيام الغياب: ${st.absence || 0}\n` +
-                              `⭐ المهارات العلمية: ${st.skills || 0} / 21\n` +
+                              `⭐ المهارات العلمية: ${st.skills || 0}\n` +
                               `🛠️ المشاريع: ${st.projects || 0}\n` +
                               `📝 اختبار الفترة 1: ${st.exam1 !== undefined ? st.exam1 + ' / 20' : '-'}\n` +
                               `📝 اختبار الفترة 2: ${st.exam2 !== undefined ? st.exam2 + ' / 20' : '-'}\n\n` +
@@ -2210,7 +2235,7 @@
             const statusLabel = lessonStatus[lIndex] ? '✅ منجز' : '⏳ قيد الانتظار';
 
             const headerInfo = `🏫 المدرسة: ${SCHOOL_NAME}\n👩‍🏫 معلمة المادة: ${TEACHER_NAME}\n\n`;
-            const msg = `${headerInfo}عزيزي وليّ أمر الطالبه: ${st.name} (${st.studentClass || ''})\nنحيطكم علماً بما تم إنجازه في درس اليوم لمادة العلوم:\n📘 ${l.chapter} - ${l.title}\n📌 حالة الدرس: ${statusLabel}\n📝 المفاهيم والمهارات المدروسة: ${l.desc}\n⭐ المهارات المكتسبة: ${st.skills || 0} / 21\n\nشكراً لتعاونكم المستمر ومتابعتكم الرائعة.`;
+            const msg = `${headerInfo}عزيزي وليّ أمر الطالبه: ${st.name} (الصف ${currentGrade})\nنحيطكم علماً بما تم إنجازه في درس اليوم لمادة العلوم:\n📘 ${l.chapter} - ${l.title}\n📌 حالة الدرس: ${statusLabel}\n📝 المفاهيم والمهارات المدروسة: ${l.desc}\n⭐ المهارات المكتسبة: ${st.skills || 0}\n\nشكراً لتعاونكم المستمر ومتابعتكم الرائعة.`;
 
             preview.textContent = msg;
 
@@ -2237,7 +2262,7 @@
             const st = students[stIndex];
             const msgTemplate = motivationTemplates[mKey] || '';
             const headerInfo = `🏫 المدرسة: ${SCHOOL_NAME}\n👩‍🏫 معلمة المادة: ${TEACHER_NAME}\n\n`;
-            const msg = `${headerInfo}${msgTemplate}\n\nالطالبه: ${st.name} (${st.studentClass || ''})`;
+            const msg = `${headerInfo}${msgTemplate}\n\nالطالبه: ${st.name} (الصف ${currentGrade})`;
 
             preview.textContent = msg;
 
@@ -2267,7 +2292,7 @@
                 noteSection = `📌 ملاحظات وتوجيهات للمعلمة: ${extraNote}\n`;
             }
 
-            const msg = `${headerInfo}عزيزي وليّ الأمر،\nنحيطكم علماً بأن الواجب/المهمة الخاصة بمادة العلوم هي:\n📘 ${l.chapter} - ${l.title}\n📝 التفاصيل المطلوبة: ${l.desc}\n${noteSection}\nنرجو الاهتمام والمتابعة وحث البطلة على إنجاز المهمة في موعدها.\nشكراً لتعاونكم المستمر.`;
+            const msg = `${headerInfo}عزيزي وليّ الأمر (الصف ${currentGrade}),\nنحيطكم علماً بأن الواجب/المهمة الخاصة بمادة العلوم هي:\n📘 ${l.chapter} - ${l.title}\n📝 التفاصيل المطلوبة: ${l.desc}\n${noteSection}\nنرجو الاهتمام والمتابعة وحث البطلة على إنجاز المهمة في موعدها.\nشكراً لتعاونكم المستمر.`;
 
             preview.textContent = msg;
         }
@@ -2285,7 +2310,7 @@
             let targetStudents = students.filter(st => {
                 if (!st.phone) return false;
                 if (targetClass === 'ALL') return true;
-                return (st.studentClass || 'سادس/1') === targetClass;
+                return (st.studentClass || '1') === targetClass;
             });
 
             if (targetStudents.length === 0) {
@@ -2307,7 +2332,7 @@
 
             targetStudents.forEach((st, idx) => {
                 const phone = getCleanPhone(st.phone);
-                const msg = `${headerInfo}عزيزي وليّ أمر الطالبه: ${st.name} (${st.studentClass || ''})\nنحيطكم علماً بأن الواجب/المهمة الخاصة بمادة العلوم هي:\n📘 ${l.chapter} - ${l.title}\n📝 التفاصيل المطلوبة: ${l.desc}\n${noteSection}\nنرجو الاهتمام والمتابعة وحث البطلة على إنجاز المهمة في موعدها.\nشكراً لتعاونكم المستمر.`;
+                const msg = `${headerInfo}عزيزي وليّ أمر الطالبه: ${st.name} (الصف ${currentGrade})\nنحيطكم علماً بأن الواجب/المهمة الخاصة بمادة العلوم هي:\n📘 ${l.chapter} - ${l.title}\n📝 التفاصيل المطلوبة: ${l.desc}\n${noteSection}\nنرجو الاهتمام والمتابعة وحث البطلة على إنجاز المهمة في موعدها.\nشكراً لتعاونكم المستمر.`;
 
                 setTimeout(() => {
                     window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
@@ -2320,10 +2345,30 @@
         }
 
         window.onload = function() {
+            document.getElementById('curriculumTitle').textContent = `📚 دليل مقرر العلوم - الصف ${currentGrade} الابتدائي (المنهج السعودي المعتمد) وتتبع التنفيذ`;
             renderLessons();
             render();
             initCharts();
         };
+
+        const motivationTemplates = {
+            "1": "🌟 **عالمة المستقبل المتميزة** 🌟\nعزيزي وليّ الأمر، نفخر اليوم بتميز ابنتكم وتألقها في حصة العلوم بمشاركتها الفعالة واستقصائها العلمي الرائع. بوركت جهودكم!",
+            "2": "🔬 **تفوق ملحوظ في التجارب العلمية** 🔬\nعزيزي وليّ الأمر، أظهرت ابنتكم اليوم مهارات استكشافية ممتازة وتفكيراً علمياً عميقاً أثناء تنفيذ التجارب. أحسنت صنعاً!",
+            "3": "📊 **دقة وإتقان في المفاهيم والمصطلحات** 📊\nعزيزي وليّ الأمر، تميزت ابنتكم اليوم بمهارات علمية دقيقة وفهم عميق للأنظمة والمفاهيم. بارك الله في جهودها!",
+            "4": "✋ **مشاركة نشطة وتفاعل علمي متميز** ✋\nعزيزي وليّ الأمر، تميزت ابنتكم اليوم بحرصها العالي ومشاركتها النشطة وإجاباتها الموفقة داخل المعمل والفصل.",
+            "5": "🧠 **حصيلة علمية واستكشافية ممتازة** 🧠\nعزيزي وليّ الأمر، أبدعت ابنتكم اليوم في التفكير الناقد وتوظيف المصطلحات العلمية بشكل دقيق. مبروك لها!",
+            "6": "📝 **تنظيم رائع للبيانات وواجبات مرتبة** 📝\nعزيزي وليّ الأمر، نشكر لكم متابعتكم المنزلية الواعية. لقد كان واجب ابنتكم اليوم منظماً، دقيقاً، وخطها في غاية الجمال والترتيب.",
+            "7": "✍️ **حل ممتاز للتمارين والأنشطة العلمية** ⑦\nعزيزي وليّ الأمر، تميز أداء ابنتكم اليوم بحل التدريبات العلمية بدقة عالية وفهم عميق. دمتِ ممتازة يا بطلة!",
+            "8": "📚 **اهتمام رائع بالملاحظة والاستنتاج** ⑧\nعزيزي وليّ الأمر، أظهرت ابنتكم اليوم شغفاً واهتماماً لافتاً بالملاحظة العلمية واستنباط النتائج.",
+            "9": "🛠️ **مشروع علمي متميز ومبتكر ومتقن** ⑨\nعزيزي وليّ الأمر، قدمت ابنتكم اليوم مشروعاً علمياً رائعاً ومنظماً ينم عن تفكير إبداعي ومهارة عالية.",
+            "10": "⭐ **اجتهاد وحرص عالٍ على إتقان العلوم** ⑩\nعزيزي وليّ الأمر، إن حرص ابنتكم المستمر على التميز والتعلم في مادة العلوم محل تقديرنا الدائم.",
+            "11": "🤝 **شراكة منزلية مثمرة ومباركة** ⑪\nعزيزي وليّ الأمر، شكراً لتعاونكم المستمر ومتابعتكم الرائعة التي تظهر جلياً في تفوق ابنتكم وتألقها.",
+            "12": "🏡 **متابعة منزلية واعية ومتميزة** ⑫\nعزيزي وليّ الأمر، إن اهتمامكم الدائم بمراجعة الدروس لابنتكم يثمر يوماً بعد يوم عن نتائج رائعة ومشرقة.",
+            "13": "🏅 **أخلاق عالية وأدب جم وتركيز متميز** ⑬\nعزيزي وليّ الأمر، ابنتكم نموذج مشرف في حسن الخلق، والهدوء، والتركيز العالي، واحترام المعلمة والزميلات.",
+            "14": "🌱 **جهد مبارك ودعم مستمر** ⑭\nعزيزي وليّ الأمر، نشكر لكم تشجيعكم المستمر لابنتكم، معاً نصنع لها مستقبلاً مشرقاً في مسار العلوم.",
+            "15": "🚀 **مستقبل واعد وطالبه مجتهدة** ⑮\nعزيزي وليّ الأمر، بمثل هذا الاجتهاد والأدب الرفيع، نتوقع لابنتكم مستقبلاً باهراً بإذن الله!"
+        };
     </script>
 </body>
 </html>
+```[cite: 1]
