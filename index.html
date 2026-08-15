@@ -1112,6 +1112,54 @@
             }
         }
 
+        // دالة إضافة طالب المعدلة والكاملة
+        function addStudent() {
+            const nameInput = document.getElementById('studentName');
+            const classInput = document.getElementById('studentClassCustom');
+            const phoneInput = document.getElementById('studentPhone');
+
+            const name = nameInput.value.trim();
+            const className = classInput.value.trim();
+            const phone = phoneInput.value.trim();
+
+            if (!name) {
+                alert('الرجاء إدخال اسم الطالب');
+                nameInput.focus();
+                return;
+            }
+
+            if (!className) {
+                alert('الرجاء إدخال الصف أو الشعبة');
+                classInput.focus();
+                return;
+            }
+
+            const newStudent = {
+                name: name,
+                className: className,
+                phone: phone || 'غير محدد',
+                absence: 0,
+                participation: 0,
+                homework: 0,
+                skills: 0,
+                projects: 0,
+                messages: 0,
+                exam1: 0,
+                exam2: 0
+            };
+
+            students.push(newStudent);
+            localStorage.setItem(getStorageKeyForStudents(), JSON.stringify(students));
+
+            // تفريغ الحقول بعد الإضافة
+            nameInput.value = '';
+            classInput.value = '';
+            phoneInput.value = '';
+
+            render();
+            showToast('➕ تم إضافة الطالب بنجاح!');
+        }
+
         function showToast(msg = '✅ تم الحفظ تلقائياً!') {
             const toast = document.getElementById('toast');
             toast.textContent = msg;
@@ -1121,6 +1169,37 @@
 
         function render() {
             document.getElementById('totalStudents').textContent = students.length;
+            
+            // تحديث الجدول إن وجد عرضه
+            const tbody = document.getElementById('studentsTbody');
+            if (tbody) {
+                tbody.innerHTML = '';
+                students.forEach((st, idx) => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${st.name}</td>
+                        <td><span class="class-badge">${st.className}</span></td>
+                        <td>${st.phone}</td>
+                        <td>${st.absence}</td>
+                        <td>${st.participation}</td>
+                        <td>${st.homework}</td>
+                        <td>${st.skills}</td>
+                        <td>${st.projects}</td>
+                        <td>${st.messages}</td>
+                        <td class="no-print"><button class="btn-action btn-danger" onclick="deleteStudent(${idx})">🗑️</button></td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            }
+        }
+
+        function deleteStudent(index) {
+            if (confirm('هل أنت متأكد من حذف هذا الطالب؟')) {
+                students.splice(index, 1);
+                localStorage.setItem(getStorageKeyForStudents(), JSON.stringify(students));
+                render();
+                showToast('🗑️ تم حذف الطالب بنجاح!');
+            }
         }
 
         function printSection(sectionId) {
