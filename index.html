@@ -3,1218 +3,390 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مدرسة داوود بن عروة الابتدائية - لوحة تحكم المعلم (مادة العلوم)</title>
-    <!-- مكتبة SheetJS لتصدير واستيراد ملفات إكسل Excel -->
+    <title>لوحة تحكم مادة العلوم - المنهج السعودي</title>
+    <!-- مكتبة Tailwind CSS للتصميم السريع -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- مكتبة SheetJS لقراءة وتصدير ملفات الإكسل -->
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-    <!-- مكتبة Chart.js للرسوم البيانية -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- خط عربي مميز -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #047857;
-            --secondary: #059669;
-            --accent: #a7f3d0;
-            --bg: #ecfdf5;
-            --card-bg: #ffffff;
-            --text: #064e3b;
-            --danger: #ef4444;
-            --warning: #f59e0b;
-            --info: #06b6d4;
-            --excel: #1d6f42;
-        }
-
-        body.theme-default { 
-            --bg: linear-gradient(135deg, #ecfdf5 0%, #a7f3d0 100%); 
-            --card-bg: #ffffff; 
-            --text: #064e3b; 
-        }
-        body.theme-royal { 
-            --bg: linear-gradient(135deg, #3b0764 0%, #581c87 100%); 
-            --card-bg: #4c1d95; 
-            --text: #f3e8ff; 
-            --secondary: #a855f7;
-            --primary: #6b21a8;
-        }
-        body.theme-emerald { 
-            --bg: linear-gradient(135deg, #064e3b 0%, #065f46 100%); 
-            --card-bg: #ffffff; 
-            --text: #065f46; 
-            --secondary: #059669;
-            --primary: #047857;
-        }
-        body.theme-amber { 
-            --bg: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); 
-            --card-bg: #ffffff; 
-            --text: #78350f; 
-            --secondary: #d97706;
-            --primary: #b45309;
-        }
-        body.theme-blue { 
-            --bg: linear-gradient(135deg, #f0fdf4 0%, #bbf7d0 100%); 
-            --card-bg: #ffffff; 
-            --text: #065f46; 
-            --secondary: #16a34a;
-            --primary: #15803d;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: var(--bg);
-            background-attachment: fixed;
-            color: var(--text);
-            margin: 0;
-            padding: 20px;
-            transition: background 0.3s ease, color 0.3s ease;
-            user-select: none;
-            min-height: 100vh;
-        }
-
-        .top-banner {
-            text-align: center;
-            background: linear-gradient(135deg, var(--secondary), var(--primary));
-            color: white;
-            padding: 12px;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            line-height: 1.8;
-        }
-
-        .header {
-            text-align: center;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            margin-bottom: 25px;
-        }
-
-        .header h1 { margin: 0 0 10px 0; font-size: 24px; }
-        .header div { font-size: 18px; opacity: 0.9; }
-        .header p { margin: 5px 0 0 0; font-size: 14px; opacity: 0.8; }
-
-        .subscription-badge {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.25);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 13px;
-            margin-top: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            font-weight: bold;
-        }
-
-        .theme-switcher {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 15px;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 8px 15px;
-            border-radius: 20px;
-            width: fit-content;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .theme-btn {
-            border: 2px solid white;
-            border-radius: 50%;
-            width: 28px;
-            height: 28px;
-            cursor: pointer;
-            padding: 0;
-            transition: transform 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-
-        .theme-btn:hover { transform: scale(1.2); }
-
-        .container { max-width: 1200px; margin: 0 auto; }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
-        .stat-card {
-            background: var(--card-bg);
-            padding: 15px;
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            border-bottom: 4px solid var(--secondary);
-        }
-
-        .stat-card h3 { margin: 0; font-size: 13px; opacity: 0.8; }
-        .stat-card p { margin: 10px 0 0 0; font-size: 22px; font-weight: bold; color: var(--secondary); }
-
-        .section-card {
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            margin-bottom: 25px;
-        }
-
-        .section-card h3 {
-            margin-top: 0;
-            color: var(--secondary);
-            border-bottom: 2px solid rgba(0,0,0,0.1);
-            padding-bottom: 10px;
-        }
-
-        .charts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 20px;
-            margin-top: 15px;
-        }
-
-        .chart-box {
-            background: rgba(0,0,0,0.02);
-            border: 1px solid rgba(0,0,0,0.08);
-            border-radius: 10px;
-            padding: 15px;
-            position: relative;
-            height: 300px;
-        }
-
-        .form-row {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-        }
-
-        .form-row input, .form-row select {
-            flex: 1;
-            min-width: 160px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 14px;
-            background-color: var(--card-bg);
-            color: var(--text);
-        }
-
-        button {
-            background: var(--secondary);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.2s;
-        }
-
-        button:hover { opacity: 0.9; }
-        .btn-danger { background: var(--danger); }
-        .btn-info { background: var(--info); }
-        .btn-warning { background: var(--warning); }
-        .btn-excel { background: var(--excel); }
-        .btn-print { background: #4b5563; }
-        .btn-action { padding: 4px 8px; font-size: 12px; margin: 0 2px; }
-
-        .classes-query-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin: 15px 0;
-            align-items: center;
-        }
-
-        .class-btn-wrapper {
-            display: inline-flex;
-            align-items: stretch;
-            border-radius: 8px;
-            overflow: hidden;
-            border: 2px solid var(--secondary);
-            background: rgba(0, 0, 0, 0.04);
-            flex: 1;
-            min-width: 150px;
-        }
-
-        .class-query-btn {
-            background: transparent;
-            border: none;
-            color: var(--text);
-            padding: 10px 15px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 14px;
-            flex: 1;
-            text-align: right;
-        }
-
-        .class-btn-wrapper.active {
-            background: var(--secondary);
-            border-color: var(--secondary);
-        }
-
-        .class-btn-wrapper.active .class-query-btn {
-            color: white;
-        }
-
-        .class-delete-btn {
-            background: rgba(239, 68, 68, 0.15);
-            border: none;
-            color: var(--danger);
-            padding: 0 12px;
-            cursor: pointer;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .class-delete-btn:hover {
-            background: var(--danger);
-            color: white;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
-
-        th, td {
-            border: 1px solid rgba(0,0,0,0.1);
-            padding: 10px;
-            text-align: center;
-        }
-
-        th { background-color: rgba(0,0,0,0.05); color: var(--secondary); }
-
-        .pagination-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 15px;
-            padding: 10px;
-            background: rgba(0,0,0,0.03);
-            border-radius: 8px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .pagination-btns {
-            display: flex;
-            gap: 5px;
-            align-items: center;
-        }
-
-        .pagination-btns button {
-            padding: 6px 12px;
-            font-size: 13px;
-        }
-
-        .student-details {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-            gap: 10px;
-            margin: 15px 0;
-            background: rgba(0,0,0,0.03);
-            padding: 15px;
-            border-radius: 8px;
-        }
-
-        .detail-item { text-align: center; }
-        .detail-item span { display: block; font-size: 12px; opacity: 0.8; }
-        .detail-item strong { font-size: 18px; color: var(--secondary); }
-
-        .sub-box {
-            background: rgba(0,0,0,0.02);
-            border: 1px solid rgba(0,0,0,0.1);
-            border-radius: 8px;
-            padding: 15px;
-            margin-top: 15px;
-        }
-
-        .sub-box h5 { margin-top: 0; color: var(--secondary); font-size: 16px; }
-
-        .preview-msg {
-            background: rgba(5, 150, 105, 0.08);
-            border-right: 4px solid var(--secondary);
-            padding: 12px;
-            margin: 10px 0;
-            border-radius: 4px;
-            white-space: pre-wrap;
-            font-size: 14px;
-            direction: rtl;
-            text-align: right;
-        }
-
-        .whatsapp-btn {
-            display: inline-block;
-            background: #25D366;
-            color: white;
-            text-decoration: none;
-            padding: 10px 15px;
-            border-radius: 6px;
-            font-weight: bold;
-            margin-top: 5px;
-        }
-
-        .lessons-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 12px;
-            margin-top: 15px;
-            max-height: 520px;
-            overflow-y: auto;
-            padding: 5px;
-        }
-
-        .lesson-card {
-            background: rgba(0,0,0,0.03);
-            border: 1px solid rgba(0,0,0,0.08);
-            padding: 12px;
-            border-radius: 8px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .lesson-card.executed {
-            border-right: 5px solid var(--secondary);
-            background: rgba(5, 150, 105, 0.04);
-        }
-
-        .lesson-card.not-executed {
-            border-right: 5px solid var(--warning);
-            background: rgba(245, 158, 11, 0.05);
-        }
-
-        .lesson-card span.ch-badge {
-            font-size: 11px;
-            color: #fff;
-            background: var(--primary);
-            padding: 2px 6px;
-            border-radius: 4px;
-            display: inline-block;
-            margin-bottom: 5px;
-        }
-
-        .lesson-card strong { color: var(--secondary); font-size: 14px; display: block; margin-bottom: 4px; }
-        .lesson-card p { margin: 0 0 10px 0; font-size: 12px; opacity: 0.85; line-height: 1.5; }
-
-        .lesson-actions {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 10px;
-        }
-
-        .status-toggle-btn {
-            padding: 6px 12px;
-            font-size: 12px;
-            border-radius: 20px;
-            cursor: pointer;
-            border: none;
-            font-weight: bold;
-        }
-
-        .status-toggle-btn.done { background-color: var(--secondary); color: white; }
-        .status-toggle-btn.pending { background-color: var(--warning); color: white; }
-
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--secondary);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 30px;
-            display: none;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            z-index: 1000;
-        }
-
-        .backup-controls {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px dashed #ccc;
-            flex-wrap: wrap;
-        }
-
-        .class-badge {
-            background-color: var(--secondary);
-            color: white;
-            padding: 3px 8px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: bold;
-        }
-
-        .searchable-dropdown-container {
-            position: relative;
-            width: 100%;
-        }
-
-        .searchable-input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 15px;
-            background-color: var(--card-bg);
-            color: var(--text);
-            box-sizing: border-box;
-        }
-
-        .searchable-dropdown-list {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            max-height: 250px;
-            overflow-y: auto;
-            background: var(--card-bg);
-            border: 1px solid var(--secondary);
-            border-radius: 0 0 6px 6px;
-            z-index: 999;
-            display: none;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-
-        .searchable-item {
-            padding: 10px 15px;
-            cursor: pointer;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            transition: background 0.15s;
-            font-size: 14px;
-        }
-
-        .searchable-item:hover {
-            background: rgba(5, 150, 105, 0.1);
-            color: var(--secondary);
-            font-weight: bold;
-        }
-
-        .footer-note {
-            text-align: center;
-            margin-top: 30px;
-            padding: 15px;
-            font-size: 14px;
-            opacity: 0.75;
-            border-top: 1px solid rgba(0,0,0,0.1);
-            line-height: 1.8;
-        }
-
-        .floating-action-buttons {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            z-index: 999;
-        }
-
-        .float-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--secondary);
-            color: white;
-            border: none;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            text-decoration: none;
-        }
-
-        .float-whatsapp { background: #25D366; }
-        .float-top { background: var(--primary); display: none; }
-
-        @media print {
-            body * { visibility: hidden; }
-            .print-active-section, .print-active-section * { visibility: visible; }
-            .print-active-section { position: absolute; left: 0; top: 0; width: 100%; background: white !important; }
-            .btn-action, .backup-controls, .pagination-bar, .form-row, .classes-query-grid, .no-print { display: none !important; }
-        }
+        body { font-family: 'Cairo', sans-serif; }
     </style>
 </head>
-<body class="theme-default">
+<body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col">
 
-    <div class="top-banner">
-        ﴿ هذا الجهد استغرق وقتاً وعناية، ولا أحلل نقله تجارياً أو نسخ دون إذن ﴾<br>
-        للتواصل والاتصال عبر واتساب: <a href="https://wa.me/966581015002" target="_blank" style="color: #ffff00; text-decoration: underline;">0581015002</a>
-    </div>
+    <!-- شاشة التنبيهات المؤقتة (Toast) -->
+    <div id="toast" class="fixed bottom-5 left-5 bg-emerald-600 text-white px-4 py-2 rounded-lg shadow-lg hidden transition-all duration-300 z-50"></div>
 
-    <div class="header">
-        <h1>مدرسة داوود بن عروة الابتدائية</h1>
-        <div>إعداد المعلم: منصور عامر الرحيلي</div>
-        <p>لوحة تحكم معلم مادة العلوم للمرحلة الابتدائية (وفق المنهج السعودي)</p>
-        <div class="subscription-badge">⏳ نهاية الاشتراك: 2027/07/01</div>
-
-        <div class="theme-switcher">
-            <span style="font-size: 12px; margin-left: 5px;">🎨 المظهر:</span>
-            <button class="theme-btn" onclick="setTheme('theme-default')">🍃</button>
-            <button class="theme-btn" onclick="setTheme('theme-royal')">👑</button>
-            <button class="theme-btn" onclick="setTheme('theme-emerald')">🌲</button>
-            <button class="theme-btn" onclick="setTheme('theme-amber')">⭐</button>
-            <button class="theme-btn" onclick="setTheme('theme-blue')">📘</button>
+    <!-- رأس الصفحة -->
+    <header class="bg-emerald-700 text-white shadow-md py-4 px-6 flex flex-wrap justify-between items-center">
+        <div>
+            <h1 class="text-2xl font-bold">🧪 لوحة تحكم مادة العلوم - المنهج السعودي</h1>
+            <p class="text-emerald-100 text-sm">متابعة الطلاب، المهارات، ودروس المنهج الدراسي للمرحلة الابتدائية</p>
         </div>
-    </div>
+        <div class="mt-2 sm:mt-0 flex items-center gap-3">
+            <select id="gradeSelect" onchange="changeGrade(this.value)" class="bg-emerald-800 text-white border border-emerald-600 rounded-lg px-3 py-2 text-sm focus:outline-none">
+                <option value="الصف الأول الابتدائي">الصف الأول الابتدائي</option>
+                <option value="الصف الثاني الابتدائي">الصف الثاني الابتدائي</option>
+                <option value="الصف الثالث الابتدائي">الصف الثالث الابتدائي</option>
+                <option value="الصف الرابع الابتدائي">الصف الرابع الابتدائي</option>
+                <option value="الصف الخامس الابتدائي">الصف الخامس الابتدائي</option>
+                <option value="الصف السادس الابتدائي">الصف السادس الابتدائي</option>
+            </select>
+        </div>
+    </header>
 
-    <div class="container">
-        <!-- اختيار الصف الدراسي -->
-        <div class="section-card" style="background: linear-gradient(135deg, rgba(5,150,105,0.05), rgba(4,120,87,0.1)); border: 2px solid var(--secondary);">
-            <h3 style="margin-bottom: 10px;">📌 اختر الصف الدراسي للمتابعة</h3>
-            <div class="form-row" style="margin-bottom: 0;">
-                <select id="globalGradeSelect" onchange="changeGradeLevel(this.value)" style="font-weight: bold; font-size: 16px; color: var(--secondary);">
-                    <option value="الأول الابتدائي">الصف الأول الابتدائي</option>
-                    <option value="الثاني الابتدائي">الصف الثاني الابتدائي</option>
-                    <option value="الثالث الابتدائي">الصف الثالث الابتدائي</option>
-                    <option value="الرابع الابتدائي">الصف الرابع الابتدائي</option>
-                    <option value="الخامس الابتدائي">الصف الخامس الابتدائي</option>
-                    <option value="السادس الابتدائي">الصف السادس الابتدائي</option>
-                </select>
+    <!-- المحتوى الرئيسي -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 space-y-6">
+
+        <!-- لوحة عرض دروس المنهج السعودي للصف الحالي -->
+        <div class="bg-white p-4 rounded-xl shadow-sm border border-emerald-100">
+            <h3 class="text-sm font-bold text-emerald-800 mb-2 flex items-center gap-2">
+                <span>📚</span> وحدات ودروس المنهج السعودي المقررة: <span id="currentGradeTitle" class="text-gray-600"></span>
+            </h3>
+            <div id="lessonsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                <!-- تُعبأ الدروس برمجياً حسب الصف -->
             </div>
         </div>
 
-        <!-- الإحصائيات -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <h3>👥 إجمالي الطلاب</h3>
-                <p id="totalStudents">0</p>
+        <!-- أشرطة الأدوات وأزرار التحكم -->
+        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-wrap gap-3 justify-between items-center">
+            <div class="flex flex-wrap gap-2">
+                <button onclick="openAddModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">➕ إضافة طالب جديد</button>
+                <button onclick="exportExcel()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">📊 تصدير إلى إكسل</button>
+                <label class="bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition cursor-pointer">
+                    📂 استيراد من إكسل
+                    <input type="file" accept=".xlsx, .xls" class="hidden" onchange="importExcel(event)">
+                </label>
             </div>
-            <div class="stat-card">
-                <h3>⭐ المهارات العلمية</h3>
-                <p id="totalSkills">0</p>
-            </div>
-            <div class="stat-card">
-                <h3>✋ مجموع المشاركات</h3>
-                <p id="totalParticipation">0</p>
-            </div>
-            <div class="stat-card">
-                <h3>📚 الواجبات المنجزة</h3>
-                <p id="totalHomework">0</p>
-            </div>
-            <div class="stat-card">
-                <h3>🔴 أيام الغياب</h3>
-                <p id="totalAbsence">0</p>
-            </div>
-            <div class="stat-card">
-                <h3>🛠️ إجمالي التجـارب</h3>
-                <p id="totalProjects">0</p>
-            </div>
-            <div class="stat-card">
-                <h3>💬 رسائل الواتس المرسلة</h3>
-                <p id="totalMessagesSent">0</p>
-            </div>
-            <div class="stat-card">
-                <h3>✅ الدروس المنفذة</h3>
-                <p id="totalExecutedLessons">0 / 0</p>
+            <div>
+                <span id="studentCountBadge" class="bg-emerald-100 text-emerald-800 text-xs font-semibold px-3 py-1.5 rounded-full">إجمالي الطلاب: 0</span>
             </div>
         </div>
 
-        <!-- لوحة التحليل الذكي مع زر الطباعة -->
-        <div class="section-card" id="analyticsSection">
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-bottom: 2px solid rgba(0,0,0,0.1); padding-bottom: 10px; margin-bottom: 15px;">
-                <h3 style="margin: 0; border: none; padding: 0;">🧠 لوحة التحليل الذكي ومؤشرات الأداء الأكاديمي</h3>
-                <button class="btn-print" onclick="printSection('analyticsSection')">🖨️ طباعة تقرير التحليل الذكي الشامل</button>
-            </div>
-
-            <div class="student-details" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 20px;">
-                <div class="detail-item">
-                    <span>🏆 نسبة إنجاز المنهج العام</span>
-                    <strong id="kpiCurriculumProgress">0%</strong>
-                </div>
-                <div class="detail-item">
-                    <span>🌟 نسبة الطلاب المتفوقين (أعلى من 85%)</span>
-                    <strong id="kpiExcellenceRate">0%</strong>
-                </div>
-                <div class="detail-item">
-                    <span>⚠️ طلاب بحاجة لدعم عاجل</span>
-                    <strong id="kpiAtRiskCount" style="color: var(--danger);">0 طالب</strong>
-                </div>
-                <div class="detail-item">
-                    <span>📈 متوسط تحصيل اختبارات الفترات</span>
-                    <strong id="kpiGeneralAvg">- / 20</strong>
-                </div>
-            </div>
-
-            <div class="sub-box" style="margin-top: 15px; border-color: var(--danger);">
-                <h5 style="color: var(--danger);">⚠️ قائمة طلاب بحاجة لدعم عاجل (أقل من 60% أو تحصيل منخفض)</h5>
-                <div class="form-row" style="margin-bottom: 0;">
-                    <select id="atRiskDropdown" onchange="selectAtRiskStudent(this.value)">
-                        <option value="">-- اختر طالباً من قائمة الدعم العاجل لعرض ملفه --</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="charts-grid">
-                <div class="chart-box">
-                    <canvas id="academicLevelsChart"></canvas>
-                </div>
-                <div class="chart-box">
-                    <canvas id="examsComparisonChart"></canvas>
-                </div>
-            </div>
-        </div>
-
-        <!-- تسجيل الطلاب والصفوف والجدول -->
-        <div class="section-card" id="studentsTableSection">
-            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid rgba(0,0,0,0.1); padding-bottom: 10px; margin-bottom: 15px;">
-                <h3 style="margin: 0; border: none; padding: 0;">✏️ تسجيل الطلاب والصفوف ومتابعتهم</h3>
-                <button class="btn-print" onclick="printSection('studentsTableSection')" title="طباعة جدول الطلاب والصفوف">🖨️ طباعة الجدول</button>
-            </div>
-            
-            <div class="form-row">
-                <input type="text" id="studentName" placeholder="اسم الطالب (Student Name)">
-                <input type="text" id="studentClassCustom" placeholder="اكتب الصف/الشعبة (مثال: رابع ابتدائي أ)">
-                <input type="tel" id="studentPhone" placeholder="رقم جوال ولي الأمر (مثال: 05xxxxxxx)">
-                <button onclick="addStudent()">➕ إضافة طالب</button>
-            </div>
-
-            <div style="margin-top: 20px;">
-                <span style="font-weight: bold; font-size: 14px; display: block; margin-bottom: 8px;">🏫 تصفح الصفوف (اضغط على الصف لعرضه):</span>
-                <div id="classesQueryContainer" class="classes-query-grid"></div>
-            </div>
-
-            <div class="form-row" style="align-items: center; background: rgba(0,0,0,0.03); padding: 8px; border-radius: 6px; margin-top: 15px;">
-                <span style="font-weight: bold; font-size: 14px;">🔍 بحث عن طالب محدد بالاسم:</span>
-                <input type="text" id="filterStudentNameInput" placeholder="اكتب اسم الطالب للبحث..." oninput="filterTableByStudentInput()" style="max-width: 320px;">
-            </div>
-
-            <div style="overflow-x: auto;">
-                <table>
+        <!-- جدول بيانات الطلاب -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-right border-collapse">
                     <thead>
-                        <tr>
-                            <th>اسم الطالب</th>
-                            <th>🏫 الصف/الشعبة</th>
-                            <th>📱 رقم الجوال</th>
-                            <th>🔴 الغياب</th>
-                            <th>✋ المشاركة</th>
-                            <th>📚 الواجبات</th>
-                            <th>⭐ المهارات</th>
-                            <th>🛠️ التجارب</th>
-                            <th>💬 الرسائل</th>
-                            <th class="no-print">حذف</th>
+                        <tr class="bg-gray-100 text-gray-700 text-xs uppercase font-semibold border-b">
+                            <th class="p-3">م</th>
+                            <th class="p-3">اسم الطالب</th>
+                            <th class="p-3">الصف</th>
+                            <th class="p-3 text-center">الغياب</th>
+                            <th class="p-3 text-center">المشاركة</th>
+                            <th class="p-3 text-center">الواجبات</th>
+                            <th class="p-3 text-center">المهارات</th>
+                            <th class="p-3 text-center">التجارب</th>
+                            <th class="p-3 text-center">الإجراءات</th>
                         </tr>
                     </thead>
-                    <tbody id="studentsTbody"></tbody>
-                </table>
-            </div>
-
-            <div class="pagination-bar">
-                <div id="paginationInfo" style="font-size: 13px; font-weight: bold;">عرض 0 من 0</div>
-                <div class="pagination-btns">
-                    <button id="prevPageBtn" onclick="changePage(-1)" class="btn-info">◀ السابق</button>
-                    <span id="pageIndicator" style="font-size: 14px; font-weight: bold; padding: 0 10px;">1 / 1</span>
-                    <button id="nextPageBtn" onclick="changePage(1)" class="btn-info">التالي ▶</button>
-                </div>
-            </div>
-
-            <div class="backup-controls">
-                <button class="btn-excel" onclick="exportExcel()">📊 تصدير إلى إكسل (Excel)</button>
-                <button class="btn-warning" onclick="document.getElementById('importExcelFile').click()">📂 استيراد من إكسل (Excel)</button>
-                <input type="file" id="importExcelFile" accept=".xlsx, .xls" style="display: none;" onchange="importExcel(event)">
-
-                <button class="btn-info" onclick="exportData()" style="margin-right: auto;">💾 تصدير JSON</button>
-                <button class="btn-warning" onclick="document.getElementById('importFile').click()">📂 استرجاع JSON</button>
-                <input type="file" id="importFile" accept=".json" style="display: none;" onchange="importData(event)">
-            </div>
-        </div>
-
-        <!-- رصد اختبارات الفترة الأولى والثانية -->
-        <div class="section-card" id="examsSection">
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-bottom: 2px solid rgba(0,0,0,0.1); padding-bottom: 10px; margin-bottom: 15px;">
-                <h3 style="margin: 0; border: none; padding: 0;">📊 رصد وتحليل اختبارات الفترة الأولى والفترة الثانية (من ٢٠) 📝</h3>
-                <button class="btn-print" onclick="printSection('examsSection')">🖨️ طباعة تقرير رصد وتحليل الاختبارات</button>
-            </div>
-            
-            <div class="form-row">
-                <select id="examClassSelect" onchange="renderExamsTable()">
-                    <option value="">-- اختر الصف/الشعبة لعرض وسجل الاختبارات --</option>
-                </select>
-            </div>
-
-            <div id="examsAnalysisBox" class="sub-box" style="display: none; margin-bottom: 15px;">
-                <h5>📈 مؤشرات التحليل الإحصائي لنتائج الصف المحدد</h5>
-                <div class="student-details" style="margin: 10px 0;">
-                    <div class="detail-item">
-                        <span>متوسط اختبار الفترة 1 (من 20)</span>
-                        <strong id="avgExam1">0</strong>
-                    </div>
-                    <div class="detail-item">
-                        <span>متوسط اختبار الفترة 2 (من 20)</span>
-                        <strong id="avgExam2">0</strong>
-                    </div>
-                </div>
-            </div>
-
-            <div style="overflow-x: auto;">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>اسم الطالب</th>
-                            <th>🏫 الصف/الشعبة</th>
-                            <th>📝 اختبار الفترة الأولى (من 20)</th>
-                            <th>📝 اختبار الفترة الثانية (من 20)</th>
-                            <th class="no-print">📤 إرسال النتيجة لولي الأمر</th>
-                        </tr>
-                    </thead>
-                    <tbody id="examsTbody">
-                        <tr><td colspan="5" style="padding: 20px; opacity: 0.7;">الرجاء اختيار الصف الدراسي من القائمة أعلاه لعرض رصد واختبارات الطلاب.</td></tr>
+                    <tbody id="studentsTableBody" class="divide-y divide-gray-100 text-sm">
+                        <!-- تُعبأ البيانات برمجياً -->
                     </tbody>
                 </table>
             </div>
         </div>
+    </main>
 
-        <!-- استعلام عن طالب -->
-        <div class="section-card">
-            <h3>🔍 استعلام وتتبع طالب محدد</h3>
-            <div class="form-row">
-                <div class="searchable-dropdown-container">
-                    <input type="text" id="studentSearchInput" class="searchable-input" placeholder="اكتب اسم الطالب للبحث الحر بالكيبورد..." oninput="filterStudentDropdown()" onfocus="showStudentDropdown()" autocomplete="off">
-                    <div id="studentDropdownList" class="searchable-dropdown-list"></div>
-                </div>
-            </div>
-
-            <div id="studentCard" style="display: none;">
+    <!-- نافذة إضافة طالب منبثقة (Modal) -->
+    <div id="addModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-xl max-w-md w-full p-6 space-y-4 shadow-xl">
+            <h3 class="text-lg font-bold text-gray-800">إضافة طالب جديد</h3>
+            <div class="space-y-3">
                 <div>
-                    <h4>سجل الطالب: <span id="selectedName"></span> (<span id="selectedClassBadge" class="class-badge"></span>)</h4>
-                    <div class="student-details">
-                        <div class="detail-item"><span>المشاركات</span><strong id="sdParticipation">0</strong></div>
-                        <div class="detail-item"><span>الواجبات</span><strong id="sdHomework">0</strong></div>
-                        <div class="detail-item"><span>أيام الغياب</span><strong id="sdAbsence">0</strong></div>
-                        <div class="detail-item"><span>المهارات</span><strong id="sdSkills">0</strong></div>
-                        <div class="detail-item"><span>التجارب</span><strong id="sdProjects">0</strong></div>
-                        <div class="detail-item"><span>رسائل الواتس</span><strong id="sdMessages">0</strong></div>
-                    </div>
+                    <label class="block text-xs font-semibold text-gray-600 mb-1">اسم الطالب</label>
+                    <input type="text" id="inputName" class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none">
                 </div>
-
-                <div class="form-row" style="margin-top: 15px;">
-                    <button class="btn-print" onclick="printStudentReport()">🖨️ طباعة تقرير الطالب الرسمي</button>
-                    <button class="whatsapp-btn" onclick="sendFullReportWhatsApp()" style="border: none; cursor: pointer; margin-top: 0;">📤 إرسال التقرير الشامل لولي الأمر عبر واتساب</button>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-600 mb-1">الصف</label>
+                    <input type="text" id="inputClass" class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none">
                 </div>
-
-                <div class="sub-box">
-                    <h5>💬 إشعار ولي الأمر بالدرس والمهارة العلمية عبر الواتساب مباشرة</h5>
-                    <div>📱 رقم الجوال المحدد: <span id="sdPhone">لا يوجد</span></div>
-                    <div class="form-row" style="margin-top: 10px;">
-                        <select id="selectLesson" onchange="updateLessonMsg()">
-                            <option value="">-- اختر موضوع الدرس والمهارة --</option>
-                        </select>
-                    </div>
-                    <div id="lessonMsgPreview" class="preview-msg">اختر موضوع الدرس والمهارة أعلاه لتوليد نص الرسالة تلقائياً...</div>
-                    <a id="whatsappLessonBtn" href="#" target="_blank" class="whatsapp-btn" onclick="incrementMessageCount()">📲 إرسال مباشر لولي الأمر</a>
-                </div>
-
-                <div class="sub-box">
-                    <h5>✨ إرسال رسائل تشجيعية وشكر وتقدير</h5>
-                    <div class="form-row">
-                        <select id="selectMotivation" onchange="updateMotivationMsg()">
-                            <option value="">-- اختر الرسالة التشجيعية --</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-row" style="margin-top: 10px; background: rgba(5, 150, 105, 0.05); padding: 10px; border-radius: 6px;">
-                        <input type="text" id="newMotivationTitle" placeholder="عنوان الرسالة..." style="max-width: 220px;">
-                        <input type="text" id="newMotivationText" placeholder="اكتب نص الرسالة التشجيعية الجديدة هنا...">
-                        <button onclick="addNewMotivation()">➕ إضافة رسالة تشجيعية</button>
-                    </div>
-
-                    <div id="motivationMsgPreview" class="preview-msg">اختر الرسالة لعرض نص الشكر والتحفيز...</div>
-                    <a id="whatsappMotivationBtn" href="#" target="_blank" class="whatsapp-btn" onclick="incrementMessageCount()">🏆 إرسال رسالة التشجيع المختارة لولي الأمر</a>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-600 mb-1">رقم الجوال (اختياري)</label>
+                    <input type="text" id="inputPhone" class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none">
                 </div>
             </div>
-        </div>
-
-        <!-- إرسال جماعي لأولياء الأمور -->
-        <div class="section-card">
-            <h3>📢 إرسال رسالة أو واجب جماعي لأولياء الأمور</h3>
-            <div class="sub-box" style="margin-top: 0;">
-                <div class="form-row">
-                    <select id="bulkTargetClass">
-                        <option value="ALL">جميع الصفوف والشعب</option>
-                    </select>
-                    <select id="bulkSelectLesson" onchange="updateBulkMsgPreview()">
-                        <option value="">-- اختر الدرس أو الرسالة التشجيعية المراد إرسالها --</option>
-                    </select>
-                </div>
-                <div class="form-row" style="margin-top: 10px;">
-                    <input type="text" id="bulkExtraNote" placeholder="اكتب ملاحظات إضافية هنا..." oninput="updateBulkMsgPreview()">
-                </div>
-                <div id="bulkMsgPreview" class="preview-msg">اختر الصف والدرس أو الرسالة التشجيعية وأدخل الملاحظات لعرض نموذج الرسالة الجماعية...</div>
-                <button class="whatsapp-btn" onclick="sendBulkWhatsApp()" style="border: none; cursor: pointer; font-size: 15px;">🚀 إرسال جماعي عبر واتساب</button>
+            <div class="flex justify-end gap-2 pt-2">
+                <button onclick="closeAddModal()" class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg text-sm">إلغاء</button>
+                <button onclick="saveNewStudent()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-sm font-medium">حفظ</button>
             </div>
         </div>
-
-        <!-- قائمة وحدات ودروس مادة العلوم -->
-        <div class="section-card">
-            <h3 id="curriculumTitle">📚 دليل مقرر العلوم - المرحلة الابتدائية (المنهج السعودي المعتمد للفصلين) وتتبع التنفيذ</h3>
-            
-            <div class="sub-box" style="margin-bottom: 15px; margin-top: 0;">
-                <h5 style="margin-bottom: 10px;">➕ إضافة درس جديد أو وحدة للمنهج</h5>
-                <div class="form-row">
-                    <input type="text" id="newLessonTitle" placeholder="عنوان الوحدة والنص والدرس...">
-                    <input type="text" id="newLessonDesc" placeholder="تفاصيل المفاهيم العلمية والتجارب الاستهلالية...">
-                    <button onclick="addNewLesson()">➕ إضافة الدرس</button>
-                </div>
-            </div>
-
-            <!-- قائمة منسدلة لدليل مقرر العلوم -->
-            <div class="sub-box" style="background: rgba(5,150,105,0.03); border: 1px solid var(--secondary);">
-                <h5 style="color: var(--secondary);">📑 القائمة المنسدلة لدليل مقرر العلوم والوحدات الدراسية</h5>
-                <div class="form-row" style="margin-bottom: 10px;">
-                    <select id="curriculumDropdownSelect" onchange="onCurriculumDropdownChange(this.value)" style="font-weight: bold; font-size: 15px; color: var(--secondary);">
-                        <option value="">-- اختر الدرس أو الوحدة من القائمة المنسدلة للاستعراض --</option>
-                    </select>
-                </div>
-                <div id="selectedLessonDetailsBox" class="preview-msg" style="display: none;">
-                    اختر درساً من القائمة المنسدلة أعلاه لعرض تفاصيله هنا...
-                </div>
-            </div>
-
-            <div class="lessons-grid" id="mainLessonsContainer"></div>
-        </div>
-
-        <div class="footer-note">
-            ﴿ هذا الجهد استغرق وقتاً وعناية، ولا أحلل نقله تجارياً أو نسخه دون إذن ﴾<br>
-            للتواصل واتساب: <a href="https://wa.me/966581015002" target="_blank" style="color: inherit; text-decoration: underline;">0581015002</a>
-        </div>
-
     </div>
 
-    <!-- الأزرار العائمة -->
-    <div class="floating-action-buttons">
-        <a href="https://wa.me/966581015002" target="_blank" class="float-btn float-whatsapp" title="تواصل الدعم الفني عبر واتساب">💬</a>
-        <button id="scrollToTopBtn" class="float-btn float-top" onclick="scrollToTop()" title="العودة إلى أعلى الصفحة">⬆️</button>
-    </div>
+    <!-- تذييل الصفحة -->
+    <footer class="bg-white border-t py-4 text-center text-xs text-gray-500">
+        جميع الحقوق محفوظة &copy; 2026 - لوحة تحكم مادة العلوم (المنهج السعودي)
+    </footer>
 
-    <div id="toast" class="toast">✅ تم حفظ البيانات تلقائياً!</div>
-
+    <!-- سكريبت التطبيق -->
     <script>
-        const TEACHER_NAME = "منصور عامر الرحيلي";
-        const SCHOOL_NAME = "مدرسة داوود بن عروة الابتدائية";
-
-        let currentGrade = localStorage.getItem('awwal_current_grade_science_v3') || 'الأول الابتدائي';
-        document.getElementById('globalGradeSelect').value = currentGrade;
-
-        let activeQueryClass = '';
-        let selectedStudentIndex = ''; 
-        let currentPage = 1;
-        const rowsPerPage = 20;
-
-        let academicLevelsChartInstance = null;
-        let examsComparisonChartInstance = null;
-
-        const defaultMotivations = [
-            { id: "1", title: "1. عالم المستقبل المتميز", text: "🌟 **عالم المستقبل المتميز** 🌟\nعزيزي ولي الأمر، نفخر اليوم بتميز ابنكم وتألقه في حصة العلوم ومشاركته في التجارب العملية بحماس ونشاط. بوركت جهودكم!" },
-            { id: "2", title: "2. تفوق ملحوظ في الملاحظة والاستنتاج", text: "🔬 **تفوق ملحوظ في الملاحظة العلمية** 🔬\nعزيزي ولي الأمر، أظهر ابنكم اليوم مهارات دقيقة في الملاحظة والتجريب واستنباط النتائج. أحسن صنعاً!" },
-            { id: "3", title: "3. دقة وإتقان في المفاهيم العلمية", text: "🌱 **دقة وإتقان في المفاهيم والعلوم** 🌱\nعزيزي ولي الأمر، تميز ابنكم اليوم باستيعابه العميق للحقائق العلمية وتوظيفها بذكاء. بارك الله في جهوده!" },
-            { id: "4", title: "4. مشاركة نشطة وفعالة في حصة العلوم", text: "✋ **مشاركة نشطة وتفاعل علمي متميز** ✋\nعزيزي ولي الأمر، تميز ابنكم اليوم بحرصه العالي ومشاركته النشطة وإجاباته العلمية الموفقة داخل الصف." },
-            { id: "5", title: "5. حصيلة استكشافية وتجارب ممتازة", text: "🧠 **حصيلة استكشافية وتجارب ممتازة** 🧠\nعزيزي ولي الأمر، أبدع ابنكم اليوم في تنفيذ التجارب الاستهلالية والاستكشافية بمهارة عالية. مبروك له!" },
-            { id: "6", title: "6. تنظيم رائع للدفتر وواجبات مرتبة بدقة", text: "📝 **تنظيم رائع للواجبات والأنشطة** 📝\nعزيزي ولي الأمر، نشكر لكم متابعتكم المنزلية الواعية. لقد كان واجب ابنكم اليوم منظماً، دقيقاً، ومرتباً للغاية." },
-            { id: "7", title: "7. حل ممتاز للتدريبات والتقويم التكويني", text: "✍️ **حل ممتاز للتدريبات والتقويم**\nعزيزي ولي الأمر، تميز أداء ابنكم اليوم بحل أسئلة التقويم والتدريبات العلمية بدقة عالية. دمت متميزاً يا بطل!" },
-            { id: "8", title: "8. اهتمام رائع بالبيئة ومخلوقات الله", text: "🌍 **اهتمام رائع بالبيئة والمحيط**\nعزيزي ولي الأمر، أظهر ابنكم اليوم شغفاً واهتماماً لافتاً بدراسة الكائنات الحية وعناصر البيئة من حوله." },
-            { id: "9", title: "9. مشروع علمي متميز ومبتكر ومتقن", text: "🛠️ **مشروع علمي متميز ومبتكر ومتقن**\nعزيزي ولي الأمر، قدم ابنكم اليوم مشروعاً علمياً رائعاً ومنظماً ينم عن تفكير إبداعي ومهارة عالية." },
-            { id: "10", title: "10. اجتهاد وحرص عالٍ على إتقان مهارات العلوم", text: "⭐ **اجتهاد وحرص عالٍ على إتقان العلوم**\nعزيزي ولي الأمر، إن حرص ابنكم المستمر على الاستكشاف والتعلم في مادة العلوم محل تقديرنا الدائم." }
-        ];
-
-        let customMotivations = JSON.parse(localStorage.getItem('awwal_custom_motivations_science_v3')) || defaultMotivations;
-
-        const gradeScienceData = {
-            "الأول الابتدائي": [
-                { chapter: "الوحدة 1: النباتات من حولنا", title: "أجزاء النباتات", desc: "دراسة الجذور، الساق، الأوراق، والزهور ودور كل منها في حياة النبات." },
-                { chapter: "الوحدة 1: النباتات من حولنا", title: "النباتات تنتج نباتات جديدة", desc: "التعرف على البذور وكيفية نموها لتصبح نباتات جديدة." },
-                { chapter: "الوحدة 2: الحيوانات من حولنا", title: "أماكن عيش الحيوانات", desc: "استكشاف الموائل الطبيعية المختلفة للحيوانات (الغابة، الصحراء، الماء)." },
-                { chapter: "الوحدة 2: الحيوانات من حولنا", title: "الحيوانات تنمو وتتغير", desc: "دراسة دورات حياة الحيوانات وكيف تتغير صغار الحيوانات عن أبائها." },
-                { chapter: "الوحدة 3: أرضنا ومواردها", title: "ما الأرض؟ وماذا يوجد عليها؟", desc: "التعرف على اليابسة والماء والصخور المكونة لسطح الأرض." },
-                { chapter: "الوحدة 3: أرضنا ومواردها", title: "الماء والهواء", desc: "أهمية الماء والهواء لحياة الكائنات الحية وطرق المحافظة عليها." },
-                { chapter: "الوحدة 4: الطقس والفصول", title: "حالات الطقس المختلفة", desc: "ملاحظة الطقس اليومي (مشمس، ممطر، عاصف، بارد) وأثره على ملابسنا." },
-                { chapter: "الوحدة 4: الطقس والفصول", title: "الفصول الأربعة", desc: "التعرف على التغيرات المناخية خلال السنة (الربيع، الصيف، الخريف، الشتاء)." }
+        // قاعدة بيانات المنهج السعودي لمادة العلوم للمرحلة الابتدائية
+        const saudiScienceCurriculum = {
+            "الصف الأول الابتدائي": [
+                { unit: "الوحدة 1: النباتات من حولنا", lessons: ["أجزاء النباتات", "النباتات تنتج أفراداً جديدة"] },
+                { unit: "الوحدة 2: الحيوانات من حولنا", lessons: ["أماكن عيش الحيوانات", "حيوانات تنمو وتتغير"] },
+                { unit: "الوحدة 3: أرضنا", lessons: ["الماء واليابسة", "الصخور"] },
+                { unit: "الوحدة 4: الطقس والفصول", lessons: ["الطقس", "الفصول الأربعة"] }
             ],
-            "الثاني الابتدائي": [
-                { chapter: "الوحدة 1: النباتات والحيوانات", title: "مخلوقات حية ومخلوقات غير حية", desc: "التفرقة بين الكائنات الحية التي تنمو وتتغذى والأشياء غير الحية." },
-                { chapter: "الوحدة 1: النباتات والحيوانات", title: "حاجات المخلوقات الحية", desc: "دراسة الماء، الهواء، الغذاء، والمكان كاحتياجات أساسية للبقاء." },
-                { chapter: "الوحدة 2: موائل الكائنات الحية", title: "السلسلة الغذائية", desc: "كيف تحصل الحيوانات على طاقاتها من النباتات والحيوانات الأخرى." },
-                { chapter: "الوحدة 2: موائل الكائنات الحية", title: "الصحاري والغابات", desc: "مقارنة الخصائص البيئية للبيئات الحارة والباردة والغابات المطيرة." },
-                { chapter: "الوحدة 3: المادة من حولنا", title: "ما المادة؟", desc: "استكشاف خصائص الأجسام والصلابة واللون والكتلة والحجم." },
-                { chapter: "الوحدة 3: المادة من حولنا", title: "حالات المادة", desc: "التمييز بين الحالات الصلبة والسائلة والغازية للمادة وتجارب تغيير حالتها." },
-                { chapter: "الوحدة 4: الطاقة والقوى", title: "الصوت والضوء", desc: "كيف ينتقل الصوت وكيف يتكون الضوء وتجارب الظلال والاهتزازات." },
-                { chapter: "الوحدة 4: الطاقة والقوى", title: "الحركة والقوى", desc: "استكشاف كيف تؤثر قوى الدفع والسحب في تغيير موضع الأجسام وسرعتها." }
+            "الصف الثاني الابتدائي": [
+                { unit: "الوحدة 1: النباتات والحيوانات", lessons: ["حاجات المخلوقات الحية", "تنبك وتتغير المخلوقات الحية", "مواطن الحيوانات"] },
+                { unit: "الوحدة 2: أرضنا", lessons: ["أرضنا المتغيرة", "الماء على الأرض"] },
+                { unit: "الوحدة 3: المادة", lessons: ["الموقع والحركة", "المادة من حولنا"] },
+                { unit: "الوحدة 4: الطاقة", lessons: ["الصوت", "الضوء"] }
             ],
-            "الثالث الابتدائي": [
-                { chapter: "الوحدة 1: الوراثة والبيئة", title: "التكاثر ودورة حياة النباتات والحيوانات", desc: "مراحل نمو المخلوقات الحية والتشابه والاختلاف بين الآباء والأبناء." },
-                { chapter: "الوحدة 1: الوراثة والبيئة", title: "التكيف والبقاء في البيئات", desc: "كيف تتكيف الحيوانات والنباتات مع ظروف البرد الشديد أو الجفاف." },
-                { chapter: "الوحدة 2: الأرض ومواردها", title: "الصخور والمعادن والتربة", desc: "أنواع التربة ومكوناتها واستخدامات الصخور والمعادن في حياتنا اليومية." },
-                { chapter: "الوحدة 3: المخلوقات الحية تنمو وتتغير", title: "أجهزة جسم الإنسان", desc: "التعرف على الجهاز الهيكلي، العضلي، والهضمي والدورة الدموية ووظائفها الأساسية." },
-                { chapter: "الوحدة 3: المخلوقات الحية تنمو وتتغير", title: "الصحة الغذائية والرياضية", desc: "أهمية الغذاء المتوازن وممارسة الرياضة للحفاظ على صحة الأجسام وقوتها." },
-                { chapter: "الوحدة 4: الطاقة والكهرباء والمغناطيسية", title: "الدوائر الكهربائية البسيطة", desc: "كيف يضيء المصباح الكهربائي وتوصيل الدوائر الكهربائية بأمان." },
-                { chapter: "الوحدة 4: الطاقة والكهرباء والمغناطيسية", title: "المغناطيس وقوته", desc: "استكشاف أقطاب المغناطيس وتنافرها وتجاذبها والمواد التي تنجذب إليه." }
+            "الصف الثالث الابتدائي": [
+                { unit: "الوحدة 1: المخلوقات الحية", lessons: ["مجموعات المخلوقات الحية", "الفطريات والبكتيريا"] },
+                { unit: "الوحدة 2: الأنظمة البيئية", lessons: ["المخلوقات الحية تتفاعل في بيئاتها", "التكيف"] },
+                { unit: "الوحدة 3: الأرض ومواردها", lessons: ["معالم سطح الأرض", "التربة"] },
+                { unit: "الوحدة 4: الطاقة والمادة", lessons: ["قوى تحرك الأشياء", "الكهرباء والمغناطيسية"] }
             ],
-            "الرابع الابتدائي": [
-                { chapter: "الوحدة 1: ممالك المخلوقات الحية", title: "الخلايا وتصنيف المخلوقات الحية", desc: "دراسة الخلايا وأساسيات تصنيف المخلوقات الحية في ممالكها." },
-                { chapter: "الوحدة 2: المملكة الحيوانية", title: "الحيوانات اللافقارية والفقارية وأجهزتها", desc: "التعرف على خصائص الحيوانات اللافقارية والفقارية وأهم أجهزة أجسامها." },
-                { chapter: "الوحدة 3: الأنظمة البيئية", title: "استكشاف والعلاقات والتغيرات في الأنظمة البيئية", desc: "دراسة مقدمة النظم البيئية، شبكات العلاقات الغذائية والتغيرات البيئية." },
-                { chapter: "الوحدة 4: الأمراض والعدوى", title: "الأمراض المعدية وطرق انتقالها", desc: "مفاهيم الأمراض وكيفية الوقاية منها وانتقال العدوى." },
-                { chapter: "الوحدة 5: التغذية والصحة", title: "الغذاء المتوازن والمحافظة على الصحة", desc: "دراسة الاحتياجات الغذائية السليمة والعناية بالصحّة العامة." },
-                { chapter: "الوحدة 6: المادة والقوى والطاقة", title: "المادة وخصائصها والقوى والحركة", desc: "القياس، حالات المادة، المخاليط، القوى والحركة، والطاقة (الحرارة)." }
+            "الصف الرابع الابتدائي": [
+                { unit: "الوحدة 1: المخلوقات الحية", lessons: ["مملكة المخلوقات الحية", "التكاثر ودورات الحياة"] },
+                { unit: "الوحدة 2: الأنظمة البيئية", lessons: ["السلاسل والشبكات الغذائية", "التكيف والبقاء"] },
+                { unit: "الوحدة 3: الأرض وتغيراتها", lessons: ["معالم سطح الأرض", "الطقس والمناخ"] },
+                { unit: "الوحدة 4: المادة والطاقة", lessons: ["حالات المادة", "الكهرباء والمغناطيس"] }
             ],
-            "الخامس الابتدائي": [
-                { chapter: "الوحدة 1: ممالك المخلوقات الحية", title: "تصنيف المخلوقات الحية والنباتات", desc: "التصنيف العلمي ومكونات وخصائص النباتات." },
-                { chapter: "الوحدة 2: الآباء والأبناء", title: "التكاثر ودورات الحياة", desc: "مفاهيم التكاثر الحيوي ومراحل دورات حياة الكائنات." },
-                { chapter: "الوحدة 3: الأنظمة البيئية", title: "التفاعلات والدورات والتغيرات البيئية", desc: "العلاقات في الأنظمة البيئية، التكيف والبقاء، ودورات العناصر في الطبيعة." },
-                { chapter: "الوحدة 4: أرضنا المتغيرة", title: "معالم سطح الأرض وعملياتها ومواردها", desc: "التضاريس، العمليات المؤثرة على سطح الأرض، ومصادر الطاقة، الهواء والماء." },
-                { chapter: "الوحدة 5: المادة", title: "أنواع المادة والتغيرات الفيزيائية والكيميائية", desc: "العناصر، الفلزات واللافلزات، والتغيرات الفيزيائية والكيميائية وحالات المادة." },
-                { chapter: "الوحدة 6: الطاقة والقوى", title: "الشغل والآلات البسيطة والصوت والضوء", desc: "الطاقة، الآلات البسيطة، خصائص الصوت والضوء وتطبيقاتها." }
+            "الصف الخامس الابتدائي": [
+                { unit: "الوحدة 1: تنوع الحياة", lessons: ["الخلية أحدة بناء الحياة", "التصنيف والممالك الخمس"] },
+                { unit: "الوحدة 2: الأنظمة البيئية", lessons: ["التقلبات البيئية والتغيرات المناخية", "الموارد الطبيعية والحفاظ عليها"] },
+                { unit: "الوحدة 3: الأرض والفضاء", lessons: ["الأرض ومواردها", "نظام الشمسي والفضاء"] },
+                { unit: "الوحدة 4: المادة والقوى", lessons: ["الذرات العناصر والجزيئات", "القوى والحركة"] }
             ],
-            "السادس الابتدائي": [
-                { chapter: "الوحدة 1: الخلايا والوراثة", title: "الخلية النباتية والحيوانية وانقسامها والوراثة", desc: "نظرية الخلية، مقارنة الخلايا، الانقسام الخلوي، والوراثة والصفات." },
-                { chapter: "الوحدة 2: عمليات الحياة", title: "عمليات الحياة في النباتات، المخلوقات الدقيقة، والإنسان والحيوان", desc: "التنفس والهضم والدوران والإخراج والحركة والإحساس." },
-                { chapter: "الوحدة 3: الأنظمة البيئية ومواردها", title: "السلاسل الغذائية ومقارنة الأنظمة والتربة", desc: "هرم الطاقة، السلاسل والشبكات، حماية موارد الأرض والتربة." },
-                { chapter: "الوحدة 4: المادة والخصائص الكيميائية", title: "الأحماض والقواعد والتغيرات الكيميائية", desc: "مفاهيم الأحماض والقواعد وتفاعلاتها والتغيرات الكيميائية." },
-                { chapter: "الوحدة 5: القوى والطاقة", title: "استعمال القوى والحركة وتسارعها", desc: "قوانين الحركة وقوى التسارع والاستعمالات التطبيقية." },
-                { chapter: "الوحدة 6: الكهرباء والمغناطيسية", title: "الدوائر الكهربائية والتيار والمغناطيس", desc: "الدوائر الكهربائية، التيار، المغناطيس والمولدات الكهربائية." }
+            "الصف السادس الابتدائي": [
+                { unit: "الوحدة 1: العمليات الحيوية", lessons: ["عمليات الحياة في النباتات والمخلوقات الحية", "وراثة الصفات والتطور"] },
+                { unit: "الوحدة 2: النظام البيئي والتوازن", lessons: ["التفاعلات في الأنظمة البيئية", "حماية البيئة والموارد"] },
+                { unit: "الوحدة 3: المادة والطاقة", lessons: ["التفاعلات الكيميائية", "الكهرباء والتيار الكهربائي"] },
+                { unit: "الوحدة 4: حركة الأرض", lessons: ["الأرض والطقس", "الفضاء والنجوم والمجرات"] }
             ]
         };
 
-        function getStorageKeyForLessons() { return 'awwal_custom_lessons_science_' + currentGrade + '_v3'; }
-        function getStorageKeyForStudents() { return 'awwal_students_science_' + currentGrade + '_v3'; }
-        function getStorageKeyForStatus() { return 'awwal_lesson_status_science_' + currentGrade + '_v3'; }
+        let currentGrade = "الصف الأول الابتدائي";
+        let students = [];
 
-        let lessons = JSON.parse(localStorage.getItem(getStorageKeyForLessons())) || gradeScienceData[currentGrade];
-        let students = JSON.parse(localStorage.getItem(getStorageKeyForStudents())) || [];
-        let lessonStatus = JSON.parse(localStorage.getItem(getStorageKeyForStatus())) || {};
-
-        function changeGradeLevel(grade) {
-            currentGrade = grade;
-            localStorage.setItem('awwal_current_grade_science_v3', currentGrade);
-            
-            lessons = JSON.parse(localStorage.getItem(getStorageKeyForLessons())) || gradeScienceData[currentGrade];
-            students = JSON.parse(localStorage.getItem(getStorageKeyForStudents())) || [];
-            lessonStatus = JSON.parse(localStorage.getItem(getStorageKeyForStatus())) || {};
-
-            activeQueryClass = '';
-            selectedStudentIndex = '';
-            currentPage = 1;
-            document.getElementById('studentSearchInput').value = '';
-
-            document.getElementById('curriculumTitle').textContent = `📚 دليل مقرر العلوم - ${currentGrade} (المنهج السعودي المعتمد) وتتبع التنفيذ`;
-
-            renderLessons();
-            render();
-            showToast(`🔄 تم الانتقال إلى بيانات ${currentGrade}`);
+        function getStorageKeyForStudents() {
+            return `science_students_${currentGrade}`;
         }
 
-        function onCurriculumDropdownChange(idx) {
-            const box = document.getElementById('selectedLessonDetailsBox');
-            if(idx === "") {
-                box.style.display = 'none';
+        window.onload = function() {
+            document.getElementById('gradeSelect').value = currentGrade;
+            loadCurriculumLessons();
+            loadStudents();
+        };
+
+        function changeGrade(grade) {
+            currentGrade = grade;
+            loadCurriculumLessons();
+            loadStudents();
+            showToast(`تم الانتقال إلى: ${grade}`);
+        }
+
+        // عرض دروس المنهج السعودي للصف المختار
+        function loadCurriculumLessons() {
+            document.getElementById('currentGradeTitle').innerText = currentGrade;
+            const container = document.getElementById('lessonsContainer');
+            container.innerHTML = '';
+
+            const units = saudiScienceCurriculum[currentGrade] || [];
+            units.forEach(u => {
+                const div = document.createElement('div');
+                div.className = "bg-gray-50 border border-gray-200 rounded-lg p-2.5 text-xs";
+                div.innerHTML = `
+                    <p class="font-bold text-emerald-900 mb-1">${u.unit}</p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-0.5">
+                        ${u.lessons.map(l => `<li>${l}</li>`).join('')}
+                    </ul>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function loadStudents() {
+            const data = localStorage.getItem(getStorageKeyForStudents());
+            students = data ? JSON.parse(data) : [];
+            render();
+        }
+
+        function saveToLocalStorage() {
+            localStorage.setItem(getStorageKeyForStudents(), JSON.stringify(students));
+        }
+
+        function render() {
+            const tbody = document.getElementById('studentsTableBody');
+            tbody.innerHTML = '';
+
+            if (students.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="9" class="text-center py-6 text-gray-400">لا توجد بيانات طلاب مضافة لهذا الصف حالياً.</td></tr>`;
+                document.getElementById('studentCountBadge').innerText = `إجمالي الطلاب: 0`;
                 return;
             }
-            const l = lessons[idx];
-            box.style.display = 'block';
-            box.innerHTML = `<strong>${l.chapter}</strong><br><span style="color:var(--primary); font-size:16px;">${l.title}</span><br><br>${l.desc}`;
-        }
 
-        function renderLessons() {
-            const selectLesson = document.getElementById('selectLesson');
-            selectLesson.innerHTML = '<option value="">-- اختر موضوع الدرس والمهارة --</option>';
-
-            const bulkSelectLesson = document.getElementById('bulkSelectLesson');
-            bulkSelectLesson.innerHTML = '<option value="">-- اختر الدرس أو الرسالة التشجيعية المراد إرسالها --</option>';
-
-            const curriculumDropdown = document.getElementById('curriculumDropdownSelect');
-            curriculumDropdown.innerHTML = '<option value="">-- اختر الدرس أو الوحدة من القائمة المنسدلة للاستعراض --</option>';
-
-            let lessonsGroup = '<optgroup label="📚 دروس ومهمات المنهج">';
-            let executedCount = 0;
-            const mainLessonsContainer = document.getElementById('mainLessonsContainer');
-            mainLessonsContainer.innerHTML = '';
-
-            lessons.forEach((l, idx) => { 
-                const isExecuted = !!lessonStatus[idx];
-                if(isExecuted) executedCount++;
-
-                lessonsGroup += `<option value="lesson-${idx}">[${l.chapter}] ${l.title}</option>`; 
-                curriculumDropdown.innerHTML += `<option value="${idx}">[${l.chapter}] ${l.title}</option>`;
-                selectLesson.innerHTML += `<option value="${idx}">[${l.chapter}] ${l.title}</option>`;
-                
-                const card = document.createElement('div');
-                card.className = `lesson-card ${isExecuted ? 'executed' : 'not-executed'}`;
-                card.innerHTML = `
-                    <div>
-                        <span class="ch-badge">${l.chapter}</span>
-                        <strong>${l.title}</strong>
-                        <p>${l.desc}</p>
-                    </div>
-                    <div class="lesson-actions">
-                        <button class="status-toggle-btn ${isExecuted ? 'done' : 'pending'}" onclick="toggleLessonStatus(${idx})">
-                            ${isExecuted ? '✅ منفذ' : '⏳ قيد الانتظار'}
-                        </button>
-                        <button class="btn-action btn-danger" onclick="deleteLesson(${idx})">🗑️</button>
-                    </div>
+            students.forEach((s, index) => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-gray-50 transition";
+                tr.innerHTML = `
+                    <td class="p-3 text-gray-500">${index + 1}</td>
+                    <td class="p-3 font-semibold text-gray-800">${s.name}</td>
+                    <td class="p-3 text-gray-600">${s.customClass || currentGrade}</td>
+                    <td class="p-3 text-center"><input type="number" value="${s.absence || 0}" onchange="updateScore(${index}, 'absence', this.value)" class="w-16 border rounded text-center py-1"></td>
+                    <td class="p-3 text-center"><input type="number" value="${s.participation || 0}" onchange="updateScore(${index}, 'participation', this.value)" class="w-16 border rounded text-center py-1"></td>
+                    <td class="p-3 text-center"><input type="number" value="${s.homework || 0}" onchange="updateScore(${index}, 'homework', this.value)" class="w-16 border rounded text-center py-1"></td>
+                    <td class="p-3 text-center"><input type="number" value="${s.skills || 0}" onchange="updateScore(${index}, 'skills', this.value)" class="w-16 border rounded text-center py-1"></td>
+                    <td class="p-3 text-center"><input type="number" value="${s.projects || 0}" onchange="updateScore(${index}, 'projects', this.value)" class="w-16 border rounded text-center py-1"></td>
+                    <td class="p-3 text-center">
+                        <button onclick="deleteStudent(${index})" class="text-red-600 hover:text-red-800 text-xs font-semibold px-2 py-1 bg-red-50 hover:bg-red-100 rounded transition">حذف</button>
+                    </td>
                 `;
-                mainLessonsContainer.appendChild(card);
+                tbody.appendChild(tr);
             });
-            lessonsGroup += '</optgroup>';
 
-            let motivGroup = '<optgroup label="🌟 الرسائل التشجيعية والتحفيزية">';
-            customMotivations.forEach((m, idx) => { motivGroup += `<option value="motiv-${idx}">${m.title}</option>`; });
-            motivGroup += '</optgroup>';
-
-            bulkSelectLesson.innerHTML += lessonsGroup + motivGroup;
-            document.getElementById('totalExecutedLessons').textContent = `${executedCount} / ${lessons.length}`;
+            document.getElementById('studentCountBadge').innerText = `إجمالي الطلاب: ${students.length}`;
         }
 
-        function toggleLessonStatus(index) {
-            lessonStatus[index] = !lessonStatus[index];
-            localStorage.setItem(getStorageKeyForStatus(), JSON.stringify(lessonStatus));
-            renderLessons();
-            showToast('🔄 تم تحديث حالة الدرس وحفظه!');
+        function updateScore(index, field, value) {
+            students[index][field] = Number(value) || 0;
+            saveToLocalStorage();
+            showToast('تم التحديث بنجاح');
         }
 
-        function addNewLesson() {
-            const title = document.getElementById('newLessonTitle').value.trim();
-            const desc = document.getElementById('newLessonDesc').value.trim();
-            if (!title) { alert('يرجى كتابة عنوان الوحدة أو الدرس'); return; }
-
-            lessons.push({ chapter: "إضافات المعلم", title: title, desc: desc || 'لا توجد تفاصيل إضافية' });
-            localStorage.setItem(getStorageKeyForLessons(), JSON.stringify(lessons));
-
-            document.getElementById('newLessonTitle').value = '';
-            document.getElementById('newLessonDesc').value = '';
-
-            renderLessons();
-            showToast('➕ تم إضافة الدرس وحفظه!');
+        function openAddModal() {
+            document.getElementById('inputName').value = '';
+            document.getElementById('inputClass').value = currentGrade;
+            document.getElementById('inputPhone').value = '';
+            document.getElementById('addModal').classList.remove('hidden');
+            document.getElementById('addModal').classList.add('flex');
         }
 
-        function deleteLesson(index) {
-            if (confirm('هل أنت متأكد من حذف هذا الدرس من المنهج؟')) {
-                lessons.splice(index, 1);
-                localStorage.setItem(getStorageKeyForLessons(), JSON.stringify(lessons));
-                renderLessons();
-                showToast('🗑️ تم حذف الدرس بنجاح!');
-            }
+        function closeAddModal() {
+            document.getElementById('addModal').classList.remove('flex');
+            document.getElementById('addModal').classList.add('hidden');
         }
 
-        // دالة إضافة طالب المعدلة والكاملة
-        function addStudent() {
-            const nameInput = document.getElementById('studentName');
-            const classInput = document.getElementById('studentClassCustom');
-            const phoneInput = document.getElementById('studentPhone');
-
-            const name = nameInput.value.trim();
-            const className = classInput.value.trim();
-            const phone = phoneInput.value.trim();
+        function saveNewStudent() {
+            const name = document.getElementById('inputName').value.trim();
+            const customClass = document.getElementById('inputClass').value.trim() || currentGrade;
+            const phone = document.getElementById('inputPhone').value.trim();
 
             if (!name) {
-                alert('الرجاء إدخال اسم الطالب');
-                nameInput.focus();
+                alert('يرجى إدخال اسم الطالب.');
                 return;
             }
 
-            if (!className) {
-                alert('الرجاء إدخال الصف أو الشعبة');
-                classInput.focus();
-                return;
-            }
-
-            const newStudent = {
-                name: name,
-                className: className,
-                phone: phone || 'غير محدد',
+            students.push({
+                name,
+                customClass,
+                phone,
                 absence: 0,
                 participation: 0,
                 homework: 0,
                 skills: 0,
-                projects: 0,
-                messages: 0,
-                exam1: 0,
-                exam2: 0
-            };
+                projects: 0
+            });
 
-            students.push(newStudent);
-            localStorage.setItem(getStorageKeyForStudents(), JSON.stringify(students));
-
-            // تفريغ الحقول بعد الإضافة
-            nameInput.value = '';
-            classInput.value = '';
-            phoneInput.value = '';
-
+            saveToLocalStorage();
             render();
-            showToast('➕ تم إضافة الطالب بنجاح!');
-        }
-
-        function showToast(msg = '✅ تم الحفظ تلقائياً!') {
-            const toast = document.getElementById('toast');
-            toast.textContent = msg;
-            toast.style.display = 'block';
-            setTimeout(() => { toast.style.display = 'none'; }, 2000);
-        }
-
-        function render() {
-            document.getElementById('totalStudents').textContent = students.length;
-            
-            // تحديث الجدول إن وجد عرضه
-            const tbody = document.getElementById('studentsTbody');
-            if (tbody) {
-                tbody.innerHTML = '';
-                students.forEach((st, idx) => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${st.name}</td>
-                        <td><span class="class-badge">${st.className}</span></td>
-                        <td>${st.phone}</td>
-                        <td>${st.absence}</td>
-                        <td>${st.participation}</td>
-                        <td>${st.homework}</td>
-                        <td>${st.skills}</td>
-                        <td>${st.projects}</td>
-                        <td>${st.messages}</td>
-                        <td class="no-print"><button class="btn-action btn-danger" onclick="deleteStudent(${idx})">🗑️</button></td>
-                    `;
-                    tbody.appendChild(row);
-                });
-            }
+            closeAddModal();
+            showToast('✅ تمت إضافة الطالب بنجاح');
         }
 
         function deleteStudent(index) {
             if (confirm('هل أنت متأكد من حذف هذا الطالب؟')) {
                 students.splice(index, 1);
-                localStorage.setItem(getStorageKeyForStudents(), JSON.stringify(students));
+                saveToLocalStorage();
                 render();
-                showToast('🗑️ تم حذف الطالب بنجاح!');
+                showToast('🗑️ تم حذف الطالب');
             }
         }
 
-        function printSection(sectionId) {
-            const section = document.getElementById(sectionId);
-            if (section) {
-                section.classList.add('print-active-section');
-                window.print();
-                section.classList.remove('print-active-section');
+        function exportExcel() {
+            if (students.length === 0) {
+                alert('لا توجد بيانات طلاب لتصديرها!');
+                return;
             }
+
+            const dataToExport = students.map((s, index) => ({
+                "م": index + 1,
+                "اسم الطالب": s.name,
+                "الصف": s.customClass || currentGrade,
+                "رقم الجوال": s.phone || '',
+                "الغياب": s.absence || 0,
+                "المشاركة": s.participation || 0,
+                "الواجبات": s.homework || 0,
+                "المهارات": s.skills || 0,
+                "التجارب": s.projects || 0
+            }));
+
+            const worksheet = XLSX.utils.json_to_sheet(dataToExport);
+            if(!worksheet['!views']) worksheet['!views'] = [];
+            worksheet['!views'].push({ rightToLeft: true });
+
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "سجل الطلاب");
+            XLSX.writeFile(workbook, `سجل_علوم_${currentGrade}.xlsx`);
+            showToast('📊 تم تصدير ملف الإكسل بنجاح!');
         }
 
-        window.onload = function() {
-            renderLessons();
-            render();
-        };
+        function importExcel(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = new Uint8Array(e.target.result);
+                    const workbook = XLSX.read(data, { type: 'array' });
+                    const firstSheetName = workbook.SheetNames[0];
+                    const worksheet = workbook.Sheets[firstSheetName];
+                    const jsonData = XLSX.utils.sheet_to_json(worksheet);
+                    
+                    if (!jsonData || jsonData.length === 0) {
+                        alert('ملف الإكسل فارغ أو غير مطابق للهيكلة المطلوبة.');
+                        return;
+                    }
+
+                    let importedCount = 0;
+                    jsonData.forEach(row => {
+                        const name = row["اسم الطالب"] || row["الاسم"] || "";
+                        const customClass = row["الصف"] || currentGrade;
+                        const phone = row["رقم الجوال"] || row["الجوال"] || "";
+                        
+                        if (name.toString().trim() !== "") {
+                            students.push({
+                                name: name.toString().trim(),
+                                customClass: customClass.toString().trim(),
+                                phone: phone.toString().trim(),
+                                absence: parseInt(row["الغياب"]) || 0,
+                                participation: parseInt(row["المشاركة"]) || 0,
+                                homework: parseInt(row["الواجبات"]) || 0,
+                                skills: parseInt(row["المهارات"]) || 0,
+                                projects: parseInt(row["التجارب"]) || 0
+                            });
+                            importedCount++;
+                        }
+                    });
+
+                    saveToLocalStorage();
+                    render();
+                    showToast(`📂 تمت استعادة وحفظ (${importedCount}) طالباً بنجاح!`);
+                } catch (error) {
+                    console.error(error);
+                    alert('حدث خطأ أثناء قراءة ملف الإكسل. تأكد من صيغة الملف (.xlsx).');
+                } finally {
+                    event.target.value = '';
+                }
+            };
+            reader.readAsArrayBuffer(file);
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.innerText = message;
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
+        }
     </script>
 </body>
 </html>
