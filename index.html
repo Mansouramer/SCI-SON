@@ -3,30 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مدرسة داوود بن عروة الثقفي الابتدائية - لوحة تحكم المعلم (مادة العلوم)</title>
+    <title>مدرسة داوود بن عروة الابتدائية - لوحة تحكم المعلم (مادة العلوم)</title>
     <!-- مكتبة SheetJS لتصدير واستيراد ملفات إكسل Excel -->
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
     <!-- مكتبة Chart.js للرسوم البيانية -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
-            --primary: #0369a1;
-            --secondary: #0284c7;
-            --accent: #e0f2fe;
-            --bg: #f0f9ff;
+            --primary: #047857;
+            --secondary: #059669;
+            --accent: #a7f3d0;
+            --bg: #ecfdf5;
             --card-bg: #ffffff;
-            --text: #0369a1;
+            --text: #064e3b;
             --danger: #ef4444;
             --warning: #f59e0b;
             --info: #06b6d4;
             --excel: #1d6f42;
         }
 
-        /* ثيمات ألوان الخلفية */
         body.theme-default { 
-            --bg: linear-gradient(135deg, #f0f9ff 0%, #bae6fd 100%); 
+            --bg: linear-gradient(135deg, #ecfdf5 0%, #a7f3d0 100%); 
             --card-bg: #ffffff; 
-            --text: #0369a1; 
+            --text: #064e3b; 
         }
         body.theme-royal { 
             --bg: linear-gradient(135deg, #3b0764 0%, #581c87 100%); 
@@ -50,11 +49,11 @@
             --primary: #b45309;
         }
         body.theme-blue { 
-            --bg: linear-gradient(135deg, #eff6ff 0%, #bfdbfe 100%); 
+            --bg: linear-gradient(135deg, #f0fdf4 0%, #bbf7d0 100%); 
             --card-bg: #ffffff; 
-            --text: #1e3a8a; 
-            --secondary: #2563eb;
-            --primary: #1d4ed8;
+            --text: #065f46; 
+            --secondary: #16a34a;
+            --primary: #15803d;
         }
 
         body {
@@ -90,7 +89,6 @@
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             margin-bottom: 25px;
-            position: relative;
         }
 
         .header h1 { margin: 0 0 10px 0; font-size: 24px; }
@@ -155,7 +153,6 @@
             text-align: center;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             border-bottom: 4px solid var(--secondary);
-            transition: background-color 0.3s ease;
         }
 
         .stat-card h3 { margin: 0; font-size: 13px; opacity: 0.8; }
@@ -167,7 +164,6 @@
             border-radius: 12px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             margin-bottom: 25px;
-            transition: background-color 0.3s ease;
         }
 
         .section-card h3 {
@@ -245,14 +241,8 @@
             overflow: hidden;
             border: 2px solid var(--secondary);
             background: rgba(0, 0, 0, 0.04);
-            transition: all 0.2s ease;
             flex: 1;
             min-width: 150px;
-        }
-
-        .class-btn-wrapper:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(2, 132, 199, 0.2);
         }
 
         .class-query-btn {
@@ -265,7 +255,6 @@
             font-size: 14px;
             flex: 1;
             text-align: right;
-            transition: background 0.2s;
         }
 
         .class-btn-wrapper.active {
@@ -284,7 +273,6 @@
             padding: 0 12px;
             cursor: pointer;
             font-size: 14px;
-            transition: background 0.2s, color 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -305,11 +293,6 @@
             border: 1px solid rgba(0,0,0,0.1);
             padding: 10px;
             text-align: center;
-        }
-
-        body.theme-royal th, body.theme-royal td,
-        body.theme-blue th, body.theme-blue td {
-            border-color: rgba(255,255,255,0.2);
         }
 
         th { background-color: rgba(0,0,0,0.05); color: var(--secondary); }
@@ -337,11 +320,6 @@
             font-size: 13px;
         }
 
-        .pagination-btns button:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-        }
-
         .student-details {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
@@ -367,7 +345,7 @@
         .sub-box h5 { margin-top: 0; color: var(--secondary); font-size: 16px; }
 
         .preview-msg {
-            background: rgba(2, 132, 199, 0.08);
+            background: rgba(5, 150, 105, 0.08);
             border-right: 4px solid var(--secondary);
             padding: 12px;
             margin: 10px 0;
@@ -411,7 +389,7 @@
 
         .lesson-card.executed {
             border-right: 5px solid var(--secondary);
-            background: rgba(2, 132, 199, 0.04);
+            background: rgba(5, 150, 105, 0.04);
         }
 
         .lesson-card.not-executed {
@@ -523,7 +501,7 @@
         }
 
         .searchable-item:hover {
-            background: rgba(2, 132, 199, 0.1);
+            background: rgba(5, 150, 105, 0.1);
             color: var(--secondary);
             font-weight: bold;
         }
@@ -561,17 +539,18 @@
             align-items: center;
             justify-content: center;
             font-size: 20px;
-            transition: transform 0.2s, background 0.2s;
             text-decoration: none;
-        }
-
-        .float-btn:hover {
-            transform: scale(1.1);
-            opacity: 1;
         }
 
         .float-whatsapp { background: #25D366; }
         .float-top { background: var(--primary); display: none; }
+
+        @media print {
+            body * { visibility: hidden; }
+            .print-active-section, .print-active-section * { visibility: visible; }
+            .print-active-section { position: absolute; left: 0; top: 0; width: 100%; background: white !important; }
+            .btn-action, .backup-controls, .pagination-bar, .form-row, .classes-query-grid, .no-print { display: none !important; }
+        }
     </style>
 </head>
 <body class="theme-default">
@@ -582,30 +561,33 @@
     </div>
 
     <div class="header">
-        <h1>مدرسة داوود بن عروة الثقفي الابتدائية</h1>
-        <div>إعداد المعلم: منصور الرحيلي | مدير المدرسة: سالم بن رحيل الجهني</div>
-        <p>لوحة تحكم معلم مادة العلوم الابتدائي (وفق المنهج السعودي)</p>
+        <h1>مدرسة داوود بن عروة الابتدائية</h1>
+        <div>إعداد المعلم: منصور عامر الرحيلي</div>
+        <p>لوحة تحكم معلم مادة العلوم للمرحلة الابتدائية (وفق المنهج السعودي)</p>
         <div class="subscription-badge">⏳ نهاية الاشتراك: 2027/07/01</div>
 
         <div class="theme-switcher">
             <span style="font-size: 12px; margin-left: 5px;">🎨 المظهر:</span>
-            <button class="theme-btn btn-theme-default" title="أزرق أساسي" onclick="setTheme('theme-default')">📘</button>
-            <button class="theme-btn btn-theme-royal" title="الملكي الفاخر" onclick="setTheme('theme-royal')">👑</button>
-            <button class="theme-btn btn-theme-emerald" title="زمردي عميق" onclick="setTheme('theme-emerald')">🌲</button>
-            <button class="theme-btn btn-theme-amber" title="ذهبي دافئ" onclick="setTheme('theme-amber')">⭐</button>
-            <button class="theme-btn btn-theme-blue" title="أزرق هادئ" onclick="setTheme('theme-blue')">🌊</button>
+            <button class="theme-btn" onclick="setTheme('theme-default')">🍃</button>
+            <button class="theme-btn" onclick="setTheme('theme-royal')">👑</button>
+            <button class="theme-btn" onclick="setTheme('theme-emerald')">🌲</button>
+            <button class="theme-btn" onclick="setTheme('theme-amber')">⭐</button>
+            <button class="theme-btn" onclick="setTheme('theme-blue')">📘</button>
         </div>
     </div>
 
     <div class="container">
         <!-- اختيار الصف الدراسي -->
-        <div class="section-card" style="background: linear-gradient(135deg, rgba(2,132,199,0.05), rgba(3,105,161,0.1)); border: 2px solid var(--secondary);">
+        <div class="section-card" style="background: linear-gradient(135deg, rgba(5,150,105,0.05), rgba(4,120,87,0.1)); border: 2px solid var(--secondary);">
             <h3 style="margin-bottom: 10px;">📌 اختر الصف الدراسي للمتابعة</h3>
             <div class="form-row" style="margin-bottom: 0;">
                 <select id="globalGradeSelect" onchange="changeGradeLevel(this.value)" style="font-weight: bold; font-size: 16px; color: var(--secondary);">
-                    <option value="الرابع">الصف الرابع الابتدائي</option>
-                    <option value="الخامس">الصف الخامس الابتدائي</option>
-                    <option value="السادس">الصف السادس الابتدائي</option>
+                    <option value="الأول الابتدائي">الصف الأول الابتدائي</option>
+                    <option value="الثاني الابتدائي">الصف الثاني الابتدائي</option>
+                    <option value="الثالث الابتدائي">الصف الثالث الابتدائي</option>
+                    <option value="الرابع الابتدائي">الصف الرابع الابتدائي</option>
+                    <option value="الخامس الابتدائي">الصف الخامس الابتدائي</option>
+                    <option value="السادس الابتدائي">الصف السادس الابتدائي</option>
                 </select>
             </div>
         </div>
@@ -633,7 +615,7 @@
                 <p id="totalAbsence">0</p>
             </div>
             <div class="stat-card">
-                <h3>🛠️ إجمالي المشاريع</h3>
+                <h3>🛠️ إجمالي التجـارب</h3>
                 <p id="totalProjects">0</p>
             </div>
             <div class="stat-card">
@@ -647,10 +629,10 @@
         </div>
 
         <!-- لوحة التحليل الذكي مع زر الطباعة -->
-        <div class="section-card">
+        <div class="section-card" id="analyticsSection">
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-bottom: 2px solid rgba(0,0,0,0.1); padding-bottom: 10px; margin-bottom: 15px;">
                 <h3 style="margin: 0; border: none; padding: 0;">🧠 لوحة التحليل الذكي ومؤشرات الأداء الأكاديمي</h3>
-                <button class="btn-print" onclick="printAnalyticsReport()">🖨️ طباعة تقرير التحليل الذكي الشامل</button>
+                <button class="btn-print" onclick="printSection('analyticsSection')">🖨️ طباعة تقرير التحليل الذكي الشامل</button>
             </div>
 
             <div class="student-details" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 20px;">
@@ -681,7 +663,7 @@
                 </div>
             </div>
 
-            <div class="charts-grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); margin-top: 15px;">
+            <div class="charts-grid">
                 <div class="chart-box">
                     <canvas id="academicLevelsChart"></canvas>
                 </div>
@@ -692,25 +674,26 @@
         </div>
 
         <!-- تسجيل الطلاب والصفوف والجدول -->
-        <div class="section-card">
-            <h3>✏️ تسجيل طلاب الصفوف ومتابعتهم</h3>
+        <div class="section-card" id="studentsTableSection">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid rgba(0,0,0,0.1); padding-bottom: 10px; margin-bottom: 15px;">
+                <h3 style="margin: 0; border: none; padding: 0;">✏️ تسجيل الطلاب والصفوف ومتابعتهم</h3>
+                <button class="btn-print" onclick="printSection('studentsTableSection')" title="طباعة جدول الطلاب والصفوف">🖨️ طباعة الجدول</button>
+            </div>
             
             <div class="form-row">
                 <input type="text" id="studentName" placeholder="اسم الطالب (Student Name)">
-                <div style="display: flex; gap: 5px; flex: 1; min-width: 220px;">
-                    <input type="text" id="studentClassCustom" placeholder="اكتب الصف/الشعبة (مثال: رابع ابتدائي أ)">
-                </div>
+                <input type="text" id="studentClassCustom" placeholder="اكتب الصف/الشعبة (مثال: رابع ابتدائي أ)">
                 <input type="tel" id="studentPhone" placeholder="رقم جوال ولي الأمر (مثال: 05xxxxxxx)">
                 <button onclick="addStudent()">➕ إضافة طالب</button>
             </div>
 
             <div style="margin-top: 20px;">
-                <span style="font-weight: bold; font-size: 14px; display: block; margin-bottom: 8px;">🏫 تصفح الصفوف (اضغط على الصف لعرضه، أو استخدم زر الطباعة 🖨️ لطباعة تقرير الصف شامل بيانات المدرسة والمعلم):</span>
+                <span style="font-weight: bold; font-size: 14px; display: block; margin-bottom: 8px;">🏫 تصفح الصفوف (اضغط على الصف لعرضه):</span>
                 <div id="classesQueryContainer" class="classes-query-grid"></div>
             </div>
 
             <div class="form-row" style="align-items: center; background: rgba(0,0,0,0.03); padding: 8px; border-radius: 6px; margin-top: 15px;">
-                <span style="font-weight: bold; font-size: 14px;">🔍 بحث عن طالب محدد بالاسم (كتابة):</span>
+                <span style="font-weight: bold; font-size: 14px;">🔍 بحث عن طالب محدد بالاسم:</span>
                 <input type="text" id="filterStudentNameInput" placeholder="اكتب اسم الطالب للبحث..." oninput="filterTableByStudentInput()" style="max-width: 320px;">
             </div>
 
@@ -725,9 +708,9 @@
                             <th>✋ المشاركة</th>
                             <th>📚 الواجبات</th>
                             <th>⭐ المهارات</th>
-                            <th>🛠️ المشاريع</th>
+                            <th>🛠️ التجارب</th>
                             <th>💬 الرسائل</th>
-                            <th>حذف</th>
+                            <th class="no-print">حذف</th>
                         </tr>
                     </thead>
                     <tbody id="studentsTbody"></tbody>
@@ -754,14 +737,17 @@
             </div>
         </div>
 
-        <!-- قسم اختبارات الفترة الأولى والفترة الثانية والتحليل -->
-        <div class="section-card">
-            <h3>📊 رصد وتحليل اختبارات الفترة الأولى والفترة الثانية (من ٢٠) 📝</h3>
+        <!-- رصد اختبارات الفترة الأولى والثانية -->
+        <div class="section-card" id="examsSection">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-bottom: 2px solid rgba(0,0,0,0.1); padding-bottom: 10px; margin-bottom: 15px;">
+                <h3 style="margin: 0; border: none; padding: 0;">📊 رصد وتحليل اختبارات الفترة الأولى والفترة الثانية (من ٢٠) 📝</h3>
+                <button class="btn-print" onclick="printSection('examsSection')">🖨️ طباعة تقرير رصد وتحليل الاختبارات</button>
+            </div>
+            
             <div class="form-row">
                 <select id="examClassSelect" onchange="renderExamsTable()">
                     <option value="">-- اختر الصف/الشعبة لعرض وسجل الاختبارات --</option>
                 </select>
-                <button class="btn-print" onclick="printExamsAnalysisReport()" style="display: none;" id="printExamsBtn">🖨️ طباعة تقرير تحليل النتائج</button>
             </div>
 
             <div id="examsAnalysisBox" class="sub-box" style="display: none; margin-bottom: 15px;">
@@ -786,7 +772,7 @@
                             <th>🏫 الصف/الشعبة</th>
                             <th>📝 اختبار الفترة الأولى (من 20)</th>
                             <th>📝 اختبار الفترة الثانية (من 20)</th>
-                            <th>📤 إرسال النتيجة لولي الأمر</th>
+                            <th class="no-print">📤 إرسال النتيجة لولي الأمر</th>
                         </tr>
                     </thead>
                     <tbody id="examsTbody">
@@ -810,30 +796,12 @@
                 <div>
                     <h4>سجل الطالب: <span id="selectedName"></span> (<span id="selectedClassBadge" class="class-badge"></span>)</h4>
                     <div class="student-details">
-                        <div class="detail-item">
-                            <span>المشاركات</span>
-                            <strong id="sdParticipation">0</strong>
-                        </div>
-                        <div class="detail-item">
-                            <span>الواجبات</span>
-                            <strong id="sdHomework">0</strong>
-                        </div>
-                        <div class="detail-item">
-                            <span>أيام الغياب</span>
-                            <strong id="sdAbsence">0</strong>
-                        </div>
-                        <div class="detail-item">
-                            <span>المهارات</span>
-                            <strong id="sdSkills">0</strong>
-                        </div>
-                        <div class="detail-item">
-                            <span>المشاريع</span>
-                            <strong id="sdProjects">0</strong>
-                        </div>
-                        <div class="detail-item">
-                            <span>رسائل الواتس</span>
-                            <strong id="sdMessages">0</strong>
-                        </div>
+                        <div class="detail-item"><span>المشاركات</span><strong id="sdParticipation">0</strong></div>
+                        <div class="detail-item"><span>الواجبات</span><strong id="sdHomework">0</strong></div>
+                        <div class="detail-item"><span>أيام الغياب</span><strong id="sdAbsence">0</strong></div>
+                        <div class="detail-item"><span>المهارات</span><strong id="sdSkills">0</strong></div>
+                        <div class="detail-item"><span>التجارب</span><strong id="sdProjects">0</strong></div>
+                        <div class="detail-item"><span>رسائل الواتس</span><strong id="sdMessages">0</strong></div>
                     </div>
                 </div>
 
@@ -862,8 +830,8 @@
                         </select>
                     </div>
                     
-                    <div class="form-row" style="margin-top: 10px; background: rgba(2, 132, 199, 0.05); padding: 10px; border-radius: 6px;">
-                        <input type="text" id="newMotivationTitle" placeholder="عنوان الرسالة (مثال: تفوق عالي)..." style="max-width: 220px;">
+                    <div class="form-row" style="margin-top: 10px; background: rgba(5, 150, 105, 0.05); padding: 10px; border-radius: 6px;">
+                        <input type="text" id="newMotivationTitle" placeholder="عنوان الرسالة..." style="max-width: 220px;">
                         <input type="text" id="newMotivationText" placeholder="اكتب نص الرسالة التشجيعية الجديدة هنا...">
                         <button onclick="addNewMotivation()">➕ إضافة رسالة تشجيعية</button>
                     </div>
@@ -876,7 +844,7 @@
 
         <!-- إرسال جماعي لأولياء الأمور -->
         <div class="section-card">
-            <h3>📢 إرسال رسالة أو واجب جماعي لأولياء الأمور (تحديد الكل أو حسب الصف)</h3>
+            <h3>📢 إرسال رسالة أو واجب جماعي لأولياء الأمور</h3>
             <div class="sub-box" style="margin-top: 0;">
                 <div class="form-row">
                     <select id="bulkTargetClass">
@@ -887,28 +855,28 @@
                     </select>
                 </div>
                 <div class="form-row" style="margin-top: 10px;">
-                    <input type="text" id="bulkExtraNote" placeholder="اكتب ملاحظات إضافية هنا (مثل: إحضار أدوات التجربة، أو حل التمارين صفحة...)" oninput="updateBulkMsgPreview()">
+                    <input type="text" id="bulkExtraNote" placeholder="اكتب ملاحظات إضافية هنا..." oninput="updateBulkMsgPreview()">
                 </div>
                 <div id="bulkMsgPreview" class="preview-msg">اختر الصف والدرس أو الرسالة التشجيعية وأدخل الملاحظات لعرض نموذج الرسالة الجماعية...</div>
-                <button class="whatsapp-btn" onclick="sendBulkWhatsApp()" style="border: none; cursor: pointer; font-size: 15px;">🚀 إرسال جماعي عبر واتساب (فتح الروابط بالتتابع)</button>
+                <button class="whatsapp-btn" onclick="sendBulkWhatsApp()" style="border: none; cursor: pointer; font-size: 15px;">🚀 إرسال جماعي عبر واتساب</button>
             </div>
         </div>
 
         <!-- قائمة وحدات ودروس مادة العلوم -->
         <div class="section-card">
-            <h3 id="curriculumTitle">📚 دليل مقرر العلوم - المرحلة الابتدائية (المنهج السعودي المعتمد) وتتبع التنفيذ</h3>
+            <h3 id="curriculumTitle">📚 دليل مقرر العلوم - المرحلة الابتدائية (المنهج السعودي المعتمد للفصلين) وتتبع التنفيذ</h3>
             
             <div class="sub-box" style="margin-bottom: 15px; margin-top: 0;">
                 <h5 style="margin-bottom: 10px;">➕ إضافة درس جديد أو وحدة للمنهج</h5>
                 <div class="form-row">
-                    <input type="text" id="newLessonTitle" placeholder="عنوان الوحدة والفصل والدرس...">
-                    <input type="text" id="newLessonDesc" placeholder="تفاصيل المهارات العلمية والتجارب والاستقصاء...">
+                    <input type="text" id="newLessonTitle" placeholder="عنوان الوحدة والنص والدرس...">
+                    <input type="text" id="newLessonDesc" placeholder="تفاصيل المفاهيم العلمية والتجارب الاستهلالية...">
                     <button onclick="addNewLesson()">➕ إضافة الدرس</button>
                 </div>
             </div>
 
             <!-- قائمة منسدلة لدليل مقرر العلوم -->
-            <div class="sub-box" style="background: rgba(2,132,199,0.03); border: 1px solid var(--secondary);">
+            <div class="sub-box" style="background: rgba(5,150,105,0.03); border: 1px solid var(--secondary);">
                 <h5 style="color: var(--secondary);">📑 القائمة المنسدلة لدليل مقرر العلوم والوحدات الدراسية</h5>
                 <div class="form-row" style="margin-bottom: 10px;">
                     <select id="curriculumDropdownSelect" onchange="onCurriculumDropdownChange(this.value)" style="font-weight: bold; font-size: 15px; color: var(--secondary);">
@@ -939,11 +907,10 @@
     <div id="toast" class="toast">✅ تم حفظ البيانات تلقائياً!</div>
 
     <script>
-        const TEACHER_NAME = "منصور الرحيلي";
-        const SCHOOL_NAME = "مدرسة داوود بن عروة الثقفي الابتدائية";
-        const PRINCIPAL_NAME = "سالم بن رحيل الجهني";
+        const TEACHER_NAME = "منصور عامر الرحيلي";
+        const SCHOOL_NAME = "مدرسة داوود بن عروة الابتدائية";
 
-        let currentGrade = localStorage.getItem('mansour_current_grade_v3') || 'الرابع';
+        let currentGrade = localStorage.getItem('awwal_current_grade_science_v3') || 'الأول الابتدائي';
         document.getElementById('globalGradeSelect').value = currentGrade;
 
         let activeQueryClass = '';
@@ -955,93 +922,89 @@
         let examsComparisonChartInstance = null;
 
         const defaultMotivations = [
-            { id: "1", title: "1. عالم المستقبل / باحث متميز", text: "🌟 **عالم المستقبل المتميز** 🌟\nعزيزي وليّ الأمر، نفخر اليوم بتميز ابنكم وتألقه في حصة العلوم بمشاركته الفعالة واستقصائه العلمي الرائع. بوركت جهودكم!" },
-            { id: "2", title: "2. تفوق ملحوظ في التجارب العلمية والاستقصاء", text: "🔬 **تفوق ملحوظ في التجارب العلمية** 🔬\nعزيزي وليّ الأمر، أظهر ابنكم اليوم مهارات استكشافية ممتازة وتفكيراً علمياً عميقاً أثناء تنفيذ التجارب. أحسن صنعاً!" },
-            { id: "3", title: "3. دقة وإتقان في المفاهيم والمصطلحات العلمية", text: "📊 **دقة وإتقان في المفاهيم والمصطلحات** 📊\nعزيزي وليّ الأمر، تميز ابنكم اليوم بمهارات علمية دقيقة وفهم عميق للأنظمة والمفاهيم. بارك الله في جهوده!" },
-            { id: "4", title: "4. مشاركة نشطة وفعالة في حصة العلوم", text: "✋ **مشاركة نشطة وتفاعل علمي متميز** ✋\nعزيزي وليّ الأمر، تميز ابنكم اليوم بحرصه العالي ومشاركته النشطة وإجاباته الموفقة داخل المعمل والفصل." },
-            { id: "5", title: "5. حصيلة علمية واستكشافية ممتازة", text: "🧠 **حصيلة علمية واستكشافية ممتازة** 🧠\nعزيزي وليّ الأمر، أبدع ابنكم اليوم في التفكير الناقد وتوظيف المصطلحات العلمية بشكل دقيق. مبروك له!" },
-            { id: "6", title: "6. تنظيم رائع للبيانات العلمية وواجبات مرتبة بدقة", text: "📝 **تنظيم رائع للبيانات وواجبات مرتبة** 📝\nعزيزي وليّ الأمر، نشكر لكم متابعتكم المنزلية الواعية. لقد كان واجب ابنكم اليوم منظماً، دقيقاً، وخطه في غاية الجمال والترتيب." },
-            { id: "7", title: "7. حل ممتاز للتمارين والأنشطة العلمية", text: "✍️ **حل ممتاز للتمارين والأنشطة العلمية**\nعزيزي وليّ الأمر، تميز أداء ابنكم اليوم بحل التدريبات العلمية بدقة عالية وفهم عميق. دمت مميزاً يا بطل!" },
-            { id: "8", title: "8. اهتمام رائع بالملاحظة والاستنتاج العلمي", text: "📚 **اهتمام رائع بالملاحظة والاستنتاج**\nعزيزي وليّ الأمر، أظهر ابنكم اليوم شغفاً واهتماماً لافتاً بالملاحظة العلمية واستنباط النتائج." },
-            { id: "9", title: "9. مشروع علمي متميز ومبتكر ومتقن", text: "🛠️ **مشروع علمي متميز ومبتكر ومتقن**\nعزيزي وليّ الأمر، قدم ابنكم اليوم مشروعاً علمياً رائعاً ومنظماً ينم عن تفكير إبداعي ومهارة عالية." },
-            { id: "10", title: "10. اجتهاد وحرص عالٍ على إتقان مهارات العلوم", text: "⭐ **اجتهاد وحرص عالٍ على إتقان العلوم**\nعزيزي وليّ الأمر، إن حرص ابنكم المستمر على التميز والتعلم في مادة العلوم محل تقديرنا الدائم." }
+            { id: "1", title: "1. عالم المستقبل المتميز", text: "🌟 **عالم المستقبل المتميز** 🌟\nعزيزي ولي الأمر، نفخر اليوم بتميز ابنكم وتألقه في حصة العلوم ومشاركته في التجارب العملية بحماس ونشاط. بوركت جهودكم!" },
+            { id: "2", title: "2. تفوق ملحوظ في الملاحظة والاستنتاج", text: "🔬 **تفوق ملحوظ في الملاحظة العلمية** 🔬\nعزيزي ولي الأمر، أظهر ابنكم اليوم مهارات دقيقة في الملاحظة والتجريب واستنباط النتائج. أحسن صنعاً!" },
+            { id: "3", title: "3. دقة وإتقان في المفاهيم العلمية", text: "🌱 **دقة وإتقان في المفاهيم والعلوم** 🌱\nعزيزي ولي الأمر، تميز ابنكم اليوم باستيعابه العميق للحقائق العلمية وتوظيفها بذكاء. بارك الله في جهوده!" },
+            { id: "4", title: "4. مشاركة نشطة وفعالة في حصة العلوم", text: "✋ **مشاركة نشطة وتفاعل علمي متميز** ✋\nعزيزي ولي الأمر، تميز ابنكم اليوم بحرصه العالي ومشاركته النشطة وإجاباته العلمية الموفقة داخل الصف." },
+            { id: "5", title: "5. حصيلة استكشافية وتجارب ممتازة", text: "🧠 **حصيلة استكشافية وتجارب ممتازة** 🧠\nعزيزي ولي الأمر، أبدع ابنكم اليوم في تنفيذ التجارب الاستهلالية والاستكشافية بمهارة عالية. مبروك له!" },
+            { id: "6", title: "6. تنظيم رائع للدفتر وواجبات مرتبة بدقة", text: "📝 **تنظيم رائع للواجبات والأنشطة** 📝\nعزيزي ولي الأمر، نشكر لكم متابعتكم المنزلية الواعية. لقد كان واجب ابنكم اليوم منظماً، دقيقاً، ومرتباً للغاية." },
+            { id: "7", title: "7. حل ممتاز للتدريبات والتقويم التكويني", text: "✍️ **حل ممتاز للتدريبات والتقويم**\nعزيزي ولي الأمر، تميز أداء ابنكم اليوم بحل أسئلة التقويم والتدريبات العلمية بدقة عالية. دمت متميزاً يا بطل!" },
+            { id: "8", title: "8. اهتمام رائع بالبيئة ومخلوقات الله", text: "🌍 **اهتمام رائع بالبيئة والمحيط**\nعزيزي ولي الأمر، أظهر ابنكم اليوم شغفاً واهتماماً لافتاً بدراسة الكائنات الحية وعناصر البيئة من حوله." },
+            { id: "9", title: "9. مشروع علمي متميز ومبتكر ومتقن", text: "🛠️ **مشروع علمي متميز ومبتكر ومتقن**\nعزيزي ولي الأمر، قدم ابنكم اليوم مشروعاً علمياً رائعاً ومنظماً ينم عن تفكير إبداعي ومهارة عالية." },
+            { id: "10", title: "10. اجتهاد وحرص عالٍ على إتقان مهارات العلوم", text: "⭐ **اجتهاد وحرص عالٍ على إتقان العلوم**\nعزيزي ولي الأمر، إن حرص ابنكم المستمر على الاستكشاف والتعلم في مادة العلوم محل تقديرنا الدائم." }
         ];
 
-        let customMotivations = JSON.parse(localStorage.getItem('mansour_custom_motivations_v3')) || defaultMotivations;
+        let customMotivations = JSON.parse(localStorage.getItem('awwal_custom_motivations_science_v3')) || defaultMotivations;
 
-        document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
-        document.onkeydown = function(e) {
-            if (e.keyCode === 123 || 
-               (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) ||
-               (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 83))) {
-                return false;
-            }
-        };
-
-        document.addEventListener('click', function(e) {
-            const container = document.querySelector('.searchable-dropdown-container');
-            const list = document.getElementById('studentDropdownList');
-            if (container && !container.contains(e.target)) {
-                if (list) list.style.display = 'none';
-            }
-        });
-
-        window.addEventListener('scroll', function() {
-            const topBtn = document.getElementById('scrollToTopBtn');
-            if (window.scrollY > 300) {
-                topBtn.style.display = 'flex';
-            } else {
-                topBtn.style.display = 'none';
-            }
-        });
-
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function setTheme(themeName) {
-            document.body.className = themeName;
-            localStorage.setItem('mansour_primary_science_v2', themeName);
-            updateChartsTheme();
-        }
-
-        const savedTheme = localStorage.getItem('mansour_primary_science_v2') || 'theme-default';
-        document.body.className = savedTheme;
-
-        const gradeLessonsData = {
-            "الرابع": [
-                { chapter: "الوحدة الأولى: النباتات والمخلوقات الحية", title: "الفصل الأول: مملكة المخلوقات الحية", desc: "دراسة خصائص المخلوقات الحية وتصنيفها." },
-                { chapter: "الوحدة الأولى: النباتات والمخلوقات الحية", title: "الفصل الثاني: النباتات وتصنيفها", desc: "التعرف على النباتات البذرية واللابذرية وأجزائها." },
-                { chapter: "الوحدة الثانية: الحيوانات", title: "الفصل الثالث: المجموعات الحيوانية", desc: "دراسة الفقاريات واللافقاريات وخصائصها." },
-                { chapter: "الوحدة الثالثة: الأرض ومواردها", title: "الفصل الرابع: أرضنا المتغيرة", desc: "التجوية والتعرية والتشكيلات الأرضية." }
+        const gradeScienceData = {
+            "الأول الابتدائي": [
+                { chapter: "الوحدة 1: النباتات من حولنا", title: "أجزاء النباتات", desc: "دراسة الجذور، الساق، الأوراق، والزهور ودور كل منها في حياة النبات." },
+                { chapter: "الوحدة 1: النباتات من حولنا", title: "النباتات تنتج نباتات جديدة", desc: "التعرف على البذور وكيفية نموها لتصبح نباتات جديدة." },
+                { chapter: "الوحدة 2: الحيوانات من حولنا", title: "أماكن عيش الحيوانات", desc: "استكشاف الموائل الطبيعية المختلفة للحيوانات (الغابة، الصحراء، الماء)." },
+                { chapter: "الوحدة 2: الحيوانات من حولنا", title: "الحيوانات تنمو وتتغير", desc: "دراسة دورات حياة الحيوانات وكيف تتغير صغار الحيوانات عن أبائها." },
+                { chapter: "الوحدة 3: أرضنا ومواردها", title: "ما الأرض؟ وماذا يوجد عليها؟", desc: "التعرف على اليابسة والماء والصخور المكونة لسطح الأرض." },
+                { chapter: "الوحدة 3: أرضنا ومواردها", title: "الماء والهواء", desc: "أهمية الماء والهواء لحياة الكائنات الحية وطرق المحافظة عليها." },
+                { chapter: "الوحدة 4: الطقس والفصول", title: "حالات الطقس المختلفة", desc: "ملاحظة الطقس اليومي (مشمس، ممطر، عاصف، بارد) وأثره على ملابسنا." },
+                { chapter: "الوحدة 4: الطقس والفصول", title: "الفصول الأربعة", desc: "التعرف على التغيرات المناخية خلال السنة (الربيع، الصيف، الخريف، الشتاء)." }
             ],
-            "الخامس": [
-                { chapter: "الوحدة الأولى: تنوع المخلوقات الحية", title: "الفصل الأول: الخلايا لبنات الحياة", desc: "تركيب الخلية النباتية والحيوانية." },
-                { chapter: "الوحدة الأولى: تنوع المخلوقات الحية", title: "الفصل الثاني: تصنيف المخلوقات الحية", desc: "الممالك وخاصة الفطريات والبكتيريا." },
-                { chapter: "الوحدة الثانية: الأنظمة البيئية", title: "الفصل الثالث: التفاعلات في الأنظمة البيئية", desc: "السلاسل والشبكات الغذائية والتوازن البيئي." },
-                { chapter: "الوحدة الثالثة: الأرض ومواردها", title: "الفصل الرابع: دورة الماء والمعالم", desc: "حالة الغلاف الجوي ودورة الماء في الطبيعة." }
+            "الثاني الابتدائي": [
+                { chapter: "الوحدة 1: النباتات والحيوانات", title: "مخلوقات حية ومخلوقات غير حية", desc: "التفرقة بين الكائنات الحية التي تنمو وتتغذى والأشياء غير الحية." },
+                { chapter: "الوحدة 1: النباتات والحيوانات", title: "حاجات المخلوقات الحية", desc: "دراسة الماء، الهواء، الغذاء، والمكان كاحتياجات أساسية للبقاء." },
+                { chapter: "الوحدة 2: موائل الكائنات الحية", title: "السلسلة الغذائية", desc: "كيف تحصل الحيوانات على طاقاتها من النباتات والحيوانات الأخرى." },
+                { chapter: "الوحدة 2: موائل الكائنات الحية", title: "الصحاري والغابات", desc: "مقارنة الخصائص البيئية للبيئات الحارة والباردة والغابات المطيرة." },
+                { chapter: "الوحدة 3: المادة من حولنا", title: "ما المادة؟", desc: "استكشاف خصائص الأجسام والصلابة واللون والكتلة والحجم." },
+                { chapter: "الوحدة 3: المادة من حولنا", title: "حالات المادة", desc: "التمييز بين الحالات الصلبة والسائلة والغازية للمادة وتجارب تغيير حالتها." },
+                { chapter: "الوحدة 4: الطاقة والقوى", title: "الصوت والضوء", desc: "كيف ينتقل الصوت وكيف يتكون الضوء وتجارب الظلال والاهتزازات." },
+                { chapter: "الوحدة 4: الطاقة والقوى", title: "الحركة والقوى", desc: "استكشاف كيف تؤثر قوى الدفع والسحب في تغيير موضع الأجسام وسرعتها." }
             ],
-            "السادس": [
-                { chapter: "الوحدة الأولى: تنوع الحياة", title: "الفصل الأول: العمليات الحيوية في الخلايا", desc: "دراسة العمليات الحيوية والتبادل الخلوي والتنفس." },
-                { chapter: "الوحدة الأولى: تنوع الحياة", title: "الفصل الثاني: تصنيف المخلوقات الحية", desc: "استكشاف الممالك الخمس والنباتات والحيوانات." },
-                { chapter: "الوحدة الثانية: العمليات المؤثرة في سطح الأرض", title: "الفصل الثالث: العمليات الداخلية والخارجية", desc: "الزلازل والبراكين والتجوية والتعرية." },
-                { chapter: "الوحدة الثالثة: المادة والطاقة", title: "الفصل الرابع: المادة والتفاعلات الكيميائية", desc: "الذرات والعناصر والتغيرات الفيزيائية والكيميائية." }
+            "الثالث الابتدائي": [
+                { chapter: "الوحدة 1: الوراثة والبيئة", title: "التكاثر ودورة حياة النباتات والحيوانات", desc: "مراحل نمو المخلوقات الحية والتشابه والاختلاف بين الآباء والأبناء." },
+                { chapter: "الوحدة 1: الوراثة والبيئة", title: "التكيف والبقاء في البيئات", desc: "كيف تتكيف الحيوانات والنباتات مع ظروف البرد الشديد أو الجفاف." },
+                { chapter: "الوحدة 2: الأرض ومواردها", title: "الصخور والمعادن والتربة", desc: "أنواع التربة ومكوناتها واستخدامات الصخور والمعادن في حياتنا اليومية." },
+                { chapter: "الوحدة 3: المخلوقات الحية تنمو وتتغير", title: "أجهزة جسم الإنسان", desc: "التعرف على الجهاز الهيكلي، العضلي، والهضمي والدورة الدموية ووظائفها الأساسية." },
+                { chapter: "الوحدة 3: المخلوقات الحية تنمو وتتغير", title: "الصحة الغذائية والرياضية", desc: "أهمية الغذاء المتوازن وممارسة الرياضة للحفاظ على صحة الأجسام وقوتها." },
+                { chapter: "الوحدة 4: الطاقة والكهرباء والمغناطيسية", title: "الدوائر الكهربائية البسيطة", desc: "كيف يضيء المصباح الكهربائي وتوصيل الدوائر الكهربائية بأمان." },
+                { chapter: "الوحدة 4: الطاقة والكهرباء والمغناطيسية", title: "المغناطيس وقوته", desc: "استكشاف أقطاب المغناطيس وتنافرها وتجاذبها والمواد التي تنجذب إليه." }
+            ],
+            "الرابع الابتدائي": [
+                { chapter: "الوحدة 1: ممالك المخلوقات الحية", title: "الخلايا وتصنيف المخلوقات الحية", desc: "دراسة الخلايا وأساسيات تصنيف المخلوقات الحية في ممالكها." },
+                { chapter: "الوحدة 2: المملكة الحيوانية", title: "الحيوانات اللافقارية والفقارية وأجهزتها", desc: "التعرف على خصائص الحيوانات اللافقارية والفقارية وأهم أجهزة أجسامها." },
+                { chapter: "الوحدة 3: الأنظمة البيئية", title: "استكشاف والعلاقات والتغيرات في الأنظمة البيئية", desc: "دراسة مقدمة النظم البيئية، شبكات العلاقات الغذائية والتغيرات البيئية." },
+                { chapter: "الوحدة 4: الأمراض والعدوى", title: "الأمراض المعدية وطرق انتقالها", desc: "مفاهيم الأمراض وكيفية الوقاية منها وانتقال العدوى." },
+                { chapter: "الوحدة 5: التغذية والصحة", title: "الغذاء المتوازن والمحافظة على الصحة", desc: "دراسة الاحتياجات الغذائية السليمة والعناية بالصحّة العامة." },
+                { chapter: "الوحدة 6: المادة والقوى والطاقة", title: "المادة وخصائصها والقوى والحركة", desc: "القياس، حالات المادة، المخاليط، القوى والحركة، والطاقة (الحرارة)." }
+            ],
+            "الخامس الابتدائي": [
+                { chapter: "الوحدة 1: ممالك المخلوقات الحية", title: "تصنيف المخلوقات الحية والنباتات", desc: "التصنيف العلمي ومكونات وخصائص النباتات." },
+                { chapter: "الوحدة 2: الآباء والأبناء", title: "التكاثر ودورات الحياة", desc: "مفاهيم التكاثر الحيوي ومراحل دورات حياة الكائنات." },
+                { chapter: "الوحدة 3: الأنظمة البيئية", title: "التفاعلات والدورات والتغيرات البيئية", desc: "العلاقات في الأنظمة البيئية، التكيف والبقاء، ودورات العناصر في الطبيعة." },
+                { chapter: "الوحدة 4: أرضنا المتغيرة", title: "معالم سطح الأرض وعملياتها ومواردها", desc: "التضاريس، العمليات المؤثرة على سطح الأرض، ومصادر الطاقة، الهواء والماء." },
+                { chapter: "الوحدة 5: المادة", title: "أنواع المادة والتغيرات الفيزيائية والكيميائية", desc: "العناصر، الفلزات واللافلزات، والتغيرات الفيزيائية والكيميائية وحالات المادة." },
+                { chapter: "الوحدة 6: الطاقة والقوى", title: "الشغل والآلات البسيطة والصوت والضوء", desc: "الطاقة، الآلات البسيطة، خصائص الصوت والضوء وتطبيقاتها." }
+            ],
+            "السادس الابتدائي": [
+                { chapter: "الوحدة 1: الخلايا والوراثة", title: "الخلية النباتية والحيوانية وانقسامها والوراثة", desc: "نظرية الخلية، مقارنة الخلايا، الانقسام الخلوي، والوراثة والصفات." },
+                { chapter: "الوحدة 2: عمليات الحياة", title: "عمليات الحياة في النباتات، المخلوقات الدقيقة، والإنسان والحيوان", desc: "التنفس والهضم والدوران والإخراج والحركة والإحساس." },
+                { chapter: "الوحدة 3: الأنظمة البيئية ومواردها", title: "السلاسل الغذائية ومقارنة الأنظمة والتربة", desc: "هرم الطاقة، السلاسل والشبكات، حماية موارد الأرض والتربة." },
+                { chapter: "الوحدة 4: المادة والخصائص الكيميائية", title: "الأحماض والقواعد والتغيرات الكيميائية", desc: "مفاهيم الأحماض والقواعد وتفاعلاتها والتغيرات الكيميائية." },
+                { chapter: "الوحدة 5: القوى والطاقة", title: "استعمال القوى والحركة وتسارعها", desc: "قوانين الحركة وقوى التسارع والاستعمالات التطبيقية." },
+                { chapter: "الوحدة 6: الكهرباء والمغناطيسية", title: "الدوائر الكهربائية والتيار والمغناطيس", desc: "الدوائر الكهربائية، التيار، المغناطيس والمولدات الكهربائية." }
             ]
         };
 
-        function getStorageKeyForLessons() { return 'mansour_custom_lessons_science_' + currentGrade + '_v3'; }
-        function getStorageKeyForStudents() { return 'mansour_students_science_' + currentGrade + '_v3'; }
-        function getStorageKeyForStatus() { return 'mansour_lesson_status_science_' + currentGrade + '_v3'; }
+        function getStorageKeyForLessons() { return 'awwal_custom_lessons_science_' + currentGrade + '_v3'; }
+        function getStorageKeyForStudents() { return 'awwal_students_science_' + currentGrade + '_v3'; }
+        function getStorageKeyForStatus() { return 'awwal_lesson_status_science_' + currentGrade + '_v3'; }
 
-        let lessons = JSON.parse(localStorage.getItem(getStorageKeyForLessons())) || gradeLessonsData[currentGrade];
+        let lessons = JSON.parse(localStorage.getItem(getStorageKeyForLessons())) || gradeScienceData[currentGrade];
         let students = JSON.parse(localStorage.getItem(getStorageKeyForStudents())) || [];
         let lessonStatus = JSON.parse(localStorage.getItem(getStorageKeyForStatus())) || {};
 
         function changeGradeLevel(grade) {
             currentGrade = grade;
-            localStorage.setItem('mansour_current_grade_v3', currentGrade);
+            localStorage.setItem('awwal_current_grade_science_v3', currentGrade);
             
-            lessons = JSON.parse(localStorage.getItem(getStorageKeyForLessons())) || gradeLessonsData[currentGrade];
+            lessons = JSON.parse(localStorage.getItem(getStorageKeyForLessons())) || gradeScienceData[currentGrade];
             students = JSON.parse(localStorage.getItem(getStorageKeyForStudents())) || [];
             lessonStatus = JSON.parse(localStorage.getItem(getStorageKeyForStatus())) || {};
 
@@ -1050,370 +1013,78 @@
             currentPage = 1;
             document.getElementById('studentSearchInput').value = '';
 
-            document.getElementById('curriculumTitle').textContent = `📚 دليل مقرر العلوم - الصف ${currentGrade} الابتدائي (المنهج السعودي المعتمد) وتتبع التنفيذ`;
+            document.getElementById('curriculumTitle').textContent = `📚 دليل مقرر العلوم - ${currentGrade} (المنهج السعودي المعتمد) وتتبع التنفيذ`;
 
             renderLessons();
             render();
-            renderExamsTable();
-            updateCharts();
-            showToast(`🔄 تم الانتقال إلى بيانات الصف ${currentGrade} الابتدائي`);
+            showToast(`🔄 تم الانتقال إلى بيانات ${currentGrade}`);
         }
 
-        function saveAndRefresh() {
-            localStorage.setItem(getStorageKeyForStudents(), JSON.stringify(students));
-            render();
-            renderExamsTable();
-            updateCharts();
-            showToast('✅ تم الحفظ تلقائياً في الجهاز!');
-        }
-
-        function updateScore(index, field, value) {
-            students[index][field] = Math.max(0, (students[index][field] || 0) + value);
-            
-            const cellElement = document.getElementById(`val-${index}-${field}`);
-            if (cellElement) cellElement.textContent = students[index][field];
-
-            if (String(selectedStudentIndex) === String(index)) loadStudentDetails();
-
-            updateHeaderStats();
-            updateCharts();
-            localStorage.setItem(getStorageKeyForStudents(), JSON.stringify(students));
-        }
-
-        function updateExamScore(index, examField, val) {
-            let num = parseFloat(val);
-            if (isNaN(num)) num = 0;
-            if (num > 20) num = 20;
-            if (num < 0) num = 0;
-            students[index][examField] = num;
-            localStorage.setItem(getStorageKeyForStudents(), JSON.stringify(students));
-            renderExamsTable();
-            updateCharts();
-            showToast('✅ تم تحديث درجة الاختبار!');
-        }
-
-        function sendExamWhatsApp(index) {
-            const st = students[index];
-            const phone = getCleanPhone(st.phone);
-            if (!phone) {
-                alert('رقم جوال ولي الأمر غير متوفر أو غير صالح.');
+        function onCurriculumDropdownChange(idx) {
+            const box = document.getElementById('selectedLessonDetailsBox');
+            if(idx === "") {
+                box.style.display = 'none';
                 return;
             }
-
-            const headerInfo = `🏫 المدرسة: ${SCHOOL_NAME}\n👨‍🏫 معلم المادة: ${TEACHER_NAME}\n\n`;
-            const msg = `${headerInfo}📋 **نتيجة اختبارات مادة العلوم - الصف ${currentGrade}**\n👦 الطالب: ${st.name} (الصف/الشعبة: ${st.studentClass || ''})\n\n` +
-                          `📝 اختبار الفترة الأولى: **${st.exam1 !== undefined ? st.exam1 : '-'} / 20**\n` +
-                          `📝 اختبار الفترة الثانية: **${st.exam2 !== undefined ? st.exam2 : '-'} / 20**\n\n` +
-                          `شكراً لمتابعتكم المستمرة ودعمكم الدائم لمسيرة ابننا التعليمية.`;
-
-            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
-            st.messages = (st.messages || 0) + 1;
-            saveAndRefresh();
+            const l = lessons[idx];
+            box.style.display = 'block';
+            box.innerHTML = `<strong>${l.chapter}</strong><br><span style="color:var(--primary); font-size:16px;">${l.title}</span><br><br>${l.desc}`;
         }
 
-        function renderExamsTable() {
-            const select = document.getElementById('examClassSelect');
-            const selectedCls = select.value;
-            const tbody = document.getElementById('examsTbody');
-            const analysisBox = document.getElementById('examsAnalysisBox');
-            const printBtn = document.getElementById('printExamsBtn');
+        function renderLessons() {
+            const selectLesson = document.getElementById('selectLesson');
+            selectLesson.innerHTML = '<option value="">-- اختر موضوع الدرس والمهارة --</option>';
 
-            if (!selectedCls) {
-                tbody.innerHTML = `<tr><td colspan="5" style="padding: 20px; opacity: 0.7;">الرجاء اختيار الصف/الشعبة من القائمة أعلاه لعرض رصد واختبارات الطلاب.</td></tr>`;
-                analysisBox.style.display = 'none';
-                printBtn.style.display = 'none';
-                return;
-            }
+            const bulkSelectLesson = document.getElementById('bulkSelectLesson');
+            bulkSelectLesson.innerHTML = '<option value="">-- اختر الدرس أو الرسالة التشجيعية المراد إرسالها --</option>';
 
-            const classStudents = students.map((st, idx) => ({ st, originalIndex: idx })).filter(item => (item.st.studentClass || 'الشعبة الأولى') === selectedCls);
+            const curriculumDropdown = document.getElementById('curriculumDropdownSelect');
+            curriculumDropdown.innerHTML = '<option value="">-- اختر الدرس أو الوحدة من القائمة المنسدلة للاستعراض --</option>';
 
-            if (classStudents.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="5" style="padding: 20px; opacity: 0.7;">لا توجد طلاب مسجلين في هذا الصف/الشعبة حالياً.</td></tr>`;
-                analysisBox.style.display = 'none';
-                printBtn.style.display = 'none';
-                return;
-            }
+            let lessonsGroup = '<optgroup label="📚 دروس ومهمات المنهج">';
+            let executedCount = 0;
+            const mainLessonsContainer = document.getElementById('mainLessonsContainer');
+            mainLessonsContainer.innerHTML = '';
 
-            tbody.innerHTML = '';
-            let sum1 = 0, sum2 = 0, count1 = 0, count2 = 0;
+            lessons.forEach((l, idx) => { 
+                const isExecuted = !!lessonStatus[idx];
+                if(isExecuted) executedCount++;
 
-            classStudents.forEach(item => {
-                const st = item.st;
-                const i = item.originalIndex;
-                const e1 = st.exam1 !== undefined ? st.exam1 : '';
-                const e2 = st.exam2 !== undefined ? st.exam2 : '';
-
-                if (st.exam1 !== undefined && st.exam1 !== '') { sum1 += Number(st.exam1); count1++; }
-                if (st.exam2 !== undefined && st.exam2 !== '') { sum2 += Number(st.exam2); count2++; }
-
-                tbody.innerHTML += `
-                    <tr>
-                        <td><strong>👦 ${st.name}</strong></td>
-                        <td><span class="class-badge">${selectedCls}</span></td>
-                        <td><input type="number" step="0.5" max="20" min="0" value="${e1}" onchange="updateExamScore(${i}, 'exam1', this.value)" style="width: 90px; text-align: center; display: block; margin: 0 auto;" placeholder="من 20"></td>
-                        <td><input type="number" step="0.5" max="20" min="0" value="${e2}" onchange="updateExamScore(${i}, 'exam2', this.value)" style="width: 90px; text-align: center; display: block; margin: 0 auto;" placeholder="من 20"></td>
-                        <td><button class="whatsapp-btn" style="padding: 6px 12px; margin: 0; font-size: 13px;" onclick="sendExamWhatsApp(${i})">📤 إرسال النتيجة</button></td>
-                    </tr>
-                `;
-            });
-
-            document.getElementById('avgExam1').textContent = count1 > 0 ? (sum1 / count1).toFixed(1) + ' / 20' : '0 / 20';
-            document.getElementById('avgExam2').textContent = count2 > 0 ? (sum2 / count2).toFixed(1) + ' / 20' : '0 / 20';
-            
-            analysisBox.style.display = 'block';
-            printBtn.style.display = 'inline-block';
-        }
-
-        function printExamsAnalysisReport() {
-            const select = document.getElementById('examClassSelect');
-            const selectedCls = select.value;
-            if (!selectedCls) return;
-
-            const classStudents = students.filter(s => (s.studentClass || 'الشعبة الأولى') === selectedCls);
-            if (classStudents.length === 0) return;
-
-            let sum1 = 0, sum2 = 0, count1 = 0, count2 = 0;
-            classStudents.forEach(st => {
-                if (st.exam1 !== undefined && st.exam1 !== '') { sum1 += Number(st.exam1); count1++; }
-                if (st.exam2 !== undefined && st.exam2 !== '') { sum2 += Number(st.exam2); count2++; }
-            });
-
-            const avg1 = count1 > 0 ? (sum1 / count1).toFixed(1) + ' / 20' : '0 / 20';
-            const avg2 = count2 > 0 ? (sum2 / count2).toFixed(1) + ' / 20' : '0 / 20';
-            const now = new Date();
-            const dateStr = now.toLocaleDateString('ar-SA') + ' هـ';
-
-            var printWindow = window.open('', '_blank', 'height=750,width=1000');
-            printWindow.document.write('<html><head><title>تقرير تحليل نتائج الاختبارات</title>');
-            printWindow.document.write('<style>');
-            printWindow.document.write('body { font-family: Tahoma, Arial, sans-serif; direction: rtl; text-align: right; color: #000; background: #fff; padding: 25px; margin: 0; }');
-            printWindow.document.write('.header-box { text-align: center; margin-bottom: 25px; border-bottom: 2px solid #333; padding-bottom: 15px; }');
-            printWindow.document.write('h2, h3, h4 { margin: 5px 0; }');
-            printWindow.document.write('.meta-row { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 14px; }');
-            printWindow.document.write('.stats-box { display: flex; justify-content: space-around; background: #f3f4f6; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: center; }');
-            printWindow.document.write('table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }');
-            printWindow.document.write('th, td { border: 1px solid #333; padding: 8px; text-align: center; }');
-            printWindow.document.write('th { background-color: #f3f4f6; }');
-            printWindow.document.write('td.text-right { text-align: right; }');
-            printWindow.document.write('.signatures { margin-top: 40px; display: flex; justify-content: space-between; font-size: 14px; }');
-            printWindow.document.write('</style>');
-            printWindow.document.write('</head><body>');
-
-            printWindow.document.write(`
-                <div class="header-box">
-                    <h2>المملكة العربية السعودية</h2>
-                    <h3>وزارة التعليم</h3>
-                    <h3 style="color: #0284c7;">${SCHOOL_NAME}</h3>
-                    <h4 style="margin-top: 5px;">تقرير تحليل نتائج اختبارات الفترة الأولى والفترة الثانية - الصف ${currentGrade} (الشعبة/الصف: ${selectedCls})</h4>
-                    <p style="margin: 5px 0 0 0; font-size: 14px;">مادة العلوم</p>
-                </div>
-                <div class="meta-row">
-                    <div><strong>معلم المادة:</strong> ${TEACHER_NAME}</div>
-                    <div><strong>تاريخ التقرير:</strong> ${dateStr}</div>
-                </div>
-                <div class="stats-box">
-                    <div><strong>متوسط الفترة الأولى:</strong><br>${avg1}</div>
-                    <div><strong>متوسط الفترة الثانية:</strong><br>${avg2}</div>
-                </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>م</th>
-                            <th>اسم الطالب</th>
-                            <th>الفترة الأولى (من 20)</th>
-                            <th>الفترة الثانية (من 20)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-            `);
-
-            classStudents.forEach((st, idx) => {
-                const e1Str = st.exam1 !== undefined && st.exam1 !== '' ? st.exam1 + ' / 20' : '-';
-                const e2Str = st.exam2 !== undefined && st.exam2 !== '' ? st.exam2 + ' / 20' : '-';
-                printWindow.document.write(`<tr><td>${idx + 1}</td><td class="text-right"><strong>👦 ${st.name}</strong></td><td>${e1Str}</td><td>${e2Str}</td></tr>`);
-            });
-
-            printWindow.document.write(`</tbody></table><div class="signatures"><div><p><strong>معلم المادة:</strong> ${TEACHER_NAME}</p><p><strong>التوقيع:</strong> ....................................</p></div><div style="text-align: left;"><p><strong>مدير المدرسة:</strong> ${PRINCIPAL_NAME}</p><p><strong>التوقيع والختم:</strong> ....................................</p></div></div></body></html>`);
-            printWindow.document.close();
-            printWindow.focus();
-            setTimeout(function () { printWindow.print(); }, 1000);
-        }
-
-        function printAnalyticsReport() {
-            const now = new Date();
-            const dateStr = now.toLocaleDateString('ar-SA') + ' هـ';
-
-            var printWindow = window.open('', '_blank', 'height=750,width=1000');
-            printWindow.document.write('<html><head><title>تقرير التحليل الذكي ومؤشرات الأداء</title>');
-            printWindow.document.write('<style>');
-            printWindow.document.write('body { font-family: Tahoma, Arial, sans-serif; direction: rtl; text-align: right; color: #000; background: #fff; padding: 25px; margin: 0; }');
-            printWindow.document.write('.header-box { text-align: center; margin-bottom: 25px; border-bottom: 2px solid #333; padding-bottom: 15px; }');
-            printWindow.document.write('h2, h3, h4 { margin: 5px 0; }');
-            printWindow.document.write('.meta-row { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 14px; }');
-            printWindow.document.write('.kpi-grid { display: flex; justify-content: space-around; background: #f3f4f6; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: center; }');
-            printWindow.document.write('.signatures { margin-top: 40px; display: flex; justify-content: space-between; font-size: 14px; }');
-            printWindow.document.write('</style>');
-            printWindow.document.write('</head><body>');
-
-            printWindow.document.write(`
-                <div class="header-box">
-                    <h2>المملكة العربية السعودية</h2>
-                    <h3>وزارة التعليم</h3>
-                    <h3 style="color: #0284c7;">${SCHOOL_NAME}</h3>
-                    <h4 style="margin-top: 5px;">تقرير التحليل الذكي ومؤشرات الأداء الأكاديمي - الصف ${currentGrade}</h4>
-                    <p style="margin: 5px 0 0 0; font-size: 14px;">مادة العلوم</p>
-                </div>
-                <div class="meta-row">
-                    <div><strong>معلم المادة:</strong> ${TEACHER_NAME}</div>
-                    <div><strong>تاريخ التقرير:</strong> ${dateStr}</div>
-                </div>
-                <div class="kpi-grid">
-                    <div><strong>نسبة إنجاز المنهج:</strong><br>${document.getElementById('kpiCurriculumProgress').textContent}</div>
-                    <div><strong>نسبة المتفوقين:</strong><br>${document.getElementById('kpiExcellenceRate').textContent}</div>
-                    <div><strong>طلاب بحاجة لدعم:</strong><br>${document.getElementById('kpiAtRiskCount').textContent}</div>
-                    <div><strong>متوسط التحصيل:</strong><br>${document.getElementById('kpiGeneralAvg').textContent}</div>
-                </div>
-                <div class="signatures">
+                lessonsGroup += `<option value="lesson-${idx}">[${l.chapter}] ${l.title}</option>`; 
+                curriculumDropdown.innerHTML += `<option value="${idx}">[${l.chapter}] ${l.title}</option>`;
+                selectLesson.innerHTML += `<option value="${idx}">[${l.chapter}] ${l.title}</option>`;
+                
+                const card = document.createElement('div');
+                card.className = `lesson-card ${isExecuted ? 'executed' : 'not-executed'}`;
+                card.innerHTML = `
                     <div>
-                        <p><strong>معلم المادة:</strong> ${TEACHER_NAME}</p>
-                        <p><strong>التوقيع:</strong> ....................................</p>
+                        <span class="ch-badge">${l.chapter}</span>
+                        <strong>${l.title}</strong>
+                        <p>${l.desc}</p>
                     </div>
-                    <div style="text-align: left;">
-                        <p><strong>مدير المدرسة:</strong> ${PRINCIPAL_NAME}</p>
-                        <p><strong>التوقيع والختم:</strong> ....................................</p>
+                    <div class="lesson-actions">
+                        <button class="status-toggle-btn ${isExecuted ? 'done' : 'pending'}" onclick="toggleLessonStatus(${idx})">
+                            ${isExecuted ? '✅ منفذ' : '⏳ قيد الانتظار'}
+                        </button>
+                        <button class="btn-action btn-danger" onclick="deleteLesson(${idx})">🗑️</button>
                     </div>
-                </div>
-            </body></html>`);
-            printWindow.document.close();
-            printWindow.focus();
-            setTimeout(function () { printWindow.print(); }, 1000);
-        }
-
-        function updateHeaderStats() {
-            let totals = { skills: 0, participation: 0, homework: 0, absence: 0, projects: 0, messages: 0 };
-            students.forEach(st => {
-                totals.skills += st.skills || 0;
-                totals.participation += st.participation || 0;
-                totals.homework += st.homework || 0;
-                totals.absence += st.absence || 0;
-                totals.projects += st.projects || 0;
-                totals.messages += st.messages || 0;
+                `;
+                mainLessonsContainer.appendChild(card);
             });
-            document.getElementById('totalStudents').textContent = students.length;
-            document.getElementById('totalSkills').textContent = totals.skills;
-            document.getElementById('totalParticipation').textContent = totals.participation;
-            document.getElementById('totalHomework').textContent = totals.homework;
-            document.getElementById('totalAbsence').textContent = totals.absence;
-            document.getElementById('totalProjects').textContent = totals.projects;
-            document.getElementById('totalMessagesSent').textContent = totals.messages;
+            lessonsGroup += '</optgroup>';
+
+            let motivGroup = '<optgroup label="🌟 الرسائل التشجيعية والتحفيزية">';
+            customMotivations.forEach((m, idx) => { motivGroup += `<option value="motiv-${idx}">${m.title}</option>`; });
+            motivGroup += '</optgroup>';
+
+            bulkSelectLesson.innerHTML += lessonsGroup + motivGroup;
+            document.getElementById('totalExecutedLessons').textContent = `${executedCount} / ${lessons.length}`;
         }
-
-        function initCharts() {
-            const ctxLevels = document.getElementById('academicLevelsChart').getContext('2d');
-            const ctxExams = document.getElementById('examsComparisonChart').getContext('2d');
-
-            academicLevelsChartInstance = new Chart(ctxLevels, {
-                type: 'pie',
-                data: {
-                    labels: ['متفوقون (85%+)', 'متوسطون (60%-84%)', 'بحاجة لدعم (<60%)'],
-                    datasets: [{ data: [0, 0, 0], backgroundColor: ['#0284c7', '#3b82f6', '#ef4444'] }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        title: { display: true, text: 'تحليل مستويات التحصيل الأكاديمي', font: { family: 'Segoe UI', size: 14 } },
-                        legend: { position: 'bottom' }
-                    }
-                }
-            });
-
-            examsComparisonChartInstance = new Chart(ctxExams, {
-                type: 'line',
-                data: {
-                    labels: ['الفترة الأولى', 'الفترة الثانية'],
-                    datasets: [{ label: 'متوسط درجات الصفوف', data: [0, 0], borderColor: '#0284c7', backgroundColor: 'rgba(2, 132, 199, 0.1)', fill: true, tension: 0.3 }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { title: { display: true, text: 'مقارنة متوسط الفترات الدراسية', font: { family: 'Segoe UI', size: 14 } }, legend: { display: false } },
-                    scales: { y: { beginAtZero: true, max: 20 } }
-                }
-            });
-
-            updateCharts();
-        }
-
-        function updateCharts() {
-            if (!academicLevelsChartInstance || !examsComparisonChartInstance) return;
-
-            let excellentCount = 0, mediumCount = 0, atRiskCount = 0;
-            let sumExam1 = 0, countExam1 = 0, sumExam2 = 0, countExam2 = 0;
-
-            const atRiskDropdown = document.getElementById('atRiskDropdown');
-            const currentAtRiskVal = atRiskDropdown.value;
-            atRiskDropdown.innerHTML = '<option value="">-- اختر طالباً من قائمة الدعم العاجل لعرض ملفه --</option>';
-
-            students.forEach((st, idx) => {
-                if (st.exam1 !== undefined && st.exam1 !== '') { sumExam1 += Number(st.exam1); countExam1++; }
-                if (st.exam2 !== undefined && st.exam2 !== '') { sumExam2 += Number(st.exam2); countExam2++; }
-
-                const score1 = st.exam2 !== undefined && st.exam2 !== '' ? Number(st.exam2) : (st.exam1 !== undefined && st.exam1 !== '' ? Number(st.exam1) : null);
-                if (score1 !== null) {
-                    const percentage = (score1 / 20) * 100;
-                    if (percentage >= 85) excellentCount++;
-                    else if (percentage >= 60) mediumCount++;
-                    else {
-                        atRiskCount++;
-                        atRiskDropdown.innerHTML += `<option value="${idx}">👦 ${st.name} (الصف/الشعبة: ${st.studentClass || 'الشعبة الأولى'}) - الدرجة: ${score1}/20</option>`;
-                    }
-                }
-            });
-
-            atRiskDropdown.value = currentAtRiskVal;
-
-            academicLevelsChartInstance.data.datasets[0].data = [excellentCount, mediumCount, atRiskCount];
-            academicLevelsChartInstance.update();
-
-            const avg1Val = countExam1 > 0 ? (sumExam1 / countExam1) : 0;
-            const avg2Val = countExam2 > 0 ? (sumExam2 / countExam2) : 0;
-
-            examsComparisonChartInstance.data.datasets[0].data = [avg1Val.toFixed(1), avg2Val.toFixed(1)];
-            examsComparisonChartInstance.update();
-
-            const executedLessonsCount = Object.values(lessonStatus).filter(val => val === true).length;
-            const curriculumProgressPercent = lessons.length > 0 ? Math.round((executedLessonsCount / lessons.length) * 100) : 0;
-            document.getElementById('kpiCurriculumProgress').textContent = curriculumProgressPercent + '%';
-
-            const totalEvaluated = excellentCount + mediumCount + atRiskCount;
-            const excellenceRateVal = totalEvaluated > 0 ? Math.round((excellentCount / totalEvaluated) * 100) : 0;
-            document.getElementById('kpiExcellenceRate').textContent = excellenceRateVal + '%';
-
-            document.getElementById('kpiAtRiskCount').textContent = atRiskCount + ' طالب';
-
-            const generalAvgVal = (countExam1 > 0 || countExam2 > 0) ? ((avg1Val + avg2Val) / (countExam1 > 0 && countExam2 > 0 ? 2 : 1)).toFixed(1) + ' / 20' : '- / 20';
-            document.getElementById('kpiGeneralAvg').textContent = generalAvgVal;
-        }
-
-        function selectAtRiskStudent(indexStr) {
-            if (indexStr === "") return;
-            const index = parseInt(indexStr);
-            if (!isNaN(index) && students[index]) {
-                selectedStudentIndex = index;
-                document.getElementById('studentSearchInput').value = `${students[index].name} (${students[index].studentClass || ''})`;
-                loadStudentDetails();
-                document.getElementById('studentCard').scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-        }
-
-        function updateChartsTheme() { updateCharts(); }
 
         function toggleLessonStatus(index) {
             lessonStatus[index] = !lessonStatus[index];
             localStorage.setItem(getStorageKeyForStatus(), JSON.stringify(lessonStatus));
             renderLessons();
-            updateCharts();
             showToast('🔄 تم تحديث حالة الدرس وحفظه!');
         }
 
@@ -1429,7 +1100,6 @@
             document.getElementById('newLessonDesc').value = '';
 
             renderLessons();
-            updateCharts();
             showToast('➕ تم إضافة الدرس وحفظه!');
         }
 
@@ -1438,7 +1108,6 @@
                 lessons.splice(index, 1);
                 localStorage.setItem(getStorageKeyForLessons(), JSON.stringify(lessons));
                 renderLessons();
-                updateCharts();
                 showToast('🗑️ تم حذف الدرس بنجاح!');
             }
         }
@@ -1450,729 +1119,23 @@
             setTimeout(() => { toast.style.display = 'none'; }, 2000);
         }
 
-        function addStudent() {
-            const name = document.getElementById('studentName').value.trim();
-            const phone = document.getElementById('studentPhone').value.trim();
-            const classCustom = document.getElementById('studentClassCustom').value.trim();
-            const studentClass = classCustom || 'الشعبة الأولى';
-
-            if (!name) { alert('الرجاء إدخال اسم الطالب'); return; }
-
-            students.push({
-                id: Date.now(),
-                name: name,
-                studentClass: studentClass,
-                phone: phone,
-                absence: 0,
-                participation: 0,
-                homework: 0,
-                skills: 0,
-                projects: 0,
-                messages: 0,
-                exam1: undefined,
-                exam2: undefined
-            });
-
-            document.getElementById('studentName').value = '';
-            document.getElementById('studentPhone').value = '';
-            document.getElementById('studentClassCustom').value = '';
-
-            activeQueryClass = studentClass;
-            currentPage = 1;
-            saveAndRefresh();
-        }
-
-        function incrementMessageCount() {
-            const index = selectedStudentIndex;
-            if (index !== '' && students[index]) {
-                students[index].messages = (students[index].messages || 0) + 1;
-                saveAndRefresh();
-            }
-        }
-
-        function deleteStudent(index) {
-            if (confirm('هل أنت متأكد من حذف هذا الطالب؟')) {
-                students.splice(index, 1);
-                if (String(selectedStudentIndex) === String(index)) {
-                    selectedStudentIndex = '';
-                    document.getElementById('studentSearchInput').value = '';
-                }
-                saveAndRefresh();
-            }
-        }
-
-        function deleteClassStudents(className, event) {
-            if (event) event.stopPropagation();
-            const count = students.filter(s => (s.studentClass || 'الشعبة الأولى') === className).length;
-            if (count === 0) { alert(`لا توجد طلاب مسجلين في هذا الصف/الشعبة (${className}) حالياً.`); return; }
-
-            if (confirm(`⚠️ تحذير: هل أنت متأكد من حذف جميع طلاب الصف/الشعبة (${className}) وعددهم (${count}) طالب؟ لا يمكن التراجع.`)) {
-                students = students.filter(s => (s.studentClass || 'الشعبة الأولى') !== className);
-                if (activeQueryClass === className) activeQueryClass = '';
-                selectedStudentIndex = '';
-                document.getElementById('studentSearchInput').value = '';
-                currentPage = 1;
-                saveAndRefresh();
-                showToast(`🗑️ تم حذف الصف/الشعبة (${className}) بنجاح!`);
-            }
-        }
-
-        function printStudentReport() {
-            const stIndex = selectedStudentIndex;
-            if (stIndex === '' || !students[stIndex]) { alert('يرجى اختيار طالب أولاً لطباعة تقريره.'); return; }
-            const st = students[stIndex];
-            const now = new Date();
-            const dateStr = now.toLocaleDateString('ar-SA') + ' هـ';
-
-            var printWindow = window.open('', '_blank', 'height=700,width=900');
-            printWindow.document.write('<html><head><title>تقرير متابعة الطالب الرسمي</title>');
-            printWindow.document.write('<style>');
-            printWindow.document.write('body { font-family: Tahoma, Arial, sans-serif; direction: rtl; text-align: right; color: #000; background: #fff; padding: 25px; margin: 0; }');
-            printWindow.document.write('.header-box { text-align: center; margin-bottom: 25px; border-bottom: 2px solid #333; padding-bottom: 15px; }');
-            printWindow.document.write('h2, h3, h4 { margin: 5px 0; }');
-            printWindow.document.write('.meta-row { display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 14px; }');
-            printWindow.document.write('table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 14px; }');
-            printWindow.document.write('th, td { border: 1px solid #333; padding: 10px; text-align: center; }');
-            printWindow.document.write('th { background-color: #f3f4f6; }');
-            printWindow.document.write('td.text-right { text-align: right; }');
-            printWindow.document.write('.signatures { margin-top: 40px; display: flex; justify-content: space-between; font-size: 14px; }');
-            printWindow.document.write('</style>');
-            printWindow.document.write('</head><body>');
-
-            printWindow.document.write(`
-                <div class="header-box">
-                    <h2>المملكة العربية السعودية</h2>
-                    <h3>وزارة التعليم</h3>
-                    <h3 style="color: #0284c7;">${SCHOOL_NAME}</h3>
-                    <h4 style="margin-top: 5px;">تقرير متابعة أداء الطالب: 👦 ${st.name}</h4>
-                    <p style="margin: 5px 0 0 0; font-size: 14px;">الصف ${currentGrade} (الصف/الشعبة: ${st.studentClass || 'الشعبة الأولى'}) - مادة العلوم</p>
-                </div>
-                <div class="meta-row">
-                    <div><strong>معلم المادة:</strong> ${TEACHER_NAME}</div>
-                    <div><strong>تاريخ التقرير:</strong> ${dateStr}</div>
-                </div>
-                <table>
-                    <thead><tr><th>عنصر المتابعة والتقييم</th><th>الدرجة أو المجموع التراكمي</th></tr></thead>
-                    <tbody>
-                        <tr><td class="text-right">✋ المشاركات الصفية الفعالة</td><td><strong>${st.participation || 0}</strong></td></tr>
-                        <tr><td class="text-right">📚 الواجبات المنزلية والأنشطة</td><td><strong>${st.homework || 0}</strong></td></tr>
-                        <tr><td class="text-right">🔴 أيام الغياب</td><td><strong>${st.absence || 0}</strong></td></tr>
-                        <tr><td class="text-right">⭐ المهارات العلمية المكتسبة</td><td><strong>${st.skills || 0}</strong></td></tr>
-                        <tr><td class="text-right">🛠️ المشاريع والأنشطة الإثرائية</td><td><strong>${st.projects || 0}</strong></td></tr>
-                        <tr><td class="text-right">📝 اختبار الفترة الأولى (من 20)</td><td><strong>${st.exam1 !== undefined ? st.exam1 + ' / 20' : '-'}</strong></td></tr>
-                        <tr><td class="text-right">📝 اختبار الفترة الثانية (من 20)</td><td><strong>${st.exam2 !== undefined ? st.exam2 + ' / 20' : '-'}</strong></td></tr>
-                    </tbody>
-                </table>
-                <div class="signatures">
-                    <div><p><strong>معلم المادة:</strong> ${TEACHER_NAME}</p><p><strong>التوقيع:</strong> ....................................</p></div>
-                    <div style="text-align: left;"><p><strong>مدير المدرسة:</strong> ${PRINCIPAL_NAME}</p><p><strong>التوقيع والختم:</strong> ....................................</p></div>
-                </div>
-            </body></html>`);
-            printWindow.document.close();
-            printWindow.focus();
-            setTimeout(function () { printWindow.print(); }, 1000);
-        }
-
-        function printClassReport(className, event) {
-            if (event) event.stopPropagation();
-            if (!className || className === 'ALL') { alert('يرجى اختيار صف/شعبة محددة لطباعة تقريرها.'); return; }
-
-            const classStudents = students.filter(s => (s.studentClass || 'الشعبة الأولى') === className);
-            if (classStudents.length === 0) { alert(`لا توجد طلاب في (${className}).`); return; }
-
-            const now = new Date();
-            const dateStr = now.toLocaleDateString('ar-SA') + ' هـ';
-
-            var printWindow = window.open('', '_blank', 'height=750,width=1000');
-            printWindow.document.write('<html><head><title>تقرير الصف/الشعبة الرسمي</title>');
-            printWindow.document.write('<style>');
-            printWindow.document.write('body { font-family: Tahoma, Arial, sans-serif; direction: rtl; text-align: right; color: #000; background: #fff; padding: 25px; margin: 0; }');
-            printWindow.document.write('.header-box { text-align: center; margin-bottom: 25px; border-bottom: 2px solid #333; padding-bottom: 15px; }');
-            printWindow.document.write('h2, h3, h4 { margin: 5px 0; }');
-            printWindow.document.write('.meta-row { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 14px; }');
-            printWindow.document.write('table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }');
-            printWindow.document.write('th, td { border: 1px solid #333; padding: 8px; text-align: center; }');
-            printWindow.document.write('th { background-color: #f3f4f6; }');
-            printWindow.document.write('td.text-right { text-align: right; }');
-            printWindow.document.write('.signatures { margin-top: 40px; display: flex; justify-content: space-between; font-size: 14px; }');
-            printWindow.document.write('</style></head><body>');
-
-            printWindow.document.write(`
-                <div class="header-box">
-                    <h2>المملكة العربية السعودية</h2>
-                    <h3>وزارة التعليم</h3>
-                    <h3 style="color: #0284c7;">${SCHOOL_NAME}</h3>
-                    <h4 style="margin-top: 5px;">تقرير متابعة أداء طلاب الصف ${currentGrade} (الصف/الشعبة: ${className})</h4>
-                    <p style="margin: 5px 0 0 0; font-size: 14px;">مادة العلوم</p>
-                </div>
-                <div class="meta-row">
-                    <div><strong>معلم المادة:</strong> ${TEACHER_NAME}</div>
-                    <div><strong>تاريخ التقرير:</strong> ${dateStr}</div>
-                </div>
-                <table>
-                    <thead><tr><th>م</th><th>اسم الطالب</th><th>رقم الجوال</th><th>الغياب</th><th>المشاركة</th><th>الواجبات</th><th>المهارات</th><th>فترة 1</th><th>فترة 2</th></tr></thead>
-                    <tbody>
-            `);
-
-            classStudents.forEach((st, idx) => {
-                const e1Str = st.exam1 !== undefined ? st.exam1 : '-';
-                const e2Str = st.exam2 !== undefined ? st.exam2 : '-';
-                printWindow.document.write(`<tr><td>${idx + 1}</td><td class="text-right"><strong>👦 ${st.name}</strong></td><td dir="ltr">${st.phone || '-'}</td><td>${st.absence || 0}</td><td>${st.participation || 0}</td><td>${st.homework || 0}</td><td>${st.skills || 0}</td><td>${e1Str}</td><td>${e2Str}</td></tr>`);
-            });
-
-            printWindow.document.write(`</tbody></table><div class="signatures"><div><p><strong>معلم المادة:</strong> ${TEACHER_NAME}</p><p><strong>التوقيع:</strong> ....................................</p></div><div style="text-align: left;"><p><strong>مدير المدرسة:</strong> ${PRINCIPAL_NAME}</p><p><strong>التوقيع والختم:</strong> ....................................</p></div></div></body></html>`);
-            printWindow.document.close();
-            printWindow.focus();
-            setTimeout(function () { printWindow.print(); }, 1000);
-        }
-
-        function exportExcel() {
-            if (students.length === 0) { alert('لا توجد بيانات طلاب للتصدير!'); return; }
-            const excelData = students.map((st, idx) => ({
-                "No.": idx + 1,
-                "Student Name": st.name,
-                "Class": st.studentClass || 'الشعبة الأولى',
-                "Phone": st.phone || '',
-                "Absence": st.absence || 0,
-                "Participation": st.participation || 0,
-                "Homework": st.homework || 0,
-                "Skills": st.skills || 0,
-                "Projects": st.projects || 0,
-                "Exam 1 (Out of 20)": st.exam1 !== undefined ? st.exam1 : '',
-                "Exam 2 (Out of 20)": st.exam2 !== undefined ? st.exam2 : '',
-                "Messages Sent": st.messages || 0
-            }));
-
-            const worksheet = XLSX.utils.json_to_sheet(excelData);
-            const workbook = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(workbook, worksheet, "Science Students");
-            if(!workbook.Workbook) workbook.Workbook = {};
-            if(!workbook.Workbook.Views) workbook.Workbook.Views = [];
-            workbook.Workbook.Views[0] = { RTL: true };
-
-            const dateStr = new Date().toISOString().slice(0,10);
-            XLSX.writeFile(workbook, `Dawood_School_Science_${currentGrade}_${dateStr}.xlsx`);
-            showToast('📊 تم تصدير ملف إكسل بنجاح!');
-        }
-
-        function importExcel(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                try {
-                    const data = new Uint8Array(e.target.result);
-                    const workbook = XLSX.read(data, { type: 'array' });
-                    const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-                    const jsonData = XLSX.utils.sheet_to_json(worksheet, { defval: "" });
-
-                    if (jsonData.length > 0) {
-                        let importedCount = 0;
-                        jsonData.forEach(row => {
-                            const name = String(row["Student Name"] || row["اسم الطالب"] || row["Name"] || "").trim();
-                            const rawClass = String(row["Class"] || row["الصف"] || row["الفصل"] || "").trim() || 'الشعبة الأولى';
-                            if (!name) return;
-
-                            const valExam1 = row["Exam 1 (Out of 20)"] !== undefined && row["Exam 1 (Out of 20)"] !== "" ? Number(row["Exam 1 (Out of 20)"]) : undefined;
-                            const valExam2 = row["Exam 2 (Out of 20)"] !== undefined && row["Exam 2 (Out of 20)"] !== "" ? Number(row["Exam 2 (Out of 20)"]) : undefined;
-
-                            students.push({
-                                id: Date.now() + Math.random(),
-                                name: name,
-                                studentClass: rawClass,
-                                phone: String(row["Phone"] || row["رقم الجوال"] || "").trim(),
-                                absence: Number(row["Absence"] || 0),
-                                participation: Number(row["Participation"] || 0),
-                                homework: Number(row["Homework"] || 0),
-                                skills: Number(row["Skills"] || 0),
-                                projects: Number(row["Projects"] || 0),
-                                exam1: valExam1 !== undefined ? Math.min(20, Math.max(0, valExam1)) : undefined,
-                                exam2: valExam2 !== undefined ? Math.min(20, Math.max(0, valExam2)) : undefined,
-                                messages: Number(row["Messages Sent"] || 0)
-                            });
-                            importedCount++;
-                        });
-
-                        if (importedCount > 0) {
-                            if (confirm(`تم استيراد (${importedCount}) طالب بنجاح. هل تريد حفظ التغييرات؟`)) {
-                                currentPage = 1;
-                                saveAndRefresh();
-                                showToast('📂 تم استيراد ملف الإكسل بنجاح!');
-                            }
-                        } else { alert('لم يتم العثور على بيانات طلاب صالحة في الملف.'); }
-                    } else { alert('ملف الإكسل فارغ.'); }
-                } catch (err) { alert('حدث خطأ أثناء قراءة ملف الإكسل.'); }
-            };
-            reader.readAsArrayBuffer(file);
-        }
-
-        function exportData() {
-            if (students.length === 0) { alert('لا توجد بيانات لتصديرها!'); return; }
-            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(students, null, 2));
-            const downloadAnchor = document.createElement('a');
-            downloadAnchor.setAttribute("href", dataStr);
-            downloadAnchor.setAttribute("download", `Dawood_School_Science_${currentGrade}_Backup.json`);
-            document.body.appendChild(downloadAnchor);
-            downloadAnchor.click();
-            downloadAnchor.remove();
-            showToast('💾 تم تنزيل النسخة الاحتياطية بنجاح!');
-        }
-
-        function importData(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                try {
-                    const importedStudents = JSON.parse(e.target.result);
-                    if (Array.isArray(importedStudents)) {
-                        if (confirm('هل أنت متأكد من استعادة هذه النسخة؟')) {
-                            students = importedStudents;
-                            currentPage = 1;
-                            saveAndRefresh();
-                            showToast('📂 تم استرجاع البيانات بنجاح!');
-                        }
-                    } else { alert('الملف المحدد غير صالح!'); }
-                } catch (err) { alert('حدث خطأ أثناء قراءة الملف.'); }
-            };
-            reader.readAsText(file);
-        }
-
-        function renderMotivationDropdown() {
-            const select = document.getElementById('selectMotivation');
-            select.innerHTML = '<option value="">-- اختر الرسالة التشجيعية --</option>';
-            customMotivations.forEach((item, idx) => { select.innerHTML += `<option value="${idx}">${item.title}</option>`; });
-            updateMotivationMsg();
-        }
-
-        function renderLessons() {
-            const selectLesson = document.getElementById('selectLesson');
-            selectLesson.innerHTML = '<option value="">-- اختر موضوع الدرس والمهارة --</option>';
-
-            const bulkSelectLesson = document.getElementById('bulkSelectLesson');
-            bulkSelectLesson.innerHTML = '<option value="">-- اختر الدرس أو الرسالة التشجيعية المراد إرسالها --</option>';
-
-            const curriculumDropdown = document.getElementById('curriculumDropdownSelect');
-            curriculumDropdown.innerHTML = '<option value="">-- اختر الدرس أو الوحدة من القائمة المنسدلة للاستعراض --</option>';
-
-            let lessonsGroup = '<optgroup label="📚 دروس ومهمات المنهج">';
-            lessons.forEach((l, idx) => { 
-                lessonsGroup += `<option value="lesson-${idx}">[${l.chapter}] ${l.title}</option>`; 
-                curriculumDropdown.innerHTML += `<option value="${idx}">[${l.chapter}] ${l.title}</option>`;
-            });
-            lessonsGroup += '</optgroup>';
-
-            let motivGroup = '<optgroup label="🌟 الرسائل التشجيعية والتحفيزية">';
-            customMotivations.forEach((m, idx) => { motivGroup += `<option value="motiv-${idx}">${m.title}</option>`; });
-            motivGroup += '</optgroup>';
-
-            bulkSelectLesson.innerHTML += lessonsGroup + motivGroup;
-            
-            const mainLessonsContainer = document.getElementById('mainLessonsContainer');
-            mainLessonsContainer.innerHTML = '';
-            let executedCount = 0;
-
-            lessons.forEach((l, idx) => {
-                const isExecuted = !!lessonStatus[idx];
-                if (isExecuted) executedCount++;
-                const statusLabel = isExecuted ? '✅ منجز' : '⏳ قيد الانتظار';
-                const statusClass = isExecuted ? 'done' : 'pending';
-                const cardClass = isExecuted ? 'executed' : 'not-executed';
-
-                selectLesson.innerHTML += `<option value="${idx}">[${l.chapter}] ${l.title} (${statusLabel})</option>`;
-                
-                mainLessonsContainer.innerHTML += `
-                    <div class="lesson-card ${cardClass}">
-                        <div>
-                            <span class="ch-badge">${l.chapter}</span>
-                            <strong>${l.title}</strong>
-                            <p>${l.desc}</p>
-                        </div>
-                        <div class="lesson-actions">
-                            <button class="status-toggle-btn ${statusClass}" onclick="toggleLessonStatus(${idx})">${statusLabel}</button>
-                            <button class="btn-danger btn-action" onclick="deleteLesson(${idx})" title="حذف الدرس">🗑️</button>
-                        </div>
-                    </div>
-                `;
-            });
-
-            document.getElementById('totalExecutedLessons').textContent = `${executedCount} / ${lessons.length}`;
-            updateLessonMsg();
-            updateBulkMsgPreview();
-        }
-
-        function onCurriculumDropdownChange(val) {
-            const detailsBox = document.getElementById('selectedLessonDetailsBox');
-            if (val === "") {
-                detailsBox.style.display = 'none';
-                return;
-            }
-            const l = lessons[val];
-            if (l) {
-                const isExecuted = !!lessonStatus[val];
-                const statusText = isExecuted ? '✅ الحالة: منجز' : '⏳ الحالة: قيد الانتظار';
-                detailsBox.innerHTML = `📚 <strong>[${l.chapter}] ${l.title}</strong><br>📌 <strong>التفاصيل:</strong> ${l.desc}<br>${statusText}`;
-                detailsBox.style.display = 'block';
-            }
-        }
-
-        function updateClassQueryButtons() {
-            const queryContainer = document.getElementById('classesQueryContainer');
-            const bulkTargetSelect = document.getElementById('bulkTargetClass');
-            const examClassSelect = document.getElementById('examClassSelect');
-            
-            const currentBulkTarget = bulkTargetSelect.value;
-            const currentExamClass = examClassSelect.value;
-            
-            const existingClasses = students.map(s => s.studentClass || 'الشعبة الأولى');
-            const allClasses = [...new Set(existingClasses)].filter(c => c && c.trim() !== "");
-            
-            queryContainer.innerHTML = '';
-            bulkTargetSelect.innerHTML = '<option value="ALL">جميع الصفوف والشعب</option>';
-            examClassSelect.innerHTML = '<option value="">-- اختر الصف/الشعبة لعرض وسجل الاختبارات --</option>';
-
-            const isEmptyActive = (activeQueryClass === '') ? 'active' : '';
-            queryContainer.innerHTML += `
-                <div class="class-btn-wrapper ${isEmptyActive}" style="flex: 2; min-width: 140px;">
-                    <button class="class-query-btn" style="text-align: center;" onclick="selectQueryClass('')">⬜ (اختر الصف)</button>
-                </div>
-            `;
-
-            const isAllActive = (activeQueryClass === 'ALL') ? 'active' : '';
-            queryContainer.innerHTML += `
-                <div class="class-btn-wrapper ${isAllActive}" style="flex: 2; min-width: 160px;">
-                    <button class="class-query-btn" style="text-align: center;" onclick="selectQueryClass('ALL')">🏫 جميع الصفوف <span style="font-size: 11px; opacity: 0.8;">(${students.length})</span></button>
-                </div>
-            `;
-
-            allClasses.forEach(cls => {
-                const count = students.filter(s => (s.studentClass || 'الشعبة الأولى') === cls).length;
-                const isActive = (activeQueryClass === cls) ? 'active' : '';
-
-                queryContainer.innerHTML += `
-                    <div class="class-btn-wrapper ${isActive}">
-                        <button class="class-query-btn" onclick="selectQueryClass('${cls}')">🏫 ${cls} <span style="font-size: 11px; opacity: 0.8;">(${count})</span></button>
-                        <button class="btn-info btn-action" onclick="printClassReport('${cls}', event)" title="طباعة تقرير الصف الرسمي" style="padding: 0 8px; font-size: 13px; border-radius: 0;">🖨️</button>
-                        <button class="class-delete-btn" onclick="deleteClassStudents('${cls}', event)" title="حذف الصف ${cls}">🗑️</button>
-                    </div>
-                `;
-
-                bulkTargetSelect.innerHTML += `<option value="${cls}">${cls}</option>`;
-                examClassSelect.innerHTML += `<option value="${cls}">${cls}</option>`;
-            });
-
-            bulkTargetSelect.value = currentBulkTarget;
-            examClassSelect.value = currentExamClass;
-        }
-
-        function selectQueryClass(className) {
-            activeQueryClass = className;
-            currentPage = 1;
-            document.getElementById('filterStudentNameInput').value = '';
-            render();
-        }
-
-        function filterTableByStudentInput() {
-            currentPage = 1;
-            render();
-        }
-
-        function changePage(direction) {
-            currentPage += direction;
-            render();
-        }
-
-        function showStudentDropdown() { filterStudentDropdown(); }
-
-        function filterStudentDropdown() {
-            const inputVal = document.getElementById('studentSearchInput').value.trim().toLowerCase();
-            const listContainer = document.getElementById('studentDropdownList');
-            listContainer.innerHTML = '';
-            
-            const filtered = students.map((st, index) => ({ st, index })).filter(item => {
-                if (inputVal === '') return true;
-                return item.st.name.toLowerCase().includes(inputVal);
-            });
-
-            if (filtered.length === 0) {
-                listContainer.innerHTML = '<div class="searchable-item" style="opacity: 0.7; cursor: default;">لا توجد نتائج مطابقة...</div>';
-            } else {
-                filtered.forEach(item => {
-                    const div = document.createElement('div');
-                    div.className = 'searchable-item';
-                    div.innerHTML = `<strong>👦 ${item.st.name}</strong> <span style="font-size: 12px; opacity: 0.7; float: left;">(${item.st.studentClass || ''})</span>`;
-                    div.onclick = function() { selectStudentFromDropdown(item.index, item.st.name, item.st.studentClass || ''); };
-                    listContainer.appendChild(div);
-                });
-            }
-            listContainer.style.display = 'block';
-        }
-
-        function selectStudentFromDropdown(index, name, className) {
-            selectedStudentIndex = index;
-            document.getElementById('studentSearchInput').value = `👦 ${name} (${className})`;
-            document.getElementById('studentDropdownList').style.display = 'none';
-            loadStudentDetails();
-        }
-
         function render() {
-            updateClassQueryButtons();
-            const tbody = document.getElementById('studentsTbody');
-            tbody.innerHTML = '';
-
-            const searchInputVal = document.getElementById('filterStudentNameInput').value.trim().toLowerCase();
-            let totals = { skills: 0, participation: 0, homework: 0, absence: 0, projects: 0, messages: 0 };
-
-            students.forEach(st => {
-                totals.skills += st.skills || 0;
-                totals.participation += st.participation || 0;
-                totals.homework += st.homework || 0;
-                totals.absence += st.absence || 0;
-                totals.projects += st.projects || 0;
-                totals.messages += st.messages || 0;
-            });
-
-            let filteredStudents = students.map((st, idx) => ({ st, originalIndex: idx })).filter(item => {
-                if (activeQueryClass === '' && searchInputVal === '') return false;
-                if (searchInputVal !== '') return item.st.name.toLowerCase().includes(searchInputVal);
-                else {
-                    const stClass = item.st.studentClass || 'الشعبة الأولى';
-                    if (activeQueryClass === 'ALL') return true;
-                    return stClass === activeQueryClass;
-                }
-            });
-
-            const totalFilteredCount = filteredStudents.length;
-            const totalPages = Math.ceil(totalFilteredCount / rowsPerPage) || 1;
-            if (currentPage > totalPages) currentPage = totalPages;
-            if (currentPage < 1) currentPage = 1;
-
-            const startIndex = (currentPage - 1) * rowsPerPage;
-            const endIndex = startIndex + rowsPerPage;
-            const paginatedItems = filteredStudents.slice(startIndex, endIndex);
-
-            paginatedItems.forEach(item => {
-                const st = item.st;
-                const i = item.originalIndex;
-                const stClass = st.studentClass || 'الشعبة الأولى';
-
-                tbody.innerHTML += `
-                    <tr>
-                        <td><strong>👦 ${st.name}</strong></td>
-                        <td><span class="class-badge">${stClass}</span></td>
-                        <td>${st.phone || '-'}</td>
-                        <td><button class="btn-action" onclick="updateScore(${i}, 'absence', 1)">+</button><span id="val-${i}-absence">${st.absence || 0}</span><button class="btn-action" onclick="updateScore(${i}, 'absence', -1)">-</button></td>
-                        <td><button class="btn-action" onclick="updateScore(${i}, 'participation', 1)">+</button><span id="val-${i}-participation">${st.participation || 0}</span><button class="btn-action" onclick="updateScore(${i}, 'participation', -1)">-</button></td>
-                        <td><button class="btn-action" onclick="updateScore(${i}, 'homework', 1)">+</button><span id="val-${i}-homework">${st.homework || 0}</span><button class="btn-action" onclick="updateScore(${i}, 'homework', -1)">-</button></td>
-                        <td><button class="btn-action" onclick="updateScore(${i}, 'skills', 1)">+</button><span id="val-${i}-skills">${st.skills || 0}</span><button class="btn-action" onclick="updateScore(${i}, 'skills', -1)">-</button></td>
-                        <td><button class="btn-action" onclick="updateScore(${i}, 'projects', 1)">+</button><span id="val-${i}-projects">${st.projects || 0}</span><button class="btn-action" onclick="updateScore(${i}, 'projects', -1)">-</button></td>
-                        <td><strong id="val-${i}-messages">${st.messages || 0}</strong></td>
-                        <td><button class="btn-danger btn-action" onclick="deleteStudent(${i})">🗑️</button></td>
-                    </tr>
-                `;
-            });
-
-            if (tbody.innerHTML === '') {
-                const emptyMsg = (activeQueryClass === '' && searchInputVal === '') ? 'يرجى النقر على صف/شعبة أو زر "جميع الصفوف" بالأعلى لعرض بيانات الطلاب.' : 'لا توجد نتائج مطابقة.';
-                tbody.innerHTML = `<tr><td colspan="10" style="padding: 25px; opacity: 0.7;">${emptyMsg}</td></tr>`;
-            }
-
-            document.getElementById('paginationInfo').textContent = `عرض من ${totalFilteredCount > 0 ? startIndex + 1 : 0} إلى ${Math.min(endIndex, totalFilteredCount)} من إجمالي ${totalFilteredCount} طالب`;
-            document.getElementById('pageIndicator').textContent = `${currentPage} / ${totalPages}`;
-            document.getElementById('prevPageBtn').disabled = (currentPage <= 1);
-            document.getElementById('nextPageBtn').disabled = (currentPage >= totalPages);
-
             document.getElementById('totalStudents').textContent = students.length;
-            document.getElementById('totalSkills').textContent = totals.skills;
-            document.getElementById('totalParticipation').textContent = totals.participation;
-            document.getElementById('totalHomework').textContent = totals.homework;
-            document.getElementById('totalAbsence').textContent = totals.absence;
-            document.getElementById('totalProjects').textContent = totals.projects;
-            document.getElementById('totalMessagesSent').textContent = totals.messages;
-
-            if (selectedStudentIndex !== '' && students[selectedStudentIndex]) loadStudentDetails();
-            else document.getElementById('studentCard').style.display = 'none';
-
-            updateBulkMsgPreview();
         }
 
-        function loadStudentDetails() {
-            const index = selectedStudentIndex;
-            const card = document.getElementById('studentCard');
-            if (index === '' || !students[index]) { card.style.display = 'none'; return; }
-
-            const st = students[index];
-            document.getElementById('selectedName').textContent = st.name;
-            document.getElementById('selectedClassBadge').textContent = st.studentClass || '';
-            document.getElementById('sdParticipation').textContent = st.participation || 0;
-            document.getElementById('sdHomework').textContent = st.homework || 0;
-            document.getElementById('sdAbsence').textContent = st.absence || 0;
-            document.getElementById('sdSkills').textContent = st.skills || 0;
-            document.getElementById('sdProjects').textContent = st.projects || 0;
-            document.getElementById('sdMessages').textContent = st.messages || 0;
-            document.getElementById('sdPhone').textContent = st.phone || 'لا يوجد';
-
-            card.style.display = 'block';
-            updateLessonMsg();
-            updateMotivationMsg();
-        }
-
-        function getCleanPhone(phone) {
-            if (!phone) return null;
-            let p = String(phone).replace(/\D/g, '');
-            if (p.startsWith('05')) p = '966' + p.substring(1);
-            return p;
-        }
-
-        function sendFullReportWhatsApp() {
-            const stIndex = selectedStudentIndex;
-            if (stIndex === '' || !students[stIndex]) return;
-            const st = students[stIndex];
-            const headerInfo = `🏫 المدرسة: ${SCHOOL_NAME}\n👨‍🏫 معلم المادة: ${TEACHER_NAME}\n\n`;
-            const reportMsg = `${headerInfo}📋 **التقرير الشامل لأداء الطالب:** 👦 ${st.name} (الصف ${currentGrade} - الصف/الشعبة: ${st.studentClass || ''})\n\n` +
-                              `✋ المشاركات: ${st.participation || 0}\n` +
-                              `📚 الواجبات: ${st.homework || 0}\n` +
-                              `🔴 أيام الغياب: ${st.absence || 0}\n` +
-                              `⭐ المهارات العلمية: ${st.skills || 0}\n` +
-                              `🛠️ المشاريع: ${st.projects || 0}\n` +
-                              `📝 اختبار الفترة 1: ${st.exam1 !== undefined ? st.exam1 + ' / 20' : '-'}\n` +
-                              `📝 اختبار الفترة 2: ${st.exam2 !== undefined ? st.exam2 + ' / 20' : '-'}\n\n` +
-                              `شكراً لمتابعتكم المستمرة ودعمكم ودائم مسيرة ابننا التعليمية.`;
-
-            const phone = getCleanPhone(st.phone);
-            if (phone) {
-                window.open(`https://wa.me/${phone}?text=${encodeURIComponent(reportMsg)}`, '_blank');
-                st.messages = (st.messages || 0) + 1;
-                saveAndRefresh();
-            } else { alert('رقم جوال ولي الأمر غير متوفر أو غير صالح.'); }
-        }
-
-        function updateLessonMsg() {
-            const stIndex = selectedStudentIndex;
-            const lIndex = document.getElementById('selectLesson').value;
-            const preview = document.getElementById('lessonMsgPreview');
-            const btn = document.getElementById('whatsappLessonBtn');
-
-            if (stIndex === '' || !students[stIndex] || lIndex === '') {
-                preview.textContent = 'اختر اسم الطالب من البحث وموضوع الدرس والمهارة أعلاه لتوليد نص الرسالة تلقائياً...';
-                btn.href = '#';
-                return;
-            }
-
-            const st = students[stIndex];
-            const l = lessons[lIndex];
-            const statusLabel = lessonStatus[lIndex] ? '✅ منجز' : '⏳ قيد الانتظار';
-            const headerInfo = `🏫 المدرسة: ${SCHOOL_NAME}\n👨‍🏫 معلم المادة: ${TEACHER_NAME}\n\n`;
-            const msg = `${headerInfo}عزيزي وليّ أمر الطالب: 👦 ${st.name} (الصف ${currentGrade})\nنحيطكم علماً بما تم إنجازه في درس اليوم لمادة العلوم:\n📘 ${l.chapter} - ${l.title}\n📌 حالة الدرس: ${statusLabel}\n📝 المفاهيم والمهارات المدروسة: ${l.desc}\n⭐ المهارات المكتسبة: ${st.skills || 0}\n\nشكراً لتعاونكم المستمر ومتابعتكم الرائعة.`;
-
-            preview.textContent = msg;
-            const phone = getCleanPhone(st.phone);
-            btn.href = phone ? `https://wa.me/${phone}?text=${encodeURIComponent(msg)}` : '#';
-        }
-
-        function updateMotivationMsg() {
-            const stIndex = selectedStudentIndex;
-            const mIndex = document.getElementById('selectMotivation').value;
-            const preview = document.getElementById('motivationMsgPreview');
-            const btn = document.getElementById('whatsappMotivationBtn');
-
-            if (stIndex === '' || !students[stIndex] || mIndex === '') {
-                preview.textContent = 'اختر الطالب والرسالة لعرض النص...';
-                btn.href = '#';
-                return;
-            }
-
-            const st = students[stIndex];
-            const mItem = customMotivations[mIndex];
-            if (!mItem) return;
-
-            const headerInfo = `🏫 المدرسة: ${SCHOOL_NAME}\n👨‍🏫 معلم المادة: ${TEACHER_NAME}\n\n`;
-            const msg = `${headerInfo}${mItem.text}\n\n👦 الطالب: ${st.name} (الصف ${currentGrade})`;
-
-            preview.textContent = msg;
-            const phone = getCleanPhone(st.phone);
-            btn.href = phone ? `https://wa.me/${phone}?text=${encodeURIComponent(msg)}` : '#';
-        }
-
-        function updateBulkMsgPreview() {
-            const selectedVal = document.getElementById('bulkSelectLesson').value;
-            const extraNote = document.getElementById('bulkExtraNote').value.trim();
-            const preview = document.getElementById('bulkMsgPreview');
-
-            if (!selectedVal) {
-                preview.textContent = 'اختر الدرس أو الرسالة التشجيعية أعلاه لعرض النموذج الجماعي...';
-                return;
-            }
-
-            let contentText = '';
-            if (selectedVal.startsWith('lesson-')) {
-                const lIdx = selectedVal.split('-')[1];
-                const l = lessons[lIdx];
-                if (l) {
-                    contentText = `📚 إشعار بدرس اليوم لمادة العلوم:\n📘 ${l.chapter} - ${l.title}\n📌 ${l.desc}`;
-                }
-            } else if (selectedVal.startsWith('motiv-')) {
-                const mIdx = selectedVal.split('-')[1];
-                const m = customMotivations[mIdx];
-                if (m) {
-                    contentText = m.text;
-                }
-            }
-
-            let msg = `🏫 المدرسة: ${SCHOOL_NAME}\n👨‍🏫 معلم المادة: ${TEACHER_NAME}\n\n${contentText}`;
-            if (extraNote) msg += `\n\n📌 ملاحظات هامة: ${extraNote}`;
-            preview.textContent = msg;
-        }
-
-        function sendBulkWhatsApp() {
-            const targetClass = document.getElementById('bulkTargetClass').value;
-            const selectedVal = document.getElementById('bulkSelectLesson').value;
-            const extraNote = document.getElementById('bulkExtraNote').value.trim();
-
-            if (!selectedVal) { alert('يرجى اختيار الدرس أو الرسالة المراد إرسالها.'); return; }
-
-            let targetStudents = students.filter(st => {
-                if (targetClass === 'ALL') return true;
-                return (st.studentClass || 'الشعبة الأولى') === targetClass;
-            });
-
-            targetStudents = targetStudents.filter(st => getCleanPhone(st.phone) !== null);
-
-            if (targetStudents.length === 0) { alert('لا توجد طلاب بأرقام جوالات صحيحة مطابقة للتحديد.'); return; }
-
-            let contentText = '';
-            if (selectedVal.startsWith('lesson-')) {
-                const lIdx = selectedVal.split('-')[1];
-                const l = lessons[lIdx];
-                if (l) contentText = `📚 إشعار بدرس اليوم لمادة العلوم:\n📘 ${l.chapter} - ${l.title}\n📌 ${l.desc}`;
-            } else if (selectedVal.startsWith('motiv-')) {
-                const mIdx = selectedVal.split('-')[1];
-                const m = customMotivations[mIdx];
-                if (m) contentText = m.text;
-            }
-
-            if (confirm(`سيتم فتح (${targetStudents.length}) نافذة واتساب تباعاً. هل تريد المتابعة؟`)) {
-                targetStudents.forEach((st, i) => {
-                    const phone = getCleanPhone(st.phone);
-                    const headerInfo = `🏫 المدرسة: ${SCHOOL_NAME}\n👨‍🏫 معلم المادة: ${TEACHER_NAME}\n\n`;
-                    let msg = `${headerInfo}عزيزي وليّ أمر الطالب: 👦 ${st.name}\n\n${contentText}`;
-                    if (extraNote) msg += `\n\n📌 ملاحظات هامة: ${extraNote}`;
-
-                    setTimeout(() => {
-                        window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
-                        st.messages = (st.messages || 0) + 1;
-                        if (i === targetStudents.length - 1) saveAndRefresh();
-                    }, i * 1500);
-                });
+        function printSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.classList.add('print-active-section');
+                window.print();
+                section.classList.remove('print-active-section');
             }
         }
 
-        // Initialize App on Load
-        renderLessons();
-        renderMotivationDropdown();
-        initCharts();
-        render();
+        window.onload = function() {
+            renderLessons();
+            render();
+        };
     </script>
 </body>
 </html>
