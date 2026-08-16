@@ -928,7 +928,7 @@
             selectLesson.innerHTML = '<option value="">-- اختر موضوع الدرس والمهارة --</option>';
 
             const bulkSelectLesson = document.getElementById('bulkSelectLesson');
-            bulkSelectLesson.innerHTML = '<option value="">-- اختر الدرس المراد إرساله --</option>';
+            bulkSelectLesson.innerHTML = '<option value="">-- اختر الدرس أو الرسالة المراد إرسالها --</option>';
 
             const curriculumDropdown = document.getElementById('curriculumDropdownSelect');
             curriculumDropdown.innerHTML = '<option value="">-- اختر الدرس أو الوحدة للاستعراض --</option>';
@@ -965,7 +965,14 @@
             });
             lessonsGroup += '</optgroup>';
 
-            bulkSelectLesson.innerHTML += lessonsGroup;
+            // إضافة رسائل التحفيز الافتراضية للقائمة الجماعية أيضاً
+            let motivationsGroup = '<optgroup label="⭐ رسائل تحفيزية وتشجيعية">';
+            customMotivations.forEach((m) => {
+                motivationsGroup += `<option value="motivation-${m.id}">${m.title}</option>`;
+            });
+            motivationsGroup += '</optgroup>';
+
+            bulkSelectLesson.innerHTML += lessonsGroup + motivationsGroup;
             document.getElementById('totalExecutedLessons').textContent = `${executedCount} / ${lessons.length}`;
         }
 
@@ -1093,7 +1100,7 @@
                 return;
             }
 
-            pageData.forEach((s, idx) => {
+            pageData.forEach((s) => {
                 const globalIndex = students.indexOf(s);
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
@@ -1468,6 +1475,12 @@
                 const idx = val.split('-')[1];
                 const l = lessons[idx];
                 msg = `أولياء الأمور الأفاضل، نود إحاطتكم بأننا سندرس في مادة العلوم:\n📘 (${l.chapter}) - ${l.title}\nالتفاصيل: ${l.desc}`;
+            } else if(val.startsWith('motivation-')) {
+                const mId = val.split('-')[1];
+                const mObj = customMotivations.find(m => m.id === mId);
+                if(mObj) {
+                    msg = mObj.text;
+                }
             }
 
             if(note) msg += `\n\nملاحظة إضافية: ${note}`;
@@ -1478,7 +1491,7 @@
         function sendBulkWhatsApp() {
             const targetClass = document.getElementById('bulkTargetClass').value;
             const val = document.getElementById('bulkSelectLesson').value;
-            if(!val) { alert('الرجاء اختيار الدرس للإرسال الجماعي'); return; }
+            if(!val) { alert('الرجاء اختيار الدرس أو الرسالة للإرسال الجماعي'); return; }
 
             let targetStudents = students;
             if(targetClass !== 'ALL') {
@@ -1488,11 +1501,12 @@
             targetStudents = targetStudents.filter(s => s.phone && s.phone.trim() !== '');
             if(targetStudents.length === 0) { alert('لا توجد أرقام واتساب مسجلة للطلاب المستهدفين'); return; }
 
-            let msg = document.getElementById('bulkMsgPreview').textContent;
+            let msgTemplate = document.getElementById('bulkMsgPreview').textContent;
             
             targetStudents.forEach((s, i) => {
                 setTimeout(() => {
-                    window.open(`https://wa.me/${s.phone}?text=` + encodeURIComponent(`عزيزي ولي أمر الطالب / ${s.name}\n\n` + msg), '_blank');
+                    const finalMsg = `عزيزي ولي أمر الطالب / ${s.name}\n\n` + msgTemplate;
+                    window.open(`https://wa.me/${s.phone}?text=` + encodeURIComponent(finalMsg), '_blank');
                 }, i * 600);
             });
             showToast('🚀 جاري فتح رسائل الواتساب الجماعية...');
