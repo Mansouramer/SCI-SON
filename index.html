@@ -20,39 +20,11 @@
             --excel: #1d6f42;
         }
 
-        body.theme-default { 
-            --bg: linear-gradient(135deg, #ecfdf5 0%, #a7f3d0 100%); 
-            --card-bg: #ffffff; 
-            --text: #064e3b; 
-        }
-        body.theme-royal { 
-            --bg: linear-gradient(135deg, #3b0764 0%, #581c87 100%); 
-            --card-bg: #4c1d95; 
-            --text: #f3e8ff; 
-            --secondary: #a855f7;
-            --primary: #6b21a8;
-        }
-        body.theme-emerald { 
-            --bg: linear-gradient(135deg, #064e3b 0%, #065f46 100%); 
-            --card-bg: #ffffff; 
-            --text: #065f46; 
-            --secondary: #059669;
-            --primary: #047857;
-        }
-        body.theme-amber { 
-            --bg: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); 
-            --card-bg: #ffffff; 
-            --text: #78350f; 
-            --secondary: #d97706;
-            --primary: #b45309;
-        }
-        body.theme-blue { 
-            --bg: linear-gradient(135deg, #f0fdf4 0%, #bbf7d0 100%); 
-            --card-bg: #ffffff; 
-            --text: #065f46; 
-            --secondary: #16a34a;
-            --primary: #15803d;
-        }
+        body.theme-default { --bg: linear-gradient(135deg, #ecfdf5 0%, #a7f3d0 100%); --card-bg: #ffffff; --text: #064e3b; }
+        body.theme-royal { --bg: linear-gradient(135deg, #3b0764 0%, #581c87 100%); --card-bg: #4c1d95; --text: #f3e8ff; --secondary: #a855f7; --primary: #6b21a8; }
+        body.theme-emerald { --bg: linear-gradient(135deg, #064e3b 0%, #065f46 100%); --card-bg: #ffffff; --text: #065f46; --secondary: #059669; --primary: #047857; }
+        body.theme-amber { --bg: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); --card-bg: #ffffff; --text: #78350f; --secondary: #d97706; --primary: #b45309; }
+        body.theme-blue { --bg: linear-gradient(135deg, #f0fdf4 0%, #bbf7d0 100%); --card-bg: #ffffff; --text: #065f46; --secondary: #16a34a; --primary: #15803d; }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -134,7 +106,6 @@
         }
 
         .theme-btn:hover { transform: scale(1.2); }
-
         .container { max-width: 1200px; margin: 0 auto; }
 
         .stats-grid {
@@ -248,9 +219,7 @@
             border-color: var(--secondary);
         }
 
-        .class-btn-wrapper.active .class-query-btn {
-            color: white;
-        }
+        .class-btn-wrapper.active .class-query-btn { color: white; }
 
         .class-delete-btn {
             background: rgba(239, 68, 68, 0.15);
@@ -264,10 +233,7 @@
             justify-content: center;
         }
 
-        .class-delete-btn:hover {
-            background: var(--danger);
-            color: white;
-        }
+        .class-delete-btn:hover { background: var(--danger); color: white; }
 
         table {
             width: 100%;
@@ -447,11 +413,7 @@
             font-weight: bold;
         }
 
-        .searchable-dropdown-container {
-            position: relative;
-            width: 100%;
-        }
-
+        .searchable-dropdown-container { position: relative; width: 100%; }
         .searchable-input {
             width: 100%;
             padding: 12px;
@@ -485,12 +447,7 @@
             transition: background 0.15s;
             font-size: 14px;
         }
-
-        .searchable-item:hover {
-            background: rgba(5, 150, 105, 0.1);
-            color: var(--secondary);
-            font-weight: bold;
-        }
+        .searchable-item:hover { background: rgba(5, 150, 105, 0.1); color: var(--secondary); font-weight: bold; }
 
         .footer-note {
             text-align: center;
@@ -527,7 +484,6 @@
             font-size: 20px;
             text-decoration: none;
         }
-
         .float-whatsapp { background: #25D366; }
 
         @media print {
@@ -579,38 +535,14 @@
 
         <!-- الإحصائيات -->
         <div class="stats-grid">
-            <div class="stat-card">
-                <h3>👥 إجمالي الطلاب</h3>
-                <p id="totalStudents">0</p>
-            </div>
-            <div class="stat-card">
-                <h3>⭐ المهارات العلمية</h3>
-                <p id="totalSkills">0</p>
-            </div>
-            <div class="stat-card">
-                <h3>✋ مجموع المشاركات</h3>
-                <p id="totalParticipation">0</p>
-            </div>
-            <div class="stat-card">
-                <h3>📚 الواجبات المنجزة</h3>
-                <p id="totalHomework">0</p>
-            </div>
-            <div class="stat-card">
-                <h3>🔴 أيام الغياب</h3>
-                <p id="totalAbsence">0</p>
-            </div>
-            <div class="stat-card">
-                <h3>🛠️ إجمالي التجـارب</h3>
-                <p id="totalProjects">0</p>
-            </div>
-            <div class="stat-card">
-                <h3>💬 رسائل الواتس المرسلة</h3>
-                <p id="totalMessagesSent">0</p>
-            </div>
-            <div class="stat-card">
-                <h3>✅ الدروس المنفذة</h3>
-                <p id="totalExecutedLessons">0 / 0</p>
-            </div>
+            <div class="stat-card"><h3>👥 إجمالي الطلاب</h3><p id="totalStudents">0</p></div>
+            <div class="stat-card"><h3>⭐ المهارات العلمية</h3><p id="totalSkills">0</p></div>
+            <div class="stat-card"><h3>✋ مجموع المشاركات</h3><p id="totalParticipation">0</p></div>
+            <div class="stat-card"><h3>📚 الواجبات المنجزة</h3><p id="totalHomework">0</p></div>
+            <div class="stat-card"><h3>🔴 أيام الغياب</h3><p id="totalAbsence">0</p></div>
+            <div class="stat-card"><h3>🛠️ إجمالي التجـارب</h3><p id="totalProjects">0</p></div>
+            <div class="stat-card"><h3>💬 رسائل الواتس المرسلة</h3><p id="totalMessagesSent">0</p></div>
+            <div class="stat-card"><h3>✅ الدروس المنفذة</h3><p id="totalExecutedLessons">0 / 0</p></div>
         </div>
 
         <!-- تسجيل الطلاب والصفوف والجدول -->
@@ -622,7 +554,7 @@
             
             <div class="form-row">
                 <input type="text" id="studentName" placeholder="اسم الطالب">
-                <input type="text" id="studentClassCustom" placeholder="الصف/الصف (مثال: رابع أ)">
+                <input type="text" id="studentClassCustom" placeholder="الصف (مثال: رابع أ)">
                 <input type="tel" id="studentPhone" placeholder="رقم واتس ولي الأمر (مثال: 9665xxxxxxxx)">
                 <button onclick="addStudent()">➕ إضافة طالب</button>
             </div>
@@ -642,7 +574,7 @@
                     <thead>
                         <tr>
                             <th>اسم الطالب</th>
-                            <th>🏫 الصف/الصف</th>
+                            <th>🏫 الصف</th>
                             <th>📱 رقم واتس ولي الأمر</th>
                             <th>🔴 الغياب</th>
                             <th>✋ المشاركة</th>
@@ -686,21 +618,15 @@
             
             <div class="form-row">
                 <select id="examClassSelect" onchange="renderExamsTable()">
-                    <option value="">-- اختر الصف/الصف لعرض سجل الاختبارات --</option>
+                    <option value="">-- اختر الصف لعرض سجل الاختبارات --</option>
                 </select>
             </div>
 
             <div id="examsAnalysisBox" class="sub-box" style="display: none; margin-bottom: 15px;">
                 <h5>📈 مؤشرات التحليل الإحصائي لنتائج الصف المحدد</h5>
                 <div class="student-details" style="margin: 10px 0;">
-                    <div class="detail-item">
-                        <span>متوسط اختبار الفترة 1 (من 20)</span>
-                        <strong id="avgExam1">0</strong>
-                    </div>
-                    <div class="detail-item">
-                        <span>متوسط اختبار الفترة 2 (من 20)</span>
-                        <strong id="avgExam2">0</strong>
-                    </div>
+                    <div class="detail-item"><span>متوسط اختبار الفترة 1 (من 20)</span><strong id="avgExam1">0</strong></div>
+                    <div class="detail-item"><span>متوسط اختبار الفترة 2 (من 20)</span><strong id="avgExam2">0</strong></div>
                 </div>
             </div>
 
@@ -709,7 +635,7 @@
                     <thead>
                         <tr>
                             <th>اسم الطالب</th>
-                            <th>🏫 الصف/الصف</th>
+                            <th>🏫 الصف</th>
                             <th>📝 الفترة الأولى (من 20)</th>
                             <th>📝 الفترة الثانية (من 20)</th>
                             <th class="no-print">📤 إرسال النتيجة واتساب</th>
@@ -764,13 +690,14 @@
             </div>
         </div>
 
-        <!-- إرسال جماعي لأولياء الأمور -->
+        <!-- إرسال جماعي آمن لأولياء الأمور (بدون حظر) -->
         <div class="section-card">
-            <h3>📢 إرسال رسالة أو واجب جماعي لأولياء الأمور</h3>
+            <h3>📢 نظام الإرسال الجماعي الآمن (نسخ وفتح فوري)</h3>
+            <p style="font-size: 13px; opacity: 0.85; margin-top: -5px;">لتجاوز حظر المتصفحات والنوافذ المنبثقة، اضغط على زر "نسخ وفتح" لكل ولي أمر، أو انسخ الرسالة الموحدة وأرسلها.</p>
             <div class="sub-box" style="margin-top: 0;">
                 <div class="form-row">
-                    <select id="bulkTargetClass">
-                        <option value="ALL">جميع الصفوف والصَفوف</option>
+                    <select id="bulkTargetClass" onchange="renderBulkListTable()">
+                        <option value="ALL">جميع الصفوف</option>
                     </select>
                     <select id="bulkSelectLesson" onchange="updateBulkMsgPreview()">
                         <option value="">-- اختر الدرس أو الرسالة التشجيعية المراد إرسالها --</option>
@@ -780,7 +707,22 @@
                     <input type="text" id="bulkExtraNote" placeholder="اكتب ملاحظات إضافية هنا..." oninput="updateBulkMsgPreview()">
                 </div>
                 <div id="bulkMsgPreview" class="preview-msg">اختر الصف والدرس أو الرسالة التشجيعية لعرض نموذج الرسالة الجماعية...</div>
-                <button class="whatsapp-btn" onclick="sendBulkWhatsApp()" style="border: none; cursor: pointer; font-size: 15px; padding: 10px 20px;">🚀 إرسال جماعي واتساب</button>
+                
+                <div style="margin-top: 15px; overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>اسم الطالب</th>
+                                <th>الصف</th>
+                                <th>رقم الواتساب</th>
+                                <th>إجراء إرسال آمن (نسخ الرسالة + فتح واتساب)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bulkSendTableBody">
+                            <tr><td colspan="4" style="padding: 15px; opacity: 0.7;">الرجاء اختيار درس أو رسالة من القائمة أعلاه لعرض جدول الإرسال الآمن.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
@@ -821,7 +763,6 @@
             ﴿ هذا الجهد استغرق وقتاً وعناية، ولا أحلل نقله تجارياً أو نسخه دون إذن ﴾<br>
             للتواصل واتساب: <a href="https://wa.me/966581015002" target="_blank" style="color: inherit; text-decoration: underline;">0581015002</a>
         </div>
-
     </div>
 
     <!-- الأزرار العائمة -->
@@ -914,10 +855,7 @@
 
         function onCurriculumDropdownChange(idx) {
             const box = document.getElementById('selectedLessonDetailsBox');
-            if(idx === "") {
-                box.style.display = 'none';
-                return;
-            }
+            if(idx === "") { box.style.display = 'none'; return; }
             const l = lessons[idx];
             box.style.display = 'block';
             box.innerHTML = `<strong>${l.chapter}</strong><br><span style="color:var(--primary); font-size:16px;">${l.title}</span><br><br>${l.desc}`;
@@ -965,7 +903,6 @@
             });
             lessonsGroup += '</optgroup>';
 
-            // إضافة رسائل التحفيز الافتراضية للقائمة الجماعية أيضاً
             let motivationsGroup = '<optgroup label="⭐ رسائل تحفيزية وتشجيعية">';
             customMotivations.forEach((m) => {
                 motivationsGroup += `<option value="motivation-${m.id}">${m.title}</option>`;
@@ -1042,6 +979,7 @@
             document.getElementById('totalStudents').textContent = students.length;
             renderStudentsTable();
             renderClassesQuery();
+            renderBulkListTable();
         }
 
         function addStudent() {
@@ -1157,7 +1095,7 @@
 
             const allWrapper = document.createElement('div');
             allWrapper.className = `class-btn-wrapper ${activeQueryClass === '' ? 'active' : ''}`;
-            allWrapper.innerHTML = `<button class="class-query-btn" onclick="filterByClass('')">📋 كافة الصفوف والصَفوف</button>`;
+            allWrapper.innerHTML = `<button class="class-query-btn" onclick="filterByClass('')">📋 كافة الصفوف</button>`;
             container.appendChild(allWrapper);
 
             classesSet.forEach(cName => {
@@ -1195,20 +1133,18 @@
         function updateExamClassSelect(classesSet) {
             const select = document.getElementById('examClassSelect');
             const currentVal = select.value;
-            select.innerHTML = '<option value="">-- اختر الصف/الصف لعرض سجل الاختبارات --</option>';
-            classesSet.forEach(cName => {
-                select.innerHTML += `<option value="${cName}">${cName}</option>`;
-            });
+            select.innerHTML = '<option value="">-- اختر الصف لعرض سجل الاختبارات --</option>';
+            classesSet.forEach(cName => { select.innerHTML += `<option value="${cName}">${cName}</option>`; });
             if(classesSet.has(currentVal)) select.value = currentVal;
             renderExamsTable();
         }
 
         function updateBulkTargetSelect(classesSet) {
             const select = document.getElementById('bulkTargetClass');
-            select.innerHTML = '<option value="ALL">جميع الصفوف والصَفوف</option>';
-            classesSet.forEach(cName => {
-                select.innerHTML += `<option value="${cName}">${cName}</option>`;
-            });
+            const currentVal = select.value;
+            select.innerHTML = '<option value="ALL">جميع الصفوف</option>';
+            classesSet.forEach(cName => { select.innerHTML += `<option value="${cName}">${cName}</option>`; });
+            if(classesSet.has(currentVal) || currentVal === 'ALL') select.value = currentVal;
         }
 
         function renderExamsTable() {
@@ -1218,7 +1154,7 @@
             tbody.innerHTML = '';
 
             if(!selectedClass) {
-                tbody.innerHTML = `<tr><td colspan="5" style="padding: 20px; opacity: 0.7;">الرجاء اختيار الصف الدراسي من القائمة أعلاه لعرض وسجل الاختبارات.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="5" style="padding: 20px; opacity: 0.7;">الرجاء اختيار الصف الدراسي من القائمة أعلاه لعرض سجل الاختبارات.</td></tr>`;
                 analysisBox.style.display = 'none';
                 return;
             }
@@ -1245,7 +1181,7 @@
                     <td><input type="number" min="0" max="20" value="${s.exam1 || 0}" style="width:70px; text-align:center;" onchange="updateExamScore(${globalIndex}, 'exam1', this.value)"></td>
                     <td><input type="number" min="0" max="20" value="${s.exam2 || 0}" style="width:70px; text-align:center;" onchange="updateExamScore(${globalIndex}, 'exam2', this.value)"></td>
                     <td class="no-print">
-                        <a href="https://wa.me/${s.phone || ''}?text=${encodeURIComponent('عزيزي ولي أمر الطالب ' + s.name + '، درجات اختبارات مادة العلوم:\n- اختبار الفترة الأولى: ' + (s.exam1 || 0) + '/20\n- اختبار الفترة الثانية: ' + (s.exam2 || 0) + '/20\nمع تمنياتنا له بالتوفيق.')}" target="_blank" class="whatsapp-btn" style="padding:4px 10px; font-size:12px;" onclick="incrementMessageCount()">📤 إرسال واتساب</a>
+                        <button class="whatsapp-btn" style="padding:4px 10px; font-size:12px;" onclick="copyAndOpenWhatsApp('${s.phone || ''}', 'عزيزي ولي أمر الطالب ' + '${s.name}' + '، درجات اختبارات مادة العلوم:\\n- اختبار الفترة الأولى: ' + '${s.exam1 || 0}' + '/20\\n- اختبار الفترة الثانية: ' + '${s.exam2 || 0}' + '/20\\nمع تمنياتنا له بالتوفيق.')">📤 إرسال واتساب</button>
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -1301,10 +1237,7 @@
                     const worksheet = workbook.Sheets[firstSheetName];
                     const jsonData = XLSX.utils.sheet_to_json(worksheet);
 
-                    if(!jsonData || jsonData.length === 0) {
-                        alert('ملف الإكسل فارغ.');
-                        return;
-                    }
+                    if(!jsonData || jsonData.length === 0) { alert('ملف الإكسل فارغ.'); return; }
 
                     let count = 0;
                     jsonData.forEach(row => {
@@ -1365,14 +1298,9 @@
                         localStorage.setItem(getStorageKeyForStudents(), JSON.stringify(students));
                         render();
                         showToast('📂 تم استرجاع البيانات بنجاح!');
-                    } else {
-                        alert('ملف غير صالح.');
-                    }
-                } catch(err) {
-                    alert('خطأ في قراءة الملف.');
-                } finally {
-                    event.target.value = '';
-                }
+                    } else { alert('ملف غير صالح.'); }
+                } catch(err) { alert('خطأ في قراءة الملف.'); }
+                finally { event.target.value = ''; }
             };
             reader.readAsText(file);
         }
@@ -1382,16 +1310,10 @@
             const listContainer = document.getElementById('studentDropdownList');
             listContainer.innerHTML = '';
 
-            if(!keyword) {
-                listContainer.style.display = 'none';
-                return;
-            }
+            if(!keyword) { listContainer.style.display = 'none'; return; }
 
             const matches = students.filter(s => s.name.toLowerCase().includes(keyword));
-            if(matches.length === 0) {
-                listContainer.style.display = 'none';
-                return;
-            }
+            if(matches.length === 0) { listContainer.style.display = 'none'; return; }
 
             listContainer.style.display = 'block';
             matches.forEach(m => {
@@ -1409,9 +1331,7 @@
         }
 
         function showStudentDropdown() {
-            if(document.getElementById('studentSearchInput').value.trim()) {
-                filterStudentDropdown();
-            }
+            if(document.getElementById('studentSearchInput').value.trim()) { filterStudentDropdown(); }
         }
 
         function selectStudentForDetails(index) {
@@ -1440,7 +1360,7 @@
 
             if(lessonIdx === "") {
                 preview.textContent = "اختر موضوع الدرس والمهارة أعلاه لتوليد نص الرسالة...";
-                btn.href = "#";
+                btn.onclick = function(e) { e.preventDefault(); alert('الرجاء اختيار الدرس أولاً.'); };
                 return;
             }
 
@@ -1448,7 +1368,11 @@
             const msg = `عزيزي ولي أمر الطالب / ${s.name}\nنحيطكم علماً بأننا تناولنا اليوم في مادة العلوم درس:\n📘 (${l.chapter}) - ${l.title}\n💡 المفاهيم: ${l.desc}\nمع تقديـرنا، المعلم: ${TEACHER_NAME} - ${SCHOOL_NAME}`;
             
             preview.textContent = msg;
-            btn.href = `https://wa.me/${s.phone || ''}?text=` + encodeURIComponent(msg);
+            btn.onclick = function(e) {
+                e.preventDefault();
+                copyAndOpenWhatsApp(s.phone, msg);
+                incrementMessageCount();
+            };
         }
 
         function incrementMessageCount() {
@@ -1467,6 +1391,7 @@
 
             if(!val) {
                 preview.textContent = "اختر الصف والدرس لعرض نموذج الرسالة الجماعية...";
+                renderBulkListTable();
                 return;
             }
 
@@ -1478,38 +1403,72 @@
             } else if(val.startsWith('motivation-')) {
                 const mId = val.split('-')[1];
                 const mObj = customMotivations.find(m => m.id === mId);
-                if(mObj) {
-                    msg = mObj.text;
-                }
+                if(mObj) { msg = mObj.text; }
             }
 
             if(note) msg += `\n\nملاحظة إضافية: ${note}`;
             msg += `\n\nمع التحية، المعلم: ${TEACHER_NAME} - ${SCHOOL_NAME}`;
             preview.textContent = msg;
+            renderBulkListTable();
         }
 
-        function sendBulkWhatsApp() {
+        function renderBulkListTable() {
+            const tbody = document.getElementById('bulkSendTableBody');
             const targetClass = document.getElementById('bulkTargetClass').value;
             const val = document.getElementById('bulkSelectLesson').value;
-            if(!val) { alert('الرجاء اختيار الدرس أو الرسالة للإرسال الجماعي'); return; }
+            tbody.innerHTML = '';
+
+            if(!val) {
+                tbody.innerHTML = `<tr><td colspan="4" style="padding: 15px; opacity: 0.7;">الرجاء اختيار الدرس أو الرسالة من القائمة أعلاه أولاً.</td></tr>`;
+                return;
+            }
 
             let targetStudents = students;
             if(targetClass !== 'ALL') {
                 targetStudents = students.filter(s => (s.classCustom || currentGrade) === targetClass);
             }
 
-            targetStudents = targetStudents.filter(s => s.phone && s.phone.trim() !== '');
-            if(targetStudents.length === 0) { alert('لا توجد أرقام واتساب مسجلة للطلاب المستهدفين'); return; }
+            if(targetStudents.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" style="padding: 15px; opacity: 0.7;">لا توجد طلاب مسجلين في هذا الصف.</td></tr>`;
+                return;
+            }
 
-            let msgTemplate = document.getElementById('bulkMsgPreview').textContent;
-            
-            targetStudents.forEach((s, i) => {
-                setTimeout(() => {
-                    const finalMsg = `عزيزي ولي أمر الطالب / ${s.name}\n\n` + msgTemplate;
-                    window.open(`https://wa.me/${s.phone}?text=` + encodeURIComponent(finalMsg), '_blank');
-                }, i * 600);
+            const msgTemplate = document.getElementById('bulkMsgPreview').textContent;
+
+            targetStudents.forEach(s => {
+                const tr = document.createElement('tr');
+                const fullMsg = `عزيزي ولي أمر الطالب / ${s.name}\n\n` + msgTemplate;
+                tr.innerHTML = `
+                    <td><strong>${s.name}</strong></td>
+                    <td><span class="class-badge">${s.classCustom || currentGrade}</span></td>
+                    <td>${s.phone || '<span style="color:red">بدون رقم</span>'}</td>
+                    <td>
+                        <button class="whatsapp-btn" style="font-size: 13px; padding: 6px 12px;" onclick="copyAndOpenWhatsApp('${s.phone || ''}', \`${fullMsg.replace(/`/g, '\\`')}\`)">
+                            📋 نسخ الرسالة وفتح واتساب 📲
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
             });
-            showToast('🚀 جاري فتح رسائل الواتساب الجماعية...');
+        }
+
+        // دالة آمنة 100% لتجاوز الحظر: تقوم بنسخ النص تلقائياً للحافظة ثم فتح الرابط
+        function copyAndOpenWhatsApp(phone, text) {
+            if(!phone || phone.trim() === '') {
+                alert('عذراً، هذا الطالب ليس لديه رقم واتساب مسجل.');
+                return;
+            }
+
+            // محاولة نسخ النص للحافظة لتسهيل اللصق المباشر
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('📋 تم نسخ النص للحافظة! جاري فتح واتساب...');
+            }).catch(() => {
+                // في حال قيود المتصفح الأمنية
+            });
+
+            // فتح رابط الواتساب المباشر
+            const url = `https://wa.me/${phone}?text=` + encodeURIComponent(text);
+            window.open(url, '_blank');
         }
 
         function printSection(sectionId) {
@@ -1541,7 +1500,7 @@
                     <h3>تقرير متابعة الطالب في مادة العلوم</h3>
                     <div class="box">
                         <p><strong>اسم الطالب:</strong> ${s.name}</p>
-                        <p><strong>الصف والصَف:</strong> ${s.classCustom || currentGrade}</p>
+                        <p><strong>الصف:</strong> ${s.classCustom || currentGrade}</p>
                         <p><strong>رقم واتس ولي الأمر:</strong> ${s.phone || '-'}</p>
                         <table>
                             <tr>
@@ -1577,7 +1536,7 @@
             if(selectedStudentIndex === '') return;
             const s = students[selectedStudentIndex];
             const msg = `تقرير متابعة الطالب: ${s.name}\nالصف: ${s.classCustom || currentGrade}\n- الغياب: ${s.absence || 0}\n- المشاركات: ${s.participation || 0}\n- الواجبات: ${s.homework || 0}\n- المهارات: ${s.skills || 0}\n- التجارب: ${s.projects || 0}\n- اختبار الفترة 1: ${s.exam1 || 0}/20\n- اختبار الفترة 2: ${s.exam2 || 0}/20\nمع التحية، المعلم: ${TEACHER_NAME} - ${SCHOOL_NAME}`;
-            window.open(`https://wa.me/${s.phone || ''}?text=` + encodeURIComponent(msg), '_blank');
+            copyAndOpenWhatsApp(s.phone, msg);
             incrementMessageCount();
         }
 
