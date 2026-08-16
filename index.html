@@ -622,7 +622,7 @@
             
             <div class="form-row">
                 <input type="text" id="studentName" placeholder="اسم الطالب">
-                <input type="text" id="studentClassCustom" placeholder="الصف/الشعبة (مثال: رابع أ)">
+                <input type="text" id="studentClassCustom" placeholder="الصف/الصف (مثال: رابع أ)">
                 <input type="tel" id="studentPhone" placeholder="رقم واتس ولي الأمر (مثال: 9665xxxxxxxx)">
                 <button onclick="addStudent()">➕ إضافة طالب</button>
             </div>
@@ -642,7 +642,7 @@
                     <thead>
                         <tr>
                             <th>اسم الطالب</th>
-                            <th>🏫 الصف/الشعبة</th>
+                            <th>🏫 الصف/الصف</th>
                             <th>📱 رقم واتس ولي الأمر</th>
                             <th>🔴 الغياب</th>
                             <th>✋ المشاركة</th>
@@ -686,7 +686,7 @@
             
             <div class="form-row">
                 <select id="examClassSelect" onchange="renderExamsTable()">
-                    <option value="">-- اختر الصف/الشعبة لعرض سجل الاختبارات --</option>
+                    <option value="">-- اختر الصف/الصف لعرض سجل الاختبارات --</option>
                 </select>
             </div>
 
@@ -709,7 +709,7 @@
                     <thead>
                         <tr>
                             <th>اسم الطالب</th>
-                            <th>🏫 الصف/الشعبة</th>
+                            <th>🏫 الصف/الصف</th>
                             <th>📝 الفترة الأولى (من 20)</th>
                             <th>📝 الفترة الثانية (من 20)</th>
                             <th class="no-print">📤 إرسال النتيجة واتساب</th>
@@ -761,24 +761,6 @@
                     <div id="lessonMsgPreview" class="preview-msg">اختر موضوع الدرس والمهارة أعلاه لتوليد نص الرسالة...</div>
                     <a id="whatsappLessonBtn" href="#" target="_blank" class="whatsapp-btn" onclick="incrementMessageCount()">📲 إرسال مباشر واتساب</a>
                 </div>
-
-                <div class="sub-box">
-                    <h5>✨ إرسال رسائل تشجيعية وشكر وتقدير</h5>
-                    <div class="form-row">
-                        <select id="selectMotivation" onchange="updateMotivationMsg()">
-                            <option value="">-- اختر الرسالة التشجيعية --</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-row" style="margin-top: 10px; background: rgba(5, 150, 105, 0.05); padding: 10px; border-radius: 6px;">
-                        <input type="text" id="newMotivationTitle" placeholder="عنوان الرسالة..." style="max-width: 220px;">
-                        <input type="text" id="newMotivationText" placeholder="اكتب نص الرسالة التشجيعية الجديدة...">
-                        <button onclick="addNewMotivation()">➕ إضافة رسالة تشجيعية</button>
-                    </div>
-
-                    <div id="motivationMsgPreview" class="preview-msg">اختر الرسالة لعرض نص التحفيز...</div>
-                    <a id="whatsappMotivationBtn" href="#" target="_blank" class="whatsapp-btn" onclick="incrementMessageCount()">🏆 إرسال رسالة التشجيع واتساب</a>
-                </div>
             </div>
         </div>
 
@@ -788,7 +770,7 @@
             <div class="sub-box" style="margin-top: 0;">
                 <div class="form-row">
                     <select id="bulkTargetClass">
-                        <option value="ALL">جميع الصفوف والشعب</option>
+                        <option value="ALL">جميع الصفوف والصَفوف</option>
                     </select>
                     <select id="bulkSelectLesson" onchange="updateBulkMsgPreview()">
                         <option value="">-- اختر الدرس أو الرسالة التشجيعية المراد إرسالها --</option>
@@ -945,11 +927,8 @@
             const selectLesson = document.getElementById('selectLesson');
             selectLesson.innerHTML = '<option value="">-- اختر موضوع الدرس والمهارة --</option>';
 
-            const selectMotivation = document.getElementById('selectMotivation');
-            selectMotivation.innerHTML = '<option value="">-- اختر الرسالة التشجيعية --</option>';
-
             const bulkSelectLesson = document.getElementById('bulkSelectLesson');
-            bulkSelectLesson.innerHTML = '<option value="">-- اختر الدرس أو الرسالة التشجيعية المراد إرسالها --</option>';
+            bulkSelectLesson.innerHTML = '<option value="">-- اختر الدرس المراد إرساله --</option>';
 
             const curriculumDropdown = document.getElementById('curriculumDropdownSelect');
             curriculumDropdown.innerHTML = '<option value="">-- اختر الدرس أو الوحدة للاستعراض --</option>';
@@ -986,14 +965,7 @@
             });
             lessonsGroup += '</optgroup>';
 
-            let motivGroup = '<optgroup label="🌟 الرسائل التشجيعية والتحفيزية">';
-            customMotivations.forEach((m, idx) => { 
-                motivGroup += `<option value="motiv-${idx}">${m.title}</option>`; 
-                selectMotivation.innerHTML += `<option value="motiv-${idx}">${m.title}</option>`;
-            });
-            motivGroup += '</optgroup>';
-
-            bulkSelectLesson.innerHTML += lessonsGroup + motivGroup;
+            bulkSelectLesson.innerHTML += lessonsGroup;
             document.getElementById('totalExecutedLessons').textContent = `${executedCount} / ${lessons.length}`;
         }
 
@@ -1178,7 +1150,7 @@
 
             const allWrapper = document.createElement('div');
             allWrapper.className = `class-btn-wrapper ${activeQueryClass === '' ? 'active' : ''}`;
-            allWrapper.innerHTML = `<button class="class-query-btn" onclick="filterByClass('')">📋 كافة الصفوف والشعب</button>`;
+            allWrapper.innerHTML = `<button class="class-query-btn" onclick="filterByClass('')">📋 كافة الصفوف والصَفوف</button>`;
             container.appendChild(allWrapper);
 
             classesSet.forEach(cName => {
@@ -1216,7 +1188,7 @@
         function updateExamClassSelect(classesSet) {
             const select = document.getElementById('examClassSelect');
             const currentVal = select.value;
-            select.innerHTML = '<option value="">-- اختر الصف/الشعبة لعرض سجل الاختبارات --</option>';
+            select.innerHTML = '<option value="">-- اختر الصف/الصف لعرض سجل الاختبارات --</option>';
             classesSet.forEach(cName => {
                 select.innerHTML += `<option value="${cName}">${cName}</option>`;
             });
@@ -1226,7 +1198,7 @@
 
         function updateBulkTargetSelect(classesSet) {
             const select = document.getElementById('bulkTargetClass');
-            select.innerHTML = '<option value="ALL">جميع الصفوف والشعب</option>';
+            select.innerHTML = '<option value="ALL">جميع الصفوف والصَفوف</option>';
             classesSet.forEach(cName => {
                 select.innerHTML += `<option value="${cName}">${cName}</option>`;
             });
@@ -1450,7 +1422,6 @@
             document.getElementById('sdPhone').textContent = s.phone || 'لا يوجد رقم مسجل';
             
             updateLessonMsg();
-            updateMotivationMsg();
         }
 
         function updateLessonMsg() {
@@ -1473,45 +1444,6 @@
             btn.href = `https://wa.me/${s.phone || ''}?text=` + encodeURIComponent(msg);
         }
 
-        function updateMotivationMsg() {
-            if(selectedStudentIndex === '') return;
-            const s = students[selectedStudentIndex];
-            const motivVal = document.getElementById('selectMotivation').value;
-            const preview = document.getElementById('motivationMsgPreview');
-            const btn = document.getElementById('whatsappMotivationBtn');
-
-            if(motivVal === "") {
-                preview.textContent = "اختر الرسالة لعرض نص التحفيز...";
-                btn.href = "#";
-                return;
-            }
-
-            let text = "";
-            if(motivVal.startsWith('motiv-')) {
-                const idx = motivVal.split('-')[1];
-                text = customMotivations[idx].text;
-            }
-
-            const finalMsg = `إلى ولي أمر الطالب / ${s.name}\n\n${text}\n\nمع خالص الشكر، المعلم: ${TEACHER_NAME} - ${SCHOOL_NAME}`;
-            preview.textContent = finalMsg;
-            btn.href = `https://wa.me/${s.phone || ''}?text=` + encodeURIComponent(finalMsg);
-        }
-
-        function addNewMotivation() {
-            const title = document.getElementById('newMotivationTitle').value.trim();
-            const text = document.getElementById('newMotivationText').value.trim();
-            if(!title || !text) { alert('الرجاء كتابة عنوان ونصح الرسالة التشجيعية'); return; }
-
-            customMotivations.push({ id: Date.now().toString(), title: title, text: text });
-            localStorage.setItem('awwal_custom_motivations_science_v3', JSON.stringify(customMotivations));
-            
-            document.getElementById('newMotivationTitle').value = '';
-            document.getElementById('newMotivationText').value = '';
-            
-            renderLessons();
-            showToast('🌟 تمت إضافة رسالة التحفيز بنجاح!');
-        }
-
         function incrementMessageCount() {
             if(selectedStudentIndex !== '') {
                 students[selectedStudentIndex].messages = (students[selectedStudentIndex].messages || 0) + 1;
@@ -1527,7 +1459,7 @@
             const preview = document.getElementById('bulkMsgPreview');
 
             if(!val) {
-                preview.textContent = "اختر الصف والدرس أو الرسالة التشجيعية لعرض نموذج الرسالة الجماعية...";
+                preview.textContent = "اختر الصف والدرس لعرض نموذج الرسالة الجماعية...";
                 return;
             }
 
@@ -1536,9 +1468,6 @@
                 const idx = val.split('-')[1];
                 const l = lessons[idx];
                 msg = `أولياء الأمور الأفاضل، نود إحاطتكم بأننا سندرس في مادة العلوم:\n📘 (${l.chapter}) - ${l.title}\nالتفاصيل: ${l.desc}`;
-            } else if(val.startsWith('motiv-')) {
-                const idx = val.split('-')[1];
-                msg = customMotivations[idx].text;
             }
 
             if(note) msg += `\n\nملاحظة إضافية: ${note}`;
@@ -1549,7 +1478,7 @@
         function sendBulkWhatsApp() {
             const targetClass = document.getElementById('bulkTargetClass').value;
             const val = document.getElementById('bulkSelectLesson').value;
-            if(!val) { alert('الرجاء اختيار الدرس أو الرسالة للإرسال الجماعي'); return; }
+            if(!val) { alert('الرجاء اختيار الدرس للإرسال الجماعي'); return; }
 
             let targetStudents = students;
             if(targetClass !== 'ALL') {
@@ -1598,7 +1527,7 @@
                     <h3>تقرير متابعة الطالب في مادة العلوم</h3>
                     <div class="box">
                         <p><strong>اسم الطالب:</strong> ${s.name}</p>
-                        <p><strong>الصف والشعبة:</strong> ${s.classCustom || currentGrade}</p>
+                        <p><strong>الصف والصَف:</strong> ${s.classCustom || currentGrade}</p>
                         <p><strong>رقم واتس ولي الأمر:</strong> ${s.phone || '-'}</p>
                         <table>
                             <tr>
