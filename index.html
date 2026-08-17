@@ -18,6 +18,7 @@
             --warning: #f59e0b;
             --info: #06b6d4;
             --excel: #1d6f42;
+            --success: #10b981;
         }
 
         body.theme-default { 
@@ -205,6 +206,7 @@
         .btn-info { background: var(--info); }
         .btn-warning { background: var(--warning); }
         .btn-excel { background: var(--excel); }
+        .btn-success { background: var(--success); }
         .btn-print { background: #4b5563; }
         .btn-action { padding: 4px 8px; font-size: 12px; margin: 0 2px; }
 
@@ -444,6 +446,17 @@
             font-weight: bold;
         }
 
+        .mastery-btn {
+            padding: 4px 10px;
+            font-size: 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            border: none;
+            font-weight: bold;
+        }
+        .mastery-btn.mastered { background-color: var(--success); color: white; }
+        .mastery-btn.review { background-color: var(--danger); color: white; }
+
         .searchable-dropdown-container {
             position: relative;
             width: 100%;
@@ -528,14 +541,13 @@
         .float-whatsapp { background: #25D366; }
         .float-top { background: var(--primary); display: none; }
 
-        /* تنسيقات الطباعة بألوان داكنة ونصوص سوداء حادة */
         @media print {
             body * {
                 visibility: hidden !important;
             }
             .printing-section, .printing-section * {
                 visibility: visible !important;
-                color: #000000 !important; /* لون الخط داكن بالكامل */
+                color: #000000 !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
@@ -552,27 +564,12 @@
             .printing-section table, 
             .printing-section th, 
             .printing-section td {
-                border: 2px solid #000000 !important; /* حدود داكنة وقوية للجدول */
+                border: 2px solid #000000 !important;
                 color: #000000 !important;
             }
             .printing-section th {
-                background-color: #d1d5db !important; /* خلفية داكنة متناسقة للطباعة */
+                background-color: #d1d5db !important;
                 font-weight: bold !important;
-            }
-            .printing-section input {
-                border: none !important;
-                background: transparent !important;
-                text-align: center !important;
-                font-weight: bold !important;
-                color: #000000 !important;
-            }
-            .printing-section .class-badge {
-                background-color: #000000 !important;
-                color: #ffffff !important;
-                border: 1px solid #000000 !important;
-            }
-            .printing-section strong {
-                color: #000000 !important;
             }
             .no-print, button, select, textarea, .pagination-bar, .backup-controls, .form-row, .classes-query-grid, .floating-action-buttons, .top-banner {
                 display: none !important;
@@ -626,8 +623,8 @@
                 <p id="totalStudents">0</p>
             </div>
             <div class="stat-card">
-                <h3>⭐ المهارات العلمية</h3>
-                <p id="totalSkills">0</p>
+                <h3>⭐ إتقان الدروس</h3>
+                <p id="totalSkills">0%</p>
             </div>
             <div class="stat-card">
                 <h3>✋ مجموع المشاركات</h3>
@@ -689,7 +686,6 @@
                             <th>🔴 الغياب</th>
                             <th>✋ المشاركة</th>
                             <th>📚 الواجبات</th>
-                            <th>⭐ المهارات</th>
                             <th>🛠️ التجارب</th>
                             <th>💬 الرسائل</th>
                             <th class="no-print">حذف</th>
@@ -713,9 +709,57 @@
                 <button class="btn-warning" onclick="document.getElementById('importExcelFile').click()">📂 استيراد من إكسل (Excel)</button>
                 <input type="file" id="importExcelFile" accept=".xlsx, .xls" style="display: none;" onchange="importExcel(event)">
 
+                <button class="btn-success" onclick="exportToGoogleSheetsCSV()">☁️ تصدير لـ Google Sheets (CSV)</button>
                 <button class="btn-info" onclick="exportData()" style="margin-right: auto;">💾 تصدير JSON</button>
                 <button class="btn-warning" onclick="document.getElementById('importFile').click()">📂 استرجاع JSON</button>
                 <input type="file" id="importFile" accept=".json" style="display: none;" onchange="importData(event)">
+            </div>
+        </div>
+
+        <!-- نظام تتبع إتقان الدروس لكل طالب -->
+        <div class="section-card" id="lessonMasterySection">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-bottom: 2px solid rgba(0,0,0,0.1); padding-bottom: 10px; margin-bottom: 15px;">
+                <h3 style="margin: 0; border: none; padding: 0;">🎯 تتبع إتقان كل درس لكل طالب (متقن / بحاجة مراجعة)</h3>
+                <button class="btn-print" onclick="printSection('lessonMasterySection')">🖨️ طباعة تقرير إتقان الدروس</button>
+            </div>
+
+            <div class="form-row no-print">
+                <select id="masteryLessonSelect" onchange="renderMasteryTable()">
+                    <option value="">-- اختر الدرس لتحديد حالة الإتقان للطلاب --</option>
+                </select>
+                <select id="masteryClassSelect" onchange="renderMasteryTable()">
+                    <option value="">-- جميع الصفوف --</option>
+                </select>
+            </div>
+
+            <div id="masterySummaryBox" class="sub-box" style="display: none; margin-bottom: 15px;">
+                <h5>📊 إحصائية إتقان الدرس المحدد</h5>
+                <div class="student-details" style="margin: 10px 0;">
+                    <div class="detail-item">
+                        <span>عدد الطلاب المتقنين</span>
+                        <strong id="countMastered" style="color: var(--success);">0</strong>
+                    </div>
+                    <div class="detail-item">
+                        <span>بحاجة لإعادة شرح / مراجعة</span>
+                        <strong id="countReview" style="color: var(--danger);">0</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>اسم الطالب</th>
+                            <th>🏫 الصف</th>
+                            <th>حالة الإتقان للدرس المختصر</th>
+                            <th class="no-print">تبديل الحالة بنقرة واحدة</th>
+                        </tr>
+                    </thead>
+                    <tbody id="masteryTbody">
+                        <tr><td colspan="4" style="padding: 20px; opacity: 0.7;">الرجاء اختيار الدرس من القائمة أعلاه لعرض حالات إتقان الطلاب.</td></tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
@@ -784,7 +828,7 @@
                         <div class="detail-item"><span>المشاركات</span><strong id="sdParticipation">0</strong></div>
                         <div class="detail-item"><span>الواجبات</span><strong id="sdHomework">0</strong></div>
                         <div class="detail-item"><span>أيام الغياب</span><strong id="sdAbsence">0</strong></div>
-                        <div class="detail-item"><span>المهارات</span><strong id="sdSkills">0</strong></div>
+                        <div class="detail-item"><span>الدروس المتقنة</span><strong id="sdSkills">0</strong></div>
                         <div class="detail-item"><span>التجارب</span><strong id="sdProjects">0</strong></div>
                         <div class="detail-item"><span>رسائل الواتس</span><strong id="sdMessages">0</strong></div>
                     </div>
@@ -909,7 +953,7 @@
         const TEACHER_NAME = "منصور";
         const SCHOOL_NAME = "مدرسة داوود (طلاب)";
 
-        let currentGrade = localStorage.getItem('mansour_current_grade_science_v4') || 'الأول الابتدائي';
+        let currentGrade = localStorage.getItem('mansour_current_grade_science_v5') || 'الأول الابتدائي';
         document.getElementById('globalGradeSelect').value = currentGrade;
 
         let activeQueryClass = '';
@@ -924,13 +968,13 @@
             { id: "4", title: "4. مشاركة نشطة وفعالة في حصة العلوم", text: "✋ **مشاركة نشطة وتفاعل علمي متميز** ✋\nعزيزي ولي الأمر، تميز ابنكم اليوم بحرصه العالي ومشاركته النشطة وإجاباته العلمية الموفقة داخل الصف." },
             { id: "5", title: "5. حصيلة استكشافية وتجارب ممتازة", text: "🧠 **حصيلة استكشافية وتجارب ممتازة** 🧠\nعزيزي ولي الأمر، أبدع ابنكم اليوم في تنفيذ التجارب الاستهلالية والاستكشافية بمهارة عالية. مبروك له!" },
             { id: "6", title: "6. تنظيم رائع للدفتر وواجبات مرتبة بدقة", text: "📝 **تنظيم رائع للواجبات والأنشطة** 📝\nعزيزي ولي الأمر، نشكر لكم متابعتكم المنزلية الواعية. لقد كان واجب ابنكم اليوم منظماً، دقيقاً، ومرتباً للغاية." },
-            { id: "7", title: "7. حل ممتاز للتدريبات والتقويم التكويني", text: "✍️ **حل ممتاز للتدريبات والتقويم**\nعزيزي ولي الأمر، تميز أداء ابنكم اليوم بحل أسئلة التقويم والتدريبات العلمية بدقة عالية. دمت متميزاً يا بطل!" },
+            { id: "7", title: "7. حل ممتاز للتدريبات والتقويم التكويني", text: "✍️ **حل ممتاز للتقويم والتدريبات**\nعزيزي ولي الأمر، تميز أداء ابنكم اليوم بحل أسئلة التقويم والتدريبات العلمية بدقة عالية. دمت متميزاً يا بطل!" },
             { id: "8", title: "8. اهتمام رائع بالبيئة ومخلوقات الله", text: "🌍 **اهتمام رائع بالبيئة والمحيط**\nعزيزي ولي الأمر، أظهر ابنكم اليوم شغفاً واهتماماً لافتاً بدراسة الكائنات الحية وعناصر البيئة من حوله." },
             { id: "9", title: "9. مشروع علمي متميز ومبتكر ومتقن", text: "🛠️ **مشروع علمي متميز ومبتكر ومتقن**\nعزيزي ولي الأمر، قدم ابنكم اليوم مشروعاً علمياً رائعاً ومنظماً ينم عن تفكير إبداعي ومهارة عالية." },
             { id: "10", title: "10. اجتهاد وحرص عالٍ على إتقان مهارات العلوم", text: "⭐ **اجتهاد وحرص عالٍ على إتقان العلوم**\nعزيزي ولي الأمر، إن حرص ابنكم المستمر على الاستكشاف والتعلم في مادة العلوم محل تقديرنا الدائم." }
         ];
 
-        let customMotivations = JSON.parse(localStorage.getItem('mansour_custom_motivations_science_v4')) || defaultMotivations;
+        let customMotivations = JSON.parse(localStorage.getItem('mansour_custom_motivations_science_v5')) || defaultMotivations;
 
         const gradeScienceData = {
             "الأول الابتدائي": [
@@ -988,21 +1032,35 @@
             ]
         };
 
-        function getStorageKeyForLessons() { return 'mansour_custom_lessons_science_' + currentGrade + '_v4'; }
-        function getStorageKeyForStudents() { return 'mansour_students_science_' + currentGrade + '_v4'; }
-        function getStorageKeyForStatus() { return 'mansour_lesson_status_science_' + currentGrade + '_v4'; }
+        function getStorageKeyForLessons() { return 'mansour_custom_lessons_science_' + currentGrade + '_v5'; }
+        function getStorageKeyForStudents() { return 'mansour_students_science_' + currentGrade + '_v5'; }
+        function getStorageKeyForStatus() { return 'mansour_lesson_status_science_' + currentGrade + '_v5'; }
+        function getStorageKeyForMastery() { return 'mansour_lesson_mastery_science_' + currentGrade + '_v5'; }
 
         let lessons = JSON.parse(localStorage.getItem(getStorageKeyForLessons())) || gradeScienceData[currentGrade];
         let students = JSON.parse(localStorage.getItem(getStorageKeyForStudents())) || [];
         let lessonStatus = JSON.parse(localStorage.getItem(getStorageKeyForStatus())) || {};
+        let lessonMastery = JSON.parse(localStorage.getItem(getStorageKeyForMastery())) || {}; // { studentIndex: { lessonIndex: true/false } }
+
+        function checkBackupReminder() {
+            const lastBackup = localStorage.getItem('mansour_last_backup_date');
+            const now = Date.now();
+            if (!lastBackup || (now - Number(lastBackup) > 7 * 24 * 60 * 60 * 1000)) {
+                setTimeout(() => {
+                    alert('📌 تذكير دوري لحماية بياناتك:\nمرت فترة على آخر نسختك الاحتياطية. يوصى بالنقر على زر (تصدير JSON) أو (تصدير لـ Google Sheets) لحفظ بياناتك وتجنب ضياعها حال تم مسح متصفحك.');
+                    localStorage.setItem('mansour_last_backup_date', now.toString());
+                }, 3000);
+            }
+        }
 
         function changeGradeLevel(grade) {
             currentGrade = grade;
-            localStorage.setItem('mansour_current_grade_science_v4', currentGrade);
+            localStorage.setItem('mansour_current_grade_science_v5', currentGrade);
             
             lessons = JSON.parse(localStorage.getItem(getStorageKeyForLessons())) || gradeScienceData[currentGrade];
             students = JSON.parse(localStorage.getItem(getStorageKeyForStudents())) || [];
             lessonStatus = JSON.parse(localStorage.getItem(getStorageKeyForStatus())) || {};
+            lessonMastery = JSON.parse(localStorage.getItem(getStorageKeyForMastery())) || {};
 
             activeQueryClass = '';
             selectedStudentIndex = '';
@@ -1013,6 +1071,7 @@
             document.getElementById('curriculumTitle').textContent = `📚 دليل مقرر العلوم - ${currentGrade} (المنهج السعودي المعتمد) وتتبع التنفيذ`;
 
             renderLessons();
+            renderMasteryDropdowns();
             render();
             showToast(`🔄 تم الانتقال إلى بيانات ${currentGrade}`);
         }
@@ -1082,6 +1141,18 @@
             motivGroup += '</optgroup>';
 
             document.getElementById('totalExecutedLessons').textContent = `${executedCount} / ${lessons.length}`;
+            renderMasteryDropdowns();
+        }
+
+        function renderMasteryDropdowns() {
+            const masterySelect = document.getElementById('masteryLessonSelect');
+            const currentVal = masterySelect.value;
+            masterySelect.innerHTML = '<option value="">-- اختر الدرس لتحديد حالة الإتقان للطلاب --</option>';
+            lessons.forEach((l, idx) => {
+                masterySelect.innerHTML += `<option value="${idx}">[${l.chapter}] ${l.title}</option>`;
+            });
+            if(lessons[currentVal]) masterySelect.value = currentVal;
+            renderMasteryTable();
         }
 
         function toggleLessonStatus(index) {
@@ -1160,15 +1231,26 @@
         }
 
         function render() {
-            let sumSkills = 0;
+            let totalPossibleMastery = students.length * lessons.length;
+            let achievedMastery = 0;
+
+            students.forEach((s, sIdx) => {
+                lessons.forEach((l, lIdx) => {
+                    if (lessonMastery[sIdx] && lessonMastery[sIdx][lIdx]) {
+                        achievedMastery++;
+                    }
+                });
+            });
+
+            let masteryPercentage = totalPossibleMastery > 0 ? Math.round((achievedMastery / totalPossibleMastery) * 100) : 0;
+
             let sumPart = 0;
             let sumHw = 0;
             let sumAbs = 0;
             let sumProj = 0;
             let sumMsg = 0;
 
-            students.forEach(s => {
-                sumSkills += Number(s.skills) || 0;
+            students.forEach((s, sIdx) => {
                 sumPart += Number(s.participation) || 0;
                 sumHw += Number(s.homework) || 0;
                 sumAbs += Number(s.absence) || 0;
@@ -1177,7 +1259,7 @@
             });
 
             document.getElementById('totalStudents').textContent = students.length;
-            document.getElementById('totalSkills').textContent = sumSkills;
+            document.getElementById('totalSkills').textContent = masteryPercentage + '%';
             document.getElementById('totalParticipation').textContent = sumPart;
             document.getElementById('totalHomework').textContent = sumHw;
             document.getElementById('totalAbsence').textContent = sumAbs;
@@ -1186,6 +1268,7 @@
 
             renderStudentsTable();
             renderClassesQuery();
+            renderMasteryTable();
         }
 
         function addStudent() {
@@ -1203,7 +1286,6 @@
                 absence: 0,
                 participation: 0,
                 homework: 0,
-                skills: 0,
                 projects: 0,
                 messages: 0,
                 exam1: 0,
@@ -1239,7 +1321,7 @@
             const pageData = filtered.slice(startIdx, startIdx + rowsPerPage);
 
             if(pageData.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="10" style="padding: 20px; opacity: 0.7;">لا توجد بيانات طلاب مسجلة حالياً.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="9" style="padding: 20px; opacity: 0.7;">لا توجد بيانات طلاب مسجلة حالياً.</td></tr>`;
                 document.getElementById('paginationInfo').textContent = `عرض 0 من 0`;
                 document.getElementById('pageIndicator').textContent = `1 / 1`;
                 return;
@@ -1255,7 +1337,6 @@
                     <td><input type="number" value="${s.absence}" min="0" style="width:50px; text-align:center;" oninput="updateStudentField(${globalIndex}, 'absence', this.value)"></td>
                     <td><input type="number" value="${s.participation}" min="0" style="width:50px; text-align:center;" oninput="updateStudentField(${globalIndex}, 'participation', this.value)"></td>
                     <td><input type="number" value="${s.homework}" min="0" style="width:50px; text-align:center;" oninput="updateStudentField(${globalIndex}, 'homework', this.value)"></td>
-                    <td><input type="number" value="${s.skills}" min="0" style="width:50px; text-align:center;" oninput="updateStudentField(${globalIndex}, 'skills', this.value)"></td>
                     <td><input type="number" value="${s.projects}" min="0" style="width:50px; text-align:center;" oninput="updateStudentField(${globalIndex}, 'projects', this.value)"></td>
                     <td>${s.messages || 0}</td>
                     <td class="no-print"><button class="btn-action btn-danger" onclick="deleteStudent(${globalIndex})">حذف</button></td>
@@ -1282,6 +1363,19 @@
             if(confirm('هل أنت متأكد من حذف هذا الطالب؟')) {
                 students.splice(index, 1);
                 localStorage.setItem(getStorageKeyForStudents(), JSON.stringify(students));
+                delete lessonMastery[index];
+                // إعادة ترتيب الـ mastery indices
+                let newMastery = {};
+                Object.keys(lessonMastery).forEach(k => {
+                    let oldIdx = Number(k);
+                    if(oldIdx > index) {
+                        newMastery[oldIdx - 1] = lessonMastery[k];
+                    } else if(oldIdx < index) {
+                        newMastery[oldIdx] = lessonMastery[k];
+                    }
+                });
+                lessonMastery = newMastery;
+                localStorage.setItem(getStorageKeyForMastery(), JSON.stringify(lessonMastery));
                 render();
                 showToast('🗑️ تم حذف الطالب بنجاح!');
             }
@@ -1321,6 +1415,7 @@
             });
             
             updateExamClassSelect(classesSet);
+            updateMasteryClassSelect(classesSet);
             updateBulkTargetSelect(classesSet);
         }
 
@@ -1353,12 +1448,91 @@
             renderExamsTable();
         }
 
+        function updateMasteryClassSelect(classesSet) {
+            const select = document.getElementById('masteryClassSelect');
+            const currentVal = select.value;
+            select.innerHTML = '<option value="">-- جميع الصفوف --</option>';
+            classesSet.forEach(cName => {
+                select.innerHTML += `<option value="${cName}">${cName}</option>`;
+            });
+            if(classesSet.has(currentVal)) select.value = currentVal;
+        }
+
         function updateBulkTargetSelect(classesSet) {
             const select = document.getElementById('bulkTargetClass');
             select.innerHTML = '<option value="ALL">جميع الصفوف</option>';
             classesSet.forEach(cName => {
                 select.innerHTML += `<option value="${cName}">${cName}</option>`;
             });
+        }
+
+        // دوال نظام إتقان الدروس لكل طالب
+        function renderMasteryTable() {
+            const lessonIdx = document.getElementById('masteryLessonSelect').value;
+            const selectedClass = document.getElementById('masteryClassSelect').value;
+            const tbody = document.getElementById('masteryTbody');
+            const summaryBox = document.getElementById('masterySummaryBox');
+            tbody.innerHTML = '';
+
+            if(lessonIdx === "") {
+                tbody.innerHTML = `<tr><td colspan="4" style="padding: 20px; opacity: 0.7;">الرجاء اختيار الدرس من القائمة أعلاه لعرض حالات إتقان الطلاب.</td></tr>`;
+                summaryBox.style.display = 'none';
+                return;
+            }
+
+            let filteredStudents = students;
+            if(selectedClass) {
+                filteredStudents = students.filter(s => (s.classCustom || currentGrade) === selectedClass);
+            }
+
+            if(filteredStudents.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" style="padding: 20px; opacity: 0.7;">لا توجد بيانات طلاب مسجلة.</td></tr>`;
+                summaryBox.style.display = 'none';
+                return;
+            }
+
+            summaryBox.style.display = 'block';
+            let masteredCount = 0;
+            let reviewCount = 0;
+
+            filteredStudents.forEach(s => {
+                const globalIdx = students.indexOf(s);
+                const isMastered = lessonMastery[globalIdx] && lessonMastery[globalIdx][lessonIdx];
+
+                if(isMastered) masteredCount++;
+                else reviewCount++;
+
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><strong>${s.name}</strong></td>
+                    <td><span class="class-badge">${s.classCustom || currentGrade}</span></td>
+                    <td>
+                        <span style="font-weight:bold; color: ${isMastered ? 'var(--success)' : 'var(--danger)'};">
+                            ${isMastered ? '✅ متقن' : '⚠️ بحاجة مراجعة'}
+                        </span>
+                    </td>
+                    <td class="no-print">
+                        <button class="mastery-btn ${isMastered ? 'mastered' : 'review'}" onclick="toggleStudentMastery(${globalIdx}, ${lessonIdx})">
+                            ${isMastered ? 'تحويل إلى: بحاجة مراجعة' : 'تحويل إلى: متقن'}
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            document.getElementById('countMastered').textContent = masteredCount;
+            document.getElementById('countReview').textContent = reviewCount;
+        }
+
+        function toggleStudentMastery(studentIdx, lessonIdx) {
+            if(!lessonMastery[studentIdx]) {
+                lessonMastery[studentIdx] = {};
+            }
+            lessonMastery[studentIdx][lessonIdx] = !lessonMastery[studentIdx][lessonIdx];
+            localStorage.setItem(getStorageKeyForMastery(), JSON.stringify(lessonMastery));
+            renderMasteryTable();
+            render();
+            showToast('🎯 تم تحديث حالة الإتقان بنجاح!');
         }
 
         function renderExamsTable() {
@@ -1445,7 +1619,6 @@
                 "الغياب": s.absence || 0,
                 "المشاركة": s.participation || 0,
                 "الواجبات": s.homework || 0,
-                "المهارات": s.skills || 0,
                 "التجارب": s.projects || 0,
                 "اختبار الفترة الأولى": s.exam1 || 0,
                 "اختبار الفترة الثانية": s.exam2 || 0
@@ -1459,6 +1632,24 @@
             XLSX.utils.book_append_sheet(wb, ws, "سجل طلاب العلوم");
             XLSX.writeFile(wb, `سجل_العلوم_${currentGrade}.xlsx`);
             showToast('📊 تم تصدير ملف الإكسل بنجاح!');
+        }
+
+        // ميزة التصدير لربط سحابي بسيط (Google Sheets عبر CSV) لحماية البيانات
+        function exportToGoogleSheetsCSV() {
+            if(students.length === 0) { alert('لا توجد بيانات طلاب لتصديرها!'); return; }
+            let csvContent = "\uFEFFاسم الطالب,الصف,رقم الجوال,الغياب,المشاركة,الواجبات,التجارب,اختبار 1,اختبار 2\n";
+            students.forEach(s => {
+                csvContent += `"${s.name}","${s.classCustom || currentGrade}","${s.phone || ''}",${s.absence || 0},${s.participation || 0},${s.homework || 0},${s.projects || 0},${s.exam1 || 0},${s.exam2 || 0}\n`;
+            });
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.setAttribute('href', url);
+            a.setAttribute('download', `GoogleSheets_Backup_${currentGrade}.csv`);
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            showToast('☁️ تم تصدير ملف متوافق مع Google Sheets بنجاح! يمكنك استيراده مباشرة لملفات جوجل.');
         }
 
         function importExcel(event) {
@@ -1493,7 +1684,6 @@
                                 absence: Number(row["الغياب"] || 0),
                                 participation: Number(row["المشاركة"] || row["المشاركات"] || 0),
                                 homework: Number(row["الواجبات"] || 0),
-                                skills: Number(row["المهارات"] || 0),
                                 projects: Number(row["التجارب"] || 0),
                                 messages: Number(row["الرسائل"] || 0),
                                 exam1: Number(row["اختبار الفترة الأولى"] || 0),
@@ -1517,14 +1707,22 @@
         }
 
         function exportData() {
-            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(students));
+            const backupPackage = {
+                students: students,
+                lessons: lessons,
+                lessonStatus: lessonStatus,
+                lessonMastery: lessonMastery,
+                customMotivations: customMotivations
+            };
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(backupPackage));
             const dlAnchor = document.createElement('a');
             dlAnchor.setAttribute("href", dataStr);
-            dlAnchor.setAttribute("download", `سجل_العلوم_${currentGrade}_backup.json`);
+            dlAnchor.setAttribute("download", `سجل_العلوم_${currentGrade}_full_backup.json`);
             document.body.appendChild(dlAnchor);
             dlAnchor.click();
             dlAnchor.remove();
-            showToast('💾 تم تصدير النسخة الاحتياطية بنجاح!');
+            localStorage.setItem('mansour_last_backup_date', Date.now().toString());
+            showToast('💾 تم تصدير النسخة الاحتياطية الشاملة بنجاح!');
         }
 
         function importData(event) {
@@ -1537,11 +1735,27 @@
                     if(Array.isArray(imported)) {
                         students = imported;
                         localStorage.setItem(getStorageKeyForStudents(), JSON.stringify(students));
-                        render();
-                        showToast('📂 تم استرجاع البيانات بنجاح!');
-                    } else {
-                        alert('ملف النسخة الاحتياطية غير صالح.');
+                    } else if(imported && typeof imported === 'object') {
+                        if(imported.students) {
+                            students = imported.students;
+                            localStorage.setItem(getStorageKeyForStudents(), JSON.stringify(students));
+                        }
+                        if(imported.lessons) {
+                            lessons = imported.lessons;
+                            localStorage.setItem(getStorageKeyForLessons(), JSON.stringify(lessons));
+                        }
+                        if(imported.lessonStatus) {
+                            lessonStatus = imported.lessonStatus;
+                            localStorage.setItem(getStorageKeyForStatus(), JSON.stringify(lessonStatus));
+                        }
+                        if(imported.lessonMastery) {
+                            lessonMastery = imported.lessonMastery;
+                            localStorage.setItem(getStorageKeyForMastery(), JSON.stringify(lessonMastery));
+                        }
                     }
+                    renderLessons();
+                    render();
+                    showToast('📂 تم استرجاع كافة البيانات بنجاح!');
                 } catch(err) {
                     alert('خطأ في قراءة ملف JSON.');
                 } finally {
@@ -1597,7 +1811,13 @@
             document.getElementById('sdParticipation').textContent = s.participation || 0;
             document.getElementById('sdHomework').textContent = s.homework || 0;
             document.getElementById('sdAbsence').textContent = s.absence || 0;
-            document.getElementById('sdSkills').textContent = s.skills || 0;
+            
+            // حساب عدد الدروس المتقنة لهذا الطالب
+            let studentMasteredCount = 0;
+            lessons.forEach((l, lIdx) => {
+                if (lessonMastery[index] && lessonMastery[index][lIdx]) studentMasteredCount++;
+            });
+            document.getElementById('sdSkills').textContent = studentMasteredCount;
             document.getElementById('sdProjects').textContent = s.projects || 0;
             document.getElementById('sdMessages').textContent = s.messages || 0;
             document.getElementById('sdPhone').textContent = s.phone || 'لا يوجد رقم جوال مسجل';
@@ -1655,7 +1875,13 @@
         function sendFullReportWhatsApp() {
             if(selectedStudentIndex === '') return;
             const s = students[selectedStudentIndex];
-            const msg = `عزيزي ولي أمر الطالب / ${s.name} (${s.classCustom || currentGrade})\nنحيطكم علماً بمستوى ابنكم وتقييمه في مادة العلوم حتى تاريخه:\n\n- المشاركات: ${s.participation || 0}\n- الواجبات: ${s.homework || 0}\n- أيام الغياب: ${s.absence || 0}\n- المهارات: ${s.skills || 0}\n- التجارب: ${s.projects || 0}\n- اختبار الفترة الأولى: ${s.exam1 || 0}/20\n- اختبار الفترة الثانية: ${s.exam2 || 0}/20\n\nنشكر تعاونكم المستمر ودعمكم الدائم.\nمع تقديـرنا، المعلم: ${TEACHER_NAME} - ${SCHOOL_NAME}`;
+            
+            let studentMasteredCount = 0;
+            lessons.forEach((l, lIdx) => {
+                if (lessonMastery[selectedStudentIndex] && lessonMastery[selectedStudentIndex][lIdx]) studentMasteredCount++;
+            });
+
+            const msg = `عزيزي ولي أمر الطالب / ${s.name} (${s.classCustom || currentGrade})\nنحيطكم علماً بمستوى ابنكم وتقييمه في مادة العلوم حتى تاريخه:\n\n- المشاركات: ${s.participation || 0}\n- الواجبات: ${s.homework || 0}\n- أيام الغياب: ${s.absence || 0}\n- الدروس المتقنة: ${studentMasteredCount} من ${lessons.length}\n- التجارب: ${s.projects || 0}\n- اختبار الفترة الأولى: ${s.exam1 || 0}/20\n- اختبار الفترة الثانية: ${s.exam2 || 0}/20\n\nنشكر تعاونكم المستمر ودعمكم الدائم.\nمع تقديـرنا، المعلم: ${TEACHER_NAME} - ${SCHOOL_NAME}`;
             
             incrementMessageCount(selectedStudentIndex);
             const formattedPhone = s.phone ? `966${s.phone.replace(/^0+/, '')}` : '';
@@ -1668,7 +1894,7 @@
             if(!title || !text) { alert('الرجاء كتابة عنوان ونصح الرسالة التشجيعية'); return; }
 
             customMotivations.push({ id: Date.now().toString(), title: title, text: text });
-            localStorage.setItem('mansour_custom_motivations_science_v4', JSON.stringify(customMotivations));
+            localStorage.setItem('mansour_custom_motivations_science_v5', JSON.stringify(customMotivations));
             
             document.getElementById('newMotivationTitle').value = '';
             document.getElementById('newMotivationText').value = '';
@@ -1780,15 +2006,16 @@
 
         function setTheme(themeName) {
             document.body.className = themeName;
-            localStorage.setItem('mansour_science_theme_v4', themeName);
+            localStorage.setItem('mansour_science_theme_v5', themeName);
         }
 
-        const savedTheme = localStorage.getItem('mansour_science_theme_v4');
+        const savedTheme = localStorage.getItem('mansour_science_theme_v5');
         if(savedTheme) document.body.className = savedTheme;
 
         window.onload = function() {
             renderLessons();
             render();
+            checkBackupReminder();
         };
     </script>
 </body>
