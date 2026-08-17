@@ -2,8 +2,8 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>المعلم منصور عامر الرحيلي - مدرسة داوود بن عروة الثقفي (لوحة تحكم مادة العلوم)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>مدرسة داوود - لوحة تحكم مادة العلوم</title>
     <!-- مكتبة SheetJS لتصدير واستيراد ملفات إكسل Excel -->
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
     <style>
@@ -53,45 +53,56 @@
             background-attachment: fixed;
             color: var(--text);
             margin: 0;
-            padding: 20px;
+            padding: 10px;
             transition: background 0.3s ease, color 0.3s ease;
-            user-select: none;
             min-height: 100vh;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        @media (min-width: 768px) {
+            body { padding: 20px; }
         }
 
         .top-banner {
             text-align: center;
             background: linear-gradient(135deg, var(--secondary), var(--primary));
             color: white;
-            padding: 12px;
+            padding: 10px;
             border-radius: 8px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: bold;
             margin-bottom: 15px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            line-height: 1.8;
+            line-height: 1.6;
         }
 
         .header {
             text-align: center;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            padding: 25px;
+            padding: 20px 10px;
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
-        .header h1 { margin: 0 0 10px 0; font-size: 24px; }
-        .header div { font-size: 18px; opacity: 0.9; }
-        .header p { margin: 5px 0 0 0; font-size: 14px; opacity: 0.8; }
+        .header h1 { margin: 0 0 10px 0; font-size: 20px; }
+        .header div { font-size: 16px; opacity: 0.9; }
+        .header p { margin: 5px 0 0 0; font-size: 13px; opacity: 0.8; }
+
+        @media (min-width: 768px) {
+            .header { padding: 25px; }
+            .header h1 { font-size: 24px; }
+            .header div { font-size: 18px; }
+            .header p { font-size: 14px; }
+        }
 
         .subscription-badge {
             display: inline-block;
             background: rgba(255, 255, 255, 0.25);
             padding: 5px 15px;
             border-radius: 20px;
-            font-size: 13px;
+            font-size: 12px;
             margin-top: 10px;
             border: 1px solid rgba(255, 255, 255, 0.4);
             font-weight: bold;
@@ -100,11 +111,11 @@
         .theme-switcher {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
             margin-top: 15px;
             align-items: center;
             background: rgba(255, 255, 255, 0.2);
-            padding: 8px 15px;
+            padding: 6px 12px;
             border-radius: 20px;
             width: fit-content;
             margin-left: auto;
@@ -114,47 +125,65 @@
         .theme-btn {
             border: 2px solid white;
             border-radius: 50%;
-            width: 28px;
-            height: 28px;
+            width: 26px;
+            height: 26px;
             cursor: pointer;
             padding: 0;
             transition: transform 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
+            font-size: 12px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
         .theme-btn:hover { transform: scale(1.2); }
-
-        .container { max-width: 1200px; margin: 0 auto; }
+        .container { max-width: 1200px; margin: 0 auto; width: 100%; box-sizing: border-box; }
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin-bottom: 25px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        @media (min-width: 640px) {
+            .stats-grid { grid-template-columns: repeat(3, 1fr); gap: 15px; }
+        }
+
+        @media (min-width: 1024px) {
+            .stats-grid { grid-template-columns: repeat(4, 1fr); }
         }
 
         .stat-card {
             background: var(--card-bg);
-            padding: 15px;
-            border-radius: 12px;
+            padding: 12px;
+            border-radius: 10px;
             text-align: center;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             border-bottom: 4px solid var(--secondary);
         }
 
-        .stat-card h3 { margin: 0; font-size: 13px; opacity: 0.8; }
-        .stat-card p { margin: 10px 0 0 0; font-size: 22px; font-weight: bold; color: var(--secondary); }
+        .stat-card h3 { margin: 0; font-size: 12px; opacity: 0.8; }
+        .stat-card p { margin: 8px 0 0 0; font-size: 18px; font-weight: bold; color: var(--secondary); }
+
+        @media (min-width: 768px) {
+            .stat-card { padding: 15px; }
+            .stat-card h3 { font-size: 13px; }
+            .stat-card p { font-size: 22px; }
+        }
 
         .section-card {
             background: var(--card-bg);
-            padding: 20px;
+            padding: 15px;
             border-radius: 12px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            margin-bottom: 25px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        @media (min-width: 768px) {
+            .section-card { padding: 20px; margin-bottom: 25px; }
         }
 
         .section-card h3 {
@@ -162,6 +191,11 @@
             color: var(--secondary);
             border-bottom: 2px solid rgba(0,0,0,0.1);
             padding-bottom: 10px;
+            font-size: 16px;
+        }
+
+        @media (min-width: 768px) {
+            .section-card h3 { font-size: 18px; }
         }
 
         .form-row {
@@ -173,24 +207,36 @@
 
         .form-row input, .form-row select, .form-row textarea {
             flex: 1;
-            min-width: 160px;
-            padding: 10px;
+            min-width: 100%;
+            padding: 12px;
             border: 1px solid #ccc;
             border-radius: 6px;
-            font-size: 14px;
+            font-size: 16px;
             background-color: var(--card-bg);
             color: var(--text);
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+
+        @media (min-width: 640px) {
+            .form-row input, .form-row select, .form-row textarea { min-width: 160px; font-size: 14px; }
         }
 
         button {
             background: var(--secondary);
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 18px;
             border-radius: 6px;
             cursor: pointer;
             font-weight: bold;
             transition: 0.2s;
+            font-size: 14px;
+            width: 100%;
+        }
+
+        @media (min-width: 640px) {
+            button { width: auto; }
         }
 
         button:hover { opacity: 0.9; }
@@ -199,12 +245,45 @@
         .btn-warning { background: var(--warning); }
         .btn-excel { background: var(--excel); }
         .btn-print { background: #4b5563; }
-        .btn-action { padding: 4px 8px; font-size: 12px; margin: 0 2px; }
+        .btn-action { padding: 6px 10px; font-size: 12px; margin: 2px; width: auto; }
+
+        .counter-cell {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(0,0,0,0.03);
+            padding: 3px;
+            border-radius: 6px;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+        .counter-btn {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            padding: 0;
+        }
+        .counter-btn:hover { opacity: 0.85; }
+        .counter-value {
+            font-weight: bold;
+            font-size: 14px;
+            min-width: 22px;
+            text-align: center;
+            color: var(--text);
+        }
 
         .classes-query-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
             margin: 15px 0;
             align-items: center;
         }
@@ -216,20 +295,24 @@
             overflow: hidden;
             border: 2px solid var(--secondary);
             background: rgba(0, 0, 0, 0.04);
-            flex: 1;
-            min-width: 150px;
+            flex: 1 1 140px;
         }
 
         .class-query-btn {
             background: transparent;
             border: none;
             color: var(--text);
-            padding: 10px 15px;
+            padding: 10px;
             cursor: pointer;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 13px;
             flex: 1;
-            text-align: right;
+            text-align: center;
+            width: auto;
+        }
+
+        @media (min-width: 768px) {
+            .class-query-btn { text-align: right; padding: 10px 15px; font-size: 14px; }
         }
 
         .class-btn-wrapper.active {
@@ -245,12 +328,13 @@
             background: rgba(239, 68, 68, 0.15);
             border: none;
             color: var(--danger);
-            padding: 0 12px;
+            padding: 0 10px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 13px;
             display: flex;
             align-items: center;
             justify-content: center;
+            width: auto;
         }
 
         .class-delete-btn:hover {
@@ -258,16 +342,30 @@
             color: white;
         }
 
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin-top: 15px;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 15px;
+            white-space: nowrap;
         }
 
         th, td {
             border: 1px solid rgba(0,0,0,0.1);
-            padding: 10px;
+            padding: 10px 8px;
             text-align: center;
+            font-size: 13px;
+        }
+
+        @media (min-width: 768px) {
+            th, td { padding: 10px; font-size: 14px; }
         }
 
         th { background-color: rgba(0,0,0,0.05); color: var(--secondary); }
@@ -288,69 +386,113 @@
             display: flex;
             gap: 5px;
             align-items: center;
+            width: 100%;
+            justify-content: center;
+        }
+
+        @media (min-width: 640px) {
+            .pagination-btns { width: auto; }
         }
 
         .pagination-btns button {
             padding: 6px 12px;
             font-size: 13px;
+            width: auto;
         }
 
         .student-details {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 10px;
             margin: 15px 0;
             background: rgba(0,0,0,0.03);
-            padding: 15px;
+            padding: 12px;
             border-radius: 8px;
         }
 
+        @media (min-width: 640px) {
+            .student-details { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); padding: 15px; }
+        }
+
         .detail-item { text-align: center; }
-        .detail-item span { display: block; font-size: 12px; opacity: 0.8; }
-        .detail-item strong { font-size: 18px; color: var(--secondary); }
+        .detail-item span { display: block; font-size: 11px; opacity: 0.8; }
+        .detail-item strong { font-size: 16px; color: var(--secondary); }
+
+        @media (min-width: 768px) {
+            .detail-item span { font-size: 12px; }
+            .detail-item strong { font-size: 18px; }
+        }
 
         .sub-box {
             background: rgba(0,0,0,0.02);
             border: 1px solid rgba(0,0,0,0.1);
             border-radius: 8px;
-            padding: 15px;
+            padding: 12px;
             margin-top: 15px;
         }
 
-        .sub-box h5 { margin-top: 0; color: var(--secondary); font-size: 16px; }
+        @media (min-width: 768px) {
+            .sub-box { padding: 15px; }
+        }
+
+        .sub-box h5 { margin-top: 0; color: var(--secondary); font-size: 15px; }
 
         .preview-msg {
             background: rgba(37, 99, 235, 0.08);
             border-right: 4px solid var(--secondary);
-            padding: 12px;
+            padding: 10px;
             margin: 10px 0;
             border-radius: 4px;
             white-space: pre-wrap;
-            font-size: 14px;
+            font-size: 13px;
             direction: rtl;
             text-align: right;
+            word-break: break-word;
+        }
+
+        @media (min-width: 768px) {
+            .preview-msg { padding: 12px; font-size: 14px; }
+        }
+
+        .action-cell-container {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
         .whatsapp-btn {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             background: #25D366;
             color: white;
             text-decoration: none;
-            padding: 10px 15px;
+            padding: 8px 12px;
             border-radius: 6px;
             font-weight: bold;
-            margin-top: 5px;
+            font-size: 13px;
             text-align: center;
+            border: none;
+            cursor: pointer;
+            gap: 5px;
         }
+
+        .whatsapp-btn:hover { opacity: 0.9; }
 
         .lessons-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: 1fr;
             gap: 12px;
             margin-top: 15px;
             max-height: 520px;
             overflow-y: auto;
             padding: 5px;
+        }
+
+        @media (min-width: 768px) {
+            .lessons-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
         }
 
         .lesson-card {
@@ -391,6 +533,7 @@
             justify-content: space-between;
             align-items: center;
             margin-top: 10px;
+            gap: 5px;
         }
 
         .status-toggle-btn {
@@ -400,6 +543,7 @@
             cursor: pointer;
             border: none;
             font-weight: bold;
+            width: auto;
         }
 
         .status-toggle-btn.done { background-color: var(--secondary); color: white; }
@@ -417,23 +561,29 @@
             display: none;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
             z-index: 1000;
+            font-size: 13px;
+            width: 80%;
+            max-width: 300px;
+            text-align: center;
         }
 
         .backup-controls {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             margin-top: 15px;
             padding-top: 15px;
             border-top: 1px dashed #ccc;
             flex-wrap: wrap;
         }
 
+        .backup-controls button { flex: 1 1 140px; }
+
         .class-badge {
             background-color: var(--secondary);
             color: white;
             padding: 3px 8px;
             border-radius: 12px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: bold;
         }
 
@@ -447,7 +597,7 @@
             padding: 12px;
             border: 1px solid #ccc;
             border-radius: 6px;
-            font-size: 15px;
+            font-size: 16px;
             background-color: var(--card-bg);
             color: var(--text);
             box-sizing: border-box;
@@ -458,7 +608,7 @@
             top: 100%;
             left: 0;
             right: 0;
-            max-height: 250px;
+            max-height: 220px;
             overflow-y: auto;
             background: var(--card-bg);
             border: 1px solid var(--secondary);
@@ -484,9 +634,9 @@
 
         .footer-note {
             text-align: center;
-            margin-top: 30px;
+            margin-top: 25px;
             padding: 15px;
-            font-size: 14px;
+            font-size: 13px;
             opacity: 0.75;
             border-top: 1px solid rgba(0,0,0,0.1);
             line-height: 1.8;
@@ -494,17 +644,17 @@
 
         .floating-action-buttons {
             position: fixed;
-            bottom: 25px;
-            right: 25px;
+            bottom: 20px;
+            right: 20px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
             z-index: 999;
         }
 
         .float-btn {
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             background: var(--secondary);
             color: white;
@@ -514,38 +664,56 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-size: 18px;
             text-decoration: none;
+        }
+
+        @media (min-width: 768px) {
+            .float-btn { width: 50px; height: 50px; font-size: 20px; }
         }
 
         .float-whatsapp { background: #25D366; }
         .float-top { background: var(--primary); display: none; }
 
         @media print {
-            body * {
-                visibility: hidden !important;
+            @page {
+                size: A4 landscape;
+                margin: 5mm;
             }
-            .printing-section, .printing-section * {
-                visibility: visible !important;
+            body { 
+                background: white !important; 
+                color: #000 !important; 
+                padding: 0 !important; 
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
             }
-            .printing-section {
-                position: absolute !important;
-                left: 0 !important;
-                top: 0 !important;
-                width: 100% !important;
-                background: white !important;
-                box-shadow: none !important;
-                margin: 0 !important;
-                padding: 10px !important;
-            }
-            .printing-section input {
-                border: none !important;
-                background: transparent !important;
-                text-align: center !important;
+            .top-banner, .subscription-badge, .theme-switcher, .floating-action-buttons, .toast,
+            .btn-action, .backup-controls, .pagination-bar, .form-row, .classes-query-grid,
+            .no-print, button, select, textarea, .searchable-dropdown-container { display: none !important; }
+            
+            #examsAnalysisBox { display: block !important; visibility: visible !important; background: #f8fafc !important; border: 1px solid #1e3a8a !important; }
+            
+            .container { max-width: 100% !important; margin: 0 !important; width: 100% !important; }
+            .section-card { box-shadow: none !important; border: 1px solid #ccc !important; page-break-inside: avoid; margin-bottom: 10px !important; padding: 10px !important; background: white !important; }
+            
+            body * { visibility: hidden; }
+            .print-target, .print-target * { visibility: visible !important; }
+            .print-target { position: absolute; left: 0; top: 0; width: 100%; }
+            
+            table { width: 100% !important; border-collapse: collapse !important; font-size: 12px !important; }
+            th, td { border: 1px solid #000 !important; padding: 6px !important; color: black !important; }
+            th { background-color: #e2e8f0 !important; font-weight: bold !important; }
+            
+            .class-badge { background-color: #2563eb !important; color: white !important; border: 1px solid #000; }
+            
+            input[type="number"], input[type="tel"], input[type="text"] { 
+                border: none !important; 
+                background: transparent !important; 
+                color: black !important; 
                 font-weight: bold !important;
-            }
-            .no-print, button, select, textarea, .pagination-bar, .backup-controls, .form-row, .classes-query-grid, .floating-action-buttons, .top-banner {
-                display: none !important;
+                text-align: center !important;
+                display: inline-block !important;
+                visibility: visible !important;
             }
         }
     </style>
@@ -553,19 +721,19 @@
 <body class="theme-default">
 
     <div class="top-banner">
-        ﴿ هذا الجهد استغرق وقتاً وعناية، ولا أحلل نقله تجارياً أو نسخ دون إذن ﴾<br>
-        للتواصل والاتصال عبر واتساب: <a href="https://wa.me/966581015002" target="_blank" style="color: #ffff00; text-decoration: underline;">0581015002</a>
+        ﴿ هذا الجهد استغرق وقتاً وعناية، ولا أحلل نقله تجارياً أو نسخ دون إذن ﴾[cite: 1]<br>
+        للتواصل والاتصال عبر واتساب: <a href="https://wa.me/966581015002" target="_blank" style="color: #ffff00; text-decoration: underline;">0581015002</a>[cite: 1]
     </div>
 
     <div class="header">
-        <h1>مدرسة داوود بن عروة الثقفي (طلاب)</h1>
-        <div>إعداد المعلم: منصور عامر الرحيلي</div>
+        <h1>مدرسة داوود (طلاب)[cite: 1]</h1>
+        <div>إعداد المعلم: منصور عامر الرحيلي[cite: 1]</div>
         <p>لوحة تحكم معلم مادة العلوم للمرحلة الابتدائية (وفق المنهج السعودي)</p>
-        <div class="subscription-badge">⏳ نهاية الاشتراك: 2027/07/01</div>
+        <div class="subscription-badge">⏳ نهاية الاشتراك: 2027/07/01[cite: 1]</div>
 
         <div class="theme-switcher">
             <span style="font-size: 12px; margin-left: 5px;">🎨 المظهر:</span>
-            <button class="theme-btn" onclick="setTheme('theme-default')">📘</button>
+            <button class="theme-btn" onclick="setTheme('theme-default')">🔵</button>
             <button class="theme-btn" onclick="setTheme('theme-royal')">👑</button>
             <button class="theme-btn" onclick="setTheme('theme-emerald')">🌲</button>
             <button class="theme-btn" onclick="setTheme('theme-amber')">⭐</button>
@@ -574,24 +742,24 @@
 
     <div class="container">
         <!-- اختيار الصف الدراسي -->
-        <div class="section-card no-print" style="background: linear-gradient(135deg, rgba(37,99,235,0.05), rgba(30,58,138,0.1)); border: 2px solid var(--secondary);">
-            <h3 style="margin-bottom: 10px;">📌 اختر الصف الدراسي للمتابعة</h3>
+        <div class="section-card" style="background: linear-gradient(135deg, rgba(37,99,235,0.05), rgba(30,58,138,0.1)); border: 2px solid var(--secondary);">
+            <h3 style="margin-bottom: 10px;">📌 اختر الصف الدراسي للمتابعة[cite: 1]</h3>
             <div class="form-row" style="margin-bottom: 0;">
                 <select id="globalGradeSelect" onchange="changeGradeLevel(this.value)" style="font-weight: bold; font-size: 16px; color: var(--secondary);">
-                    <option value="الأول الابتدائي">الصف الأول الابتدائي</option>
-                    <option value="الثاني الابتدائي">الصف الثاني الابتدائي</option>
-                    <option value="الثالث الابتدائي">الصف الثالث الابتدائي</option>
-                    <option value="الرابع الابتدائي">الصف الرابع الابتدائي</option>
-                    <option value="الخامس الابتدائي">الصف الخامس الابتدائي</option>
-                    <option value="السادس الابتدائي">الصف السادس الابتدائي</option>
+                    <option value="الأول الابتدائي">الصف الأول الابتدائي[cite: 1]</option>
+                    <option value="الثاني الابتدائي">الصف الثاني الابتدائي[cite: 1]</option>
+                    <option value="الثالث الابتدائي">الصف الثالث الابتدائي[cite: 1]</option>
+                    <option value="الرابع الابتدائي">الصف الرابع الابتدائي[cite: 1]</option>
+                    <option value="الخامس الابتدائي">الصف الخامس الابتدائي[cite: 1]</option>
+                    <option value="السادس الابتدائي">الصف السادس الابتدائي[cite: 1]</option>
                 </select>
             </div>
         </div>
 
         <!-- الإحصائيات -->
-        <div class="stats-grid no-print">
+        <div class="stats-grid">
             <div class="stat-card">
-                <h3>👥 إجمالي الطلاب</h3>
+                <h3>👥 إجمالي الطلاب[cite: 1]</h3>
                 <p id="totalStudents">0</p>
             </div>
             <div class="stat-card">
@@ -599,147 +767,144 @@
                 <p id="totalSkills">0</p>
             </div>
             <div class="stat-card">
-                <h3>✋ مجموع المشاركات</h3>
+                <h3>✋ مجموع المشاركات[cite: 1]</h3>
                 <p id="totalParticipation">0</p>
             </div>
             <div class="stat-card">
-                <h3>📚 الواجبات المنجزة</h3>
+                <h3>📚 الواجبات المنجزة[cite: 1]</h3>
                 <p id="totalHomework">0</p>
             </div>
             <div class="stat-card">
-                <h3>🔴 أيام الغياب</h3>
+                <h3>🔴 أيام الغياب[cite: 1]</h3>
                 <p id="totalAbsence">0</p>
             </div>
             <div class="stat-card">
-                <h3>🛠️ إجمالي التجـارب</h3>
+                <h3>🛠️ حل التمارين والأنشطة العملية</h3>
                 <p id="totalProjects">0</p>
             </div>
             <div class="stat-card">
-                <h3>💬 رسائل الواتس المرسلة</h3>
+                <h3>💬 رسائل الواتس المرسلة[cite: 1]</h3>
                 <p id="totalMessagesSent">0</p>
             </div>
             <div class="stat-card">
-                <h3>✅ الدروس المنفذة</h3>
+                <h3>✅ الدروس المنفذة[cite: 1]</h3>
                 <p id="totalExecutedLessons">0 / 0</p>
             </div>
         </div>
 
         <!-- تسجيل الطلاب والصفوف والجدول -->
         <div class="section-card" id="studentsTableSection">
-            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid rgba(0,0,0,0.1); padding-bottom: 10px; margin-bottom: 15px;">
-                <h3 style="margin: 0; border: none; padding: 0;">✏️ تسجيل الطلاب والصفوف ومتابعتهم</h3>
-                <button class="btn-print no-print" onclick="printSection('studentsTableSection')" title="طباعة جدول الطلاب والصفوف">🖨️ طباعة الجدول</button>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid rgba(0,0,0,0.1); padding-bottom: 10px; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
+                <h3 style="margin: 0; border: none; padding: 0;">✏️ تسجيل الطلاب والصفوف ومتابعة السجل (التعديل بالأسهم)[cite: 1]</h3>
+                <button class="btn-print" onclick="printSection('studentsTableSection')" title="طباعة جدول الطلاب والصفوف">🖨️ طباعة الجدول[cite: 1]</button>
             </div>
             
-            <div class="form-row no-print">
-                <input type="text" id="studentName" placeholder="اسم الطالب (Student Name)">
-                <input type="text" id="studentClassCustom" placeholder="اكتب الصف (مثال: رابع ابتدائي أول)">
-                <input type="tel" id="studentPhone" maxlength="10" placeholder="رقم جوال ولي الأمر (10 أرقام)">
-                <button onclick="addStudent()">➕ إضافة طالب</button>
+            <div class="form-row">
+                <input type="text" id="studentName" placeholder="اسم الطالب (Student Name)[cite: 1]">
+                <input type="text" id="studentClassCustom" placeholder="اكتب الصف (مثال: رابع ابتدائي أول)[cite: 1]">
+                <input type="tel" id="studentPhone" placeholder="رقم جوال ولي الأمر (مثال: 05xxxxxxx)[cite: 1]">
+                <button onclick="addStudent()">➕ إضافة طالب[cite: 1]</button>
             </div>
 
-            <div style="margin-top: 20px;" class="no-print">
-                <span style="font-weight: bold; font-size: 14px; display: block; margin-bottom: 8px;">🏫 تصفح الصفوف (اضغط على الصف لعرضه):</span>
+            <div style="margin-top: 20px;">
+                <span style="font-weight: bold; font-size: 14px; display: block; margin-bottom: 8px;">🏫 تصفح الصفوف (اضغط على الصف لعرضه):[cite: 1]</span>
                 <div id="classesQueryContainer" class="classes-query-grid"></div>
             </div>
 
-            <div class="form-row no-print" style="align-items: center; background: rgba(0,0,0,0.03); padding: 8px; border-radius: 6px; margin-top: 15px;">
-                <span style="font-weight: bold; font-size: 14px;">🔍 بحث عن طالب محدد بالاسم:</span>
-                <input type="text" id="filterStudentNameInput" placeholder="اكتب اسم الطالب للبحث..." oninput="filterTableByStudentInput()" style="max-width: 320px;">
+            <div class="form-row" style="align-items: center; background: rgba(0,0,0,0.03); padding: 8px; border-radius: 6px; margin-top: 15px;">
+                <span style="font-weight: bold; font-size: 14px; width: 100%;">🔍 بحث عن طالب محدد بالاسم:[cite: 1]</span>
+                <input type="text" id="filterStudentNameInput" placeholder="اكتب اسم الطالب للبحث..." oninput="filterTableByStudentInput()" style="width: 100%;">
             </div>
 
-            <div style="overflow-x: auto;">
+            <div class="table-responsive">
                 <table>
                     <thead>
                         <tr>
-                            <th>اسم الطالب</th>
-                            <th>🏫 الصف</th>
-                            <th>📱 رقم الجوال</th>
-                            <th>🔴 الغياب</th>
-                            <th>✋ المشاركة</th>
-                            <th>📚 الواجبات</th>
+                            <th>اسم الطالب[cite: 1]</th>
+                            <th>🏫 الصف[cite: 1]</th>
+                            <th>📱 رقم الجوال[cite: 1]</th>
+                            <th>🔴 الغياب[cite: 1]</th>
+                            <th>✋ المشاركة[cite: 1]</th>
+                            <th>📚 الواجبات[cite: 1]</th>
                             <th>⭐ المهارات</th>
-                            <th>🛠️ التجارب</th>
-                            <th>💬 الرسائل</th>
-                            <th class="no-print">حذف</th>
+                            <th>🛠️ التمارين</th>
+                            <th>💬 الرسائل[cite: 1]</th>
+                            <th class="no-print">حذف[cite: 1]</th>
                         </tr>
                     </thead>
                     <tbody id="studentsTbody"></tbody>
                 </table>
             </div>
 
-            <div class="pagination-bar no-print">
-                <div id="paginationInfo" style="font-size: 13px; font-weight: bold;">عرض 0 من 0</div>
+            <div class="pagination-bar">
+                <div id="paginationInfo" style="font-size: 13px; font-weight: bold;">عرض 0 من 0[cite: 1]</div>
                 <div class="pagination-btns">
-                    <button id="prevPageBtn" onclick="changePage(-1)" class="btn-info">◀ السابق</button>
-                    <span id="pageIndicator" style="font-size: 14px; font-weight: bold; padding: 0 10px;">1 / 1</span>
-                    <button id="nextPageBtn" onclick="changePage(1)" class="btn-info">التالي ▶</button>
+                    <button id="prevPageBtn" onclick="changePage(-1)" class="btn-info">◀ السابق[cite: 1]</button>
+                    <span id="pageIndicator" style="font-size: 14px; font-weight: bold; padding: 0 10px;">1 / 1[cite: 1]</span>
+                    <button id="nextPageBtn" onclick="changePage(1)" class="btn-info">التالي ▶[cite: 1]</button>
                 </div>
             </div>
 
-            <div class="backup-controls no-print">
-                <button class="btn-excel" onclick="exportExcel()">📊 تصدير إلى إكسل (Excel)</button>
-                <button class="btn-warning" onclick="document.getElementById('importExcelFile').click()">📂 استيراد من إكسل (Excel)</button>
+            <div class="backup-controls">
+                <button class="btn-excel" onclick="exportExcel()">📊 تصدير إكسل[cite: 1]</button>
+                <button class="btn-warning" onclick="document.getElementById('importExcelFile').click()">📂 استيراد إكسل[cite: 1]</button>
                 <input type="file" id="importExcelFile" accept=".xlsx, .xls" style="display: none;" onchange="importExcel(event)">
 
-                <button class="btn-info" onclick="exportData()" style="margin-right: auto;">💾 تصدير JSON</button>
-                <button class="btn-warning" onclick="document.getElementById('importFile').click()">📂 استرجاع JSON</button>
+                <button class="btn-info" onclick="exportData()">💾 تصدير JSON[cite: 1]</button>
+                <button class="btn-warning" onclick="document.getElementById('importFile').click()">📂 استرجاع JSON[cite: 1]</button>
                 <input type="file" id="importFile" accept=".json" style="display: none;" onchange="importData(event)">
             </div>
         </div>
 
-        <!-- رصد اختبارات الفترة الأولى والثانية -->
+        <!-- تقرير رصد مؤشرات التحليل الإحصائي مع درجات الاختبار -->
         <div class="section-card" id="examsSection">
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-bottom: 2px solid rgba(0,0,0,0.1); padding-bottom: 10px; margin-bottom: 15px;">
-                <h3 style="margin: 0; border: none; padding: 0;">📊 رصد وتحليل اختبارات الفترة الأولى والفترة الثانية (من ٢٠) 📝</h3>
-                <button class="btn-print" onclick="printSection('examsSection')">🖨️ طباعة تقرير رصد وتحليل الاختبارات</button>
+                <h3 style="margin: 0; border: none; padding: 0;">📊 تقرير رصد مؤشرات التحليل الإحصائي مع درجات الاختبار 📝[cite: 1]</h3>
+                <button class="btn-print" onclick="printSection('examsSection')">🖨️ طباعة تقرير رصد المؤشرات والدرجات[cite: 1]</button>
             </div>
             
-            <div class="form-row no-print">
+            <div class="form-row">
                 <select id="examClassSelect" onchange="renderExamsTable()">
-                    <option value="">-- اختر الصف لعرض وسجل الاختبارات --</option>
+                    <option value="">-- اختر الصف لعرض السجل وتقرير المؤشرات والدرجات --[cite: 1]</option>
                 </select>
             </div>
 
             <div id="examsAnalysisBox" class="sub-box" style="display: none; margin-bottom: 15px;">
-                <h5>📈 مؤشرات التحليل الإحصائي لنتائج الصف المحدد</h5>
+                <h5>📈 مؤشرات التحليل الإحصائي لنتائج الصف المحدد[cite: 1]</h5>
                 <div class="student-details" style="margin: 10px 0;">
                     <div class="detail-item">
-                        <span>متوسط اختبار الفترة 1 (من 20)</span>
+                        <span>متوسط اختبار الفترة 1 (من 20)[cite: 1]</span>
                         <strong id="avgExam1">0</strong>
                     </div>
                     <div class="detail-item">
-                        <span>متوسط اختبار الفترة 2 (من 20)</span>
+                        <span>متوسط اختبار الفترة 2 (من 20)[cite: 1]</span>
                         <strong id="avgExam2">0</strong>
                     </div>
                 </div>
             </div>
 
-            <div style="overflow-x: auto;">
+            <div class="table-responsive">
                 <table>
                     <thead>
                         <tr>
-                            <th>اسم الطالب</th>
-                            <th>🏫 الصف</th>
-                            <th>📝 اختبار الفترة الأولى (من 20)</th>
-                            <th>📝 اختبار الفترة الثانية (من 20)</th>
-                            <th class="no-print">📤 إرسال النتيجة لولي الأمر</th>
+                            <th>اسم الطالب[cite: 1]</th>
+                            <th>🏫 الصف[cite: 1]</th>
+                            <th>📝 اختبار الفترة الأولى (من 20)[cite: 1]</th>
+                            <th>📝 اختبار الفترة الثانية (من 20)[cite: 1]</th>
+                            <th class="no-print">📤 إرسال النتيجة[cite: 1]</th>
                         </tr>
                     </thead>
                     <tbody id="examsTbody">
-                        <tr><td colspan="5" style="padding: 20px; opacity: 0.7;">الرجاء اختيار الصف الدراسي من القائمة أعلاه لعرض رصد واختبارات الطلاب.</td></tr>
+                        <tr><td colspan="5" style="padding: 20px; opacity: 0.7;">الرجاء اختيار الصف الدراسي من القائمة أعلاه لعرض تقرير رصد المؤشرات ودرجات الطلاب.[cite: 1]</td></tr>
                     </tbody>
                 </table>
             </div>
         </div>
 
         <!-- استعلام عن طالب -->
-        <div class="section-card" id="studentReportSection">
-            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid rgba(0,0,0,0.1); padding-bottom: 10px; margin-bottom: 15px;">
-                <h3 style="margin: 0; border: none; padding: 0;">🔍 استعلام وتتبع طالب محدد</h3>
-                <button class="btn-print no-print" onclick="printSection('studentReportSection')">🖨️ طباعة تقرير الطالب</button>
-            </div>
-            <div class="form-row no-print">
+        <div class="section-card" id="studentReportPrintArea">
+            <h3>🔍 استعلام وتتبع طالب محدد[cite: 1]</h3>
+            <div class="form-row">
                 <div class="searchable-dropdown-container">
                     <input type="text" id="studentSearchInput" class="searchable-input" placeholder="اكتب اسم الطالب للبحث الحر بالكيبورد..." oninput="filterStudentDropdown()" onfocus="showStudentDropdown()" autocomplete="off">
                     <div id="studentDropdownList" class="searchable-dropdown-list"></div>
@@ -748,226 +913,275 @@
 
             <div id="studentCard" style="display: none;">
                 <div>
-                    <h4>سجل الطالب: <span id="selectedName"></span> (<span id="selectedClassBadge" class="class-badge"></span>)</h4>
+                    <h4>سجل الطالب: <span id="selectedName"></span> (<span id="selectedClassBadge" class="class-badge"></span>)[cite: 1]</h4>
+                    
+                    <div class="form-row" style="margin-top: 10px; align-items: center;">
+                        <input type="tel" id="editStudentPhoneInput" placeholder="تعديل رقم الجوال..." style="flex:1;">
+                        <button class="btn-info" onclick="saveStudentPhone()" style="width: auto;">💾 حفظ رقم الجوال[cite: 1]</button>
+                    </div>
+
                     <div class="student-details">
-                        <div class="detail-item"><span>المشاركات</span><strong id="sdParticipation">0</strong></div>
-                        <div class="detail-item"><span>الواجبات</span><strong id="sdHomework">0</strong></div>
-                        <div class="detail-item"><span>أيام الغياب</span><strong id="sdAbsence">0</strong></div>
+                        <div class="detail-item"><span>المشاركات[cite: 1]</span><strong id="sdParticipation">0</strong></div>
+                        <div class="detail-item"><span>الواجبات[cite: 1]</span><strong id="sdHomework">0</strong></div>
+                        <div class="detail-item"><span>أيام الغياب[cite: 1]</span><strong id="sdAbsence">0</strong></div>
                         <div class="detail-item"><span>المهارات</span><strong id="sdSkills">0</strong></div>
-                        <div class="detail-item"><span>التجارب</span><strong id="sdProjects">0</strong></div>
-                        <div class="detail-item"><span>رسائل الواتس</span><strong id="sdMessages">0</strong></div>
+                        <div class="detail-item"><span>التمارين</span><strong id="sdProjects">0</strong></div>
+                        <div class="detail-item"><span>رسائل الواتس[cite: 1]</span><strong id="sdMessages">0</strong></div>
                     </div>
                 </div>
 
-                <div class="form-row no-print" style="margin-top: 15px;">
-                    <button class="btn-print" onclick="printStudentReport()">🖨️ طباعة تقرير الطالب الرسمي</button>
-                    <button class="whatsapp-btn" onclick="sendFullReportWhatsApp()" style="border: none; cursor: pointer; margin-top: 0; width: 100%;">📤 إرسال التقرير الشامل لولي الأمر عبر واتساب</button>
+                <div class="form-row" style="margin-top: 15px;">
+                    <button class="btn-print" onclick="printStudentReport()">🖨️ طباعة تقرير الطالب الرسمي[cite: 1]</button>
+                    <button class="whatsapp-btn" onclick="sendFullReportWhatsApp()" style="border: none; cursor: pointer; margin-top: 0; width: 100%;">📤 إرسال التقرير الشامل لولي الأمر عبر واتساب[cite: 1]</button>
                 </div>
 
                 <div class="sub-box">
                     <h5>💬 إشعار ولي الأمر بالدرس والمهارة العلمية عبر الواتساب مباشرة</h5>
-                    <div class="no-print">📱 رقم الجوال المحدد: <span id="sdPhone">لا يوجد</span></div>
-                    <div class="form-row no-print" style="margin-top: 10px;">
+                    <div>📱 رقم الجوال المحدد: <span id="sdPhone">لا يوجد</span>[cite: 1]</div>
+                    <div class="form-row" style="margin-top: 10px;">
                         <select id="selectLesson" onchange="updateLessonMsg()">
-                            <option value="">-- اختر موضوع الدرس والمهارة --</option>
+                            <option value="">-- اختر موضوع الدرس والمهارة العلمية --</option>
                         </select>
                     </div>
-                    <div id="lessonMsgPreview" class="preview-msg">اختر موضوع الدرس والمهارة أعلاه لتوليد نص الرسالة تلقائياً...</div>
-                    <a id="whatsappLessonBtn" href="#" target="_blank" class="whatsapp-btn no-print" onclick="incrementMessageCount()" style="display: block;">📲 إرسال مباشر لولي الأمر</a>
+                    <div id="lessonMsgPreview" class="preview-msg">اختر موضوع الدرس والمهارة أعلاه لتوليد نص الرسالة تلقائياً...[cite: 1]</div>
+                    <a id="whatsappLessonBtn" href="#" target="_blank" class="whatsapp-btn" onclick="incrementMessageCount()">📲 إرسال مباشر لولي الأمر[cite: 1]</a>
                 </div>
 
                 <div class="sub-box">
-                    <h5>✨ إرسال رسائل تشجيعية وشكر وتقدير</h5>
-                    <div class="form-row no-print">
+                    <h5>✨ إرسال رسائل تشجيعية وشكر وتقدير في مادة العلوم</h5>
+                    <div class="form-row">
                         <select id="selectMotivation" onchange="updateMotivationMsg()">
-                            <option value="">-- اختر الرسالة التشجيعية --</option>
+                            <option value="">-- اختر الرسالة التشجيعية --[cite: 1]</option>
                         </select>
                     </div>
                     
-                    <div class="form-row no-print" style="margin-top: 10px; background: rgba(37, 99, 235, 0.05); padding: 10px; border-radius: 6px;">
-                        <input type="text" id="newMotivationTitle" placeholder="عنوان الرسالة..." style="max-width: 220px;">
-                        <input type="text" id="newMotivationText" placeholder="اكتب نص الرسالة التشجيعية الجديدة هنا...">
-                        <button onclick="addNewMotivation()">➕ إضافة رسالة تشجيعية</button>
+                    <div class="form-row" style="margin-top: 10px; background: rgba(37, 99, 235, 0.05); padding: 10px; border-radius: 6px;">
+                        <input type="text" id="newMotivationTitle" placeholder="عنوان الرسالة...[cite: 1]">
+                        <input type="text" id="newMotivationText" placeholder="اكتب نص الرسالة التشجيعية الجديدة هنا...[cite: 1]">
+                        <button onclick="addNewMotivation()">➕ إضافة رسالة تشجيعية[cite: 1]</button>
                     </div>
 
-                    <div id="motivationMsgPreview" class="preview-msg">اختر الرسالة لعرض نص الشكر والتحفيز...</div>
-                    <a id="whatsappMotivationBtn" href="#" target="_blank" class="whatsapp-btn no-print" onclick="incrementMessageCount()" style="display: block;">🏆 إرسال رسالة التشجيع المختارة لولي الأمر</a>
+                    <div id="motivationMsgPreview" class="preview-msg">اختر الرسالة لعرض نص الشكر والتحفيز...[cite: 1]</div>
+                    <a id="whatsappMotivationBtn" href="#" target="_blank" class="whatsapp-btn" onclick="incrementMessageCount()">🏆 إرسال رسالة التشجيع المختارة لولي الأمر[cite: 1]</a>
                 </div>
             </div>
         </div>
 
-        <!-- إرسال جماعي للواجب فقط لأولياء الأمور -->
-        <div class="section-card no-print">
-            <h3>📢 إرسال الواجب المدرسي الجماعي لأولياء الأمور</h3>
+        <!-- إرسال جماعي لأولياء الأمور -->
+        <div class="section-card">
+            <h3>📢 إرسال رسالة أو واجب جماعي لأولياء الأمور (مع عرض أسماء الطلاب للإرسال اليدوي المنظم)[cite: 1]</h3>
             <div class="sub-box" style="margin-top: 0;">
                 <div class="form-row">
-                    <select id="bulkTargetClass">
-                        <option value="ALL">جميع الصفوف</option>
+                    <select id="bulkTargetClass" onchange="updateBulkMsgPreview()">
+                        <option value="ALL">جميع الصفوف[cite: 1]</option>
                     </select>
-                    <select id="bulkSelectHomeworkLesson" onchange="updateBulkHomeworkMsgPreview()">
-                        <option value="">-- اختر الدرس لتحديد الواجب المراد إرساله --</option>
+                    <select id="bulkSelectLesson" onchange="updateBulkMsgPreview()">
+                        <option value="">-- اختر الدرس أو الرسالة التشجيعية المراد إرسالها --[cite: 1]</option>
                     </select>
                 </div>
                 <div class="form-row" style="margin-top: 10px;">
-                    <input type="text" id="bulkHomeworkDetails" placeholder="تفاصيل الواجب المطلوب حلّه (مثال: حل التمارين ص 45)..." oninput="updateBulkHomeworkMsgPreview()">
+                    <input type="text" id="bulkExtraNote" placeholder="اكتب ملاحظات إضافية هنا...[cite: 1]" oninput="updateBulkMsgPreview()">
                 </div>
-                <div class="form-row" style="margin-top: 10px;">
-                    <input type="text" id="bulkHomeworkExtraNote" placeholder="ملاحظات إضافية للواجب (اختياري)..." oninput="updateBulkHomeworkMsgPreview()">
-                </div>
-                <div id="bulkHomeworkMsgPreview" class="preview-msg">اختر الصف والدرس وأدخل تفاصيل الواجب لعرض نموذج رسالة الواجب الجماعية...</div>
+                <div id="bulkMsgPreview" class="preview-msg">اختر الصف والدرس أو الرسالة التشجيعية وأدخل الملاحظات لعرض نموذج الرسالة الجماعية...[cite: 1]</div>
                 
-                <div id="bulkSendPanel" style="display: none; margin-top: 15px; background: rgba(0,0,0,0.04); padding: 15px; border-radius: 8px; border: 1px solid var(--secondary);">
-                    <h5 style="margin-top: 0; color: var(--secondary);">📤 قائمة إرسال الواجب الجماعي (انقر فوق زر كل ولي أمر للإرسال الفردي بأمان):</h5>
-                    <div id="bulkSendListContainer" style="display: flex; flex-direction: column; gap: 8px; max-height: 250px; overflow-y: auto; margin-top: 10px;"></div>
+                <div style="margin-top: 15px;">
+                    <h5 style="margin-bottom: 8px; color: var(--secondary);">👥 قائمة الطلاب المستهدفين (اضغط على "إرسال" أمام كل طالب لإرسال الرسالة بشكل يدوي منظم):[cite: 1]</h5>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>م[cite: 1]</th>
+                                    <th>اسم الطالب[cite: 1]</th>
+                                    <th>الصف[cite: 1]</th>
+                                    <th>رقم الجوال[cite: 1]</th>
+                                    <th>إجراء الإرسال اليدوي[cite: 1]</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bulkStudentsListTbody">
+                                <tr><td colspan="5" style="padding: 15px; opacity: 0.7;">الرجاء اختيار الدرس وتحديد الصف لعرض الطلاب وأزرار الإرسال.[cite: 1]</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-
-                <button class="whatsapp-btn" onclick="prepareBulkHomeworkBatch()" style="border: none; cursor: pointer; font-size: 15px; width: 100%;">🚀 تجهيز روابط إرسال الواجب الجماعي</button>
             </div>
         </div>
 
-        <!-- قائمة وحدات ودروس مادة العلوم -->
-        <div class="section-card no-print">
-            <h3 id="curriculumTitle">📚 دليل مقرر العلوم - المرحلة الابتدائية (المنهج السعودي المعتمد للفصلين) وتتبع التنفيذ</h3>
+        <!-- قائمة وحدات ودروس مادة العلوم وتعديل إضافة مجموعة الدروس -->
+        <div class="section-card">
+            <h3 id="curriculumTitle">📚 دليل مقرر العلوم - المرحلة الابتدائية (المنهج السعودي) وتتبع التنفيذ</h3>
             
             <div class="sub-box" style="margin-bottom: 15px; margin-top: 0;">
-                <h5 style="margin-bottom: 10px;">➕ إضافة درس فردي أو مجموعة دروس دفعة واحدة</h5>
-                
+                <h5 style="margin-bottom: 10px;">➕ إضافة درس جديد فردي[cite: 1]</h5>
                 <div class="form-row">
-                    <input type="text" id="newLessonTitle" placeholder="عنوان الوحدة والدرس...">
-                    <input type="text" id="newLessonDesc" placeholder="تفاصيل المفاهيم العلمية والتجارب الاستهلالية...">
-                    <button onclick="addNewLesson()">➕ إضافة الدرس الفردي</button>
+                    <input type="text" id="newLessonTitle" placeholder="عنوان الوحدة والدرس...[cite: 1]">
+                    <input type="text" id="newLessonDesc" placeholder="تفاصيل المهارات والأنشطة العلمية...">
+                    <button onclick="addNewLesson()">➕ إضافة الدرس[cite: 1]</button>
                 </div>
+            </div>
 
-                <div class="form-row" style="margin-top: 15px; border-top: 1px dashed #ccc; padding-top: 15px;">
-                    <textarea id="bulkLessonsInput" rows="3" placeholder="أدخل مجموعة دروس دفعة واحدة (كل درس في سطر مستقل)، بحيث يكون التنسيق كالتالي:&#10;اسم الوحدة | عنوان الدرس | الوصف والتفاصيل" style="width:100%;"></textarea>
-                    <button class="btn-info" onclick="addBatchLessons()" style="width:100%;">📥 إضافة مجموعة الدروس دفعة واحدة</button>
+            <div class="sub-box" style="margin-bottom: 15px; background: rgba(5, 150, 105, 0.04); border: 1px solid var(--secondary);">
+                <h5 style="margin-bottom: 10px; color: var(--secondary);">📦 إضافة مجموعة دروس دفعة واحدة[cite: 1]</h5>
+                <p style="font-size: 12px; opacity: 0.85; margin-top: 0;">اكتب كل درس في سطر مستقل بالتنسيق التالي: (عنوان الدرس | التفاصيل والمهارة)[cite: 1]</p>
+                <div class="form-row">
+                    <textarea id="bulkLessonsText" rows="4" placeholder="مثال:
+الدرس الأول: النباتات وأجزاؤها | مهارة التعرف على جذور ونباتات البيئة
+الدرس الثاني: الحيوانات ومساكنها | استكشاف حاجات الحيوانات الأساسية"></textarea>
                 </div>
+                <button class="btn-excel" onclick="addBulkLessonsBatch()">📥 إضافة مجموعة الدروس دفعة واحدة[cite: 1]</button>
             </div>
 
             <div class="sub-box" style="background: rgba(37,99,235,0.03); border: 1px solid var(--secondary);">
                 <h5 style="color: var(--secondary);">📑 القائمة المنسدلة لدليل مقرر العلوم والوحدات الدراسية</h5>
                 <div class="form-row" style="margin-bottom: 10px;">
                     <select id="curriculumDropdownSelect" onchange="onCurriculumDropdownChange(this.value)" style="font-weight: bold; font-size: 15px; color: var(--secondary);">
-                        <option value="">-- اختر الدرس أو الوحدة من القائمة المنسدلة للاستعراض --</option>
+                        <option value="">-- اختر الدرس أو الوحدة من القائمة المنسدلة للاستعراض --[cite: 1]</option>
                     </select>
                 </div>
                 <div id="selectedLessonDetailsBox" class="preview-msg" style="display: none;">
-                    اختر درساً من القائمة المنسدلة أعلاه لعرض تفاصيله هنا...
+                    اختر درساً من القائمة المنسدلة أعلاه لعرض تفاصيله هنا...[cite: 1]
                 </div>
             </div>
 
             <div class="lessons-grid" id="mainLessonsContainer"></div>
         </div>
 
-        <div class="footer-note no-print">
-            ﴿ هذا الجهد استغرق وقتاً وعناية، ولا أحلل نقله تجارياً أو نسخه دون إذن ﴾<br>
-            للتواصل واتساب: <a href="https://wa.me/966581015002" target="_blank" style="color: inherit; text-decoration: underline;">0581015002</a>
+        <div class="footer-note">
+            ﴿ هذا الجهد استغرق وقتاً وعناية، ولا أحلل نقله تجارياً أو نسخه دون إذن ﴾[cite: 1]<br>
+            للتواصل واتساب: <a href="https://wa.me/966581015002" target="_blank" style="color: inherit; text-decoration: underline;">0581015002</a>[cite: 1]
         </div>
 
     </div>
 
     <!-- الأزرار العائمة -->
-    <div class="floating-action-buttons no-print">
-        <a href="https://wa.me/966581015002" target="_blank" class="float-btn float-whatsapp" title="تواصل الدعم الفني عبر واتساب">💬</a>
-        <button id="scrollToTopBtn" class="float-btn float-top" onclick="scrollToTop()" title="العودة إلى أعلى الصفحة">⬆️</button>
+    <div class="floating-action-buttons">
+        <a href="https://wa.me/966581015002" target="_blank" class="float-btn float-whatsapp" title="تواصل الدعم الفني عبر واتساب">💬[cite: 1]</a>
+        <button id="scrollToTopBtn" class="float-btn float-top" onclick="scrollToTop()" title="العودة إلى أعلى الصفحة">⬆️[cite: 1]</button>
     </div>
 
-    <div id="toast" class="toast">✅ تم حفظ البيانات تلقائياً!</div>
+    <div id="toast" class="toast">✅ تم حفظ البيانات تلقائياً![cite: 1]</div>
 
     <script>
-        const TEACHER_NAME = "منصور عامر الرحيلي";
-        const SCHOOL_NAME = "مدرسة داوود بن عروة الثقفي";
+        const TEACHER_NAME = "منصور عامر الرحيلي";[cite: 1]
+        const SCHOOL_NAME = "مدرسة داوود (طلاب)";[cite: 1]
 
-        let currentGrade = localStorage.getItem('mansour_current_grade_science_v4') || 'الأول الابتدائي';
+        let currentGrade = localStorage.getItem('awwal_current_grade_science_v4') || 'الأول الابتدائي';
         document.getElementById('globalGradeSelect').value = currentGrade;
 
         let activeQueryClass = '';
         let selectedStudentIndex = ''; 
-        let currentPage = 1;
+        letcurrentPage = 1;
         const rowsPerPage = 20;
 
         const defaultMotivations = [
-            { id: "1", title: "1. عالم المستقبل المتميز", text: "🌟 **عالم المستقبل المتميز** 🌟\nعزيزي ولي الأمر، نفخر اليوم بتميز ابنكم وتألقه في حصة العلوم ومشاركته في التجارب العملية بحماس ونشاط. بوركت جهودكم!" },
-            { id: "2", title: "2. تفوق ملحوظ في الملاحظة والاستنتاج", text: "🔬 **تفوق ملحوظ في الملاحظة العلمية** 🔬\nعزيزي ولي الأمر، أظهر ابنكم اليوم مهارات دقيقة في الملاحظة والتجريب واستنباط النتائج. أحسن صنعاً!" },
-            { id: "3", title: "3. دقة وإتقان في المفاهيم العلمية", text: "🌱 **دقة وإتقان في المفاهيم والعلوم** 🌱\nعزيزي ولي الأمر، تميز ابنكم اليوم باستيعابه العميق للحقائق العلمية وتوظيفها بذكاء. بارك الله في جهوده!" },
-            { id: "4", title: "4. مشاركة نشطة وفعالة في حصة العلوم", text: "✋ **مشاركة نشطة وتفاعل علمي متميز** ✋\nعزيزتي ولي الأمر، تميز ابنكم اليوم بحرصه العالي ومشاركته النشطة وإجاباته العلمية الموفقة داخل الصف." },
-            { id: "5", title: "5. حصيلة استكشافية وتجارب ممتازة", text: "🧠 **حصيلة استكشافية وتجارب ممتازة** 🧠\nعزيزي ولي الأمر، أبدع ابنكم اليوم في تنفيذ التجارب الاستهلالية والاستكشافية بمهارة عالية. مبروك له!" },
-            { id: "6", title: "6. تنظيم رائع للدفتر وواجبات مرتبة بدقة", text: "📝 **تنظيم رائع للواجبات والأنشطة** 📝\nعزيزي ولي الأمر، نشكر لكم متابعتكم المنزلية الواعية. لقد كان واجب ابنكم اليوم منظماً، دقيقاً، ومرتباً للغاية." },
-            { id: "7", title: "7. حل ممتاز للتدريبات والتقويم التكويني", text: "✍️ **حل ممتاز للتدريبات والتقويم**\nعزيزي ولي الأمر، تميز أداء ابنكم اليوم بحل أسئلة التقويم والتدريبات العلمية بدقة عالية. دمت متميزاً يا بطل!" },
-            { id: "8", title: "8. اهتمام رائع بالبيئة ومخلوقات الله", text: "🌍 **اهتمام رائع بالبيئة والمحيط**\nعزيزي ولي الأمر، أظهر ابنكم اليوم شغفاً واهتماماً لافتاً بدراسة الكائنات الحية وعناصر البيئة من حوله." },
-            { id: "9", title: "9. مشروع علمي متميز ومبتكر ومتقن", text: "🛠️ **مشروع علمي متميز ومبتكر ومتقن**\nعزيزي ولي الأمر، قدم ابنكم اليوم مشروعاً علمياً رائعاً ومنظماً ينم عن تفكير إبداعي ومهارة عالية." },
-            { id: "10", title: "10. اجتهاد وحرص عالٍ على إتقان مهارات العلوم", text: "⭐ **اجتهاد وحرص عالٍ على إتقان العلوم**\nعزيزي ولي الأمر، إن حرص ابنكم المستمر على الاستكشاف والتعلم في مادة العلوم محل تقديرنا الدائم." }
+            { id: "1", title: "1. العالم الصغير المتميز", text: "🌟 **العالم الصغير المتميز** 🌟\nعزيزي ولي الأمر، نفخر اليوم بتميز ابنكم وتألقه في حصة العلوم واستكشاف الظواهر الطبيعية بدقة وفضول علمي. بوركت جهودكم!" },
+            { id: "2", title: "2. تفوق ملحوظ في الملاحظة والاستقصاء", text: "🔬 **تفوق ملحوظ في الملاحظة والتجريب العلمي** 🧪\nعزيزي ولي الأمر، أظهر ابنكم اليوم مهارات فائقة في استنتاج الحقائق العلمية والمقارنة بين الكائنات الحية. أحسن صنعاً!" },
+            { id: "3", title: "3. دقة وإتقان في التجارب العلمية", text: "🌿 **دقة وإتقان في الأنشطة والتجارب العلمية** 💧\nعزيزي ولي الأمر، تميز ابنكم اليوم بتنفيذ التجارب العملية واستنباط النتائج بمهارة وذكاء. بارك الله في جهوده!" },
+            { id: "4", title: "4. مشاركة نشطة وفعالة في حصة العلوم", text: "✋ **مشاركة نشطة وتفاعل علمي متميز** ✋\nعزيزي ولي الأمر، تميز ابنكم اليوم بحرصه العالي ومشاركته الفعالة وإجاباته العلمية الموفقة داخل الصف." },
+            { id: "5", title: "5. استيعاب رائع لخصائص الكائنات والحياة", text: "🐾 **استيعاب رائع للبيئة والكائنات الحية** 🌍\nعزيزي ولي الأمر، أبدع ابنكم اليوم في تمييز أجزاء النباتات وخصائص الحيوانات وبيئاتها المختلفة. مبروك له!" },
+            { id: "6", title: "6. تنظيم رائع للدفتر وحل التمارين العلمية", text: "📝 **تنظيم رائع للواجبات والأنشطة العلمية** 📝\nعزيزي ولي الأمر، نشكر لكم متابعتكم المنزلية الواعية. لقد كان حل ابنكم للأنشطة اليوم منظماً ودقيقاً للغاية." },
+            { id: "7", title: "7. حل ممتاز لاختبارات التقويم والعلوم", text: "✍️ **حل ممتاز للمسائل والتقويم المستمر للعلوم**\nعزيزي ولي الأمر، تميز أداء ابنكم اليوم بحل أسئلة العلوم والتقويمات الإثرائية بدقة عالية. دمت متميزاً يا بطل!" },
+            { id: "8", title: "8. إبداع في طرح الأسئلة والاستكشاف", text: "🧠 **إبداع في التفكير العلمي والاستكشاف**\nعزيزي ولي الأمر، أظهر ابنكم اليوم شغفاً وفماً عميقاً لطرح الأسئلة الاستقصائية والبحث عن إجاباتها." },
+            { id: "9", title: "9. سرعة وبديهة متميزة في ربط الظواهر", text: "⚡ **ربط ممتاز للظواهر الطبيعية بالواقع**\nعزيزي ولي الأمر، قدم ابنكم اليوم أداءً استثنائياً في فهم وتفسير الظواهر البيئية والعلمية المحيطة." },
+            { id: "10", title: "10. اجتهاد وحرص عالٍ على إتقان مهارات العلوم", text: "⭐ **اجتهاد وحرص عالٍ على اكتشاف العلوم**\nعزيزي ولي الأمر، إن حرص ابنكم المستمر على التطور وحل التمارين في مادة العلوم محل تقديرنا الدائم." }
         ];
 
-        let customMotivations = JSON.parse(localStorage.getItem('mansour_custom_motivations_science_v4')) || defaultMotivations;
+        let customMotivations = JSON.parse(localStorage.getItem('awwal_custom_motivations_science_v4')) || defaultMotivations;
 
         const gradeScienceData = {
             "الأول الابتدائي": [
-                { chapter: "الوحدة 1: النباتات من حولنا", title: "أجزاء النباتات", desc: "دراسة الجذور، الساق، الأوراق، والزهور ودور كل منها في حياة النبات." },
-                { chapter: "الوحدة 1: النباتات من حولنا", title: "النباتات تنتج نباتات جديدة", desc: "التعرف على البذور وكيفية نموها لتصبح نباتات جديدة." },
-                { chapter: "الوحدة 2: الحيوانات من حولنا", title: "أماكن عيش الحيوانات", desc: "استكشاف الموائل الطبيعية المختلفة للحيوانات (الغابة، الصحراء، الماء)." },
-                { chapter: "الوحدة 2: الحيوانات من حولنا", title: "الحيوانات تنمو وتتغير", desc: "دراسة دورات حياة الحيوانات وكيف تتغير صغار الحيوانات عن أبائها." },
-                { chapter: "الوحدة 3: أرضنا ومواردها", title: "ما الأرض؟ وماذا يوجد عليها؟", desc: "التعرف على اليابسة والماء والصخور المكونة لسطح الأرض." },
-                { chapter: "الوحدة 3: أرضنا ومواردها", title: "الماء والهواء", desc: "أهمية الماء والهواء لحياة الكائنات الحية وطرق المحافظة عليها." },
-                { chapter: "الوحدة 4: الطقس والفصول", title: "حالات الطقس المختلفة", desc: "ملاحظة الطقس اليومي (مشمس، ممطر، عاصف، بارد) وأثره على ملابسنا." },
-                { chapter: "الوحدة 4: الطقس والفصول", title: "الفصول الأربعة", desc: "التعرف على التغيرات المناخية خلال السنة (الربيع، الصيف، الخريف، الشتاء)." }
+                { chapter: "الوحدة 1: النباتات والحيوانات", title: "نباتات تزرعها ونباتات تعيش في البيئة", desc: "التعرف على أجزاء النباتات الأساسية (الجذور، الساق، الأوراق) وحاجات النبات للماء والضوء." },
+                { chapter: "الوحدة 2: مكان للعيش", title: "الموطن والبيئة الطبيعية للحيوانات", desc: "استكشاف أماكن عيش الحيوانات المختلفة وكيف تحصل على غذائها ومسكنها." },
+                { chapter: "الوحدة 3: أرضنا", title: "مكونات الأرض والماء والصخور", desc: "التعرف على الصخور، التربة، والماء وأهميتها للحياة على سطح الأرض." },
+                { chapter: "الوحدة 4: الطقس والفصول الأربعة", title: "حالة الطقس وتغيرات الفصول", desc: "ملاحظة مظاهر الطقس المختلفة (مشمس، ممطر، عاصف، بارد) وخصائص فصول السنة." },
+                { chapter: "الوحدة 5: المادة من حولنا", title: "خصائص الأشياء والمواد الصلبة والسائلة", desc: "تصنيف الأشياء بحسب ملمسها، لونها، وحجمها ومادة صنعها." },
+                { chapter: "الوحدة 6: الطاقة والحركة", title: "الحركة والموقع والقوى البسيطة", desc: "كيف تتحرك الأشياء (دفع وسحب) وملاحظة مواقعها بالنسبة لغيرها." }
             ],
             "الثاني الابتدائي": [
-                { chapter: "الوحدة 1: النباتات والحيوانات", title: "مخلوقات حية ومخلوقات غير حية", desc: "التفرقة بين الكائنات الحية التي تنمو وتتغذى والأشياء غير الحية." },
-                { chapter: "الوحدة 1: النباتات والحيوانات", title: "حاجات المخلوقات الحية", desc: "دراسة الماء، الهواء، الغذاء، والمكان كاحتياجات أساسية للبقاء." },
-                { chapter: "الوحدة 2: موائل الكائنات الحية", title: "السلسلة الغذائية", desc: "كيف تحصل الحيوانات على طاقاتها من النباتات والحيوانات الأخرى." },
-                { chapter: "الوحدة 2: موائل الكائنات الحية", title: "الصحاري والغابات", desc: "مقارنة الخصائص البيئية للبيئات الحارة والباردة والغابات المطيرة." },
-                { chapter: "الوحدة 3: المادة من حولنا", title: "ما المادة؟", desc: "استكشاف خصائص الأجسام والصلابة واللون والكتلة والحجم." },
-                { chapter: "الوحدة 3: المادة من حولنا", title: "حالات المادة", desc: "التمييز بين الحالات الصلبة والسائلة والغازية للمادة وتجارب تغيير حالتها." },
-                { chapter: "الوحدة 4: الطاقة والقوى", title: "الصوت والضوء", desc: "كيف ينتقل الصوت وكيف يتكون الضوء وتجارب الظلال والاهتزازات." },
-                { chapter: "الوحدة 4: الطاقة والقوى", title: "الحركة والقوى", desc: "استكشاف كيف تؤثر قوى الدفع والسحب في تغيير موضع الأجسام وسرعتها." }
+                { chapter: "الوحدة 1: النباتات والحيوانات", title: "نباتات نستخدمها ودورات حياتها", desc: "كيف تنمو النباتات من البذور وتتغير عبر مراحل نموها، وحيوانات وصغارها." },
+                { chapter: "الوحدة 2: ملائمة الكائنات الحية", title: "أعضاء الحيوانات وكيف تتكيف للعيش", desc: "كيف تساعد أجزاء أجسام الحيوانات (الريش، الفرو، الأرجل) على البقاء في بيئاتها." },
+                { chapter: "الوحدة 3: أرضنا المتغيرة", title: "معالم سطح الأرض والتغيرات السريعة والبطيئة", desc: "الجبال، الوديان، الأنهار، وكيف تتغير الأرض بسبب الزلازل والبراكين أو الرياح والماء." },
+                { chapter: "الوحدة 4: الطقس والمناخ", title: "قياس الطقس وحركة الشمس والأرض", desc: "استخدام أدوات قياس الطقس (مقياس المطر، ميزان الحرارة) وملاحظة دورة الليل والنهار." },
+                { chapter: "الوحدة 5: المادة", title: "حالات المادة (صلبة، سائلة، غازية)", desc: "استكشاف خصائص المواد الصلبة والسائلة والغازية وكيف تتغير بالتسخين أو التبريد." },
+                { chapter: "الوحدة 6: القوى والطاقة", title: "الضوء والصوت والمغناطيسية", desc: "مصادر الضوء والصوت وكيف ينتقلان، وتطبيقات المغناطيس في جذب الأشياء." }
             ],
             "الثالث الابتدائي": [
-                { chapter: "الوحدة 1: الوراثة والبيئة", title: "التكاثر ودورة حياة النباتات والحيوانات", desc: "مراحل نمو المخلوقات الحية والتشابه والاختلاف بين الآباء والأبناء." },
-                { chapter: "الوحدة 1: الوراثة والبيئة", title: "التكيف والبقاء في البيئات", desc: "كيف تتكيف الحيوانات والنباتات مع ظروف البرد الشديد أو الجفاف." },
-                { chapter: "الوحدة 2: الأرض ومواردها", title: "الصخور والمعادن والتربة", desc: "أنواع التربة ومكوناتها واستخدامات الصخور والمعادن في حياتنا اليومية." },
-                { chapter: "الوحدة 3: المخلوقات الحية تنمو وتتغير", title: "أجهزة جسم الإنسان", desc: "التعرف على الجهاز الهيكلي، العضلي، والهضمي والدورة الدموية ووظائفها الأساسية." },
-                { chapter: "الوحدة 3: المخلوقات الحية تنمو وتتغير", title: "الصحة الغذائية والرياضية", desc: "أهمية الغذاء المتوازن وممارسة الرياضة للحفاظ على صحة الأجسام وقوتها." },
-                { chapter: "الوحدة 4: الطاقة والكهرباء والمغناطيسية", title: "الدوائر الكهربائية البسيطة", desc: "كيف يضيء المصباح الكهربائي وتوصيل الدوائر الكهربائية بأمان." },
-                { chapter: "الوحدة 4: الطاقة والكهرباء والمغناطيسية", title: "المغناطيس وقوته", desc: "استكشاف أقطاب المغناطيس وتنافرها وتجاذبها والم المواد التي تنجذب إليه." }
+                { chapter: "الوحدة 1: المخلوقات الحية تنمو وتتغير", title: "مجموعات الحيوانات والنباتات وسلوكياتها", desc: "خصائص الثدييات، الطيور، الزواحف، البرمائيات، الأسماك، وكيف تتكيف مع بيئاتها." },
+                { chapter: "الوحدة 2: الأنظمة البيئية", title: "السلاسل الغذائية وتفاعل المخلوقات الحية", desc: "كيف تعتمد المخلوقات الحية بعضها على بعض للحصول على الغذاء والطاقة في النظام البيئي." },
+                { chapter: "الوحدة 3: الأرض ومواردها", title: "التربة، الوقود الأحفوري، والمحافظة على البيئة", desc: "مكونات التربة، أنواع الصخور، وكيفية ترشيد استهلاك موارد الأرض الطبيعية." },
+                { chapter: "الوحدة 4: الطقس والمناخ", title: "دورات الماء في الطبيعة والطقس القاسي", desc: "مراحل دورة الماء (تبخر، تكاثف، هطول) والتعرف على العواصف وأدوات الأرصاد." },
+                { chapter: "الوحدة 5: المادة", title: "القياس، الكتلة، الحجم، والمخلوطات", desc: "طرق قياس المواد والفرق بين العناصر والمخلوطات وطرق فصلها." },
+                { chapter: "الوحدة 6: القوى والطاقة", title: "الكهرباء والمغناطيس والحرارة", desc: "الدوائر الكهربائية البسيطة، توليد الكهرباء الساكنة، وانتقال الحرارة." }
             ],
             "الرابع الابتدائي": [
-                { chapter: "الوحدة 1: ممالك المخلوقات الحية", title: "الخلايا وتصنيف المخلوقات الحية", desc: "دراسة الخلايا وأساسيات تصنيف المخلوقات الحية في ممالكها." },
-                { chapter: "الوحدة 2: المملكة الحيوانية", title: "الحيوانات اللافقارية والفقارية وأجهزتها", desc: "التعرف على خصائص الحيوانات اللافقارية والفقارية وأهم أجهزة أجسامها." },
-                { chapter: "الوحدة 3: الأنظمة البيئية", title: "استكشاف والعلاقات والتغيرات في الأنظمة البيئية", desc: "دراسة مقدمة النظم البيئية، شبكات العلاقات الغذائية والتغيرات البيئية." },
-                { chapter: "الوحدة 4: الأمراض والعدوى", title: "الأمراض المعدية وطرق انتقالها", desc: "مفاهيم الأمراض وكيفية الوقاية منها وانتقال العدوى." },
-                { chapter: "الوحدة 5: التغذية والصحة", title: "الغذاء المتوازن والمحافظة على الصحة", desc: "دراسة الاحتياجات الغذائية السليمة والعناية بالصحّة العامة." },
-                { chapter: "الوحدة 6: المادة والقوى والطاقة", title: "المادة وخصائصها والقوى والحركة", desc: "القياس، حالات المادة، المخاليط، القوى والحركة، والطاقة (الحرارة)." }
+                { chapter: "الوحدة 1: النباتات والحيوانات", title: "وظائف أجزاء النباتات والعمليات الحيوية", desc: "البناء الضوئي، النتح، وتكاثر النباتات البذرة واللاپذرية." },
+                { chapter: "الوحدة 2: الأنظمة البيئية", title: "التكيف والتغيرات في الأنظمة البيئية", desc: "كيف تؤثر التغيرات الطبيعية وتدخلات الإنسان في انقراض أو تكيّف المخلوقات الحية." },
+                { chapter: "الوحدة 3: أرضنا المتغيرة", title: "الدهور الجيولوجية، الأحافير، والصفائح الأرضية", desc: "تفسير تكوين الأحافير، طبقات الأرض، والزلازل والبراكين." },
+                { chapter: "الوحدة 4: الفضاء", title: "الشمس، الأرض، القمر، والنظام الشمسي", desc: "أطوار القمر، الفصول الأربعة، والكواكب السيارة في النظام الشمسي." },
+                { chapter: "الوحدة 5: المادة والطاقة", title: "حالات المادة، التغيرات الفيزيائية والكيميائية", desc: "الفرق بين الذوبان والتفاعل الكيميائي، وخصائص الأحماض والقواعد." },
+                { chapter: "الوحدة 6: القوى والحركة", title: "الموقع، السرعة، وقوى الاحتكاك والجاذبية", desc: "حساب السرعة، تأثير القوى المتزنة وغير المتزنة على الأجسام المتحركة." }
             ],
             "الخامس الابتدائي": [
-                { chapter: "الوحدة 1: ممالك المخلوقات الحية", title: "تصنيف المخلوقات الحية والنباتات", desc: "التصنيف العلمي ومكونات وخصائص النباتات." },
-                { chapter: "الوحدة 2: الآباء والأبناء", title: "التكاثر ودورات الحياة", desc: "مفاهيم التكاثر الحيوي ومراحل دورات حياة الكائنات." },
-                { chapter: "الوحدة 3: الأنظمة البيئية", title: "التفاعلات والدورات والتغيرات البيئية", desc: "العلاقات في الأنظمة البيئية، التكيف والبقاء، ودورات العناصر في الطبيعة." },
-                { chapter: "الوحدة 4: أرضنا المتغيرة", title: "معالم سطح الأرض وعملياتها ومواردها", desc: "التضاريس، العمليات المؤثرة على سطح الأرض، ومصادر الطاقة، الهواء والماء." },
-                { chapter: "الوحدة 5: المادة", title: "أنواع المادة والتغيرات الفيزيائية والكيميائية", desc: "العناصر، الفلزات واللافلزات، والتغيرات الفيزيائية والكيميائية وحالات المادة." },
-                { chapter: "الوحدة 6: الطاقة والقوى", title: "الشغل والآلات البسيطة والصوت والضوء", desc: "الطاقة، الآلات البسيطة، خصائص الصوت والضوء وتطبيقاتها." }
+                { chapter: "الوحدة 1: أجهزة جسم الإنسان وسلامته", title: "الجهاز الهيكلي، العضلي، العصبي، والهضمي", desc: "كيف تعمل أجهزة الجسم المختلفة معاً للحفاظ على حيوية وصحة الإنسان." },
+                { chapter: "الوحدة 2: الوراثة والتكاثر", title: "الصفات الوراثية والوراثة والتعلم", desc: "كيف تنتقل الصفات الجينية من الأبناء للآباء ودورات حياة المخلوقات الدقيقة." },
+                { chapter: "الوحدة 3: الأنظمة البيئية ومواردها", title: "المجتمعات الحيوية والتنوع البيولوجي", desc: "التفاعلات بين المخلوقات الحية في البيئات والمحافظة على الموارد الطبيعية المتجددة." },
+                { chapter: "الوحدة 4: الفضاء والطقس", title: "النجوم، المجرات، والغلاف الجوي", desc: "خصائص النجوم والكواكب الخارجية وطبقات الغلاف الجوي للارض." },
+                { chapter: "الوحدة 5: المخلوقات الحية الدقيقة", title: "البكتيريا، الفطريات، والفيروسات", desc: "دور المخلوقات الدقيقة في الطبيعة والصحة والصناعات الغذائية." },
+                { chapter: "الوحدة 6: الطاقة والحركة", title: "الطاقة الحركية، الكامنة، وانتقال الصوت والضوء", desc: "قانون حفظ الطاقة، الانعكاس والانكسار في المرايا والعدسات." }
             ],
             "السادس الابتدائي": [
-                { chapter: "الوحدة 1: الخلايا والوراثة", title: "الخلية النباتية والحيوانية وانقسامها والوراثة", desc: "نظرية الخلية، مقارنة الخلايا، الانقسام الخلوي، والوراثة والصفات." },
-                { chapter: "الوحدة 2: عمليات الحياة", title: "عمليات الحياة في النباتات، المخلوقات الدقيقة، والإنسان والحيوان", desc: "التنفس والهضم والدوران والإخراج والحركة والإحساس." },
-                { chapter: "الوحدة 3: الأنظمة البيئية ومواردها", title: "السلاسل الغذائية ومقارنة الأنظمة والتربة", desc: "هرم الطاقة، السلاسل والشبكات، حماية موارد الأرض والتربة." },
-                { chapter: "الوحدة 4: المادة والخصائص الكيميائية", title: "الأحماض والقواعد والتغيرات الكيميائية", desc: "مفاهيم الأحماض والقواعد وتفاعلاتها والتغيرات الكيميائية." },
-                { chapter: "الوحدة 5: القوى والطاقة", title: "استعمال القوى والحركة وتسارعها", desc: "قوانين الحركة وقوى التسارع والاستعمالات التطبيقية." },
-                { chapter: "الوحدة 6: الكهرباء والمغناطيسية", title: "الدوائر الكهربائية والتيار والمغناطيس", desc: "الدوائر الكهربائية، التيار، المغناطيس والمولدات الكهربائية." }
+                { chapter: "الوحدة 1: التنوع الحيوي", title: "المملكة النباتية والمملكة الحيوانية وخصائصها", desc: "تصنيف المخلوقات الحية إلى مجموعات رئيسية وفق التصنيف الحديث." },
+                { chapter: "الوحدة 2: العمليات الحيوية في النباتات", title: "نقل المواد والإنبات والتكاثر الخضري", desc: "آلية حركة الماء والأملاح في السويقات والأوراق والتمثيل الغذائي." },
+                { chapter: "الوحدة 3: المادة والذرات", title: "الجدول الدوري، العناصر، والمركبات", desc: "بنية الذرة، النواة، الإلكترونات، وتصنيف العناصر في الجدول الدوري." },
+                { chapter: "الوحدة 4: الحركة والطاقة", title: "الشغل، الطاقة الآلات البسيطة", desc: "حساب الشغل المنجز، الآلات البسيطة (الرافعة، البكرة، السطح المائل)." },
+                { chapter: "الوحدة 5: الكهرباء والمغناطيسية", title: "التيار الكهربائي، الدوائر، والمولدات", desc: "المقاومة الكهربائية، التيار المستمر والمتناوب، والمغناطيس الكهربائي." },
+                { chapter: "الوحدة 6: الأرض والفضاء", title: "استكشاف الفضاء والتقنيات الفلكية", desc: "التلسكوبات، الأقمار الصناعية، ورحلات استكشاف الفضاء الخارجي." }
             ]
         };
 
-        function getStorageKeyForLessons() { return 'mansour_custom_lessons_science_' + currentGrade + '_v4'; }
-        function getStorageKeyForStudents() { return 'mansour_students_science_' + currentGrade + '_v4'; }
-        function getStorageKeyForStatus() { return 'mansour_lesson_status_science_' + currentGrade + '_v4'; }
+        function getStorageKeyForLessons() { return 'awwal_custom_lessons_science_' + currentGrade + '_v4'; }
+        function getStorageKeyForStudents() { return 'awwal_students_science_' + currentGrade + '_v4'; }
+        function getStorageKeyForStatus() { return 'awwal_lesson_status_science_' + currentGrade + '_v4'; }
 
         let lessons = JSON.parse(localStorage.getItem(getStorageKeyForLessons())) || gradeScienceData[currentGrade];
         let students = JSON.parse(localStorage.getItem(getStorageKeyForStudents())) || [];
         let lessonStatus = JSON.parse(localStorage.getItem(getStorageKeyForStatus())) || {};
 
+        function printSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (!section) return;
+            section.classList.add('print-target');
+            window.print();
+            section.classList.remove('print-target');
+        }
+
+        function printStudentReport() {
+            if (selectedStudentIndex === '') {
+                alert('الرجاء اختيار طالب من القائمة أولاً لطباعة تقريره.[cite: 1]');
+                return;
+            }
+            const printArea = document.getElementById('studentReportPrintArea');
+            if (!printArea) return;
+            printArea.classList.add('print-target');
+            window.print();
+            printArea.classList.remove('print-target');
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.addEventListener('scroll', function() {
+            const btn = document.getElementById('scrollToTopBtn');
+            if (window.scrollY > 300) {
+                btn.style.display = 'flex';
+            } else {
+                btn.style.display = 'none';
+            }
+        });
+
         function changeGradeLevel(grade) {
             currentGrade = grade;
-            localStorage.setItem('mansour_current_grade_science_v4', currentGrade);
+            localStorage.setItem('awwal_current_grade_science_v4', currentGrade);
             
             lessons = JSON.parse(localStorage.getItem(getStorageKeyForLessons())) || gradeScienceData[currentGrade];
             students = JSON.parse(localStorage.getItem(getStorageKeyForStudents())) || [];
@@ -977,7 +1191,6 @@
             selectedStudentIndex = '';
             currentPage = 1;
             document.getElementById('studentSearchInput').value = '';
-            document.getElementById('bulkSendPanel').style.display = 'none';
 
             document.getElementById('curriculumTitle').textContent = `📚 دليل مقرر العلوم - ${currentGrade} (المنهج السعودي المعتمد) وتتبع التنفيذ`;
 
@@ -999,18 +1212,15 @@
 
         function renderLessons() {
             const selectLesson = document.getElementById('selectLesson');
-            selectLesson.innerHTML = '<option value="">-- اختر موضوع الدرس والمهارة --</option>';
+            selectLesson.innerHTML = '<option value="">-- اختر موضوع الدرس والمهارة العلمية --</option>';
 
-            const selectMotivation = document.getElementById('selectMotivation');
-            selectMotivation.innerHTML = '<option value="">-- اختر الرسالة التشجيعية --</option>';
-
-            const bulkSelectHomeworkLesson = document.getElementById('bulkSelectHomeworkLesson');
-            bulkSelectHomeworkLesson.innerHTML = '<option value="">-- اختر الدرس لتحديد الواجب المراد إرساله --</option>';
+            const bulkSelectLesson = document.getElementById('bulkSelectLesson');
+            bulkSelectLesson.innerHTML = '<option value="">-- اختر الدرس أو الرسالة التشجيعية المراد إرسالها --[cite: 1]</option>';
 
             const curriculumDropdown = document.getElementById('curriculumDropdownSelect');
-            curriculumDropdown.innerHTML = '<option value="">-- اختر الدرس أو الوحدة من القائمة المنسدلة للاستعراض --</option>';
+            curriculumDropdown.innerHTML = '<option value="">-- اختر الدرس أو الوحدة من القائمة المنسدلة للاستعراض --[cite: 1]</option>';
 
-            let lessonsGroup = '';
+            let lessonsGroup = '<optgroup label="📚 دروس ومهمات المنهج العلمية">';
             let executedCount = 0;
             const mainLessonsContainer = document.getElementById('mainLessonsContainer');
             mainLessonsContainer.innerHTML = '';
@@ -1035,35 +1245,40 @@
                         <button class="status-toggle-btn ${isExecuted ? 'done' : 'pending'}" onclick="toggleLessonStatus(${idx})">
                             ${isExecuted ? '✅ منفذ' : '⏳ قيد الانتظار'}
                         </button>
-                        <button class="btn-action btn-danger" onclick="deleteLesson(${idx})">🗑️</button>
+                        <button class="btn-action btn-danger" onclick="deleteLesson(${idx})">🗑️[cite: 1]</button>
                     </div>
                 `;
                 mainLessonsContainer.appendChild(card);
             });
-
-            bulkSelectHomeworkLesson.innerHTML += lessonsGroup;
+            lessonsGroup += '</optgroup>';
 
             let motivGroup = '<optgroup label="🌟 الرسائل التشجيعية والتحفيزية">';
-            customMotivations.forEach((m, idx) => { 
-                motivGroup += `<option value="motiv-${idx}">${m.title}</option>`; 
-                selectMotivation.innerHTML += `<option value="motiv-${idx}">${m.title}</option>`;
-            });
+            customMotivations.forEach((m, idx) => { motivGroup += `<option value="motiv-${idx}">${m.title}</option>`; });
             motivGroup += '</optgroup>';
 
+            bulkSelectLesson.innerHTML += lessonsGroup + motivGroup;
             document.getElementById('totalExecutedLessons').textContent = `${executedCount} / ${lessons.length}`;
+            
+            const selectMotivation = document.getElementById('selectMotivation');
+            if(selectMotivation) {
+                selectMotivation.innerHTML = '<option value="">-- اختر الرسالة التشجيعية --[cite: 1]</option>';
+                customMotivations.forEach((m, idx) => {
+                    selectMotivation.innerHTML += `<option value="motiv-${idx}">${m.title}</option>`;
+                });
+            }
         }
 
         function toggleLessonStatus(index) {
             lessonStatus[index] = !lessonStatus[index];
             localStorage.setItem(getStorageKeyForStatus(), JSON.stringify(lessonStatus));
             renderLessons();
-            showToast('🔄 تم تحديث حالة الدرس وحفظه!');
+            showToast('🔄 تم تحديث حالة الدرس وحفظه![cite: 1]');
         }
 
         function addNewLesson() {
             const title = document.getElementById('newLessonTitle').value.trim();
             const desc = document.getElementById('newLessonDesc').value.trim();
-            if (!title) { alert('يرجى كتابة عنوان الوحدة أو الدرس'); return; }
+            if (!title) { alert('يرجى كتابة عنوان الوحدة أو الدرس[cite: 1]'); return; }
 
             lessons.push({ chapter: "إضافات المعلم", title: title, desc: desc || 'لا توجد تفاصيل إضافية' });
             localStorage.setItem(getStorageKeyForLessons(), JSON.stringify(lessons));
@@ -1072,56 +1287,48 @@
             document.getElementById('newLessonDesc').value = '';
 
             renderLessons();
-            showToast('➕ تم إضافة الدرس وحفظه!');
+            showToast('➕ تم إضافة الدرس وحفظه![cite: 1]');
         }
 
-        function addBatchLessons() {
-            const textData = document.getElementById('bulkLessonsInput').value.trim();
-            if(!textData) { alert('الرجاء إدخال بيانات الدروس في الحقل المخصص.'); return; }
+        function addBulkLessonsBatch() {
+            const text = document.getElementById('bulkLessonsText').value.trim();
+            if(!text) { alert('يرجى كتابة الدروس في مربع النص أولاً[cite: 1]'); return; }
 
-            const lines = textData.split('\n');
+            const lines = text.split('\n');
             let addedCount = 0;
 
             lines.forEach(line => {
-                if(!line.trim()) return;
-                const parts = line.split('|');
-                if(parts.length >= 2) {
-                    lessons.push({
-                        chapter: parts[0].trim(),
-                        title: parts[1].trim(),
-                        desc: parts[2] ? parts[2].trim() : 'لا توجد تفاصيل إضافية'
-                    });
-                    addedCount++;
-                } else {
-                    lessons.push({
-                        chapter: "إضافات دفعية",
-                        title: parts[0].trim(),
-                        desc: 'لا توجد تفاصيل إضافية'
-                    });
+                const cleanLine = line.trim();
+                if(cleanLine) {
+                    let parts = cleanLine.split('|');
+                    let title = parts[0] ? parts[0].trim() : cleanLine;
+                    let desc = parts[1] ? parts[1].trim() : 'دروس مضافة دفعة واحدة';
+                    
+                    lessons.push({ chapter: "دروس إضافية (دفعة)", title: title, desc: desc });
                     addedCount++;
                 }
             });
 
             if(addedCount > 0) {
                 localStorage.setItem(getStorageKeyForLessons(), JSON.stringify(lessons));
-                document.getElementById('bulkLessonsInput').value = '';
+                document.getElementById('bulkLessonsText').value = '';
                 renderLessons();
-                showToast(`📥 تمت إضافة (${addedCount}) دروس دفعة واحدة بنجاح!`);
+                showToast(`📥 تمت إضافة (${addedCount}) دروس بنجاح![cite: 1]`);
             } else {
-                alert('لم يتم العثور على صيغة دروس صحيحة.');
+                alert('لم يتم العثور على أسطر صالحة للإضافة.[cite: 1]');
             }
         }
 
         function deleteLesson(index) {
-            if (confirm('هل أنت متأكد من حذف هذا الدرس من المنهج؟')) {
+            if (confirm('هل أنت متأكد من حذف هذا الدرس من المنهج؟[cite: 1]')) {
                 lessons.splice(index, 1);
                 localStorage.setItem(getStorageKeyForLessons(), JSON.stringify(lessons));
                 renderLessons();
-                showToast('🗑️ تم حذف الدرس بنجاح!');
+                showToast('🗑️ تم حذف الدرس بنجاح![cite: 1]');
             }
         }
 
-        function showToast(msg = '✅ تم الحفظ تلقائياً!') {
+        function showToast(msg = '✅ تم الحفظ تلقائياً![cite: 1]') {
             const toast = document.getElementById('toast');
             toast.textContent = msg;
             toast.style.display = 'block';
@@ -1129,32 +1336,34 @@
         }
 
         function render() {
-            let sumSkills = 0;
-            let sumPart = 0;
-            let sumHw = 0;
-            let sumAbs = 0;
-            let sumProj = 0;
-            let sumMsg = 0;
+            document.getElementById('totalStudents').textContent = students.length;
+            
+            let totalSkillsSum = 0;
+            let totalPartSum = 0;
+            let totalHwSum = 0;
+            let totalAbsSum = 0;
+            let totalProjSum = 0;
+            let totalMsgSum = 0;
 
             students.forEach(s => {
-                sumSkills += Number(s.skills) || 0;
-                sumPart += Number(s.participation) || 0;
-                sumHw += Number(s.homework) || 0;
-                sumAbs += Number(s.absence) || 0;
-                sumProj += Number(s.projects) || 0;
-                sumMsg += Number(s.messages) || 0;
+                totalSkillsSum += Number(s.skills) || 0;
+                totalPartSum += Number(s.participation) || 0;
+                totalHwSum += Number(s.homework) || 0;
+                totalAbsSum += Number(s.absence) || 0;
+                totalProjSum += Number(s.projects) || 0;
+                totalMsgSum += Number(s.messages) || 0;
             });
 
-            document.getElementById('totalStudents').textContent = students.length;
-            document.getElementById('totalSkills').textContent = sumSkills;
-            document.getElementById('totalParticipation').textContent = sumPart;
-            document.getElementById('totalHomework').textContent = sumHw;
-            document.getElementById('totalAbsence').textContent = sumAbs;
-            document.getElementById('totalProjects').textContent = sumProj;
-            document.getElementById('totalMessagesSent').textContent = sumMsg;
+            document.getElementById('totalSkills').textContent = totalSkillsSum;
+            document.getElementById('totalParticipation').textContent = totalPartSum;
+            document.getElementById('totalHomework').textContent = totalHwSum;
+            document.getElementById('totalAbsence').textContent = totalAbsSum;
+            document.getElementById('totalProjects').textContent = totalProjSum;
+            document.getElementById('totalMessagesSent').textContent = totalMsgSum;
 
             renderStudentsTable();
             renderClassesQuery();
+            updateBulkMsgPreview();
         }
 
         function addStudent() {
@@ -1162,8 +1371,7 @@
             const sClass = document.getElementById('studentClassCustom').value.trim() || currentGrade;
             const phone = document.getElementById('studentPhone').value.trim();
 
-            if(!name) { alert('الرجاء إدخال اسم الطالب'); return; }
-            if(phone && phone.length !== 10) { alert('رقم جوال ولي الأمر يجب أن يكون مكوناً من 10 أرقام بالضبط'); return; }
+            if(!name) { alert('الرجاء إدخال اسم الطالب[cite: 1]'); return; }
 
             students.push({
                 name: name,
@@ -1183,7 +1391,28 @@
             document.getElementById('studentName').value = '';
             document.getElementById('studentPhone').value = '';
             render();
-            showToast('➕ تمت إضافة الطالب بنجاح!');
+            showToast('➕ تمت إضافة الطالب بنجاح![cite: 1]');
+        }
+
+        function createCounterCell(globalIndex, field, value) {
+            return `
+                <div class="counter-cell">
+                    <button class="counter-btn" onclick="modifyStudentField(${globalIndex}, '${field}', -1)">-</button>
+                    <span class="counter-value">${value || 0}</span>
+                    <button class="counter-btn" onclick="modifyStudentField(${globalIndex}, '${field}', 1)">+</button>
+                </div>
+            `;
+        }
+
+        function modifyStudentField(index, field, delta) {
+            let currentVal = Number(students[index][field]) || 0;
+            let newVal = currentVal + delta;
+            if(newVal < 0) newVal = 0;
+            students[index][field] = newVal;
+            
+            localStorage.setItem(getStorageKeyForStudents(), JSON.stringify(students));
+            render();
+            showToast('✅ تم تحديث القيمة وحفظها بنجاح![cite: 1]');
         }
 
         function renderStudentsTable() {
@@ -1208,9 +1437,9 @@
             const pageData = filtered.slice(startIdx, startIdx + rowsPerPage);
 
             if(pageData.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="10" style="padding: 20px; opacity: 0.7;">لا توجد بيانات طلاب مسجلة حالياً.</td></tr>`;
-                document.getElementById('paginationInfo').textContent = `عرض 0 من 0`;
-                document.getElementById('pageIndicator').textContent = `1 / 1`;
+                tbody.innerHTML = `<tr><td colspan="10" style="padding: 20px; opacity: 0.7;">لا توجد بيانات طلاب مسجلة حالياً.[cite: 1]</td></tr>`;
+                document.getElementById('paginationInfo').textContent = `عرض 0 من 0[cite: 1]`;
+                document.getElementById('pageIndicator').textContent = `1 / 1[cite: 1]`;
                 return;
             }
 
@@ -1220,39 +1449,38 @@
                 tr.innerHTML = `
                     <td><strong>${s.name}</strong></td>
                     <td><span class="class-badge">${s.classCustom || currentGrade}</span></td>
-                    <td><input type="text" maxlength="10" value="${s.phone || ''}" style="width:110px; text-align:center;" oninput="updateStudentPhone(${globalIndex}, this.value)" placeholder="05xxxxxxxx"></td>
-                    <td><input type="number" value="${s.absence}" min="0" style="width:50px; text-align:center;" oninput="updateStudentField(${globalIndex}, 'absence', this.value)"></td>
-                    <td><input type="number" value="${s.participation}" min="0" style="width:50px; text-align:center;" oninput="updateStudentField(${globalIndex}, 'participation', this.value)"></td>
-                    <td><input type="number" value="${s.homework}" min="0" style="width:50px; text-align:center;" oninput="updateStudentField(${globalIndex}, 'homework', this.value)"></td>
-                    <td><input type="number" value="${s.skills}" min="0" style="width:50px; text-align:center;" oninput="updateStudentField(${globalIndex}, 'skills', this.value)"></td>
-                    <td><input type="number" value="${s.projects}" min="0" style="width:50px; text-align:center;" oninput="updateStudentField(${globalIndex}, 'projects', this.value)"></td>
+                    <td>${s.phone || '-'}</td>
+                    <td>${createCounterCell(globalIndex, 'absence', s.absence)}</td>
+                    <td>${createCounterCell(globalIndex, 'participation', s.participation)}</td>
+                    <td>${createCounterCell(globalIndex, 'homework', s.homework)}</td>
+                    <td>${createCounterCell(globalIndex, 'skills', s.skills)}</td>
+                    <td>${createCounterCell(globalIndex, 'projects', s.projects)}</td>
                     <td>${s.messages || 0}</td>
-                    <td class="no-print"><button class="btn-action btn-danger" onclick="deleteStudent(${globalIndex})">حذف</button></td>
+                    <td class="no-print"><button class="btn-action btn-danger" onclick="deleteStudent(${globalIndex})">حذف[cite: 1]</button></td>
                 `;
                 tbody.appendChild(tr);
             });
 
-            document.getElementById('paginationInfo').textContent = `عرض من ${startIdx + 1} إلى ${Math.min(startIdx + rowsPerPage, totalRows)} من أصل ${totalRows} طالب`;
-            document.getElementById('pageIndicator').textContent = `${currentPage} / ${totalPages}`;
+            document.getElementById('paginationInfo').textContent = `عرض من ${startIdx + 1} إلى ${Math.min(startIdx + rowsPerPage, totalRows)} من أصل ${totalRows} طالب[cite: 1]`;
+            document.getElementById('pageIndicator').textContent = `${currentPage} / ${totalPages}[cite: 1]`;
         }
 
-        function updateStudentPhone(index, val) {
-            students[index].phone = val.trim();
+        function saveStudentPhone() {
+            if(selectedStudentIndex === '') return;
+            const newPhone = document.getElementById('editStudentPhoneInput').value.trim();
+            students[selectedStudentIndex].phone = newPhone;
             localStorage.setItem(getStorageKeyForStudents(), JSON.stringify(students));
-        }
-
-        function updateStudentField(index, field, val) {
-            students[index][field] = Number(val) || 0;
-            localStorage.setItem(getStorageKeyForStudents(), JSON.stringify(students));
-            render();
+            selectStudentForDetails(selectedStudentIndex);
+            renderStudentsTable();
+            showToast('📱 تم تحديث رقم جوال الطالب بنجاح![cite: 1]');
         }
 
         function deleteStudent(index) {
-            if(confirm('هل أنت متأكد من حذف هذا الطالب؟')) {
+            if(confirm('هل أنت متأكد من حذف هذا الطالب؟[cite: 1]')) {
                 students.splice(index, 1);
                 localStorage.setItem(getStorageKeyForStudents(), JSON.stringify(students));
                 render();
-                showToast('🗑️ تم حذف الطالب بنجاح!');
+                showToast('🗑️ تم حذف الطالب بنجاح![cite: 1]');
             }
         }
 
@@ -1276,7 +1504,7 @@
 
             const allWrapper = document.createElement('div');
             allWrapper.className = `class-btn-wrapper ${activeQueryClass === '' ? 'active' : ''}`;
-            allWrapper.innerHTML = `<button class="class-query-btn" onclick="filterByClass('')">📋 كافة الصفوف</button>`;
+            allWrapper.innerHTML = `<button class="class-query-btn" onclick="filterByClass('')">📋 كافة الصفوف[cite: 1]</button>`;
             container.appendChild(allWrapper);
 
             classesSet.forEach(cName => {
@@ -1284,7 +1512,7 @@
                 wrapper.className = `class-btn-wrapper ${activeQueryClass === cName ? 'active' : ''}`;
                 wrapper.innerHTML = `
                     <button class="class-query-btn" onclick="filterByClass('${cName}')">📁 ${cName}</button>
-                    <button class="class-delete-btn" onclick="deleteEntireClass('${cName}', event)" title="حذف الصف بالكامل">🗑️</button>
+                    <button class="class-delete-btn" onclick="deleteEntireClass('${cName}', event)" title="حذف الصف بالكامل">🗑️[cite: 1]</button>
                 `;
                 container.appendChild(wrapper);
             });
@@ -1302,19 +1530,19 @@
 
         function deleteEntireClass(cName, event) {
             event.stopPropagation();
-            if(confirm(`هل أنت متأكد من حذف جميع طلاب الصف (${cName})؟`)) {
+            if(confirm(`هل أنت متأكد من حذف جميع طلاب الصف (${cName})؟[cite: 1]`)) {
                 students = students.filter(s => (s.classCustom || currentGrade) !== cName);
                 localStorage.setItem(getStorageKeyForStudents(), JSON.stringify(students));
                 if(activeQueryClass === cName) activeQueryClass = '';
                 render();
-                showToast('🗑️ تمت إزالة الصف وطلابها بنجاح!');
+                showToast('🗑️ تمت إزالة الصف وطلابها بنجاح![cite: 1]');
             }
         }
 
         function updateExamClassSelect(classesSet) {
             const select = document.getElementById('examClassSelect');
             const currentVal = select.value;
-            select.innerHTML = '<option value="">-- اختر الصف لعرض وسجل الاختبارات --</option>';
+            select.innerHTML = '<option value="">-- اختر الصف لعرض السجل وتقرير المؤشرات والدرجات --[cite: 1]</option>';
             classesSet.forEach(cName => {
                 select.innerHTML += `<option value="${cName}">${cName}</option>`;
             });
@@ -1324,10 +1552,14 @@
 
         function updateBulkTargetSelect(classesSet) {
             const select = document.getElementById('bulkTargetClass');
-            select.innerHTML = '<option value="ALL">جميع الصفوف</option>';
+            const currentVal = select.value;
+            select.innerHTML = '<option value="ALL">جميع الصفوف[cite: 1]</option>';
             classesSet.forEach(cName => {
                 select.innerHTML += `<option value="${cName}">${cName}</option>`;
             });
+            if(currentVal && (currentVal === 'ALL' || classesSet.has(currentVal))) {
+                select.value = currentVal;
+            }
         }
 
         function renderExamsTable() {
@@ -1337,14 +1569,14 @@
             tbody.innerHTML = '';
 
             if(!selectedClass) {
-                tbody.innerHTML = `<tr><td colspan="5" style="padding: 20px; opacity: 0.7;">الرجاء اختيار الصف الدراسي من القائمة أعلاه لعرض رصد واختبارات الطلاب.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="5" style="padding: 20px; opacity: 0.7;">الرجاء اختيار الصف الدراسي من القائمة أعلاه لعرض تقرير رصد المؤشرات ودرجات الطلاب.[cite: 1]</td></tr>`;
                 analysisBox.style.display = 'none';
                 return;
             }
 
             const classStudents = students.filter(s => (s.classCustom || currentGrade) === selectedClass);
             if(classStudents.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="5" style="padding: 20px; opacity: 0.7;">لا توجد طلاب مسجلين في هذا الصف.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="5" style="padding: 20px; opacity: 0.7;">لا توجد طلاب مسجلين في هذا الصف.[cite: 1]</td></tr>`;
                 analysisBox.style.display = 'none';
                 return;
             }
@@ -1358,13 +1590,18 @@
                 sum2 += Number(s.exam2) || 0;
 
                 const tr = document.createElement('tr');
+                let examMsg = 'عزيزي ولي أمر الطالب ' + s.name + '، نود إفادتكم بدرجات اختبارات مادة العلوم:\n- اختبار الفترة الأولى: ' + (s.exam1 || 0) + '/20\n- اختبار الفترة الثانية: ' + (s.exam2 || 0) + '/20\nمع تمنياتنا له بدوام التوفيق والنجاح.';
+                let encodedExamMsg = encodeURIComponent(examMsg);
+
                 tr.innerHTML = `
                     <td><strong>${s.name}</strong></td>
                     <td><span class="class-badge">${s.classCustom || currentGrade}</span></td>
-                    <td><input type="number" min="0" max="20" value="${s.exam1 || 0}" style="width:70px; text-align:center;" oninput="updateExamScore(${globalIndex}, 'exam1', this.value)"></td>
-                    <td><input type="number" min="0" max="20" value="${s.exam2 || 0}" style="width:70px; text-align:center;" oninput="updateExamScore(${globalIndex}, 'exam2', this.value)"></td>
+                    <td><input type="text" inputmode="numeric" pattern="[0-9]*" value="${s.exam1 !== undefined ? s.exam1 : 0}" style="width:60px; text-align:center;" oninput="updateExamScore(${globalIndex}, 'exam1', this.value)"></td>
+                    <td><input type="text" inputmode="numeric" pattern="[0-9]*" value="${s.exam2 !== undefined ? s.exam2 : 0}" style="width:60px; text-align:center;" oninput="updateExamScore(${globalIndex}, 'exam2', this.value)"></td>
                     <td class="no-print">
-                        <a href="https://wa.me/966${s.phone ? s.phone.replace(/^0+/, '') : ''}?text=${encodeURIComponent('عزيزي ولي أمر الطالب ' + s.name + '، نود إفادتكم بدرجات اختبارات مادة العلوم:\n- اختبار الفترة الأولى: ' + (s.exam1 || 0) + '/20\n- اختبار الفترة الثانية: ' + (s.exam2 || 0) + '/20\nمع تمنياتنا له بدوام التوفيق والنجاح.')}" target="_blank" class="whatsapp-btn" style="padding:4px 10px; font-size:12px;" onclick="incrementMessageCount(${globalIndex})">📤 إرسال عبر واتساب</a>
+                        <div class="action-cell-container">
+                            <a href="https://wa.me/${s.phone || ''}?text=${encodedExamMsg}" target="_blank" class="whatsapp-btn" onclick="incrementMessageCountGlobal(${globalIndex})">📤 إرسال عبر واتساب[cite: 1]</a>
+                        </div>
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -1375,26 +1612,25 @@
         }
 
         function updateExamScore(index, field, val) {
-            students[index][field] = Number(val) || 0;
+            students[index][field] = val === "" ? 0 : Number(val);
             localStorage.setItem(getStorageKeyForStudents(), JSON.stringify(students));
-            renderExamsTable();
-        }
-
-        function printSection(sectionId) {
-            const section = document.getElementById(sectionId);
-            if (!section) return;
             
-            document.querySelectorAll('.section-card').forEach(el => el.classList.remove('printing-section'));
-            section.classList.add('printing-section');
-            window.print();
-        }
-
-        function printStudentReport() {
-            printSection('studentReportSection');
+            const selectedClass = document.getElementById('examClassSelect').value;
+            if(selectedClass) {
+                const classStudents = students.filter(s => (s.classCustom || currentGrade) === selectedClass);
+                let sum1 = 0, sum2 = 0;
+                classStudents.forEach(s => {
+                    sum1 += Number(s.exam1) || 0;
+                    sum2 += Number(s.exam2) || 0;
+                });
+                document.getElementById('avgExam1').textContent = (sum1 / classStudents.length).toFixed(1) + ' / 20';
+                document.getElementById('avgExam2').textContent = (sum2 / classStudents.length).toFixed(1) + ' / 20';
+            }
+            showToast('📊 تم تحديث درجات الاختبارات بنجاح![cite: 1]');
         }
 
         function exportExcel() {
-            if(students.length === 0) { alert('لا توجد بيانات طلاب لتصديرها!'); return; }
+            if(students.length === 0) { alert('لا توجد بيانات طلاب لتصديرها![cite: 1]'); return; }
             const dataToExport = students.map((s, idx) => ({
                 "م": idx + 1,
                 "اسم الطالب": s.name,
@@ -1404,7 +1640,7 @@
                 "المشاركة": s.participation || 0,
                 "الواجبات": s.homework || 0,
                 "المهارات": s.skills || 0,
-                "التجارب": s.projects || 0,
+                "التمارين": s.projects || 0,
                 "اختبار الفترة الأولى": s.exam1 || 0,
                 "اختبار الفترة الثانية": s.exam2 || 0
             }));
@@ -1416,7 +1652,7 @@
             const wb = XLSX.utils.book_new();
             XLSX.utils.book_append_sheet(wb, ws, "سجل طلاب العلوم");
             XLSX.writeFile(wb, `سجل_العلوم_${currentGrade}.xlsx`);
-            showToast('📊 تم تصدير ملف الإكسل بنجاح!');
+            showToast('📊 تم تصدير ملف الإكسل بنجاح![cite: 1]');
         }
 
         function importExcel(event) {
@@ -1433,7 +1669,7 @@
                     const jsonData = XLSX.utils.sheet_to_json(worksheet);
 
                     if(!jsonData || jsonData.length === 0) {
-                        alert('ملف الإكسل فارغ أو غير مطابق للهيكلة المطلوبة.');
+                        alert('ملف الإكسل فارغ أو غير مطابق للهيكلة المطلوبة.[cite: 1]');
                         return;
                     }
 
@@ -1452,7 +1688,7 @@
                                 participation: Number(row["المشاركة"] || row["المشاركات"] || 0),
                                 homework: Number(row["الواجبات"] || 0),
                                 skills: Number(row["المهارات"] || 0),
-                                projects: Number(row["التجارب"] || 0),
+                                projects: Number(row["التمارين"] || 0),
                                 messages: Number(row["الرسائل"] || 0),
                                 exam1: Number(row["اختبار الفترة الأولى"] || 0),
                                 exam2: Number(row["اختبار الفترة الثانية"] || 0)
@@ -1463,10 +1699,10 @@
 
                     localStorage.setItem(getStorageKeyForStudents(), JSON.stringify(students));
                     render();
-                    showToast(`📂 تمت استعادة واستيراد (${count}) طالب بنجاح من ملف الإكسل!`);
+                    showToast(`📂 تمت استعادة واستيراد (${count}) طالب بنجاح من ملف الإكسل![cite: 1]`);
                 } catch(err) {
                     console.error(err);
-                    alert('حدث خطأ أثناء قراءة ملف الإكسل.');
+                    alert('حدث خطأ أثناء قراءة ملف الإكسل.[cite: 1]');
                 } finally {
                     event.target.value = '';
                 }
@@ -1482,7 +1718,7 @@
             document.body.appendChild(dlAnchor);
             dlAnchor.click();
             dlAnchor.remove();
-            showToast('💾 تم تصدير النسخة الاحتياطية بنجاح!');
+            showToast('💾 تم تصدير النسخة الاحتياطية بنجاح![cite: 1]');
         }
 
         function importData(event) {
@@ -1496,12 +1732,12 @@
                         students = imported;
                         localStorage.setItem(getStorageKeyForStudents(), JSON.stringify(students));
                         render();
-                        showToast('📂 تم استرجاع البيانات بنجاح!');
+                        showToast('📂 تم استرجاع البيانات بنجاح![cite: 1]');
                     } else {
-                        alert('ملف النسخة الاحتياطية غير صالح.');
+                        alert('ملف النسخة الاحتياطية غير صالح.[cite: 1]');
                     }
                 } catch(err) {
-                    alert('خطأ في قراءة ملف JSON.');
+                    alert('خطأ في قراءة ملف JSON.[cite: 1]');
                 } finally {
                     event.target.value = '';
                 }
@@ -1552,13 +1788,14 @@
             document.getElementById('studentCard').style.display = 'block';
             document.getElementById('selectedName').textContent = s.name;
             document.getElementById('selectedClassBadge').textContent = s.classCustom || currentGrade;
+            document.getElementById('editStudentPhoneInput').value = s.phone || '';
             document.getElementById('sdParticipation').textContent = s.participation || 0;
             document.getElementById('sdHomework').textContent = s.homework || 0;
             document.getElementById('sdAbsence').textContent = s.absence || 0;
             document.getElementById('sdSkills').textContent = s.skills || 0;
             document.getElementById('sdProjects').textContent = s.projects || 0;
             document.getElementById('sdMessages').textContent = s.messages || 0;
-            document.getElementById('sdPhone').textContent = s.phone || 'لا يوجد رقم جوال مسجل';
+            document.getElementById('sdPhone').textContent = s.phone || 'لا يوجد رقم جوال مسجل[cite: 1]';
             
             updateLessonMsg();
             updateMotivationMsg();
@@ -1572,17 +1809,16 @@
             const btn = document.getElementById('whatsappLessonBtn');
 
             if(lessonIdx === "") {
-                preview.textContent = "اختر موضوع الدرس والمهارة أعلاه لتوليد نص الرسالة تلقائياً...";
+                preview.textContent = "اختر موضوع الدرس والمهارة أعلاه لتوليد نص الرسالة تلقائياً...[cite: 1]";
                 btn.href = "#";
                 return;
             }
 
             const l = lessons[lessonIdx];
-            const msg = `عزيزي ولي أمر الطالب / ${s.name}\nنحيطكم علماً بأننا تناولنا اليوم في مادة العلوم درس:\n📘 (${l.chapter}) - ${l.title}\n💡 المفاهيم والتجارب المرتبطة: ${l.desc}\nنرجو منكم متابعة ابنكم وتعزيز استكشافاته العلمية.\nمع تقديـرنا، المعلم: ${TEACHER_NAME} - ${SCHOOL_NAME}`;
+            const msg = `عزيزي ولي أمر الطالب / ${s.name}\nنحيطكم علماً بأننا تناولنا اليوم في مادة العلوم درس:\n📘 (${l.chapter}) - ${l.title}\n💡 المفاهيم والأنشطة المرتبطة: ${l.desc}\nنرجو منكم متابعة ابنكم وتعزيز مهاراته العلمية.\nمع تقديـرنا، المعلم: ${TEACHER_NAME} - ${SCHOOL_NAME}`;
             
             preview.textContent = msg;
-            const formattedPhone = s.phone ? `966${s.phone.replace(/^0+/, '')}` : '';
-            btn.href = `https://wa.me/${formattedPhone}?text=` + encodeURIComponent(msg);
+            btn.href = `https://wa.me/${s.phone || ''}?text=` + encodeURIComponent(msg);
         }
 
         function updateMotivationMsg() {
@@ -1593,7 +1829,7 @@
             const btn = document.getElementById('whatsappMotivationBtn');
 
             if(motivVal === "") {
-                preview.textContent = "اختر الرسالة لعرض نص الشكر والتحفيز...";
+                preview.textContent = "اختر الرسالة لعرض نص الشكر والتحفيز...[cite: 1]";
                 btn.href = "#";
                 return;
             }
@@ -1606,142 +1842,134 @@
 
             const finalMsg = `إلى ولي أمر الطالب / ${s.name}\n\n${text}\n\nمع خالص الشكر، المعلم: ${TEACHER_NAME} - ${SCHOOL_NAME}`;
             preview.textContent = finalMsg;
-            const formattedPhone = s.phone ? `966${s.phone.replace(/^0+/, '')}` : '';
-            btn.href = `https://wa.me/${formattedPhone}?text=` + encodeURIComponent(finalMsg);
-        }
-
-        function sendFullReportWhatsApp() {
-            if(selectedStudentIndex === '') return;
-            const s = students[selectedStudentIndex];
-            const msg = `عزيزي ولي أمر الطالب / ${s.name} (${s.classCustom || currentGrade})\nنحيطكم علماً بمستوى ابنكم وتقييمه في مادة العلوم حتى تاريخه:\n\n- المشاركات: ${s.participation || 0}\n- الواجبات: ${s.homework || 0}\n- أيام الغياب: ${s.absence || 0}\n- المهارات: ${s.skills || 0}\n- التجارب: ${s.projects || 0}\n- اختبار الفترة الأولى: ${s.exam1 || 0}/20\n- اختبار الفترة الثانية: ${s.exam2 || 0}/20\n\nنشكر تعاونكم المستمر ودعمكم الدائم.\nمع تقديـرنا، المعلم: ${TEACHER_NAME} - ${SCHOOL_NAME}`;
-            
-            incrementMessageCount(selectedStudentIndex);
-            const formattedPhone = s.phone ? `966${s.phone.replace(/^0+/, '')}` : '';
-            window.open(`https://wa.me/${formattedPhone}?text=` + encodeURIComponent(msg), '_blank');
+            btn.href = `https://wa.me/${s.phone || ''}?text=` + encodeURIComponent(finalMsg);
         }
 
         function addNewMotivation() {
             const title = document.getElementById('newMotivationTitle').value.trim();
             const text = document.getElementById('newMotivationText').value.trim();
-            if(!title || !text) { alert('الرجاء كتابة عنوان ونصح الرسالة التشجيعية'); return; }
+            if(!title || !text) { alert('الرجاء كتابة عنوان ونصح الرسالة التشجيعية[cite: 1]'); return; }
 
             customMotivations.push({ id: Date.now().toString(), title: title, text: text });
-            localStorage.setItem('mansour_custom_motivations_science_v4', JSON.stringify(customMotivations));
+            localStorage.setItem('awwal_custom_motivations_science_v4', JSON.stringify(customMotivations));
             
             document.getElementById('newMotivationTitle').value = '';
             document.getElementById('newMotivationText').value = '';
             
             renderLessons();
-            showToast('🌟 تمت إضافة رسالة التحفيز بنجاح!');
+            showToast('🌟 تمت إضافة رسالة التحفيز بنجاح![cite: 1]');
         }
 
-        function incrementMessageCount(targetIdx = selectedStudentIndex) {
-            if(targetIdx !== '' && students[targetIdx]) {
-                students[targetIdx].messages = (students[targetIdx].messages || 0) + 1;
-                localStorage.setItem(getStorageKeyForStudents(), JSON.stringify(students));
-                render();
-                if(selectedStudentIndex !== '') selectStudentForDetails(selectedStudentIndex);
-            }
-        }
-
-        function updateBulkHomeworkMsgPreview() {
-            const val = document.getElementById('bulkSelectHomeworkLesson').value;
-            const details = document.getElementById('bulkHomeworkDetails').value.trim();
-            const note = document.getElementById('bulkHomeworkExtraNote').value.trim();
-            const preview = document.getElementById('bulkHomeworkMsgPreview');
-
-            if(!val) {
-                preview.textContent = "اختر الصف والدرس وأدخل تفاصيل الواجب لعرض نموذج رسالة الواجب الجماعية...";
+        function sendFullReportWhatsApp() {
+            if(selectedStudentIndex === '') return;
+            const s = students[selectedStudentIndex];
+            if(!s.phone) {
+                alert('لا يوجد رقم جوال مسجل لهذا الطالب.[cite: 1]');
                 return;
             }
 
-            let lessonTitle = "";
-            let chapterName = "";
+            const fullMsg = `📋 *التقرير الشامل لأداء الطالب في مادة العلوم* 🔬\n\n` +
+                `👤 اسم الطالب: *${s.name}*\n` +
+                `🏫 الصف: *${s.classCustom || currentGrade}*\n` +
+                `🏫 المدرسة: *${SCHOOL_NAME}*\n\n` +
+                `📊 *المؤشرات والإحصائيات الحالية:*\n` +
+                `- ✋ المشاركات: ${s.participation || 0}\n` +
+                `- 📚 الواجبات: ${s.homework || 0}\n` +
+                `- 🔴 أيام الغياب: ${s.absence || 0}\n` +
+                `- ⭐ المهارات العلمية المتقنة: ${s.skills || 0}\n` +
+                `- 🛠️ الأنشطة والتجارب المساندة: ${s.projects || 0}\n` +
+                `- 📝 اختبار الفترة الأولى: ${s.exam1 || 0} / 20\n` +
+                `- 📝 اختبار الفترة الثانية: ${s.exam2 || 0} / 20\n\n` +
+                `نشكر لكم حرصكم ومتابعتكم المستمرة مع المدرسة.\n` +
+                `مع تحيات معلم المادة: ${TEACHER_NAME}`;
+
+            incrementMessageCount();
+            window.open(`https://wa.me/${s.phone}?text=` + encodeURIComponent(fullMsg), '_blank');
+        }
+
+        function incrementMessageCount() {
+            if(selectedStudentIndex !== '') {
+                students[selectedStudentIndex].messages = (students[selectedStudentIndex].messages || 0) + 1;
+                localStorage.setItem(getStorageKeyForStudents(), JSON.stringify(students));
+                selectStudentForDetails(selectedStudentIndex);
+                renderStudentsTable();
+            }
+        }
+
+        function incrementMessageCountGlobal(index) {
+            if(index !== undefined && students[index]) {
+                students[index].messages = (students[index].messages || 0) + 1;
+                localStorage.setItem(getStorageKeyForStudents(), JSON.stringify(students));
+                renderStudentsTable();
+                if(selectedStudentIndex === index) {
+                    selectStudentForDetails(index);
+                }
+            }
+        }
+
+        function updateBulkMsgPreview() {
+            const val = document.getElementById('bulkSelectLesson').value;
+            const note = document.getElementById('bulkExtraNote').value.trim();
+            const preview = document.getElementById('bulkMsgPreview');
+            const targetClass = document.getElementById('bulkTargetClass').value;
+            const tbody = document.getElementById('bulkStudentsListTbody');
+
+            if(!val) {
+                preview.textContent = "اختر الصف والدرس أو الرسالة التشجيعية وأدخل الملاحظات لعرض نموذج الرسالة الجماعية...[cite: 1]";
+                tbody.innerHTML = `<tr><td colspan="5" style="padding: 15px; opacity: 0.7;">الرجاء اختيار الدرس أو الرسالة أعلاه أولاً.[cite: 1]</td></tr>`;
+                return;
+            }
+
+            let msgTemplate = "";
             if(val.startsWith('lesson-')) {
                 const idx = val.split('-')[1];
                 const l = lessons[idx];
-                chapterName = l.chapter;
-                lessonTitle = l.title;
+                msgTemplate = `أولياء الأمور الأفاضل، نود إحاطتكم بأننا سندرس في مادة العلوم:\n📘 (${l.chapter}) - ${l.title}\nالتفاصيل: ${l.desc}`;
+            } else if(val.startsWith('motiv-')) {
+                const idx = val.split('-')[1];
+                msgTemplate = customMotivations[idx].text;
             }
 
-            let msg = `أولياء الأمور الأفاضل، نود إحاطتكم بأن واجب مادة العلوم للدرس:\n📘 (${chapterName}) - ${lessonTitle}\n`;
-            if(details) {
-                msg += `📝 المطلوب حلّه: ${details}\n`;
-            } else {
-                msg += `📝 المطلوب: حل تدريبات وأسئلة الدرس في الكتاب المدرسي.\n`;
-            }
-
-            if(note) {
-                msg += `📌 ملاحظات: ${note}\n`;
-            }
-
-            msg += `\nنرجو الحرص على حل الواجب وإرساله في الموعد المحدد.\nمع خالص الشكر، المعلم: ${TEACHER_NAME} - ${SCHOOL_NAME}`;
-            preview.textContent = msg;
-        }
-
-        function prepareBulkHomeworkBatch() {
-            const targetClass = document.getElementById('bulkTargetClass').value;
-            const val = document.getElementById('bulkSelectHomeworkLesson').value;
-            if(!val) { alert('الرجاء اختيار الدرس لتحديد الواجب المراد إرساله'); return; }
+            if(note) msgTemplate += `\n\nملاحظة إضافية: ${note}`;
+            msgTemplate += `\n\nمع التحية، المعلم: ${TEACHER_NAME} - ${SCHOOL_NAME}`;
+            preview.textContent = msgTemplate;
 
             let targetStudents = students;
             if(targetClass !== 'ALL') {
                 targetStudents = students.filter(s => (s.classCustom || currentGrade) === targetClass);
             }
 
-            targetStudents = targetStudents.filter(s => s.phone && s.phone.trim() !== '');
-            if(targetStudents.length === 0) { 
-                alert('لا توجد أرقام جوالات مسجلة للطلاب المستهدفين في هذا الصف'); 
-                return; 
+            tbody.innerHTML = '';
+            if(targetStudents.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" style="padding: 15px; opacity: 0.7;">لا توجد طلاب مسجلين في هذا الصف.[cite: 1]</td></tr>`;
+                return;
             }
 
-            const baseMsg = document.getElementById('bulkHomeworkMsgPreview').textContent;
-            const panel = document.getElementById('bulkSendPanel');
-            const listContainer = document.getElementById('bulkSendListContainer');
-            listContainer.innerHTML = '';
-
-            targetStudents.forEach(s => {
+            targetStudents.forEach((s, i) => {
                 const globalIdx = students.indexOf(s);
-                const formattedPhone = s.phone ? `966${s.phone.replace(/^0+/, '')}` : '';
-                const finalMsg = `عزيزي ولي أمر الطالب / ${s.name}\n\n` + baseMsg;
-                const link = `https://wa.me/${formattedPhone}?text=` + encodeURIComponent(finalMsg);
+                const personalizedMsg = `عزيزي ولي أمر الطالب / ${s.name}\n\n` + msgTemplate;
+                const encodedMsg = encodeURIComponent(personalizedMsg);
 
-                const itemDiv = document.createElement('div');
-                itemDiv.style.display = 'flex';
-                itemDiv.style.justifyContent = 'space-between';
-                itemDiv.style.alignItems = 'center';
-                itemDiv.style.background = 'var(--card-bg)';
-                itemDiv.style.padding = '8px 12px';
-                itemDiv.style.borderRadius = '6px';
-                itemDiv.style.border = '1px solid rgba(0,0,0,0.1)';
-
-                itemDiv.innerHTML = `
-                    <div><strong>${s.name}</strong> <span class="class-badge" style="font-size:10px;">${s.classCustom || currentGrade}</span></div>
-                    <a href="${link}" target="_blank" class="whatsapp-btn" style="margin-top:0; padding:6px 12px; font-size:12px;" onclick="markMessageSentFromBulk(${globalIdx}, this)">📤 إرسال لولي الأمر</a>
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${i + 1}</td>
+                    <td><strong>${s.name}</strong></td>
+                    <td><span class="class-badge">${s.classCustom || currentGrade}</span></td>
+                    <td>${s.phone || '<span style="color:var(--danger)">لا يوجد رقم[cite: 1]</span>'}</td>
+                    <td>
+                        ${s.phone ? `<a href="https://wa.me/${s.phone}?text=${encodedMsg}" target="_blank" class="whatsapp-btn" onclick="incrementMessageCountGlobal(${globalIdx})">📤 إرسال يدوي[cite: 1]</a>` : '<span style="opacity:0.5; font-size:12px;">غير متوفر[cite: 1]</span>'}
+                    </td>
                 `;
-                listContainer.appendChild(itemDiv);
+                tbody.appendChild(tr);
             });
-
-            panel.style.display = 'block';
-            showToast(`🚀 تم تجهيز قائمة إرسال لعدد (${targetStudents.length}) ولي أمر بنجاح!`);
-        }
-
-        function markMessageSentFromBulk(globalIdx, btnElement) {
-            if(students[globalIdx]) {
-                students[globalIdx].messages = (students[globalIdx].messages || 0) + 1;
-                localStorage.setItem(getStorageKeyForStudents(), JSON.stringify(students));
-                render();
-                btnElement.style.background = '#6b7280';
-                btnElement.textContent = '✅ تم الإرسال';
-            }
         }
 
         function setTheme(themeName) {
             document.body.className = themeName;
-            localStorage.setItem('mansour_science_theme_v4', themeName);
+            localStorage.setItem('awwal_science_theme_v4', themeName);
         }
 
-        const savedTheme = localStorage.getItem('mansour_science_theme_v4');
+        const savedTheme = localStorage.getItem('awwal_science_theme_v4');
         if(savedTheme) document.body.className = savedTheme;
 
         window.onload = function() {
