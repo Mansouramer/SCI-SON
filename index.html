@@ -940,7 +940,18 @@
         </div>
 
     </div>
-
+<div class="section-card" style="text-align: center; background: #ffffff; margin: 20px auto; max-width: 600px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); padding: 20px;">
+    <h4 style="color: var(--secondary, #2563eb); margin: 0 0 15px 0; font-size: 16px;">💾 النسخ الاحتياطي وإدارة البيانات</h4>
+    <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+        <button class="btn-info" onclick="backupAllData()" style="background: #e11d48; padding: 10px 20px; font-size: 14px; border-radius: 6px; cursor: pointer; color: white; border: none; width: auto; font-weight: bold;">
+            💾 حفظ نسخة كاملة
+        </button>
+        <input type="file" id="importBackupFile" accept=".json" style="display: none;" onchange="restoreDashboardData(event)">
+        <button class="btn-warning" onclick="document.getElementById('importBackupFile').click()" style="background: #f59e0b; padding: 10px 20px; font-size: 14px; border-radius: 6px; cursor: pointer; color: white; border: none; width: auto; font-weight: bold;">
+            📂 استرجاع النسخة
+        </button>
+    </div>
+</div>
     <!-- الأزرار العائمة -->
     <div class="floating-action-buttons no-print">
         <a href="https://wa.me/966581015002" target="_blank" class="float-btn float-whatsapp" title="تواصل الدعم الفني عبر واتساب">💬</a>
@@ -2016,7 +2027,51 @@
             renderLessons();
             render();
             checkBackupReminder();
-        };
+        };// دالة حفظ النسخة الاحتياطية الكاملة
+function backupAllData() {
+    const fullBackup = {
+        students: typeof students !== 'undefined' ? students : [],
+        lessons: typeof lessons !== 'undefined' ? lessons : [],
+        timestamp: new Date().toLocaleString('ar-SA')
+    };
+
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(fullBackup));
+    const dlAnchor = document.createElement('a');
+    dlAnchor.setAttribute("href", dataStr);
+    dlAnchor.setAttribute("download", `نسخة_احتياطية_الداش_بورد_${new Date().toISOString().slice(0,10)}.json`);
+    document.body.appendChild(dlAnchor);
+    dlAnchor.click();
+    dlAnchor.remove();
+    
+    if (typeof showToast === 'function') {
+        showToast('💾 تم حفظ النسخة الاحتياطية على جهازك بنجاح!');
+    } else {
+        alert('تم حفظ النسخة الاحتياطية على جهازك بنجاح.');
+    }
+}// دالة استرجاع النسخة الاحتياطية
+function restoreDashboardData(event) {
+    const file = event.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            const imported = JSON.parse(e.target.result);
+            if(imported) {
+                if(imported.students) localStorage.setItem(getStorageKeyForStudents(), JSON.stringify(imported.students));
+                if(imported.lessons) localStorage.setItem(getStorageKeyForLessons(), JSON.stringify(imported.lessons));
+                alert('📂 تم استرجاع البيانات بنجاح!');
+                location.reload();
+            } else {
+                alert('ملف النسخة الاحتياطية غير صالح.');
+            }
+        } catch(err) {
+            alert('خطأ في قراءة ملف JSON.');
+        } finally {
+            event.target.value = '';
+        }
+    };
+    reader.readAsText(file);
+}
     </script>
 </body>
 </html>
