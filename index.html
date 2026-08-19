@@ -961,8 +961,8 @@
     <div id="toast" class="toast">✅ تم حفظ البيانات تلقائياً!</div>
 
     <script>
-        const TEACHER_NAME = "منصور";
-        const SCHOOL_NAME = "مدرسة داوود (طلاب)";
+      let currentTeacher = TEACHER_NAME;
+let currentSchool = SCHOOL_NAME;
 
         let currentGrade = localStorage.getItem('mansour_current_grade_science_v5') || 'الأول الابتدائي';
         document.getElementById('globalGradeSelect').value = currentGrade;
