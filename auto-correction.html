@@ -313,15 +313,12 @@
             @page { size: A4 portrait; margin: 10mm; }
             body * { visibility: hidden !important; }
             
-            /* طباعة الاختبار فقط عند تفعيله */
             .printable-exam-area, .printable-exam-area * { visibility: visible !important; }
             .printable-exam-area { position: absolute; left: 0; top: 0; width: 100% !important; background: white !important; padding: 0 !important; border: none !important; box-shadow: none !important; }
 
-            /* طباعة كشف الدرجات فقط عند تفعيله */
             .printable-sheet-area, .printable-sheet-area * { visibility: visible !important; }
             .printable-sheet-area { position: absolute; left: 0; top: 0; width: 100% !important; background: white !important; padding: 0 !important; border: none !important; box-shadow: none !important; }
 
-            /* طباعة تقرير التحليل فقط عند تفعيله */
             .printable-analysis-area, .printable-analysis-area * { visibility: visible !important; }
             .printable-analysis-area { position: absolute; left: 0; top: 0; width: 100% !important; background: white !important; padding: 0 !important; border: none !important; box-shadow: none !important; }
 
@@ -399,7 +396,7 @@
         </div>
 
         <div class="section-box">
-            <h3>⚙️ ثانياً: توليد ورقة الاختبار المعتمدة (10 فقرات ثابتة)</h3>
+            <h3>⚙️ ثانياً: توليد ورقة الاختبار المعتمدة (10 فقرات ثابتة وعشوائية)</h3>
             <div class="no-print">
                 <button class="action-btn" onclick="generateTestModel()">⚡ توليد ورقة الاختبار المعتمدة</button>
             </div>
@@ -766,6 +763,7 @@
 
         function escapeHtml(text) { return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;"); }
 
+        // دالة التوليد العشوائي (خلط الأسئلة في كل مرة يتم الضغط على زر التوليد)
         function generateTestModel() {
             const examType = document.getElementById('selectExamType').value;
             const gradeKey = document.getElementById('selectGrade').value;
@@ -786,7 +784,15 @@
                 rawQuestions = [...fallbackBank["science"]];
             }
 
-            activeQuestions = rawQuestions.slice(0, 10);
+            // خلط الأسئلة عشوائياً (Fisher-Yates Shuffle Algorithm) لضمان تغيرها في كل مرة
+            let shuffled = [...rawQuestions];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                let j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+
+            // اختيار 10 أسئلة عشوائية
+            activeQuestions = shuffled.slice(0, 10);
             while(activeQuestions.length < 10 && rawQuestions.length > 0) {
                 activeQuestions.push(rawQuestions[activeQuestions.length % rawQuestions.length]);
             }
