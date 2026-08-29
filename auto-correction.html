@@ -446,7 +446,7 @@
             </div>
         </div>
 
-        <!-- كشف الدرجات المستقل للطباعة (أسماء ودرجات فقط بدون تحليل) -->
+        <!-- كشف الدرجات المستقل للطباعة (أسماء ودرجات فقط بدون تحليل وبدون أسئلة) -->
         <div id="allGradesSheetPrintArea" class="sheet-print-container printable-area">
             <div style="text-align: center; border-bottom: 2px solid #1e3a8a; padding-bottom: 8px; margin-bottom: 15px;">
                 <h3 style="margin: 0; color: #1e3a8a; font-size: 15px;">المملكة العربية السعودية - وزارة التعليم</h3>
@@ -559,7 +559,7 @@
                     { q: "الشكل الهندسي الذي له ٤ أضلاع متساوية هو:", options: ["المثلث", "المربع", "الدائرة", "المستطيل"], correct: "ب" },
                     { q: "ناتج طرح: ٥٠ - ٢٠ يساوي:", options: ["٢٠", "٣٠", "٤٠", "١٠"], correct: "ب" },
                     { q: "اكتب العدد مائتان وخمسة بالأرقام:", options: ["٢٥٠", "٢٠٥", "٥٠٢", "٢٥"], correct: "ب" },
-                    { q: "إذا كان مع خالد ٣ فئات من نقد ١٠ ريالات، فكم إجمالي المبلغ؟", options: ["١٠ ريالات", "٢٠ ريالاً", "٣٠ ريالاً", "٤٠ ريالاً"], correct: "ج" },
+                    { q: "إذا كان خالد يملك ٣ فئات من نقد ١٠ ريالات، فكم إجمالي المبلغ؟", options: ["١٠ ريالات", "٢٠ ريالاً", "٣٠ ريالاً", "٤٠ ريالاً"], correct: "ج" },
                     { q: "التقدير الأنسب لطول باب الفصل هو:", options: ["٢ متر", "٢ سنتيمتر", "٢٠٠ كيلومتر", "١٠ مليمتر"], correct: "أ" },
                     { q: "مع حامد ٤٥ قلماً وأعطى زميله ١٥ قلماً، كم بقي معه؟", options: ["٣٠ قلماً", "٦٠ قلماً", "٢٠ قلماً", "٢٥ قلماً"], correct: "أ" }
                 ]
@@ -775,7 +775,6 @@
                 rawQuestions = [...fallbackBank["science"]];
             }
 
-            // ضمان 10 فقرات בדיוק
             activeQuestions = rawQuestions.slice(0, 10);
             while(activeQuestions.length < 10 && rawQuestions.length > 0) {
                 activeQuestions.push(rawQuestions[activeQuestions.length % rawQuestions.length]);
@@ -992,8 +991,12 @@
             let idx = 1;
             for (let sName in allClassResults) {
                 let data = allClassResults[sName];
-                let percentage = (data.score / maxScore) * 100;
-                let level = percentage >= 90 ? "متفوق (متقن تماماً)" : (percentage >= 75 ? "متقن" : (percentage >= 50 ? "مبكّر / متوسط" : "يحتاج تحسين"));
+                let percentage = maxScore > 0 ? (data.score / maxScore) * 100 : 0;
+                let level = "";
+                if (percentage >= 90) level = "متفوق (متقن تماماً)";
+                else if (percentage >= 75) level = "متقن";
+                else if (percentage >= 50) level = "مبكّر / متوسط";
+                else level = "يحتاج تحسين (غير مقتن)";
 
                 tbody.innerHTML += `
                     <tr>
@@ -1013,7 +1016,6 @@
             const sheetArea = document.getElementById('allGradesSheetPrintArea');
             sheetArea.style.display = 'block';
             
-            // إخفاء التحليل أثناء طباعة كشف الدرجات
             document.getElementById('analysisContainer').style.display = 'none';
 
             setTimeout(() => {
@@ -1053,6 +1055,15 @@
             let classAverage = count > 0 ? (totalScoreSum / count).toFixed(1) : 0;
             let percentageAvg = count > 0 ? ((totalScoreSum / (count * maxScore)) * 100).toFixed(1) : 0;
 
+            let dynamicNafisLevel = "مستوى منخفض (يحتاج دعم وتدخل علاجي)";
+            if (percentageAvg >= 90) {
+                dynamicNafisLevel = "مستوى متقدم (تجاوز المعيار المستهدف للطلاب)";
+            } else if (percentageAvg >= 75) {
+                dynamicNafisLevel = "مستوى متقن";
+            } else if (percentageAvg >= 50) {
+                dynamicNafisLevel = "مستوى متوسط / ملائم";
+            }
+
             document.getElementById('analysisContentText').innerHTML = `
                 <table style="width:100%; border-collapse:collapse; margin-top:5px;" border="1">
                     <tr style="background:#fef3c7; text-align:center;"><th style="padding:6px;">مؤشر القياس الإحصائي</th><th style="padding:6px;">القيمة التقديرية</th></tr>
@@ -1061,7 +1072,7 @@
                     <tr><td style="padding:6px;">متوسط أداء الفصل العام</td><td style="text-align:center;"><b>${toArabicDigits(classAverage)} / ${toArabicDigits(maxScore)}</b> (${toArabicDigits(percentageAvg)}٪)</td></tr>
                     <tr><td style="padding:6px;">أعلى درجة بالفصل</td><td style="text-align:center; color:var(--success);"><b>${toArabicDigits(highestScore)} / ${toArabicDigits(maxScore)}</b></td></tr>
                     <tr><td style="padding:6px;">أقل درجة بالفصل</td><td style="text-align:center; color:var(--danger);"><b>${toArabicDigits(lowestScore)} / ${toArabicDigits(maxScore)}</b></td></tr>
-                    <tr><td style="padding:6px;">مستوى إتقان مهارات نافس</td><td style="text-align:center; color:var(--primary);"><b>مستوى متقدم (تجاوز المعيار المستهدف للطلاب)</b></td></tr>
+                    <tr><td style="padding:6px;">مستوى إتقان مهارات نافس</td><td style="text-align:center; color:var(--primary);"><b>${dynamicNafisLevel}</b></td></tr>
                 </table>
             `;
             convertAllNumbersInDOM();
