@@ -414,7 +414,7 @@
         <div class="section-box no-print">
             <h3>👤 ثالثاً: لوحة التصحيح السريع باللمس (رصد درجات الطلاب)</h3>
             <p style="font-size: 12px; color: #555; margin-bottom: 10px;">
-                انقر على إجابة الطالب؛ لتتحدث درجتها فوراً وتُرحل لداشبورد المدرسة:
+                انقر على إجابة الطالب؛ لتتحدث درجته فوراً وتُرحل لداشبورد المدرسة:
             </p>
             <button class="action-btn btn-success" onclick="startTouchGradingSession()">🚀 بدء جلسة التصحيح الفوري</button>
 
@@ -702,19 +702,24 @@
             studentsList = [];
             for (let i = 0; i < localStorage.length; i++) {
                 let key = localStorage.key(i);
-                if (key && (key.includes('students') || key.includes('boys') || key.includes('طلاب'))) {
+                if (key && (key.includes('student') || key.includes('boy') || key.includes('طلاب') || key.includes('كشوف'))) {
                     try {
                         let data = JSON.parse(localStorage.getItem(key));
-                        if (Array.isArray(data)) studentsList = studentsList.concat(data);
+                        if (Array.isArray(data) && data.length > 0) {
+                            studentsList = data.map(item => typeof item === 'string' ? { name: item } : (item.name ? item : null)).filter(Boolean);
+                            if (studentsList.length > 0) break;
+                        }
                     } catch(e) {}
                 }
             }
+
             if (studentsList.length === 0) {
                 studentsList = [
-                    { name: "أحمد محمد العتيبي", classCustom: "الصف الأساسي" },
-                    { name: "خالد عبدالله الشمري", classCustom: "الصف الأساسي" },
-                    { name: "سلطان فهد القحطاني", classCustom: "الصف الأساسي" },
-                    { name: "نايف متعب الحربي", classCustom: "الصف الأساسي" }
+                    { name: "أحمد محمد العتيبي" },
+                    { name: "خالد عبدالله الشمري" },
+                    { name: "سلطان فهد القحطاني" },
+                    { name: "نايف متعب الحربي" },
+                    { name: "بندر تركي المطيري" }
                 ];
             }
         }
