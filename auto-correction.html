@@ -763,7 +763,6 @@
 
         function escapeHtml(text) { return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;"); }
 
-        // دالة التوليد العشوائي (خلط الأسئلة في كل مرة يتم الضغط على زر التوليد)
         function generateTestModel() {
             const examType = document.getElementById('selectExamType').value;
             const gradeKey = document.getElementById('selectGrade').value;
@@ -784,14 +783,12 @@
                 rawQuestions = [...fallbackBank["science"]];
             }
 
-            // خلط الأسئلة عشوائياً (Fisher-Yates Shuffle Algorithm) لضمان تغيرها في كل مرة
             let shuffled = [...rawQuestions];
             for (let i = shuffled.length - 1; i > 0; i--) {
                 let j = Math.floor(Math.random() * (i + 1));
                 [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
             }
 
-            // اختيار 10 أسئلة عشوائية
             activeQuestions = shuffled.slice(0, 10);
             while(activeQuestions.length < 10 && rawQuestions.length > 0) {
                 activeQuestions.push(rawQuestions[activeQuestions.length % rawQuestions.length]);
@@ -1037,6 +1034,12 @@
         }
 
         function printAllGradesSheet() {
+            // إخفاء صندوق الأسئلة تماماً عند طباعة كشف الدرجات لمنع ظهور الأسئلة في الطباعة
+            const qPreviewBox = document.getElementById('questionsPreviewBox');
+            if (qPreviewBox) {
+                qPreviewBox.style.display = 'none';
+            }
+
             prepareGradesPrintSheet();
             const sheetArea = document.getElementById('allGradesSheetPrintArea');
             sheetArea.style.display = 'block';
