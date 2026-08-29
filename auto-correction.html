@@ -691,11 +691,16 @@
 
         function changeWeek(fieldId, amount) {
             const input = document.getElementById(fieldId === 'startWeek' ? 'inputStartWeek' : 'inputEndWeek');
-            let val = parseInt(input.value.replace(/[٠-٩]/g, d => "٠١٢٣٤٥٦٧٨٩".indexOf(d))) || 1;
-            val += amount;
-            if (val < 1) val = 1;
-            if (val > 18) val = 18;
-            input.value = toArabicDigits(val);
+            if (!input) return;
+            
+            let currentValue = input.value;
+            let englishVal = parseInt(currentValue.replace(/[٠-٩]/g, d => "٠١٢٣٤٥٦٧٨٩".indexOf(d))) || 1;
+            
+            englishVal += amount;
+            if (englishVal < 1) englishVal = 1;
+            if (englishVal > 18) englishVal = 18;
+            
+            input.value = toArabicDigits(englishVal);
         }
 
         function fetchAllStudentsFromStorage() {
